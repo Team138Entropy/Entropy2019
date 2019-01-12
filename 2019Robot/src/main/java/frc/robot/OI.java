@@ -68,8 +68,7 @@ public final class OI {
     static Joystick operatorStick = new Joystick(nykoController);
     
     // Operator Stick
-	static Button lowerJackButton  = new JoystickButton(driverStick, xboxA);
-	static Button raiseJackButton  = new JoystickButton(driverStick, xboxB);
+	static Button controlJackButton  = new JoystickButton(driverStick, xboxA);
     
     static double lastX=0;
     static double LastY=0;
@@ -77,8 +76,8 @@ public final class OI {
     public OI(){
 		//Driver Stick
 		//Climbing Jack Controls
-		lowerJackButton.whenPressed(new LowerJack());
-		raiseJackButton.whenReleased(new RaiseJack());
+		controlJackButton.whenPressed(new LowerJack());
+		controlJackButton.whenReleased(new RaiseJack());
     	
 		//Operator Stick
 		
