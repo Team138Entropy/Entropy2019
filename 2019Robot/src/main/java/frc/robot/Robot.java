@@ -8,9 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.LiftJack;
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode.PixelFormat;
+import edu.wpi.first.wpilibj.CameraServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,8 +30,10 @@ public class Robot extends IterativeRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
 
+  static UsbCamera Camera0;
   // Subsystems
   public static final LiftJack liftJack = new LiftJack();
+  public static final OI operatorInterface = new OI();
 
   /**
    * This function is run when the robot is first started up and should be
@@ -38,6 +44,11 @@ public class Robot extends IterativeRobot {
     m_chooser.addDefault("Default Auto", kDefaultAuto);
     m_chooser.addObject("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+    SmartDashboard.putData(liftJack);
+    liftJack.Initialize();
+    Camera0 = CameraServer.getInstance().startAutomaticCapture("Camera0", 0);
+    Camera0.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
+    
   }
 
   /**
@@ -92,6 +103,7 @@ public class Robot extends IterativeRobot {
    */
   @Override
   public void teleopPeriodic() {
+    Scheduler.getInstance().run();
   }
 
   /**
