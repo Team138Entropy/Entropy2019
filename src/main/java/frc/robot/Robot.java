@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * creating this project, you must also update the manifest file in the resource
  * directory .
  */
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 	// Interface with players
         
     // Subsystems
