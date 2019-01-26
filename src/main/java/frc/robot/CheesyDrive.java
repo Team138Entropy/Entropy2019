@@ -47,13 +47,13 @@ public class CheesyDrive {
         if (isHighGear) {
             wheelNonLinearity = kHighWheelNonLinearity;
             final double denominator = Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            // Apply a sin function that's scaled to make it feel better.
+            // Apply a sine function that's scaled to make it feel better.
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
         } else {
             wheelNonLinearity = kLowWheelNonLinearity;
             final double denominator = Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            // Apply a sin function that's scaled to make it feel better.
+            // Apply a sine function that's scaled to make it feel better.
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
             wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
