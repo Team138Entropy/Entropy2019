@@ -3,18 +3,6 @@ package frc.robot;
  * Useful routines
  */
 public class Utility {
-	public static double angleWrap(double angle) {
-		// wrap angle to range +/-180 degrees
-		double result;
-		result=(angle % 360); // Modulo operator, result in range +/-360
-		if (result<-180)
-			result+=360;
-		if (result > 180)
-			result-=360;
-		// result in range +/-180
-		return result;
-	}
-	
 	/**
 	 * Limit a value to being between two boundaries.
 	 * @param testValue The value we want to look at.
