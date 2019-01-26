@@ -26,17 +26,4 @@ public class Utility {
 			return testValue;
 		}
 	}
-	
-	public static double applyDeadZone(double speed)
-	{
-		double finalSpeed;
-
-		if ( Math.abs(speed) < Constants.joystickDeadband) {
-			finalSpeed = 0;
-		}
-		else {
-			finalSpeed = speed;
-		}
-		return finalSpeed;
-	}
 }
