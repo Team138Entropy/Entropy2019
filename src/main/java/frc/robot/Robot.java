@@ -19,8 +19,6 @@ public class Robot extends TimedRobot {
     public static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-
-    public static final OI oi = new OI();
 	
     Preferences prefs = Preferences.getInstance();
     
