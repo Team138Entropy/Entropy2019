@@ -13,7 +13,6 @@ import frc.robot.RobotMap;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.DriveSignal;
-import frc.robot.Utility;
 import frc.robot.Util;
 
 public class Drivetrain extends Subsystem {
@@ -86,7 +85,7 @@ public class Drivetrain extends Subsystem {
 	public double limitDriveAccel(double moveSpeed)
 	{
 		// Limit rate of change of move and rotate in order to control acceleration
-		lastSpeed = Utility.limitValue(moveSpeed, lastSpeed - Constants.MaxSpeedChange,
+		lastSpeed = Util.limitValue(moveSpeed, lastSpeed - Constants.MaxSpeedChange,
 				lastSpeed + Constants.MaxSpeedChange);
 		return lastSpeed;
 	}
