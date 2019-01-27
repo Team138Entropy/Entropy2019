@@ -4,6 +4,7 @@ package frc.robot;
  * In "C" this would be a header file, but alas, this is Java
  */
 public class Constants {
+	// TODO Clean this up for the 2019 robot.
 
 	// System Constants
 		public static boolean AutoEnable=true;
@@ -123,5 +124,8 @@ public class Constants {
 		// Dashboard input constants
 		public final static String practiceRobot = "practice robot";
 		public final static String competitionRobot = "comp robot";
+
+		// Note: this is temporary. It's the ID of the talon on a test robot completely unrelated to the competition one.
+		public static final int rollerTalon = 2;
 
 }
