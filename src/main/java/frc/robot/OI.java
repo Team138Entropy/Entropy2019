@@ -25,7 +25,7 @@ public final class OI {
 	static final int xboxDpadUp = 12;
 	static final int xboxDpadDown = 13;
 	static final int xboxDpadLeft = 14;
-	static final int xboxDpadRigt = 15;
+	static final int xboxDpadRight = 15;
 	
 	//Xbox axes
 	static final int xboxLeftXAxis = 0;
