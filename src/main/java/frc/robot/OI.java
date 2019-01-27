@@ -99,6 +99,25 @@ public final class OI {
 	public static boolean isQuickturn() {
 		return driverStick.getRawAxis(xboxLeftTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
 	}
+	
+	// Return the jog direction: 1 for up, -1 for down
+	public static int getJogDirection()
+	{
+		// POV hat returns 0 for up
+		if (operatorStick.getPOV() == 0)
+		{
+			return 1;
+		}
+		// POV hat returns 180 for down
+		else if (operatorStick.getPOV() == 180)
+		{
+			return -1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
 	    
 } // :D)))
 

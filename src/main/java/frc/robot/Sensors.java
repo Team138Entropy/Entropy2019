@@ -57,4 +57,9 @@ public class Sensors {
 	// 	SmartDashboard.putNumber("Left Velocity",-Robot.drivetrain.frontLeftTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 	// 	SmartDashboard.putNumber("Right Velocity",-Robot.drivetrain.frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 	// }
+
+	public static boolean isCargoPresent(){
+		//TODO: wire up to actual sensor
+		return true;
+	}
 }
