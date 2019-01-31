@@ -1,6 +1,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.*;
+import frc.robot.subsystems.Elevator.ElevatorTarget;
+import frc.robot.commands.ElevateToTarget;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -63,9 +66,17 @@ public final class OI {
     
     static double lastX=0;
     static double LastY=0;
-    
+	
+	static Button elevateToFloor = new JoystickButton(operatorStick, nykoButton1);
+	static Button elevateToLevel1 = new JoystickButton(operatorStick, nykoButton4);
+	static Button elevateToLevel2 = new JoystickButton(operatorStick, nykoButton3);
+	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton2);
+
     public OI(){
-    	
+		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
+    	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
+		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
+		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 	}
     
 	public static double getMoveSpeed()
@@ -118,6 +129,7 @@ public final class OI {
 			return 0;
 		}
 	}
-	    
+	
+	
 } // :D)))
 
