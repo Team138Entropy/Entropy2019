@@ -37,14 +37,11 @@ public class Elevator extends Subsystem{
 	
 	public enum ElevatorTarget{
 		NONE,
-		FLOOR,							// Acquire Cargo and Hatch Panels Level 0 (Floor)
-		HATCH_PANEL_LEVEL_1,			// Deposit Hatch Panel at Rocket Level 1 / Deposit Hatch Panel at Cargo Ship Level 1 
-		ROCKET_HATCH_PANEL_LEVEL_2,		// Deposit Hatch Panel at Rocket Level 2
-		ROCKET_HATCH_PANEL_LEVEL_3,		// Deposit Hatch Panel at Rocket Level 3
-		CARGO_LEVEL_1,         			// Deposit Cargo at Rocket Level 1 / Deposit Cargo at Cargo Ship Level 1 
-		ROCKET_CARGO_LEVEL_2,  			// Deposit Cargo at Rocket Level 2
-		ROCKET_CARGO_LEVEL_3, 			// Deposit Cargo at Rocket Level 3
-
+		FLOOR,							// Acquire Cargo and dropped Hatch Panels Level 0 (Floor)
+		LOADING_STATION,				// Aquire Cargo from loading station Level 0.5
+		LEVEL_1,						// Deposit at Rocket Level 1 / Deposit at Cargo Ship Level 1 
+		LEVEL_2,						// Deposit at Rocket Level 2
+		LEVEL_3,						// Deposit at Rocket Level 3
 	}
 	
 	private static int _count = 0;
@@ -53,7 +50,6 @@ public class Elevator extends Subsystem{
 	
 	private double _targetPosition = 0.0;
 	private double _currentPosition = 0.0;
-	private ElevatorTarget _alternateElevatorTarget = ElevatorTarget.NONE;
 	private boolean _isAtFloor = true;
 	
 	private int _currentJogDirection = 0;
@@ -109,33 +105,22 @@ public class Elevator extends Subsystem{
 		ElevatorTarget elevatorTarget;
 		
 		switch (target) {
+		case "Loading Station":
+		elevatorTarget = ElevatorTarget.LOADING_STATION;
+		break;
+
 		case "Floor":
 			elevatorTarget = ElevatorTarget.FLOOR;
 			break;
+
 		case "Level 1":
-			if (Sensors.isCargoPresent()) {
-				elevatorTarget = ElevatorTarget.CARGO_LEVEL_1;
-			}
-			else {
-				elevatorTarget = ElevatorTarget.HATCH_PANEL_LEVEL_1;
-			}
-		
+				elevatorTarget = ElevatorTarget.LEVEL_1;		
 			break;
 		case "Level 2":
-			if (Sensors.isCargoPresent()) {
-				elevatorTarget = ElevatorTarget.ROCKET_CARGO_LEVEL_2;
-			}
-			else {
-				elevatorTarget = ElevatorTarget.ROCKET_HATCH_PANEL_LEVEL_2;
-			}
+				elevatorTarget = ElevatorTarget.LEVEL_2;
 			break;
 		case "Level 3":
-			if (Sensors.isCargoPresent()) {
-				elevatorTarget = ElevatorTarget.ROCKET_CARGO_LEVEL_3;
-			}
-			else {
-				elevatorTarget = ElevatorTarget.ROCKET_HATCH_PANEL_LEVEL_3;
-			}
+				elevatorTarget = ElevatorTarget.LEVEL_3;
 			break;
 		default:
 			elevatorTarget = ElevatorTarget.FLOOR;
@@ -166,31 +151,43 @@ public class Elevator extends Subsystem{
 		}
 		else
 		{
-			// TODO: Implement
-			/*if (Constants.practiceBot) {
+			// TODO: Find actual heights
+			if (Constants.practiceBot) {
 				switch (target) {
-				case ACQUIRE:
-					_targetPosition = 0;	// Acquire Height is Cube Level 1
-					_alternateElevatorTarget = ElevatorTarget.EXCHANGE;
+				case FLOOR:
+					_targetPosition = 0;	
 					_isAtFloor = true;
 					break;
-				case EXCHANGE:
-					_targetPosition = 500;	// Alternate Acquire position is Exchange
+				case LOADING_STATION:
+					_targetPosition = 500;	
 					break;
-				case SWITCH:
-					_targetPosition = 1200; // Switch height is also Cube Level 3
-					_alternateElevatorTarget = ElevatorTarget.RUNG;
+				case LEVEL_1:
+					if (Sensors.isCargoPresent()){
+						_targetPosition = 1000;
+					}
+					else
+					{
+						_targetPosition = 1200; 
+					}
+					break;	
+				case LEVEL_2:
+				if (Sensors.isCargoPresent()) {
+					_targetPosition = 2000;
+				}
+				else
+				{
+					_targetPosition = 2500;	
+				}
 					break;
-					
-				case RUNG:
-					_targetPosition = 2100;	// Alternate Switch position is Cube Level 2
-					break;
-				case LOWER_SCALE:
-					_targetPosition = 2500;	// Default scale position is lower scale
-					_alternateElevatorTarget = ElevatorTarget.UPPER_SCALE;
-					break;
-				case UPPER_SCALE:
-					_targetPosition = 2700;	// Alternate scale position is upper scale
+				case LEVEL_3:
+				if (Sensors.isCargoPresent()) {
+					_targetPosition = 3000;
+				}
+				else
+				{
+					_targetPosition = 3500;	
+				}
+					break;	
 				default:
 					// Error 
 					break;
@@ -199,37 +196,44 @@ public class Elevator extends Subsystem{
 			else	// Competition Robot
 			{
 				switch (target) {
-				case ACQUIRE:
-					_targetPosition = 0;	// Acquire Height is Cube Level 1
-					_alternateElevatorTarget = ElevatorTarget.EXCHANGE;
-					_isAtFloor = true;
-					break;
-				case EXCHANGE:
-					_targetPosition = 170;	// Alternate Acquire position is Exchange
-					_isAtFloor = false;
-					break;
-				case RUNG:
-					_targetPosition = 1700;	// Alternate Switch position is Rung
-					_isAtFloor = false;
-					break;
-				case SWITCH:
-					_targetPosition = 900; // Switch height is also Cube Level 3
-					_alternateElevatorTarget = ElevatorTarget.RUNG;
-					_isAtFloor = false;
-					break;
-				case LOWER_SCALE:
-					_targetPosition = 1520;	// Default scale position is lower scale
-					_alternateElevatorTarget = ElevatorTarget.UPPER_SCALE;
-					_isAtFloor = false;
-					break;
-				case UPPER_SCALE:
-					_targetPosition = 1935;	// Alternate scale position is upper scale
-					_isAtFloor = false;
-				default:
-					// Error 
-					break;
+				case FLOOR:
+						_targetPosition = 0;	
+						_isAtFloor = true;
+						break;
+				case LOADING_STATION:
+						_targetPosition = 500;	
+						break;
+				case LEVEL_1:
+				if (Sensors.isCargoPresent()){
+						_targetPosition = 1000;
+					}
+				else
+				{
+					_targetPosition = 1200; 
+					}
+				break;	
+				case LEVEL_2:
+				if (Sensors.isCargoPresent()) {
+					_targetPosition = 2000;
 				}
-			} */
+				else
+				{
+					_targetPosition = 2500;	
+				}
+					break;
+				case LEVEL_3:
+				if (Sensors.isCargoPresent()) {
+					_targetPosition = 3000;
+				}
+				else
+				{
+					_targetPosition = 3500;	
+				}
+					break;	
+				
+						// Error 
+				}
+			} 
 			
 			double elevatorSpeed;
 			
@@ -247,16 +251,6 @@ public class Elevator extends Subsystem{
 			}
 			
 		}
-	}
-	
-	public void ElevateToAlternateTarget()
-	{
-		Elevate(_alternateElevatorTarget);
-	}
-	
-	public ElevatorTarget getAlternateTarget()
-	{
-		return _alternateElevatorTarget;
 	}
 	
 	// Return the elevator position in encoder counts
@@ -295,7 +289,6 @@ public class Elevator extends Subsystem{
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
 		SmartDashboard.putNumber("Target Position", _targetPosition);
 		SmartDashboard.putNumber("Direction", _direction);
-		SmartDashboard.putString("Alternate Target", _alternateElevatorTarget.toString());
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
 		SmartDashboard.putNumber("Elevate Output:",_elevatorMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Count", _count);
