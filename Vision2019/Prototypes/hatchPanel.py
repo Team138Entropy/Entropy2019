@@ -14,10 +14,13 @@ import math
 #import time
 
 maxSize = (640,480)
+#maxSize = (320,240)
 selectDirectory = True
+useEllipseDistanceTest = True
+useEllipseQuadrantTest = True
 imgDir = '..\\FieldPhotos-byBradMillerofWPI\\'
 fn = 'DSC00325.JPG' 
-#fn = 'DSC00321.JPG'    
+#fn = 'DSC00305.JPG'    
     
 
 def readImage(imgDir,fn):
@@ -146,7 +149,7 @@ def findHatchPanel(imgTest):
     
     return contours
 
-def ellipseNormDistance(ellipse,x,y):
+def ellipseNormDistance(ellipse,x,y,quadrants):
      """
      Compute the normalized distance (about major axis) from
      an ellipse the test mpoint (x,y)
@@ -169,6 +172,14 @@ def ellipseNormDistance(ellipse,x,y):
      min2 = minor*minor
      rattheta = major*minor/math.sqrt(min2*cost*cost + maj2*sint*sint)
      
+     quadrant = (int)(theta / math.pi * 4)
+     if (quadrant < 0):
+         quadrant = quadrant + 8
+ 
+     quadrants[quadrant] = quadrants[quadrant] + 1
+     #print('Theta: ', theta * 180.0/math.pi,'Quadrant=',quadrant)
+     
+     
      # Compute the distance to the test point
      rtest = math.sqrt((x-centerx)*(x-centerx) + (y-centery)*(y-centery))
      #print("Theta: ",theta*180.0/math.pi," rtest",rtest, " RAtTheta:",rattheta)
@@ -190,14 +201,22 @@ def ellipseQualifier(ellipse,contour):
     if (npoints < 1):
         return 0.0
     
+    quadrants = np.zeros([8],dtype=np.uint8)
+    
     errorsum = 0.0
     for k in range(0,npoints):
         c = contour[k]
         pt = c[0]
         x,y = pt[0],pt[1]
-        error = ellipseNormDistance(ellipse,x,y)
+        error = ellipseNormDistance(ellipse,x,y,quadrants)
         errorsum = errorsum + error
         ret = errorsum / npoints
+        
+    # make sure we have a full ellipse
+    if useEllipseQuadrantTest:
+        for k in quadrants:
+            if (k < 1):
+                ret = 1.0
     #print("Quality = ",ret)
     return ret
     
@@ -207,11 +226,12 @@ def testEllipseNormDistance():
     """
     Test routine for the ellipseNormDistance function
     """
+    quadrants = np.zeros([8],dtype=np.uint8)
     
     # Test case with a 100,100 image
     img = np.zeros([100,100,1],dtype=np.uint8)
     img.fill(0)
-    ellipse = ((50,50),(10.0,30.0),20.0)
+    ellipse = ((50,50),(20.0,30.0),20.0)
     
     cv2.ellipse(img,ellipse,[255,255,255])
     cv2.imshow('img',img)
@@ -222,9 +242,10 @@ def testEllipseNormDistance():
            c = contour[k]
            pt = c[0]
            x,y = pt[0],pt[1]
-           ans = ellipseNormDistance(ellipse,x,y)
+           ans = ellipseNormDistance(ellipse,x,y,quadrants)
            print(c,ans)
 
+    print('Quadrants=',quadrants)
 
 
 def processFile(imgdir,fn): 
@@ -283,11 +304,9 @@ if __name__ == '__main__':
     """
     print ("OpenCV Version:",cv2.__version__)
     #testEllipseNormDistance()
-    
     if selectDirectory:
         processDirectory(imgDir)         
     else:
-    
         processFile(imgDir,fn)
 
     ch = 0xFF & cv2.waitKey(3000)
