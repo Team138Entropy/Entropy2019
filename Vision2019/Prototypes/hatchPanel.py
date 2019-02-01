@@ -9,13 +9,15 @@ from os import listdir
 from os.path import isfile, join
 import cv2
 import numpy as np
+import math
 #import matplotlib.pyplot as plt
 #import time
 
 maxSize = (640,480)
-selectDirectory = False
+selectDirectory = True
 imgDir = '..\\FieldPhotos-byBradMillerofWPI\\'
-fn = 'DSC00325.JPG'    
+fn = 'DSC00325.JPG' 
+#fn = 'DSC00321.JPG'    
     
 
 def readImage(imgDir,fn):
@@ -121,7 +123,7 @@ def findHatchPanel(imgTest):
         lit = np.sum(lit)
         ratio = lit/area;
         
-        print('  Area: ',area,' YellowRatio: ',ratio,' Square Ratio: ',flatness)
+        #print('  Area: ',area,' YellowRatio: ',ratio,' Square Ratio: ',flatness)
         if (area > 400) and (flatness < 3.0):
             outContours.append(c)
             
@@ -144,6 +146,87 @@ def findHatchPanel(imgTest):
     
     return contours
 
+def ellipseNormDistance(ellipse,x,y):
+     """
+     Compute the normalized distance (about major axis) from
+     an ellipse the test mpoint (x,y)
+    
+     The return is the fraction of the major axis
+     """
+    
+     ((centerx,centery),(minor,major),angle) = ellipse
+     minor = minor/2.0
+     major = major/2.0
+     
+     # Compute test angle (from center of ellipse to (x,y))
+     theta = -(math.atan2(y-centery,x-centerx) + math.pi/2)
+
+     # Rotate and compute the radius at the test angle
+     theta = theta + angle * math.pi/180.0
+     sint = math.sin(-theta)
+     cost = math.cos(theta)
+     maj2 = major*major
+     min2 = minor*minor
+     rattheta = major*minor/math.sqrt(min2*cost*cost + maj2*sint*sint)
+     
+     # Compute the distance to the test point
+     rtest = math.sqrt((x-centerx)*(x-centerx) + (y-centery)*(y-centery))
+     #print("Theta: ",theta*180.0/math.pi," rtest",rtest, " RAtTheta:",rattheta)
+     
+     # normalized distance from test point(x,y) to the point on the ellipse
+     # at the test angle 
+     normdistance = math.fabs((rattheta-rtest)/major)
+     
+     return normdistance
+     
+ 
+def ellipseQualifier(ellipse,contour):
+    """
+    Return a metric indicating how well contour fits the ellipse
+    smaller is better and the result is normalized about
+    the number of points and the major axis
+    """
+    npoints = contour.shape[0]
+    if (npoints < 1):
+        return 0.0
+    
+    errorsum = 0.0
+    for k in range(0,npoints):
+        c = contour[k]
+        pt = c[0]
+        x,y = pt[0],pt[1]
+        error = ellipseNormDistance(ellipse,x,y)
+        errorsum = errorsum + error
+        ret = errorsum / npoints
+    #print("Quality = ",ret)
+    return ret
+    
+    
+
+def testEllipseNormDistance():
+    """
+    Test routine for the ellipseNormDistance function
+    """
+    
+    # Test case with a 100,100 image
+    img = np.zeros([100,100,1],dtype=np.uint8)
+    img.fill(0)
+    ellipse = ((50,50),(10.0,30.0),20.0)
+    
+    cv2.ellipse(img,ellipse,[255,255,255])
+    cv2.imshow('img',img)
+    
+    img2, contours, hierarchy = cv2.findContours(img.copy(),cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+    for contour in contours:
+       for k in range(0,contour.shape[0]):
+           c = contour[k]
+           pt = c[0]
+           x,y = pt[0],pt[1]
+           ans = ellipseNormDistance(ellipse,x,y)
+           print(c,ans)
+
+
+
 def processFile(imgdir,fn): 
     """
     Process a single file
@@ -155,15 +238,25 @@ def processFile(imgdir,fn):
     
     for c in contours:
         # draw a green rectangle to visualize the bounding rect
-        x, y, w, h = cv2.boundingRect(c)
-        cv2.rectangle(imgInput, (x, y), (x+w, y+h), (0, 255, 0), 2)                
 
-        # Fit an ellipse and draw it over the contour        
+        # Fit an ellipse and draw it over the contour      
         ellipse = cv2.fitEllipse(c)
-        cv2.ellipse(imgInput,ellipse,(255,0,255),2)
+        goodness = ellipseQualifier(ellipse,c)
+        
+        # Only display
+        if (goodness < 0.03):
+            color = (0,255,0)
+        else:
+            color = (0,0,200)
+
+        x, y, w, h = cv2.boundingRect(c)
+        cv2.rectangle(imgInput, (x, y), (x+w, y+h), color, 2)                
+
+        ((centerx,centery),(minor,major),angle) = ellipse
+        cv2.circle(imgInput,((int)(centerx-5),(int)(centery)),3,color,-1)
+        cv2.ellipse(imgInput,ellipse,color,2)
         
         
-    
     cv2.imshow('imgInput',imgInput)
         
     
@@ -189,16 +282,15 @@ if __name__ == '__main__':
     Main test program
     """
     print ("OpenCV Version:",cv2.__version__)
-    
-    
+    #testEllipseNormDistance()
     
     if selectDirectory:
         processDirectory(imgDir)         
     else:
     
         processFile(imgDir,fn)
+
+    ch = 0xFF & cv2.waitKey(3000)
     
-    ch = 0xFF & cv2.waitKey(1000)
+   
     
-    if ch == 27:
-        exit(0)
