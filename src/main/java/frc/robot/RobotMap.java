@@ -8,8 +8,9 @@ package frc.robot;
 public class RobotMap {
 	
 	// CAN Bus Assignments
-	public final static int LEFT_MOTOR_CHANNEL_FRONT    = 7;
-	public final static int LEFT_MOTOR_CHANNEL_BACK     = 8;
-	public final static int RIGHT_MOTOR_CHANNEL_FRONT   = 5;
-	public final static int RIGHT_MOTOR_CHANNEL_BACK    = 6;
+	// 
+	public final static int LEFT_MOTOR_CHANNEL_FRONT    = 1;
+	public final static int LEFT_MOTOR_CHANNEL_BACK     = 2;
+	public final static int RIGHT_MOTOR_CHANNEL_FRONT   = 3;
+	public final static int RIGHT_MOTOR_CHANNEL_BACK    = 4;
 }

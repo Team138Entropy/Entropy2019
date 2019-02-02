@@ -16,7 +16,7 @@ import frc.robot.DriveSignal;
 import frc.robot.Util;
 
 public class Drivetrain extends Subsystem {
-	public double lastSpeed=0;
+	public double lastSpeed = 0;
 	double _speedFactor = 1;
 	double _rotateFactor = 1;
 
@@ -47,8 +47,11 @@ public class Drivetrain extends Subsystem {
 		/* choose the sensor and sensor direction */
 		frontLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 		frontLeftTalon.setSensorPhase(true);
-		frontLeftTalon.setInverted(true);
-		backLeftTalon.setInverted(true);
+
+		// invert the right side
+		frontRightTalon.setInverted(true);
+		backRightTalon.setInverted(true);
+
 		/* set the peak and nominal outputs, 12V means full */
 		frontLeftTalon.configNominalOutputForward(0.,0);
 		frontLeftTalon.configNominalOutputReverse(0.,0);
@@ -111,7 +114,6 @@ public class Drivetrain extends Subsystem {
     public void driveCheezy(DriveSignal signal) {
         frontLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
 		frontRightTalon.set(ControlMode.PercentOutput, signal.getRight() * Constants.tempWheelSpeed);
-
     }
 
 	public void driveCloseLoopControl(double moveSpeed, double rotateSpeed)
