@@ -21,7 +21,7 @@ public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final Elevator elevator = new Elevator ();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-	
+	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
     
     // Global constants
@@ -38,7 +38,7 @@ public class Robot extends TimedRobot {
 		Sensors.initialize();		
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
-
+        elevator.ElevatorInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        elevator.updateSmartDashboard();
 //		LiveWindow.run();
     }
     
