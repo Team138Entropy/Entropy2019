@@ -159,33 +159,33 @@ public class Elevator extends Subsystem{
 					_isAtFloor = true;
 					break;
 				case LOADING_STATION:
-					_targetPosition = 500;	
+					_targetPosition = 100;	
 					break;
 				case LEVEL_1:
 					if (Sensors.isCargoPresent()){
-						_targetPosition = 1000;
+						_targetPosition = 200;
 					}
 					else
 					{
-						_targetPosition = 1200; 
+						_targetPosition = 300; 
 					}
 					break;	
 				case LEVEL_2:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 2000;
+					_targetPosition = 400;
 				}
 				else
 				{
-					_targetPosition = 2500;	
+					_targetPosition = 500;	
 				}
 					break;
 				case LEVEL_3:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 3000;
+					_targetPosition = 600;
 				}
 				else
 				{
-					_targetPosition = 3500;	
+					_targetPosition = 700;	
 				}
 					break;	
 				default:
@@ -201,33 +201,33 @@ public class Elevator extends Subsystem{
 						_isAtFloor = true;
 						break;
 				case LOADING_STATION:
-						_targetPosition = 500;	
+						_targetPosition = 100;	
 						break;
 				case LEVEL_1:
 				if (Sensors.isCargoPresent()){
-						_targetPosition =600;
+						_targetPosition =200;
 					}
 				else
 				{
-					_targetPosition = 800; 
+					_targetPosition = 300; 
 					}
 				break;	
 				case LEVEL_2:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 1000;
+					_targetPosition = 400;
 				}
 				else
 				{
-					_targetPosition = 1200;	
+					_targetPosition = 500;	
 				}
 					break;
 				case LEVEL_3:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 1500;
+					_targetPosition = 600;
 				}
 				else
 				{
-					_targetPosition = 1935;	
+					_targetPosition = 700;	
 				}
 					break;	
 				
