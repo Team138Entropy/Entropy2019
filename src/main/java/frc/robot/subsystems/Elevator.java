@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Elevator extends Subsystem{
 
 	public WPI_TalonSRX _elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_PORT);
-	
 	public DigitalInput _lowerLimitSwitch = new DigitalInput(0);
 	public DigitalInput _upperLimitSwitch = new DigitalInput(1);
 	
@@ -222,16 +221,17 @@ public class Elevator extends Subsystem{
 				}
 					break;
 				case LEVEL_3:
-				if (Sensors.isCargoPresent()) {
-					_targetPosition = 600;
-				}
-				else
-				{
-					_targetPosition = 700;	
-				}
+					if (Sensors.isCargoPresent()) {
+						_targetPosition = 600;
+					}
+					else
+					{
+						_targetPosition = 700;	
+					}
 					break;	
-				
-						// Error 
+				default:
+					// Error 
+					break;
 				}
 			} 
 			

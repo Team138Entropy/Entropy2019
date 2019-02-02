@@ -67,10 +67,10 @@ public final class OI {
     static double lastX=0;
     static double LastY=0;
 	
-	static Button elevateToFloor = new JoystickButton(operatorStick, nykoButton1);
-	static Button elevateToLevel1 = new JoystickButton(operatorStick, nykoButton4);
-	static Button elevateToLevel2 = new JoystickButton(operatorStick, nykoButton3);
-	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton2);
+	static Button elevateToFloor = new JoystickButton(operatorStick, nykoButton4);
+	static Button elevateToLevel1 = new JoystickButton(operatorStick, nykoButton1);
+	static Button elevateToLevel2 = new JoystickButton(operatorStick, nykoButton2);
+	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton3);
 
     public OI(){
 		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
