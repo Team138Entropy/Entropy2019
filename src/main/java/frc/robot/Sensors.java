@@ -45,16 +45,4 @@ public class Sensors {
 		Robot.drivetrain.bottomLeftTalon.setSelectedSensorPosition(0, 0, 0);
 		Robot.drivetrain.bottomRightTalon.setSelectedSensorPosition(0, 0, 0);
 	}	
-	
-	// public static void updateSmartDashboard(){
-	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
-	// 	SmartDashboard.putNumber("Right Pos(M)", getRightDistance());
-	// 	SmartDashboard.putNumber("Elev Position", Robot.elevator._elevatorMotor.getSelectedSensorPosition(0));     
-	// 	SmartDashboard.putNumber("Elev Velocity", Robot.elevator._elevatorMotor.getSelectedSensorVelocity(0));
-		
-	// 	SmartDashboard.putNumber("Target Heading", Robot.accumulatedHeading);		
-	// 	SmartDashboard.putNumber("Robot Heading", gyro.getAngle());
-	// 	SmartDashboard.putNumber("Left Velocity",-Robot.drivetrain.frontLeftTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
-	// 	SmartDashboard.putNumber("Right Velocity",-Robot.drivetrain.frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
-	// }
 }
