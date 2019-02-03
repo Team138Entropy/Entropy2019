@@ -20,7 +20,7 @@ public class Sensors {
 
 	public static DigitalInput practiceRobotJumperPin;
 	
-	public static void initialize() {
+	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
@@ -28,7 +28,7 @@ public class Sensors {
         gyro.calibrate();
         gyro.reset();
 	   
-	   practiceRobotJumperPin = new DigitalInput(5);
+		practiceRobotJumperPin = new DigitalInput(5);
 	}
 	
 	public static double getLeftDistance() {

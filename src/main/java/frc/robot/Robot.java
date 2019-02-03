@@ -33,8 +33,7 @@ public class Robot extends TimedRobot {
      */
     public void robotInit() {
     	drivetrain.DriveTrainInit();
-    	compressor.start();
-		Sensors.initialize();		
+    	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
 
