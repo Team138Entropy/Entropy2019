@@ -82,7 +82,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed=-driverStick.getRawAxis(xboxRightXAxis);
+		double rotateSpeed=driverStick.getRawAxis(xboxRightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;
@@ -93,7 +93,11 @@ public final class OI {
 	}
 	
 	public static boolean isFullSpeed() {
-		return driverStick.getRawAxis(xboxRightTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
+		// We don't use a freaking transmission, so just return false
+		return false;
+
+		// But if we did...
+		// return driverStick.getRawAxis(xboxRightTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
 	}
 	
 	public static boolean isQuickturn() {
