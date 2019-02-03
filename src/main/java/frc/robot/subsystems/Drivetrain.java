@@ -16,7 +16,7 @@ import frc.robot.DriveSignal;
 import frc.robot.Util;
 
 public class Drivetrain extends Subsystem {
-	public double lastSpeed=0;
+	public double lastSpeed = 0;
 	double _speedFactor = 1;
 	double _rotateFactor = 1;
 
@@ -32,10 +32,10 @@ public class Drivetrain extends Subsystem {
 
 	int zeroCounter=0;
 
-	public WPI_TalonSRX frontLeftTalon = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_FRONT);
-	WPI_TalonSRX backLeftTalon = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_BACK);
-	public WPI_TalonSRX frontRightTalon = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_FRONT);
-	WPI_TalonSRX backRightTalon = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_BACK);
+	WPI_TalonSRX topLeftTalon            = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
+	public WPI_TalonSRX bottomLeftTalon  = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_BOTTOM);
+	WPI_TalonSRX topRightTalon           = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_TOP);
+	public WPI_TalonSRX bottomRightTalon = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_BOTTOM);
 
 	protected void initDefaultCommand() {
 		setDefaultCommand(new TeleopDrive());
@@ -45,41 +45,44 @@ public class Drivetrain extends Subsystem {
 	public void DriveTrainInit()
 	{
 		/* choose the sensor and sensor direction */
-		frontLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
-		frontLeftTalon.setSensorPhase(true);
-		frontLeftTalon.setInverted(true);
-		backLeftTalon.setInverted(true);
-		/* set the peak and nominal outputs, 12V means full */
-		frontLeftTalon.configNominalOutputForward(0.,0);
-		frontLeftTalon.configNominalOutputReverse(0.,0);
-		frontLeftTalon.configPeakOutputForward(1,0);
-		frontLeftTalon.configPeakOutputReverse(-1,0);
-		frontLeftTalon.setNeutralMode(NeutralMode.Coast);
-		backLeftTalon.setNeutralMode(NeutralMode.Coast);
+		bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
+		bottomLeftTalon.setSensorPhase(true);
 
-		/* choose the sensor and sensor direction */
-		frontRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
-		frontRightTalon.setSensorPhase(true);
-		frontRightTalon.configNominalOutputForward(0.,0);
-		frontRightTalon.configNominalOutputReverse(-0.,0);
-		frontRightTalon.configPeakOutputForward(1,0);
-		frontRightTalon.configPeakOutputReverse(-1,0);
-		frontRightTalon.setNeutralMode(NeutralMode.Coast);
-		backRightTalon.setNeutralMode(NeutralMode.Coast);
+		// Reverse the right talons because they're facing opposite directions
+		topRightTalon.setInverted(true);
+		bottomRightTalon.setInverted(true);
+
+		/* set the peak and nominal outputs, 12V means full */
+		bottomLeftTalon.configNominalOutputForward(0.,0);
+		bottomLeftTalon.configNominalOutputReverse(0.,0);
+		bottomLeftTalon.configPeakOutputForward(1,0);
+		bottomLeftTalon.configPeakOutputReverse(-1,0);
+		bottomLeftTalon.setNeutralMode(NeutralMode.Coast);
+		topLeftTalon.setNeutralMode(NeutralMode.Coast);
+
+		/* choose thebttomnsor and sensor direction */
+		bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
+		bottomRightTalon.setSensorPhase(true);
+		bottomRightTalon.configNominalOutputForward(0.,0);
+		bottomRightTalon.configNominalOutputReverse(-0.,0);
+		bottomRightTalon.configPeakOutputForward(1,0);
+		bottomRightTalon.configPeakOutputReverse(-1,0);
+		bottomRightTalon.setNeutralMode(NeutralMode.Coast);
+		topRightTalon.setNeutralMode(NeutralMode.Coast);
 
 		// Configure Talon gains
-		frontLeftTalon.config_kF(0, Drive_Kf,0);
-		frontLeftTalon.config_kP(0, Drive_Kp,0);
-		frontLeftTalon.config_kI(0, Drive_Ki,0);
-		frontLeftTalon.config_kD(0, Drive_Kd,0);
-		frontRightTalon.config_kF(0, Drive_Kf,0);
-		frontRightTalon.config_kP(0, Drive_Kp,0);
-		frontRightTalon.config_kI(0, Drive_Ki,0);
-		frontRightTalon.config_kD(0, Drive_Kd,0);
+		bottomLeftTalon.config_kF(0, Drive_Kf,0);
+		bottomLeftTalon.config_kP(0, Drive_Kp,0);
+		bottomLeftTalon.config_kI(0, Drive_Ki,0);
+		bottomLeftTalon.config_kD(0, Drive_Kd,0);
+		bottomRightTalon.config_kF(0, Drive_Kf,0);
+		bottomRightTalon.config_kP(0, Drive_Kp,0);
+		bottomRightTalon.config_kI(0, Drive_Ki,0);
+		bottomRightTalon.config_kD(0, Drive_Kd,0);
 
 		// Configure slave Talons to follow masters
-		backLeftTalon.follow(frontLeftTalon);
-		backRightTalon.follow(frontRightTalon);
+		topLeftTalon.follow(bottomLeftTalon);
+		topRightTalon.follow(bottomRightTalon);
 	}
 
 	public double limitDriveAccel(double moveSpeed)
@@ -109,9 +112,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void driveCheezy(DriveSignal signal) {
-        frontLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
-		frontRightTalon.set(ControlMode.PercentOutput, signal.getRight() * Constants.tempWheelSpeed);
-
+        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
+		bottomRightTalon.set(ControlMode.PercentOutput, signal.getRight() * Constants.tempWheelSpeed);
     }
 
 	public void driveCloseLoopControl(double moveSpeed, double rotateSpeed)
@@ -133,8 +135,8 @@ public class Drivetrain extends Subsystem {
 				Relax(); // set Talon VOLTAGE to 0
 			else {
 				// set Talon SPEED to 0
-				frontLeftTalon.set(ControlMode.Velocity, 0);
-				frontRightTalon.set(ControlMode.Velocity, 0);
+				bottomLeftTalon.set(ControlMode.Velocity, 0);
+				bottomRightTalon.set(ControlMode.Velocity, 0);
 			}
 		}
 		else {
@@ -143,24 +145,24 @@ public class Drivetrain extends Subsystem {
 			right = moveSpeed + rotateSpeed;
 
 			// Convert Meters / seconds to Encoder Counts per 100 milliseconds
-			frontLeftTalon.set(ControlMode.Velocity, left * Constants.SecondsTo100Milliseconds / Constants.MetersPerPulse);
-			frontRightTalon.set(ControlMode.Velocity, right * Constants.SecondsTo100Milliseconds / Constants.MetersPerPulse);
+			bottomLeftTalon.set(ControlMode.Velocity, left * Constants.SecondsTo100Milliseconds / Constants.MetersPerPulse);
+			bottomRightTalon.set(ControlMode.Velocity, right * Constants.SecondsTo100Milliseconds / Constants.MetersPerPulse);
 		}
 
 
-		SmartDashboard.putNumber("L PWM", -frontLeftTalon.getMotorOutputPercent());
-		SmartDashboard.putNumber("R PWM", -frontRightTalon.getMotorOutputPercent());
+		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
+		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
 
-		SmartDashboard.putNumber("L Talon Vel (M/S)", -frontLeftTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
-		SmartDashboard.putNumber("R Talon Vel (M/S)", -frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
+		SmartDashboard.putNumber("L Talon Vel (M/S)", -bottomLeftTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
+		SmartDashboard.putNumber("R Talon Vel (M/S)", -bottomRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 
 	}
 
 	public void Relax(){
-		frontLeftTalon.set(ControlMode.PercentOutput, 0);
-		frontRightTalon.set(ControlMode.PercentOutput, 0);
-		SmartDashboard.putNumber("L PWM", -frontLeftTalon.getMotorOutputPercent());
-		SmartDashboard.putNumber("R PWM", -frontRightTalon.getMotorOutputPercent());
+		bottomLeftTalon.set(ControlMode.PercentOutput, 0);
+		bottomRightTalon.set(ControlMode.PercentOutput, 0);
+		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
+		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
 	}
 
 
