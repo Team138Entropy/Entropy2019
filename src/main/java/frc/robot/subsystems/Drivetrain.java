@@ -87,7 +87,7 @@ public class Drivetrain extends Subsystem {
 
 	public double limitDriveAccel(double moveSpeed)
 	{
-		// Limit rate of change of move and rotate in order to control acceleration
+		// Limit rate of change of move in order to control acceleration
 		lastSpeed = Util.limitValue(moveSpeed, lastSpeed - Constants.MaxSpeedChange,
 				lastSpeed + Constants.MaxSpeedChange);
 		return lastSpeed;
@@ -95,16 +95,11 @@ public class Drivetrain extends Subsystem {
 
 	public double limitRotateAccel(double rotateSpeed)
 	{
-		// Limit rate of change of move and rotate in order to control acceleration
+		// Limit rate of change of rotate in order to control acceleration
 		lastRotateSpeed = Util.limit(rotateSpeed, lastRotateSpeed - Constants.MaxRotateSpeedChange,
 				lastRotateSpeed + Constants.MaxRotateSpeedChange);
 		return lastRotateSpeed;
 	}
-
-	public void drive(double moveSpeed, double rotateSpeed)
-	{
-        Robot.drivetrain.driveCloseLoopControl(moveSpeed, rotateSpeed);
-    }
     
 	public void drive(DriveSignal signal)
     {	
@@ -114,50 +109,8 @@ public class Drivetrain extends Subsystem {
     public void driveCheezy(DriveSignal signal) {
         bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
 		bottomRightTalon.set(ControlMode.PercentOutput, signal.getRight() * Constants.tempWheelSpeed);
-    }
-
-	public void driveCloseLoopControl(double moveSpeed, double rotateSpeed)
-	{
-		/*
-		 * moveSpeed and rotateSpeed in Meters/second.
-		 */
-		double left  = 0;   
-		double right = 0;
-		/*
-		 * Robot motors move opposite to joystick and autonomous directions
-		 */
-		moveSpeed=-moveSpeed;
-		rotateSpeed=-rotateSpeed;
-		// Case where commands are exactly NULL
-		if (moveSpeed==0 && rotateSpeed==0) {
-			zeroCounter+=1;
-			if (zeroCounter>Constants.zeroDelay) 
-				Relax(); // set Talon VOLTAGE to 0
-			else {
-				// set Talon SPEED to 0
-				bottomLeftTalon.set(ControlMode.Velocity, 0);
-				bottomRightTalon.set(ControlMode.Velocity, 0);
-			}
-		}
-		else {
-			zeroCounter=0;
-			left = moveSpeed - rotateSpeed; 
-			right = moveSpeed + rotateSpeed;
-
-			// Convert Meters / seconds to Encoder Counts per 100 milliseconds
-			bottomLeftTalon.set(ControlMode.Velocity, left * Constants.SecondsTo100Milliseconds / Constants.MetersPerPulse);
-			bottomRightTalon.set(ControlMode.Velocity, right * Constants.SecondsTo100Milliseconds / Constants.MetersPerPulse);
-		}
-
-
-		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
-		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
-
-		SmartDashboard.putNumber("L Talon Vel (M/S)", -bottomLeftTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
-		SmartDashboard.putNumber("R Talon Vel (M/S)", -bottomRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
-
 	}
-
+	
 	public void Relax(){
 		bottomLeftTalon.set(ControlMode.PercentOutput, 0);
 		bottomRightTalon.set(ControlMode.PercentOutput, 0);

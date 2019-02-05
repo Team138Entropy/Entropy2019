@@ -66,59 +66,11 @@ public class Constants {
 		// This is our encoder constant for distance (in METERS) per  encoder pulse
 		// 6" Wheels, 15:45 chain drive; 256 encoder counts per drive sprocket rotation
 		public final static double MetersPerPulse = Math.PI*6*.0254*15/45/256;
-		public final static double SecondsTo100Milliseconds = 0.1;
-		
-		// public static double Meters2CM = 100.0; // convert distance in Meters to Centimeters
-		public static double Meters2CM = 100.0; // convert distance in Meters to Centimeters
-		// TEST ONLY
 		
 		public final static int LeftDriveEncoderPolarity = -1;
 		public final static int RightDriveEncoderPolarity = 1;
-		
-		// Elevator
-		public final static double elevatorHomingSpeed = -0.2;
-		public final static double elevatorJogSpeed = 0.5;
-		public final static double elevatorMoveSpeed = 1.0;
-		public final static double elevatorDownMoveSpeed = 0.7;
-		public final static double elevatorHoldSpeed = 0.1;
-		public final static double elevatorExchangeSpeed = 0.5;
-		
-		//Cube Grasper
-		public final static boolean grasperSolenoidActiveOpen = true;
-		public final static boolean wristSolenoidActiveRaised = false;
-		public final static double acquisitionWheelsPercent = 50.0;
-		public final static double aquireSpeed = 0.75; 
-		public final static double releaseSpeed = -0.85;
-		public final static double holdSpeed = 0.3;
-		public final static double releaseSpeedReduced = -0.7;
 
-		// Auto Cube Acquisition
-		public final static double autoDetectionSettlingTime = 0.5;	// Time to delay after turning acquisition wheels on to start detection
-		public final static int cubeDetectThresholdCount = 3;		// Consecutive readings above threshold to trigger acquire
-		public final static double cubeDetectThreshold = 3.0;		// Roller current threshold to start acquire
-		public final static int cubeAcquireThresholdCount = 10;		// Consecutive readings above threshold to trigger complete acquire
-		public final static double cubeAcquireThreshold = 7.0;		// Roller current threshold to complete acquire
-
-		// ***** Autonomous drive parameters *******
-		public final static double AutoStraighLineSpeedFactor = 1.0; 				 // Fraction of full autonomous speed
-		public static double AutoDriveSpeed = 2.25; //was 2.0 M/sec
-		public static double AutoDriveAccel = 1.0; // M/sec2 (1 ~.1G)
-		public static double AutoDriveRotateRate = 0.5; // Meters/second
 		public static double IntegralError=0;
-		
-		// PID gains to control rotation (measured by Gyro)
-		public static double kPRotate = .2;
-		public static double kIRotate = .2;
-		public static double kDRotate = 0.2;
-		
-		public static double kPDrive = 0.15;
-		public static double kIDrive = 0.0;	
-		public static double kDDrive = 0.0;
-		// Insert delay after each autonomous move to allow
-		// mechanism to settle (before sensors are reset at start of next move)
-		public static double AutoDrivePause = 2; // 50=1second
-		public static double AutoDriveStopTolerance = 2; // CM
-		public static double AutoDriveAngleCompensation = .01; // 
 
 		// Dashboard input constants
 		public final static String practiceRobot = "practice robot";
