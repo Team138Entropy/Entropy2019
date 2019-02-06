@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.ElevateToTarget;
-
+import frc.robot.commands.HomeElevator;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -67,12 +67,14 @@ public final class OI {
     static double lastX=0;
     static double LastY=0;
 	
+	static Button homeElevatorButton = new JoystickButton(operatorStick, nykoMiddle11);
 	static Button elevateToFloor = new JoystickButton(operatorStick, nykoButton4);
 	static Button elevateToLevel1 = new JoystickButton(operatorStick, nykoButton1);
 	static Button elevateToLevel2 = new JoystickButton(operatorStick, nykoButton2);
 	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton3);
 
     public OI(){
+		homeElevatorButton.whileHeld(new HomeElevator());
 		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
     	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));

@@ -14,4 +14,6 @@ public class RobotMap {
 	public final static int RIGHT_MOTOR_CHANNEL_BACK    = 6;
 
 	public final static int ELEVATOR_PORT 				= 2;
+
+	public final static int CARGO_SENSOR                = 0;
 }

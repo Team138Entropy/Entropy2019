@@ -285,7 +285,7 @@ public class Elevator extends Subsystem{
 	}
 	
 	public void updateSmartDashboard()
-	{
+	{                  
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
 		SmartDashboard.putNumber("Target Position", _targetPosition);
 		SmartDashboard.putNumber("Direction", _direction);
