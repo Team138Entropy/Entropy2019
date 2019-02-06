@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 
 import frc.robot.commands.TeleopDrive;
 import frc.robot.RobotMap;
+import frc.robot.Sensors;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.DriveSignal;
@@ -104,7 +105,20 @@ public class Drivetrain extends Subsystem {
 	public void drive(DriveSignal signal)
     {	
 		driveCheezy(signal);
-    }
+	}
+	
+	public double getDriveDifference(double turnSpeed) {
+		double newTurnSpeed = turnSpeed;
+
+		double rotationRate = Sensors.gyro.getRate();
+		double targetRate = turnSpeed * Constants.MaxRotateDegreesPerSecond;
+
+		double rateDifference = targetRate - rotationRate;
+
+		newTurnSpeed += rateDifference;
+
+		return newTurnSpeed;
+	}
 
     public void driveCheezy(DriveSignal signal) {
         bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
@@ -117,6 +131,4 @@ public class Drivetrain extends Subsystem {
 		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
 		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
 	}
-
-
 }

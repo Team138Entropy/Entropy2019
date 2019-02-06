@@ -3,13 +3,12 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj.DigitalInput;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 import edu.wpi.first.wpilibj.Joystick;
 
 public class Sensors {
-	public static ADXRS450_Gyro gyro; 
+	public static ADXRS450_Gyro gyro;
 	
     static Joystick driverStick = new Joystick(0);
 	

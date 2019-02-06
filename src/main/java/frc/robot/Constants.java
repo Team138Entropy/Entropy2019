@@ -60,6 +60,7 @@ public class Constants {
 		
 		public final static double MaxSpeedChange = 3 * 0.025; // Meters/sec2 * .025 seconds
 		public final static double MaxRotateSpeedChange = 3 * 0.025; // Meters/sec2 * .025 seconds
+		public final static int MaxRotateDegreesPerSecond = 90;
 		public final static double MaxSlowSpeedChange = 2 * 0.025;
 		public final static double CloseLoopJoystickDeadband = 0.2;
 		
