@@ -26,9 +26,6 @@ public class TeleopDrive extends Command{
 		moveSpeed = OI.getMoveSpeed();
 		rotateSpeed = OI.getRotateSpeed();
 
-		double newRotateSpeed = Robot.drivetrain.getDriveDifference(rotateSpeed);
-		System.out.println(newRotateSpeed);
-
 		// // Full speed or slow speed?
 		// if (OI.isFullSpeed()) {
 		// 	// Full speed
