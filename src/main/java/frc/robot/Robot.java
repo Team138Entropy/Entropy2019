@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.subsystems.*;
 
 import frc.robot.subsystems.*;
 
@@ -19,8 +20,9 @@ public class Robot extends TimedRobot {
     // Subsystems
     public static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Elevator elevator = new Elevator ();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-	
+	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
     
     // Global constants
@@ -36,7 +38,7 @@ public class Robot extends TimedRobot {
     	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
-
+        elevator.ElevatorInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
@@ -93,6 +95,8 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        elevator.updateSmartDashboard();
+        Sensors.updateSmartDashboard();
 //		LiveWindow.run();
     }
     
