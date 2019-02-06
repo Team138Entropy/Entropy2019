@@ -17,9 +17,9 @@ public class Robot extends TimedRobot {
 	// Interface with players
         
     // Subsystems
-    public static final Compressor compressor = new Compressor();
-    public static final Drivetrain drivetrain = new Drivetrain();
-    public static final AquisitionRoller aquisitionRoller = new AquisitionRoller();
+    public static final Compressor compressor     = new Compressor();
+    public static final Drivetrain drivetrain     = new Drivetrain();
+    public static final DriverVision driverVision = new DriverVision();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
 	
     Preferences prefs = Preferences.getInstance();
@@ -34,8 +34,7 @@ public class Robot extends TimedRobot {
      */
     public void robotInit() {
     	drivetrain.DriveTrainInit();
-    	compressor.start();
-		Sensors.initialize();		
+    	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
 
