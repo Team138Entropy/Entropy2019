@@ -61,7 +61,7 @@ public class Constants {
 		public final static double MaxSpeedChange = 3 * 0.025; // Meters/sec2 * .025 seconds
 		public final static double MaxRotateSpeedChange = 3 * 0.025; // Meters/sec2 * .025 seconds
 		public final static double MaxSlowSpeedChange = 2 * 0.025;
-		public final static double CloseLoopJoystickDeadband = 0.1;
+		public final static double CloseLoopJoystickDeadband = 0.2;
 		
 		// This is our encoder constant for distance (in METERS) per  encoder pulse
 		// 6" Wheels, 15:45 chain drive; 256 encoder counts per drive sprocket rotation

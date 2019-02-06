@@ -1,9 +1,10 @@
 package frc.robot;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 
-//import edu.wpi.first.wpilibj.Preferences;
+import frc.robot.subsystems.*;
 
 /**
  * This is the development branch.
@@ -34,8 +35,7 @@ public class Robot extends TimedRobot {
      */
     public void robotInit() {
     	drivetrain.DriveTrainInit();
-    	compressor.start();
-		Sensors.initialize();		
+    	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
         elevator.ElevatorInit();

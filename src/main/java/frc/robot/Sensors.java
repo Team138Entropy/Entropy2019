@@ -22,9 +22,9 @@ public class Sensors {
 	public static DigitalInput practiceRobotJumperPin;
 	public static DigitalInput cargosensor;
 	
-	public static void initialize() {
-		Robot.drivetrain.frontLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		Robot.drivetrain.frontRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+	static {
+		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
@@ -36,19 +36,19 @@ public class Sensors {
 	
 	public static double getLeftDistance() {
 		// In METERS
-		return -Robot.drivetrain.frontLeftTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
+		return -Robot.drivetrain.bottomLeftTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
 	}
 	
 	public static double getRightDistance() {
 		// In METERS
-		return -Robot.drivetrain.frontRightTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
+		return -Robot.drivetrain.bottomRightTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
 	}
 	
 	public static void resetEncoders() {
-		Robot.drivetrain.frontLeftTalon.setSelectedSensorPosition(0, 0, 0);
-		Robot.drivetrain.frontRightTalon.setSelectedSensorPosition(0, 0, 0);
+		Robot.drivetrain.bottomLeftTalon.setSelectedSensorPosition(0, 0, 0);
+		Robot.drivetrain.bottomRightTalon.setSelectedSensorPosition(0, 0, 0);
 	}	
-	
+  
 	 public static void updateSmartDashboard(){
 	    SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
@@ -65,4 +65,5 @@ public class Sensors {
 	public static boolean isCargoPresent(){
 		return !cargosensor.get();
 	}
+
 }
