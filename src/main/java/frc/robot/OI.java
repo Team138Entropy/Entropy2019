@@ -3,8 +3,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
+import frc.robot.commands.ChangeState;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
+import frc.robot.commands.StayState;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -73,12 +75,18 @@ public final class OI {
 	static Button elevateToLevel2 = new JoystickButton(operatorStick, nykoButton2);
 	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton3);
 
+	static Button stayState = new JoystickButton(operatorStick, nykoLeftTrigger);
+	static Button changeState = new JoystickButton(operatorStick, nykoRightTrigger);
+
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
 		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
     	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
+
+		stayState.whenPressed(new StayState());
+		changeState.whenPressed(new ChangeState());
 	}
     
 	public static double getMoveSpeed()

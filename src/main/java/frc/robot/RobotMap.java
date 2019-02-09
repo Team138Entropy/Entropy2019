@@ -16,4 +16,8 @@ public class RobotMap {
 	public final static int ELEVATOR_PORT 				= 2;
 
 	public final static int CARGO_SENSOR                = 0;
+
+	// PCM
+	public final static int MANIPULATOR_TRANSLATION_PORT = 0;
+	public final static int MANIPULATOR_ROTATION_PORT = 1;
 }
