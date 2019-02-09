@@ -99,6 +99,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
+        turret.updateSmartDashboard();
 //		LiveWindow.run();
     }
     

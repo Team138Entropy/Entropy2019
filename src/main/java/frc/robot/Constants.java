@@ -85,6 +85,10 @@ public class Constants {
 		
 		// Turret
 		public final static double TurretSpeed = 0.25;
+		public final static double TurretJogSpeed = 0.25;
+		public final static int TurretDirectionLeft = -1;
+		public final static int TurretDirectionRight = 1;
+		
 
 		// ***** Autonomous drive parameters *******
 		public final static double AutoStraighLineSpeedFactor = 1.0; 				 // Fraction of full autonomous speed

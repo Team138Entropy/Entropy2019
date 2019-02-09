@@ -8,17 +8,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.Sensors;
+import frc.robot.commands.JogTurret;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Turret extends Subsystem {
     
     final static int LEFT_POSITION = -1;
     final static int CENTER_POSITION = 0;
-    final static int RIGHT_POSTITION = 1;
+    final static int RIGHT_POSITION = 1;
 
     
     private int _currentPosition = CENTER_POSITION;
     private int _targetPosition;
     private int _direction;
+    private int _currentJogDirection = 0;
 
     private WPI_TalonSRX _turretMotor = new WPI_TalonSRX(RobotMap.TURRET_PORT);
  
@@ -37,7 +41,7 @@ public class Turret extends Subsystem {
 	// Turret motion command timeout
 	public static final int kTurretTimeoutMs = 10;
     protected void initDefaultCommand() {
-	
+        setDefaultCommand(new JogTurret());
     }
 
     public void TurretInit() {
@@ -62,7 +66,7 @@ public class Turret extends Subsystem {
 			break;
 
 		case "Right":
-				turretTarget = RIGHT_POSTITION;		
+				turretTarget = RIGHT_POSITION;		
 			break;
 		default:
 			turretTarget = CENTER_POSITION;
@@ -81,13 +85,44 @@ public class Turret extends Subsystem {
             _direction = 0;
         }
         else if (difference < 0) {
-            _direction = -1;    
+            _direction = Constants.TurretDirectionLeft;    
         }
         else {
-            _direction = 1;
+            _direction = Constants.TurretDirectionRight;
         }
 
     }
+
+    public void RotateLeft() {
+        if (_currentPosition > LEFT_POSITION) {
+            _targetPosition = _currentPosition - 1;
+            _direction = Constants.TurretDirectionLeft;
+        }
+        else {
+            _targetPosition = _currentPosition;
+            _direction = 0;
+        }
+
+    }
+
+    public void RotateRight() {
+        if (_currentPosition < RIGHT_POSITION) {
+            _targetPosition = _currentPosition + 1;
+            _direction = Constants.TurretDirectionRight;
+        }
+        else {
+            _targetPosition = _currentPosition;
+            _direction = 0;
+        }
+
+    }
+   
+    // Start jogging the Turret
+	public void JogTurret(int jogDirection, double jogSpeed)
+	{
+		_currentJogDirection = jogDirection;
+		_turretMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
+	}
     
     public void Execute()
     {
@@ -100,7 +135,7 @@ public class Turret extends Subsystem {
             _currentPosition = CENTER_POSITION;
         }
         else if (Sensors.isTurretRight()){
-            _currentPosition = RIGHT_POSTITION;
+            _currentPosition = RIGHT_POSITION;
         }
 
         if (IsMoveComplete()) {
@@ -123,4 +158,13 @@ public class Turret extends Subsystem {
     {
         _turretMotor.set(ControlMode.PercentOutput,0);
     }
+
+    public void updateSmartDashboard()
+	{                  
+		SmartDashboard.putNumber("Turret Current Position", _currentPosition);
+		SmartDashboard.putNumber("Turret Target Position", _targetPosition);
+		SmartDashboard.putNumber("Turret Direction", _direction);
+		SmartDashboard.putNumber("Turret Jog Direction", _currentJogDirection);
+		SmartDashboard.putNumber("Turret Output:",_turretMotor.getMotorOutputPercent());
+	}
 }
