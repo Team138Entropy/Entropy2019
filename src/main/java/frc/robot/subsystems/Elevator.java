@@ -11,15 +11,12 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends Subsystem{
 
 	public WPI_TalonSRX _elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_PORT);
-	public DigitalInput _lowerLimitSwitch = new DigitalInput(0);
-	public DigitalInput _upperLimitSwitch = new DigitalInput(1);
 	
 	// Servo Loop Gains
 	double _liftKf = 0.2;

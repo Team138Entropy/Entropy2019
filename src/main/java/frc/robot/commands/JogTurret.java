@@ -42,17 +42,9 @@ public class JogTurret extends Command {
 			Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
 		}
 		// Command was not invoked with specific direction - use D Pad
-		else
-		{
-			if (OI.getTurretJogDirection() == 0) // && !Robot.turret.IsAtFloor())
-			{
-				Robot.turret.JogTurret(1, 0);
-			}
-			else
-			{
-				Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
-			}
-		}
+		else{
+			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
+		}			
 	}
 
 	protected boolean isFinished() {

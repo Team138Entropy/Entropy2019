@@ -84,8 +84,8 @@ public class Constants {
 		public final static double elevatorExchangeSpeed = 0.5;
 		
 		// Turret
-		public final static double TurretSpeed = 0.25;
-		public final static double TurretJogSpeed = 0.25;
+		public final static double TurretSpeed = 0.25; //TBD
+		public final static double TurretJogSpeed = 0.25; //TBD
 		public final static int TurretDirectionLeft = -1;
 		public final static int TurretDirectionRight = 1;
 		
