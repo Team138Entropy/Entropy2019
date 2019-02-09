@@ -1,0 +1,5 @@
+setuptools
+RPI.GPIO
+adafruit-blinka
+ansicolors
+numpy
