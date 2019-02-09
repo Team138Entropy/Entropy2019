@@ -41,32 +41,44 @@ toggled = False
 while True:
 	lux = sensor.lux
 
+	# to account for button "bounce", delay .05 seconds and see if the button's state is the same
+	# only continue if it is.
 	value = not button.value
-	if not lastButtonValue == value:
-		ticksSinceChange += 1
-		if ticksSinceChange == maxTicks:
-			toggled = True
-			ticksSinceChange = 0
+	time.sleep(0.05)
+	oldValue = value
+	value == (not button.value)
+	if value == oldValue:
+		# if the button's state was changed
+		if not lastButtonValue == value:
+			ticksSinceChange += 1
+			# and it was changed for enough time
+			if ticksSinceChange == maxTicks:
+				toggled = True
+				ticksSinceChange = 0
 
-	if toggled:
-		toggled = False
-		state += 0.5
-		if state == 2:
-			whiteCalibrationValues.sort()
-			whiteCalibrationValues = removeOutliers(whiteCalibrationValues).tolist()
-			whiteCalibrationValues = whiteCalibrationValues[1:-1]
-			#print("set whiteMin", whiteMin, "whiteMax", whiteMax)
-		elif state == 3:
-			blackCalibrationValues.sort()
-			blackCalibrationValues = removeOutliers(blackCalibrationValues).tolist()
-			blackCalibrationValues = blackCalibrationValues[1:-1]
+		# if the button was *really* pressed
+		if toggled:
+			toggled = False
+			state += 0.5
+			if state == 2:
+				# sort, remove outliers from, and remove first & last from the whiteCalibrationValues
+				whiteCalibrationValues.sort()
+				whiteCalibrationValues = removeOutliers(whiteCalibrationValues).tolist()
+				whiteCalibrationValues = whiteCalibrationValues[1:-1]
+				#print("set whiteMin", whiteMin, "whiteMax", whiteMax)
+			elif state == 3:
+				# sort, remove outliers from, and remove first & last from the blackCalibrationValues
+				blackCalibrationValues.sort()
+				blackCalibrationValues = removeOutliers(blackCalibrationValues).tolist()
+				blackCalibrationValues = blackCalibrationValues[1:-1]
 
-			threshold = (
-				whiteCalibrationValues[0] + 
-				blackCalibrationValues[-1]
-			) / 2
+				# find the middle between the extreme values
+				threshold = (
+					whiteCalibrationValues[0] + 
+					blackCalibrationValues[-1]
+				) / 2
 
-		lastButtonValue = value
+			lastButtonValue = value
 
 	stateVal = (state)
 
