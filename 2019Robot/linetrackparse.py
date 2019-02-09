@@ -34,13 +34,16 @@ def linetrackparse(sensors : list):
             rowLen = len(row)
         # otherwise see if the length is different than expected
         elif rowLen != len(row):
-            raise ValueError("row length expected", rowLen, "to be", len(row))
+            raise ValueError("row length expected", rowLen, "but got", len(row), "in row #", rowIdx, "row", row)
         
         for i in range(len(row)):
             sensor = row[i]
             if sensor == True:
                 # add this sensor index
                 idxs[rowIdx].append(i)
+
+        if len(idxs[rowIdx]) == 0:
+            raise ValueError("expected each row to have at least one True, could not find any in row #", rowIdx, "row", row)
     
     # flatten (average) the list
     flatIdxs = flattenIdxs(idxs)
