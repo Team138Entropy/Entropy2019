@@ -8,9 +8,9 @@ import frc.robot.CheesyDrive;
 
 //import org.usfirst.frc.team138.robot.subsystems.Claw;
 
-public class TeleopDrive extends Command{
+public class TeleopDrive extends Command {
 	
-//           *happy stalin*
+	//       *happy stalin*
 	CheesyDrive ourDrive = new CheesyDrive();
 	
 	public TeleopDrive(){
@@ -26,22 +26,8 @@ public class TeleopDrive extends Command{
 		moveSpeed = OI.getMoveSpeed();
 		rotateSpeed = OI.getRotateSpeed();
 
-		// // Full speed or slow speed?
-		// if (OI.isFullSpeed()) {
-		// 	// Full speed
-		// 	moveSpeed=moveSpeed*Constants.ClosedLoopCruiseVelocity;
-		// 	rotateSpeed=rotateSpeed*Constants.ClosedLoopTurnSpeed;
-		// }
-		// else { 
-		// 	// Slow speed
-		// 	moveSpeed=moveSpeed*Constants.ClosedLoopSlowVelocity;
-		// 	rotateSpeed=rotateSpeed*Constants.ClosedLoopSlowRotateSpeed;
-		// }
-		// // Limit rate of change of moveSpeed
-		// moveSpeed=Robot.drivetrain.limitDriveAccel(moveSpeed);
-		// rotateSpeed=Robot.drivetrain.limitRotateAccel(rotateSpeed);
-		// Robot.drivetrain.drive(moveSpeed,rotateSpeed);
-
+		Robot.drivetrain.difference(rotateSpeed);
+		
 		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
 	}
 

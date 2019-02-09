@@ -12,7 +12,6 @@ import frc.robot.commands.TeleopDrive;
 import frc.robot.RobotMap;
 import frc.robot.Sensors;
 import frc.robot.Constants;
-import frc.robot.Robot;
 import frc.robot.DriveSignal;
 import frc.robot.Util;
 
@@ -54,6 +53,7 @@ public class Drivetrain extends Subsystem {
 		bottomRightTalon.setInverted(true);
 
 		/* set the peak and nominal outputs, 12V means full */
+		bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 		bottomLeftTalon.configNominalOutputForward(0.,0);
 		bottomLeftTalon.configNominalOutputReverse(0.,0);
 		bottomLeftTalon.configPeakOutputForward(1,0);
@@ -84,6 +84,19 @@ public class Drivetrain extends Subsystem {
 		// Configure slave Talons to follow masters
 		topLeftTalon.follow(bottomLeftTalon);
 		topRightTalon.follow(bottomRightTalon);
+	}
+
+	public double difference(double turnSpeed) {
+		double left = bottomLeftTalon.getSelectedSensorVelocity();
+		double right = bottomRightTalon.getSelectedSensorVelocity();
+
+		double directionChange = left - right;
+
+		double difference = directionChange - turnSpeed;
+
+		System.out.println(left + " / " + right + " | side difference " + directionChange);
+
+		return difference;
 	}
 
 	public double limitDriveAccel(double moveSpeed)
@@ -121,11 +134,11 @@ public class Drivetrain extends Subsystem {
 	}
 
     public void driveCheezy(DriveSignal signal) {
-        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
-		bottomRightTalon.set(ControlMode.PercentOutput, signal.getRight() * Constants.tempWheelSpeed);
+        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.driveModifier);
+		bottomRightTalon.set(ControlMode.PercentOutput, -(signal.getRight() * Constants.driveModifier));
 	}
 	
-	public void Relax(){
+	public void Relax() {
 		bottomLeftTalon.set(ControlMode.PercentOutput, 0);
 		bottomRightTalon.set(ControlMode.PercentOutput, 0);
 		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());

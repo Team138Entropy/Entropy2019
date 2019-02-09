@@ -32,12 +32,12 @@ public class Sensors {
 	
 	public static double getLeftDistance() {
 		// In METERS
-		return -Robot.drivetrain.bottomLeftTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
+		return -Robot.drivetrain.bottomLeftTalon.getSelectedSensorPosition(0) * Constants.MetersPerPulse;
 	}
 	
 	public static double getRightDistance() {
 		// In METERS
-		return -Robot.drivetrain.bottomRightTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
+		return -Robot.drivetrain.bottomRightTalon.getSelectedSensorPosition(0) * Constants.MetersPerPulse;
 	}
 	
 	public static void resetEncoders() {

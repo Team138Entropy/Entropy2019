@@ -71,11 +71,11 @@ public final class OI {
 	public static double getMoveSpeed()
 	{
 		// joystick values are opposite to robot directions
-		double moveSpeed=-driverStick.getRawAxis(xboxLeftYAxis);
+		double moveSpeed=driverStick.getRawAxis(xboxLeftYAxis);
 		// Apply thresholds to joystick positions to eliminate
 		// creep motion due to non-zero joystick value when joysticks are 
 		// "centered"
-		if (Math.abs(moveSpeed) < Constants.CloseLoopJoystickDeadband)
+		if (Math.abs(moveSpeed) < Constants.JoystickDeadband)
 			moveSpeed=0;
 		return moveSpeed;
 	}
@@ -83,7 +83,7 @@ public final class OI {
 	public static double getRotateSpeed()
 	{
 		double rotateSpeed=driverStick.getRawAxis(xboxRightXAxis);
-		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
+		if (Math.abs(rotateSpeed) < Constants.JoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;
 	}
