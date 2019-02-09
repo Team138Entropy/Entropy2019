@@ -35,11 +35,11 @@ public class Robot extends TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	//drivetrain.DriveTrainInit();
-    	//compressor.start();	
+    	drivetrain.DriveTrainInit();
+    	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
-        //elevator.ElevatorInit();
+        elevator.ElevatorInit();
         turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
     }
@@ -79,10 +79,10 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
     	mode = "teleop";
-    //	Sensors.resetEncoders();
+    	//Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-		//Robot.drivetrain.Relax();
+	    Robot.drivetrain.Relax();
 
 		Constants.AutoEnable=true;
 		Constants.IntegralError=0;
@@ -97,7 +97,7 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //elevator.updateSmartDashboard();
+        elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
 //		LiveWindow.run();
