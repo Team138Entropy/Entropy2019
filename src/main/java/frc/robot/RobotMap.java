@@ -14,6 +14,11 @@ public class RobotMap {
 	public final static int RIGHT_MOTOR_CHANNEL_BOTTOM    = 4;
 
 	public final static int ELEVATOR_PORT 				= 2;
-
+	public final static int TURRET_PORT					= 3;
+									   
 	public final static int CARGO_SENSOR                = 0;
+	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 1;
+	public final static int CENTER_TURRET_LIMIT_SWITCH  = 2;
+	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 3;
+
 }

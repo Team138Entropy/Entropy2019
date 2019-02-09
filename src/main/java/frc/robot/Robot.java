@@ -20,6 +20,7 @@ public class Robot extends TimedRobot {
     // Subsystems
     public static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator ();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
 	public static final OI oi = new OI();
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
         elevator.ElevatorInit();
+        turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
