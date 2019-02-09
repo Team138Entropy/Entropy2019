@@ -85,19 +85,19 @@ while True:
 	stateVal = (state)
 
 	if stateVal == 0:
-		print("press the button to calibrate white.")
+		print("#press the button to calibrate white.")
 	elif stateVal == 1:
-		print("calibrating white")
+		print("#calibrating white")
 		whiteCalibrationValues.append(int(lux))
 	elif stateVal == 2:
-		print("calibrating black")
+		print("#calibrating black")
 		blackCalibrationValues.append(int(lux))
 	elif stateVal > 2.5:
-		print(color("lux " + str(lux) + " threshold " + str(threshold),
+		print("#" + color("lux " + str(lux) + " threshold " + str(threshold),
 			bg=("white" if lux > threshold else "black"),
 			fg=("black" if lux > threshold else "white")
 		))
 
 	# show the state
 	if stateVal < 3:
-		print(state)
+		print("#" + state)

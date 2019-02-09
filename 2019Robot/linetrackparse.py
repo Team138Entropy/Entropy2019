@@ -19,7 +19,7 @@ def flattenIdxs(idxs: list):
 
 # converts the list to a degree measurement
 def linetrackparse(sensors : list):
-    print("array of sensors", sensors)
+    print("#array of sensors", sensors)
 
     # the list of indexes of "True", 2d array of booleans
     idxs = []
@@ -48,7 +48,7 @@ def linetrackparse(sensors : list):
     
     # flatten (average) the list
     flatIdxs = flattenIdxs(idxs)
-    print("flattened into", flatIdxs)
+    print("#flattened into", flatIdxs)
 
     # avoid a division by zero error when the column of the sensors are the same
     if flatIdxs[1] - flatIdxs[0] == 0:
@@ -58,12 +58,13 @@ def linetrackparse(sensors : list):
         deg = math.degrees(math.atan(
             ROW_DISTANCE / (SENSOR_DISTANCE * (flatIdxs[1] - flatIdxs[0]))
         ))
-    print("angle (degrees)", deg)
+    print("#angle (degrees)")
+    print(deg)
     return deg
 
 if __name__ == "__main__":
     if len(argv) == 1 or argv[1] == "-h" or argv[1] == "--help":
-        print("Usage: linetrackparse.py '[[false, true, false, false], [false, false, false, true]]'")
+        print("#Usage: linetrackparse.py '[[false, true, false, false], [false, false, false, true]]'")
         exit(1)
 
     data = json.loads(argv[1])
