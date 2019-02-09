@@ -18,11 +18,15 @@ i2c = busio.I2C(board.SCL, board.SDA)
 sensor = adafruit_tcs34725.TCS34725(i2c)
 sensor.integration_time = 50
 
+# add the toggle button
 button = digitalio.DigitalInOut(board.D4)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.UP
 
+# detect changes
 lastButtonValue = False
+
+# a list of values recieved while in calibration mode
 whiteCalibrationValues = []
 blackCalibrationValues = []
 threshold = 0
