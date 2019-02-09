@@ -21,6 +21,10 @@ public class Sensors {
 
 	public static DigitalInput practiceRobotJumperPin;
 	public static DigitalInput cargosensor;
+
+	public static DigitalInput leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
+    public static DigitalInput centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
+    public static DigitalInput rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_MOTOR_CHANNEL_BOTTOM);
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -64,6 +68,18 @@ public class Sensors {
 
 	public static boolean isCargoPresent(){
 		return !cargosensor.get();
+	}
+
+	public static boolean isTurretLeft (){
+		return !leftLimitSwitch.get();
+	}
+
+	public static boolean isTurretCenter (){
+		return !centerLimitSwitch.get();
+	}
+
+	public static boolean isTurretRight (){
+		return !rightLimitSwitch.get();
 	}
 
 }

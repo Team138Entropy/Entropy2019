@@ -1,28 +1,28 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Robot;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
-import edu.wpi.first.wpilibj.DigitalInput;
+import frc.robot.Sensors;
 
 public class Turret extends Subsystem {
     
-    
-    final static int LEFT_POSITION = 0;
-    final static int CENTER_POSITION = 1;
-    final static int RIGHT_POSTITION = 2;
+    final static int LEFT_POSITION = -1;
+    final static int CENTER_POSITION = 0;
+    final static int RIGHT_POSTITION = 1;
 
     
-    public WPI_TalonSRX _turretMotor = new WPI_TalonSRX(RobotMap.TURRET_PORT);
+    private int _currentPosition = CENTER_POSITION;
+    private int _targetPosition;
+    private int _direction;
+
+    private WPI_TalonSRX _turretMotor = new WPI_TalonSRX(RobotMap.TURRET_PORT);
  
-    public DigitalInput _leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
-    public DigitalInput _centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
-    public DigitalInput _rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_MOTOR_CHANNEL_BOTTOM);
+   
 
     // Servo Loop Gains
 	double _turretKf = 0.2;
@@ -73,27 +73,54 @@ public class Turret extends Subsystem {
 
     public void RotateTurret(int target)
     {
+        int difference = _targetPosition - _currentPosition;
+        
+        _targetPosition = target;
+
+        if (difference == 0) {
+            _direction = 0;
+        }
+        else if (difference < 0) {
+            _direction = -1;    
+        }
+        else {
+            _direction = 1;
+        }
 
     }
     
     public void Execute()
     {
+        _turretMotor.set(ControlMode.PercentOutput, Constants.TurretSpeed * _direction);
 
+        if (Sensors.isTurretLeft()) {
+            _currentPosition = LEFT_POSITION;
+        }
+        else if (Sensors.isTurretCenter()) {
+            _currentPosition = CENTER_POSITION;
+        }
+        else if (Sensors.isTurretRight()){
+            _currentPosition = RIGHT_POSTITION;
+        }
+
+        if (IsMoveComplete()) {
+            StopMoving();
+        }
+    
     }
 
     public boolean IsMoveComplete()
     {
-        //TODO
-        return false;
+        return (_currentPosition == _targetPosition);
     }
 
     public void StopMoving()
     {
-
+        _turretMotor.set(ControlMode.PercentOutput,0);
     }
 
     public void CancelMove()
     {
-
+        _turretMotor.set(ControlMode.PercentOutput,0);
     }
 }
