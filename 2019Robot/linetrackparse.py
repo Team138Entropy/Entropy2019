@@ -43,7 +43,8 @@ def linetrackparse(sensors : list):
                 idxs[rowIdx].append(i)
 
         if len(idxs[rowIdx]) == 0:
-            raise ValueError("expected each row to have at least one True, could not find any in row #", rowIdx, "row", row)
+            raise ValueError("expected each row to have at least one True, could not find any in row #",
+                rowIdx, "row", row)
     
     # flatten (average) the list
     flatIdxs = flattenIdxs(idxs)
