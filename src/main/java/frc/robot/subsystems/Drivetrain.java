@@ -28,9 +28,9 @@ public class Drivetrain extends Subsystem {
 
 	// Filter state for joystick movements
 	double _lastMoveSpeed = 0;
-	double lastRotateSpeed=0;
+	double lastRotateSpeed = 0;
 
-	int zeroCounter=0;
+	int zeroCounter = 0;
 
 	WPI_TalonSRX topLeftTalon            = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
 	public WPI_TalonSRX bottomLeftTalon  = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_BOTTOM);
@@ -90,11 +90,17 @@ public class Drivetrain extends Subsystem {
 		double left = bottomLeftTalon.getSelectedSensorVelocity();
 		double right = bottomRightTalon.getSelectedSensorVelocity();
 
-		double directionChange = left - right;
+		double directionChange = 0;
 
-		double difference = directionChange - turnSpeed;
+		if (left == 0 && right == 0) {
+			directionChange = 0;
+		} else {
+			directionChange = (left / right) - 1;
+		}
 
-		System.out.println(left + " / " + right + " | side difference " + directionChange);
+		double difference = turnSpeed - directionChange;
+
+		System.out.println(left + " / " + right + " | side difference " + difference);
 
 		return difference;
 	}
@@ -115,33 +121,23 @@ public class Drivetrain extends Subsystem {
 		return lastRotateSpeed;
 	}
     
-	public void drive(DriveSignal signal)
+	public void drive(DriveSignal signal, double turnSpeed)
     {	
-		driveCheezy(signal);
-	}
-	
-	public double getDriveDifference(double turnSpeed) {
-		double newTurnSpeed = turnSpeed;
-
-		double rotationRate = Sensors.gyro.getRate();
-		double targetRate = turnSpeed * Constants.MaxRotateDegreesPerSecond;
-
-		double rateDifference = targetRate - rotationRate;
-
-		newTurnSpeed += rateDifference;
-
-		return newTurnSpeed;
+		driveCheezy(signal, turnSpeed);
 	}
 
-    public void driveCheezy(DriveSignal signal) {
-        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.driveModifier);
-		bottomRightTalon.set(ControlMode.PercentOutput, -(signal.getRight() * Constants.driveModifier));
+    public void driveCheezy(DriveSignal signal, double turnSpeed) {
+		double diff = difference(turnSpeed);
+
+		double left = (signal.getLeft() * Constants.driveModifier);
+		double right = -(signal.getRight() * Constants.driveModifier);
+
+        bottomLeftTalon.set(ControlMode.PercentOutput, left);
+		bottomRightTalon.set(ControlMode.PercentOutput, right);
 	}
 	
 	public void Relax() {
 		bottomLeftTalon.set(ControlMode.PercentOutput, 0);
 		bottomRightTalon.set(ControlMode.PercentOutput, 0);
-		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
-		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
 	}
 }

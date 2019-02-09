@@ -28,7 +28,7 @@ public class TeleopDrive extends Command {
 
 		Robot.drivetrain.difference(rotateSpeed);
 		
-		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
+		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()), rotateSpeed);
 	}
 
 	protected boolean isFinished() {
