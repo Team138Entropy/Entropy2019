@@ -3,21 +3,27 @@ package frc.robot.commands;
 import frc.robot.Robot;
 import frc.robot.OI;
 
+import frc.robot.subsystems.AquisitionRoller.PistonState;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class RunRoller extends Command {
-    
+    private static boolean rollerOn = false;
+
     
     public RunRoller() {
-        requires(Robot.aquisitionRoller);
+        requires(Robot.roller);
     }
     
     protected void execute() {
-        // Note: we should use the left trigger to activate the roller.
-        
-        // Not quite sure if this will work. Haven't read the docs yet.
-        // ¯\_(ツ)_/¯
-        Robot.aquisitionRoller.set(OI.operatorStick.getRawButton(OI.nykoLeftTrigger));
+        rollerOn = OI.operatorStick.getRawButton(OI.NykoController.leftTrigger);
+
+        if (rollerOn) {
+            Robot.roller.setPistons(PistonState.EXTEND);
+            Robot.roller.set(true);
+        } else {
+            Robot.roller.setPistons(PistonState.RETRACT);
+        }
     }
 
     protected boolean isFinished() {

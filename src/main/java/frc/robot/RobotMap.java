@@ -12,4 +12,9 @@ public class RobotMap {
 	public final static int LEFT_MOTOR_CHANNEL_TOP        = 2;
 	public final static int RIGHT_MOTOR_CHANNEL_TOP       = 3;
 	public final static int RIGHT_MOTOR_CHANNEL_BOTTOM    = 4;
+	
+	public final static int ROLLER_TALON_ID = 5;
+
+	// Other mappings
+	public static final int PISTON_SOLENOID_CHANNEL = 0;
 }
