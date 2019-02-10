@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.Sensors;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.subsystems.Elevator;
 
@@ -23,6 +24,7 @@ public class ManipulatorStateMachine extends Command {
 
     ManipulatorState currentState;
     ManipulatorState oldState;
+    boolean isEntryActionComplete = false;
 
     public ManipulatorStateMachine() {
         requires(Robot.manipulator);
@@ -50,19 +52,29 @@ public class ManipulatorStateMachine extends Command {
     }
 
     private void idle() {
-        Robot.manipulator.actuate(false, false);
-        Robot.elevator.Elevate(Elevator.ElevatorTarget.FLOOR); // TODO: Get this correct
+        if (!isEntryActionComplete) {
+            Robot.manipulator.actuate(false, false);
+            Robot.elevator.Elevate(Elevator.ElevatorTarget.FLOOR); // TODO: Get this correct
+            isEntryActionComplete = true;
+        }
 
         if (Robot.elevator.IsMoveComplete()) {
             if (changeState) {
                 changeState(ManipulatorState.PREPARE_ACQUIRE_HP);
+            } else {
+                if (Sensors.isCargoPresent()) {
+                    changeState(ManipulatorState.IDLE_CARGO);
+                }
             }
         }
     }
 
     private void prepareAcquire() {
-        Robot.manipulator.actuate(true, true);
-        Robot.elevator.Elevate(Elevator.ElevatorTarget.LEVEL_1); // TODO: Get this correct
+        if (!isEntryActionComplete) {
+            Robot.manipulator.actuate(true, true);
+            Robot.elevator.Elevate(Elevator.ElevatorTarget.LEVEL_1); // TODO: Get this correct
+            isEntryActionComplete = true;
+        }
 
         if (Robot.elevator.IsMoveComplete()) {
             changeState(ManipulatorState.READY_ACQUIRE_HP);
@@ -76,7 +88,10 @@ public class ManipulatorStateMachine extends Command {
     }
 
     private void completeAcquire() {
-        Robot.elevator.Elevate(ElevatorTarget.LEVEL_2); // TODO: Make a preset for slightly above level 1
+        if (!isEntryActionComplete) {
+            Robot.elevator.Elevate(ElevatorTarget.LEVEL_2); // TODO: Make a preset for slightly above level 1
+            isEntryActionComplete = true;
+        }
 
         if (Robot.elevator.IsMoveComplete()) {
             Robot.manipulator.actuate(false, true);
@@ -89,7 +104,11 @@ public class ManipulatorStateMachine extends Command {
     }
 
     private void acquiredHP() {
-        Robot.manipulator.actuate(false, true);
+        if (!isEntryActionComplete) {
+            Robot.manipulator.actuate(false, true);
+            isEntryActionComplete = true;
+        }
+
         if (changeState) {
             changeState(ManipulatorState.DEPLOY_HP);
         } else {
@@ -100,7 +119,10 @@ public class ManipulatorStateMachine extends Command {
     }
 
     private void deployHP() {
-        Robot.manipulator.actuate(true, true);
+        if (!isEntryActionComplete) {
+            Robot.manipulator.actuate(true, true);
+            isEntryActionComplete = true;
+        }
 
         if (changeState) {
             changeState(ManipulatorState.IDLE);
@@ -118,7 +140,10 @@ public class ManipulatorStateMachine extends Command {
     }
 
     private void deployCargo() {
-        Robot.manipulator.actuate(false, true);
+        if (!isEntryActionComplete) {
+            Robot.manipulator.actuate(false, true);
+            isEntryActionComplete = true;
+        }
 
         if (changeState) {
             changeState(ManipulatorState.IDLE);
@@ -128,6 +153,7 @@ public class ManipulatorStateMachine extends Command {
     private void changeState(ManipulatorState newState) {
         oldState = currentState;
         currentState = newState;
+        isEntryActionComplete = false;
     }
 
     public boolean isFinished() {
