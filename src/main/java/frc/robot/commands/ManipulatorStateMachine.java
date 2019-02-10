@@ -10,8 +10,6 @@ public class ManipulatorStateMachine extends Command {
     private boolean stayState = false;
     private boolean changeState = false;
 
-    private boolean changingStates = false;
-
     private enum ManipulatorState {
         IDLE,
         PREPARE_ACQUIRE_HP,
