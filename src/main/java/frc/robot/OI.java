@@ -93,11 +93,23 @@ public final class OI {
 	}
 
 	public static double getStickX() {
-		return driverStick.getRawAxis(xboxLeftXAxis);
+		double x = driverStick.getRawAxis(xboxLeftXAxis);
+
+		if (Math.abs(x) < Constants.joystickDeadband) {
+			x = 0;
+		}
+
+		return x;
 	}
 
 	public static double getStickY() {
-		return driverStick.getRawAxis(xboxLeftYAxis);
+		double y = driverStick.getRawAxis(xboxLeftYAxis);
+
+		if (Math.abs(y) < Constants.joystickDeadband) {
+			y = 0;
+		}
+		
+		return y;
 	}
 
 	public static boolean isHeadless() {
