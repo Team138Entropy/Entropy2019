@@ -75,6 +75,27 @@ public class Turret extends Subsystem {
 		return turretTarget;
     }
 
+    public String ConvertTargetToString (int target){
+        String targetString = "Error!!";
+
+        switch(target){
+            case LEFT_POSITION:
+                targetString = "Left";
+                break;
+            case CENTER_POSITION:
+                targetString = "Center";
+                break;
+            case RIGHT_POSITION:
+                targetString = "Right";
+                break;
+            default:
+                targetString = "Error!";
+                break;
+        } 
+        return targetString;
+    }
+
+
     public void RotateTurret(int target)
     {
         int difference = _targetPosition - _currentPosition;
@@ -121,12 +142,12 @@ public class Turret extends Subsystem {
 	public void JogTurret(int jogDirection, double jogSpeed)
 	{
 		_currentJogDirection = jogDirection;
-		_turretMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
+		//_turretMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
 	}
     
     public void Execute()
     {
-        _turretMotor.set(ControlMode.PercentOutput, Constants.TurretSpeed * _direction);
+        //_turretMotor.set(ControlMode.PercentOutput, Constants.TurretSpeed * _direction);
 
         if (Sensors.isTurretLeft()) {
             _currentPosition = LEFT_POSITION;
@@ -161,10 +182,12 @@ public class Turret extends Subsystem {
 
     public void updateSmartDashboard()
 	{                  
-		SmartDashboard.putNumber("Turret Current Position", _currentPosition);
-		SmartDashboard.putNumber("Turret Target Position", _targetPosition);
+        SmartDashboard.putString("Turret Current Position", ConvertTargetToString(_currentPosition));
+        //SmartDashboard.putNumber("Turret Current Position", _currentPosition);
+		SmartDashboard.putString("Turret Target Position", ConvertTargetToString(_targetPosition));
 		SmartDashboard.putNumber("Turret Direction", _direction);
 		SmartDashboard.putNumber("Turret Jog Direction", _currentJogDirection);
-		SmartDashboard.putNumber("Turret Output:",_turretMotor.getMotorOutputPercent());
+        SmartDashboard.putNumber("Turret Output:",_turretMotor.getMotorOutputPercent());
+        
 	}
 }
