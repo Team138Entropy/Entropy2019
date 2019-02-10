@@ -21,6 +21,10 @@ public class Sensors {
 
 	public static DigitalInput practiceRobotJumperPin;
 	public static DigitalInput cargosensor;
+
+	public static DigitalInput leftLimitSwitch;
+    public static DigitalInput centerLimitSwitch;
+    public static DigitalInput rightLimitSwitch;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -30,8 +34,11 @@ public class Sensors {
         gyro.calibrate();
         gyro.reset();
 	   
-	   practiceRobotJumperPin = new DigitalInput(5);
-	   cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
+		practiceRobotJumperPin = new DigitalInput(5);
+		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
+		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
+    	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
+    	rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
 	}
 	
 	public static double getLeftDistance() {
@@ -50,7 +57,10 @@ public class Sensors {
 	}	
   
 	 public static void updateSmartDashboard(){
-	    SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
+		SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
+		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
+		SmartDashboard.putBoolean("Turret Right", isTurretRight());
+		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
 	// 	SmartDashboard.putNumber("Right Pos(M)", getRightDistance());
 	// 	SmartDashboard.putNumber("Elev Position", Robot.elevator._elevatorMotor.getSelectedSensorPosition(0));     
@@ -64,6 +74,18 @@ public class Sensors {
 
 	public static boolean isCargoPresent(){
 		return !cargosensor.get();
+	}
+
+	public static boolean isTurretLeft (){
+		return !leftLimitSwitch.get();
+	}
+
+	public static boolean isTurretCenter (){
+		return !centerLimitSwitch.get();
+	}
+
+	public static boolean isTurretRight (){
+		return !rightLimitSwitch.get();
 	}
 
 }

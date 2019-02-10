@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
+import frc.robot.commands.RotateTurretLeft;
+import frc.robot.commands.RotateTurretRight;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -72,6 +74,8 @@ public final class OI {
 	static Button elevateToLevel1 = new JoystickButton(operatorStick, nykoButton1);
 	static Button elevateToLevel2 = new JoystickButton(operatorStick, nykoButton2);
 	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton3);
+	static Button rotateTurretLeft = new JoystickButton(operatorStick,nykoLeftBumper);
+	static Button rotateTurretRight = new JoystickButton(operatorStick,nykoRightBumper);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -79,6 +83,8 @@ public final class OI {
     	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
+		rotateTurretLeft.whenPressed(new RotateTurretLeft());
+		rotateTurretRight.whenPressed(new RotateTurretRight());
 	}
     
 	public static double getMoveSpeed()
@@ -118,7 +124,7 @@ public final class OI {
 	}
 	
 	// Return the jog direction: 1 for up, -1 for down
-	public static int getJogDirection()
+	public static int getElevatorJogDirection()
 	{
 		// POV hat returns 0 for up
 		if (operatorStick.getPOV() == 0)
@@ -129,6 +135,25 @@ public final class OI {
 		else if (operatorStick.getPOV() == 180)
 		{
 			return -1;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	// Return the jog direction: 1 for up, -1 for down
+	public static int getTurretJogDirection()
+	{
+		// POV hat returns 0 for up
+		if (operatorStick.getPOV() == 90)
+		{
+			return Constants.TurretDirectionRight;
+		}
+		// POV hat returns 180 for down
+		else if (operatorStick.getPOV() == 270)
+		{
+			return Constants.TurretDirectionLeft;
 		}
 		else
 		{
