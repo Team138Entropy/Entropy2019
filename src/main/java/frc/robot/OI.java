@@ -1,6 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -63,7 +65,9 @@ public final class OI {
     
     static double lastX=0;
     static double LastY=0;
-    
+	
+	static Button headlessButton = new JoystickButton(driverStick, xboxLeftBumper);
+
     public OI(){
     	
 	}
@@ -94,6 +98,10 @@ public final class OI {
 
 	public static double getStickY() {
 		return driverStick.getRawAxis(xboxLeftYAxis);
+	}
+
+	public static boolean isHeadless() {
+		return headlessButton.get();
 	}
 	
 	public static boolean isReverse() {

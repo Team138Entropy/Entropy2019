@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -138,7 +137,8 @@ public class Drivetrain extends Subsystem {
 		heading = Sensors.gyro.getAngle();
 		double adjustedHeading = heading - error;
 		double requestedAngle = Math.atan(stickX/stickY);
-		double difference = adjustedHeading + requestedAngle;
+		double difference = adjustedHeading + requestedAngle + 90;
+		int direction = 1;
 
 		// a squared plus b squared equals c squared
 		double speed = Math.sqrt((stickX * stickX) + (stickY * stickY));
@@ -150,6 +150,10 @@ public class Drivetrain extends Subsystem {
 			turn = 0;
 		}
 
+		if (difference > 90 || difference < 90) {
+			direction = -1;
+		}
+
 		boolean requiresQuickturn = false;
 		if (difference > 45 || difference < 45) {
 			// If the rotational difference we have to cover is greater than 45 degrees...
@@ -157,7 +161,7 @@ public class Drivetrain extends Subsystem {
 			speed = 0;
 		}
 
-		ourOtherDrive.driveCheeze(speed, turn, requiresQuickturn);
+		ourOtherDrive.driveCheeze(speed * direction, turn, requiresQuickturn);
 	}
 	
 	public void Relax() {

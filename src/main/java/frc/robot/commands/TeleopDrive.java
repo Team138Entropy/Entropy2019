@@ -33,6 +33,8 @@ public class TeleopDrive extends Command {
 		double headlessStickX = OI.getStickX();
 		double headlessStickY = OI.getStickY();
 
+		headless = OI.isHeadless();
+
 		Robot.drivetrain.difference(rotateSpeed);
 
 		accumulatedGyroError += Constants.gyroDrift;
