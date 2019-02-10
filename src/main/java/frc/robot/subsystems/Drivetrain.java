@@ -20,17 +20,16 @@ public class Drivetrain extends Subsystem {
 	double _speedFactor = 1;
 	double _rotateFactor = 1;
 
-	// Servo Loop Gains
-	double Drive_Kf = 1.7;
-	double Drive_Kp = 5;
-	double Drive_Ki = 0.02; //
-	double Drive_Kd = 30;
-
 	// Filter state for joystick movements
 	double _lastMoveSpeed = 0;
-	double lastRotateSpeed = 0;
+	double _lastRotateSpeed = 0;
+
+	// Variables for the headless drive
+	double heading = 0;
 
 	int zeroCounter = 0;
+
+	TeleopDrive ourOtherDrive;
 
 	WPI_TalonSRX topLeftTalon            = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
 	public WPI_TalonSRX bottomLeftTalon  = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_BOTTOM);
@@ -38,9 +37,9 @@ public class Drivetrain extends Subsystem {
 	public WPI_TalonSRX bottomRightTalon = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_BOTTOM);
 
 	protected void initDefaultCommand() {
-		setDefaultCommand(new TeleopDrive());
+		ourOtherDrive = new TeleopDrive();
+		setDefaultCommand(ourOtherDrive);
 	}
-
 
 	public void DriveTrainInit()
 	{
@@ -70,17 +69,7 @@ public class Drivetrain extends Subsystem {
 		bottomRightTalon.configPeakOutputReverse(-1,0);
 		bottomRightTalon.setNeutralMode(NeutralMode.Coast);
 		topRightTalon.setNeutralMode(NeutralMode.Coast);
-
-		// Configure Talon gains
-		bottomLeftTalon.config_kF(0, Drive_Kf,0);
-		bottomLeftTalon.config_kP(0, Drive_Kp,0);
-		bottomLeftTalon.config_kI(0, Drive_Ki,0);
-		bottomLeftTalon.config_kD(0, Drive_Kd,0);
-		bottomRightTalon.config_kF(0, Drive_Kf,0);
-		bottomRightTalon.config_kP(0, Drive_Kp,0);
-		bottomRightTalon.config_kI(0, Drive_Ki,0);
-		bottomRightTalon.config_kD(0, Drive_Kd,0);
-
+		
 		// Configure slave Talons to follow masters
 		topLeftTalon.follow(bottomLeftTalon);
 		topRightTalon.follow(bottomRightTalon);
@@ -116,9 +105,9 @@ public class Drivetrain extends Subsystem {
 	public double limitRotateAccel(double rotateSpeed)
 	{
 		// Limit rate of change of rotate in order to control acceleration
-		lastRotateSpeed = Util.limit(rotateSpeed, lastRotateSpeed - Constants.MaxRotateSpeedChange,
-				lastRotateSpeed + Constants.MaxRotateSpeedChange);
-		return lastRotateSpeed;
+		_lastRotateSpeed = Util.limit(rotateSpeed, _lastRotateSpeed - Constants.MaxRotateSpeedChange,
+				_lastRotateSpeed + Constants.MaxRotateSpeedChange);
+		return _lastRotateSpeed;
 	}
     
 	public void drive(DriveSignal signal, double turnSpeed)
@@ -126,7 +115,11 @@ public class Drivetrain extends Subsystem {
 		driveCheezy(signal, turnSpeed);
 	}
 
-    public void driveCheezy(DriveSignal signal, double turnSpeed) {
+	public void drive(double stickX, double stickY, double error) {
+		driveHeadless(stickX, stickY, error);
+	}
+
+    private void driveCheezy(DriveSignal signal, double turnSpeed) {
 		double diff = difference(turnSpeed);
 
 		double left = (signal.getLeft() * Constants.driveModifier);
@@ -134,6 +127,37 @@ public class Drivetrain extends Subsystem {
 
         bottomLeftTalon.set(ControlMode.PercentOutput, left);
 		bottomRightTalon.set(ControlMode.PercentOutput, right);
+	}
+
+	private void driveHeadless(double stickX, double stickY, double error) {
+		// Headless Drive functions entirely seperate from standard Arcade Drive
+		// It cross-references the gyro and encoders to determine the direction the robot is facing
+		// and the way we want to go, outputting (using Cheezy Drive) the movements necessary to
+		// get there.
+
+		heading = Sensors.gyro.getAngle();
+		double adjustedHeading = heading - error;
+		double requestedAngle = Math.atan(stickX/stickY);
+		double difference = adjustedHeading + requestedAngle;
+
+		// a squared plus b squared equals c squared
+		double speed = Math.sqrt((stickX * stickX) + (stickY * stickY));
+		speed = speed * Constants.driveModifier;
+
+		double turn = difference / 90;
+
+		if (Math.abs(turn) < Constants.headlessTolerance) {
+			turn = 0;
+		}
+
+		boolean requiresQuickturn = false;
+		if (difference > 45 || difference < 45) {
+			// If the rotational difference we have to cover is greater than 45 degrees...
+			requiresQuickturn = true;
+			speed = 0;
+		}
+
+		ourOtherDrive.driveCheeze(speed, turn, requiresQuickturn);
 	}
 	
 	public void Relax() {

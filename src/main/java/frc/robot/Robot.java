@@ -80,7 +80,6 @@ public class Robot extends TimedRobot {
 		Robot.drivetrain.Relax();
 
 		Constants.AutoEnable=true;
-		Constants.IntegralError=0;
     }
     
     public static boolean isPracticeRobot() {

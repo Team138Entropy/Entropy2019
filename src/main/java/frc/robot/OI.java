@@ -87,6 +87,14 @@ public final class OI {
 			rotateSpeed=0;
 		return rotateSpeed;
 	}
+
+	public static double getStickX() {
+		return driverStick.getRawAxis(xboxLeftXAxis);
+	}
+
+	public static double getStickY() {
+		return driverStick.getRawAxis(xboxLeftYAxis);
+	}
 	
 	public static boolean isReverse() {
 		return driverStick.getRawButton(xboxB);
