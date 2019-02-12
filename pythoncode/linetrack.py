@@ -1,10 +1,12 @@
 import time
-import numpy
-from colors import *
 import board
 import busio
 import digitalio
 import adafruit_tcs34725
+import neopixel
+
+led = neopixel.NeoPixel(board.NEOPIXEL, 1)
+led.brightness = 0.3
 
 # 0 = not started
 # 1 = calibrating white
@@ -31,9 +33,10 @@ whiteCalibrationValues = []
 blackCalibrationValues = []
 threshold = 0
 
-def removeOutliers(data, m=2.):
-	data = numpy.array(data)
-	return data[abs(data - numpy.mean(data)) < m * numpy.std(data)]
+# no numpy
+# def removeOutliers(data, m=2.):
+# 	data = numpy.array(data)
+	# return data[abs(data - numpy.mean(data)) < m * numpy.std(data)]
 
 ticksSinceChange = 0
 maxTicks = 2
@@ -46,7 +49,7 @@ while True:
 	# to account for button "bounce", delay .05 seconds and see if the button's state is the same
 	# only continue if it is.
 	value = not button.value
-	time.sleep(0.05)
+	# time.sleep(0.05)
 	oldValue = value
 	value == (not button.value)
 	if value == oldValue:
@@ -65,13 +68,13 @@ while True:
 			if state == 2:
 				# sort, remove outliers from, and remove first & last from the whiteCalibrationValues
 				whiteCalibrationValues.sort()
-				whiteCalibrationValues = removeOutliers(whiteCalibrationValues).tolist()
+				# whiteCalibrationValues = removeOutliers(whiteCalibrationValues).tolist()
 				whiteCalibrationValues = whiteCalibrationValues[1:-1]
 				#print("set whiteMin", whiteMin, "whiteMax", whiteMax)
 			elif state == 3:
 				# sort, remove outliers from, and remove first & last from the blackCalibrationValues
 				blackCalibrationValues.sort()
-				blackCalibrationValues = removeOutliers(blackCalibrationValues).tolist()
+				# blackCalibrationValues = removeOutliers(blackCalibrationValues).tolist()
 				blackCalibrationValues = blackCalibrationValues[1:-1]
 
 				# find the middle between the extreme values
@@ -85,19 +88,33 @@ while True:
 	stateVal = (state)
 
 	if stateVal == 0:
+		if led[0] == (50, 0, 0):
+			led[0] = (0, 0, 0)
+		else:
+			led[0] = (50, 0, 0)
+		
 		print("#press the button to calibrate white.")
 	elif stateVal == 1:
+		if led[0] == (255, 255, 255):
+			led[0] = (5, 5, 5)
+		else:
+			led[0] = (255, 255, 255)
 		print("#calibrating white")
 		whiteCalibrationValues.append(int(lux))
 	elif stateVal == 2:
+		if led[0] == (0, 0, 0):
+			led[0] = (5, 5, 5)
+		else:
+			led[0] = (0, 0, 0)
 		print("#calibrating black")
 		blackCalibrationValues.append(int(lux))
 	elif stateVal > 2.5:
-		print("#" + color("lux " + str(lux) + " threshold " + str(threshold),
-			bg=("white" if lux > threshold else "black"),
-			fg=("black" if lux > threshold else "white")
-		))
+		led[0] = ((255, 255, 255) if lux > threshold else (5, 5, 5))
+		print("#lux " + str(lux) + " threshold " + str(threshold) + " " + ("white" if lux > threshold else "black"))
+
+	if stateVal % 1 != 0:
+		led[0] = (0, 0, 50)
 
 	# show the state
 	if stateVal < 3:
-		print("#" + state)
+		print("#" + str(state))
