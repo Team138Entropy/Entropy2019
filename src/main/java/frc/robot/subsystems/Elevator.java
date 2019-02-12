@@ -285,12 +285,24 @@ public class Elevator extends Subsystem{
 	{                  
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
 		SmartDashboard.putNumber("Target Position", _targetPosition);
-		SmartDashboard.putNumber("Direction", _direction);
+		SmartDashboard.putString("Direction", convertDirectionToString(_direction));
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
 		SmartDashboard.putNumber("Elevate Output:",_elevatorMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Count", _count);
 	}
 	
+	private String convertDirectionToString (int direction) {
+		if (_direction == -1) {
+			return "Down";
+		}	
+		else if (_direction == 1) {
+			return "Up";
+		}
+		else {
+			return "";
+		}
+	}
+
 	// Stop the homing move, reset the encoder position 
 	public void StopHoming()
 	{
