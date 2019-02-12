@@ -97,17 +97,14 @@
               "Layout/Label position": "BOTTOM",
               "_children": [
                 {
-                  "_type": "Text View",
+                  "_type": "Number Bar",
                   "_source0": "network_table:///SmartDashboard/Turret Output:",
-                  "_title": "Turret Output:"
-                },
-                {
-                  "_type": "Number Slider",
-                  "_source0": "network_table:///SmartDashboard/Turret Direction",
-                  "_title": "Turret Direction",
-                  "Slider Settings/Min": -1.0,
-                  "Slider Settings/Max": 1.0,
-                  "Slider Settings/Block increment": 0.0625
+                  "_title": "Turret Output:",
+                  "Range/Min": -1.0,
+                  "Range/Max": 1.0,
+                  "Range/Center": 0.0,
+                  "Visuals/Num tick marks": 5.0,
+                  "Visuals/Show text": true
                 },
                 {
                   "_type": "Text View",
@@ -125,9 +122,14 @@
                   "_title": "Turret Target Position"
                 },
                 {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Turret Direction",
+                  "_title": "Turret Direction"
+                },
+                {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/Turret Right",
-                  "_title": "Turret Right",
+                  "_source0": "network_table:///SmartDashboard/Turret Left",
+                  "_title": "Turret Left",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 },
@@ -140,8 +142,8 @@
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/Turret Left",
-                  "_title": "Turret Left",
+                  "_source0": "network_table:///SmartDashboard/Turret Right",
+                  "_title": "Turret Right",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 }

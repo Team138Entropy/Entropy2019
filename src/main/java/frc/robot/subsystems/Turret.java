@@ -45,8 +45,8 @@ public class Turret extends Subsystem {
     }
 
     public void TurretInit() {
-		// initial direction is 0, since Turret is not moving
-		//_direction = 0;
+		//initial direction is 0, since Turret is not moving
+	    _direction = 0;
 		
 		// Set brake mode to hold at position
 		_turretMotor.setNeutralMode(NeutralMode.Brake);		
@@ -142,12 +142,12 @@ public class Turret extends Subsystem {
 	public void JogTurret(int jogDirection, double jogSpeed)
 	{
 		_currentJogDirection = jogDirection;
-		//_turretMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
+		_turretMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
 	}
     
     public void Execute()
     {
-        //_turretMotor.set(ControlMode.PercentOutput, Constants.TurretSpeed * _direction);
+        _turretMotor.set(ControlMode.PercentOutput, Constants.TurretSpeed * _direction);
 
         if (Sensors.isTurretLeft()) {
             _currentPosition = LEFT_POSITION;
@@ -173,20 +173,36 @@ public class Turret extends Subsystem {
     public void StopMoving()
     {
         _turretMotor.set(ControlMode.PercentOutput,0);
+        _direction = 0;
+        _currentJogDirection = 0;
     }
 
     public void CancelMove()
     {
         _turretMotor.set(ControlMode.PercentOutput,0);
+        _direction = 0;
+        _currentJogDirection = 0;
     }
 
     public void updateSmartDashboard()
 	{                  
         SmartDashboard.putString("Turret Current Position", ConvertTargetToString(_currentPosition));
-        //SmartDashboard.putNumber("Turret Current Position", _currentPosition);
-		SmartDashboard.putString("Turret Target Position", ConvertTargetToString(_targetPosition));
-		SmartDashboard.putNumber("Turret Direction", _direction);
-		SmartDashboard.putNumber("Turret Jog Direction", _currentJogDirection);
+        SmartDashboard.putString("Turret Target Position", ConvertTargetToString(_targetPosition));
+        
+        if (_direction != 0) {
+            SmartDashboard.putString("Turret Direction", "Moving ".concat(ConvertTargetToString(_direction)));
+        }
+        else {
+            SmartDashboard.putString("Turret Direction", "");
+        }
+        
+        if (_currentJogDirection != 0) {
+            SmartDashboard.putString("Turret Jog Direction", "Jogging ".concat(ConvertTargetToString(_currentJogDirection)));
+        }
+        else {
+            SmartDashboard.putString("Turret Jog Direction", "");
+        }
+		
         SmartDashboard.putNumber("Turret Output:",_turretMotor.getMotorOutputPercent());
         
 	}
