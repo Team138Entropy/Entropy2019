@@ -10,86 +10,10 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "0,0": {
-            "size": [
-              3,
-              4
-            ],
-            "content": {
-              "_type": "List Layout",
-              "_title": "List Layout",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/LiftState",
-                  "_title": "LiftState"
-                },
-                {
-                  "_type": "Simple Dial",
-                  "_source0": "network_table:///SmartDashboard/liftspeed",
-                  "_title": "liftspeed",
-                  "Range/Min": 0.0,
-                  "Range/Max": 100.0,
-                  "Visuals/Show value": true
-                },
-                {
-                  "_type": "Command",
-                  "_source0": "network_table:///SmartDashboard/raise",
-                  "_title": "raise"
-                },
-                {
-                  "_type": "Command",
-                  "_source0": "network_table:///SmartDashboard/lower",
-                  "_title": "lower"
-                },
-                {
-                  "_type": "Simple Dial",
-                  "_source0": "network_table:///SmartDashboard/liftspeed",
-                  "_title": "liftspeed",
-                  "Range/Min": 0.0,
-                  "Range/Max": 100.0,
-                  "Visuals/Show value": true
-                }
-              ]
-            }
-          },
-          "3,0": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Basic Subsystem",
-              "_title": "Basic Subsystem"
-            }
-          },
-          "5,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/L PWM",
-              "_title": "L PWM"
-            }
-          },
           "6,0": {
             "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/R PWM",
-              "_title": "R PWM"
-            }
-          },
-          "11,0": {
-            "size": [
               2,
-              6
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -125,6 +49,102 @@
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/Turret Direction",
                   "_title": "Turret Direction"
+                }
+              ]
+            }
+          },
+          "4,0": {
+            "size": [
+              2,
+              5
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Elevator",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Number Bar",
+                  "_source0": "network_table:///SmartDashboard/Elevate Output:",
+                  "_title": "Elevate Output:",
+                  "Range/Min": -1.0,
+                  "Range/Max": 1.0,
+                  "Range/Center": 0.0,
+                  "Visuals/Num tick marks": 5.0,
+                  "Visuals/Show text": true
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Jog Direction",
+                  "_title": "Jog Direction"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Current Position",
+                  "_title": "Current Position"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Target Position",
+                  "_title": "Target Position"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Direction",
+                  "_title": "Direction"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Timer",
+                  "_title": "Timer"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Count",
+                  "_title": "Count"
+                }
+              ]
+            }
+          },
+          "2,0": {
+            "size": [
+              2,
+              4
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "DriveTrain",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/L PWM",
+                  "_title": "L PWM"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/R PWM",
+                  "_title": "R PWM"
+                }
+              ]
+            }
+          },
+          "0,0": {
+            "size": [
+              2,
+              6
+            ],
+            "content": {
+              "_type": "Subsystem Layout",
+              "_title": "Sensors",
+              "Layout/Label position": "BOTTOM",
+              "_children": [
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Cargo Present",
+                  "_title": "Cargo Present",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Boolean Box",
@@ -150,71 +170,16 @@
               ]
             }
           },
-          "9,0": {
+          "8,0": {
             "size": [
               2,
-              4
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_title": "Elevator",
+              "_title": "Acquire and Deploy",
               "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Current Position",
-                  "_title": "Current Position"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Target Position",
-                  "_title": "Target Position"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Jog Direction",
-                  "_title": "Jog Direction"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Elevate Output:",
-                  "_title": "Elevate Output:"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Direction",
-                  "_title": "Direction"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Count",
-                  "_title": "Count"
-                }
-              ]
-            }
-          },
-          "7,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Cargo Present",
-              "_title": "Cargo Present",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "8,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Timer",
-              "_title": "Timer"
+              "_children": []
             }
           }
         }
