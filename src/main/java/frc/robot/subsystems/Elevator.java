@@ -47,7 +47,7 @@ public class Elevator extends Subsystem{
 	private double _targetPosition = 0.0;
 	private double _currentPosition = 0.0;
 	private boolean _isAtFloor = true;
-	private ElevatorTarget _targetNamedPosition;
+	private ElevatorTarget _targetNamedPosition = ElevatorTarget.NONE;
 	
 	private int _currentJogDirection = 0;
 	
@@ -307,27 +307,33 @@ public class Elevator extends Subsystem{
 	}
 
 	private String convertTargetPositionToString (ElevatorTarget targetNamedPosition) {
-		if (targetNamedPosition == ElevatorTarget.FLOOR) {
-			return "Floor";
+		String targetString = "Error!";
+
+		switch (targetNamedPosition){
+			case FLOOR:
+				targetString = "Floor";
+				break;
+			case LEVEL_1:
+				targetString = "Level 1";
+				break;
+			case LEVEL_2:
+				targetString = "Level 2";
+				break;
+			case LEVEL_3:
+				targetString = "Level 3";
+				break;
+			case NONE:
+				targetString = "None";
+				break;
+			case LOADING_STATION:
+				targetString = "Loading Station";
+				break;
+			default:
+				targetString = "Error!";
+				break;
 		}
-		else if (targetNamedPosition == ElevatorTarget.LOADING_STATION) {
-			return "Loading Station";
-		}
-		else if (targetNamedPosition == ElevatorTarget.LEVEL_1) {
-			return "Level 1";
-		}
-		else if (targetNamedPosition == ElevatorTarget.LEVEL_2) {
-			return "Level 2";
-		}
-		else if (targetNamedPosition == ElevatorTarget.LEVEL_3) {
-			return "Level 3";
-		}
-		else if (targetNamedPosition == ElevatorTarget.NONE) {
-			return "none";
-		}
-		else {
-			return "unknown";
-		}
+
+		return targetString; 
 	}
 
 
