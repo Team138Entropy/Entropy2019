@@ -47,6 +47,7 @@ public class Elevator extends Subsystem{
 	private double _targetPosition = 0.0;
 	private double _currentPosition = 0.0;
 	private boolean _isAtFloor = true;
+	private ElevatorTarget _targetNamedPosition;
 	
 	private int _currentJogDirection = 0;
 	
@@ -140,6 +141,7 @@ public class Elevator extends Subsystem{
 	
 	// Elevate to a specific target position
 	public void Elevate (ElevatorTarget target) {
+		_targetNamedPosition = target;
 		_isAtFloor = false; 
 		if (target == ElevatorTarget.NONE)
 		{
@@ -284,6 +286,7 @@ public class Elevator extends Subsystem{
 	public void updateSmartDashboard()
 	{                  
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
+		SmartDashboard.putString("Target Named Position", convertTargetPositionToString(_targetNamedPosition));
 		SmartDashboard.putNumber("Target Position", _targetPosition);
 		SmartDashboard.putString("Direction", convertDirectionToString(_direction));
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
@@ -302,6 +305,31 @@ public class Elevator extends Subsystem{
 			return "";
 		}
 	}
+
+	private String convertTargetPositionToString (ElevatorTarget targetNamedPosition) {
+		if (targetNamedPosition == ElevatorTarget.FLOOR) {
+			return "Floor";
+		}
+		else if (targetNamedPosition == ElevatorTarget.LOADING_STATION) {
+			return "Loading Station";
+		}
+		else if (targetNamedPosition == ElevatorTarget.LEVEL_1) {
+			return "Level 1";
+		}
+		else if (targetNamedPosition == ElevatorTarget.LEVEL_2) {
+			return "Level 2";
+		}
+		else if (targetNamedPosition == ElevatorTarget.LEVEL_3) {
+			return "Level 3";
+		}
+		else if (targetNamedPosition == ElevatorTarget.NONE) {
+			return "none";
+		}
+		else {
+			return "unknown";
+		}
+	}
+
 
 	// Stop the homing move, reset the encoder position 
 	public void StopHoming()

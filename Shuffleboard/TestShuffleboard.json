@@ -102,6 +102,11 @@
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/Count",
                   "_title": "Count"
+                },
+                {
+                  "_type": "Text View",
+                  "_source0": "network_table:///SmartDashboard/Target Named Position",
+                  "_title": "Target Named Position"
                 }
               ]
             }
@@ -141,13 +146,6 @@
               "_children": [
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/Cargo Present",
-                  "_title": "Cargo Present",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/Turret Left",
                   "_title": "Turret Left",
                   "Colors/Color when true": "#7CFC00FF",
@@ -164,6 +162,13 @@
                   "_type": "Boolean Box",
                   "_source0": "network_table:///SmartDashboard/Turret Right",
                   "_title": "Turret Right",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Cargo Present",
+                  "_title": "Cargo Present",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 }
