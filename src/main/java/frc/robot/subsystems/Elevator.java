@@ -47,6 +47,7 @@ public class Elevator extends Subsystem{
 	private double _targetPosition = 0.0;
 	private double _currentPosition = 0.0;
 	private boolean _isAtFloor = true;
+	private ElevatorTarget _targetNamedPosition = ElevatorTarget.NONE;
 	
 	private int _currentJogDirection = 0;
 	
@@ -140,6 +141,7 @@ public class Elevator extends Subsystem{
 	
 	// Elevate to a specific target position
 	public void Elevate (ElevatorTarget target) {
+		_targetNamedPosition = target;
 		_isAtFloor = false; 
 		if (target == ElevatorTarget.NONE)
 		{
@@ -284,13 +286,57 @@ public class Elevator extends Subsystem{
 	public void updateSmartDashboard()
 	{                  
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
+		SmartDashboard.putString("Target Named Position", convertTargetPositionToString(_targetNamedPosition));
 		SmartDashboard.putNumber("Target Position", _targetPosition);
-		SmartDashboard.putNumber("Direction", _direction);
+		SmartDashboard.putString("Direction", convertDirectionToString(_direction));
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
 		SmartDashboard.putNumber("Elevate Output:",_elevatorMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Count", _count);
 	}
 	
+	private String convertDirectionToString (int direction) {
+		if (_direction == -1) {
+			return "Down";
+		}	
+		else if (_direction == 1) {
+			return "Up";
+		}
+		else {
+			return "";
+		}
+	}
+
+	private String convertTargetPositionToString (ElevatorTarget targetNamedPosition) {
+		String targetString = "Error!";
+
+		switch (targetNamedPosition){
+			case FLOOR:
+				targetString = "Floor";
+				break;
+			case LEVEL_1:
+				targetString = "Level 1";
+				break;
+			case LEVEL_2:
+				targetString = "Level 2";
+				break;
+			case LEVEL_3:
+				targetString = "Level 3";
+				break;
+			case NONE:
+				targetString = "None";
+				break;
+			case LOADING_STATION:
+				targetString = "Loading Station";
+				break;
+			default:
+				targetString = "Error!";
+				break;
+		}
+
+		return targetString; 
+	}
+
+
 	// Stop the homing move, reset the encoder position 
 	public void StopHoming()
 	{
