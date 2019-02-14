@@ -21,7 +21,8 @@ public class AquisitionRoller extends Subsystem {
     private static PistonState currentState = PistonState.RETRACT;
 
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunRoller());
+        // Nothing to see here
+        // :D
     }
 
     public synchronized void set(boolean on) {
