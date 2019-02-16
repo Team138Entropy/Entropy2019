@@ -1,7 +1,11 @@
-import time
-import board
-import busio
 import digitalio
+import board
+power = digitalio.DigitalInOut(board.D2)
+power.direction = digitalio.Direction.OUTPUT
+power.value = True
+
+import time
+import busio
 import adafruit_tcs34725
 import neopixel
 
@@ -21,7 +25,7 @@ sensor = adafruit_tcs34725.TCS34725(i2c)
 sensor.integration_time = 50
 
 # add the toggle button
-button = digitalio.DigitalInOut(board.D4)
+button = digitalio.DigitalInOut(board.D3)
 button.direction = digitalio.Direction.INPUT
 button.pull = digitalio.Pull.UP
 

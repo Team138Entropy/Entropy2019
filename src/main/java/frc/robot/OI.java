@@ -117,7 +117,7 @@ public final class OI {
 		return driverStick.getRawAxis(xboxLeftTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
 	}
 	
-	// Return the jog direction: 1 for up, -1 for down
+	// Return the jog direction: 1 for up, -1v  for down
 	public static int getJogDirection()
 	{
 		// POV hat returns 0 for up

@@ -6,6 +6,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - LineTrackParse",
+      "request": "launch",
+      "mainClass": "frc.robot.LineTrackParse",
+      "projectName": "Entropy2019"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - LineTrackParse",
+      "request": "launch",
+      "mainClass": "LineTrackParse",
+      "projectName": "Entropy2019"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - Main",
       "request": "launch",
       "mainClass": "frc.robot.Main",
