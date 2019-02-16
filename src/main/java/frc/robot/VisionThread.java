@@ -2,12 +2,15 @@ package frc.robot;
 
 import frc.robot.subsystems.DriverVision;
 
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
+
+/*
+import org.opencv.core.Core;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 
 import org.opencv.imgproc.Imgproc;
+*/
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.cscore.CvSink;
@@ -79,6 +82,7 @@ public class VisionThread extends Thread {
                 continue;
 
             // Annotate the frame
+            /*
             Imgproc.putText(
                 frameBuffer,
                 (currentCamera == DriverVision.Camera.FRONT) ? "Front" : "Rear",
@@ -88,6 +92,7 @@ public class VisionThread extends Thread {
                 new Scalar(255, 255, 255),
                 3
             );
+            */
 
             // Yeet it back at the driver station
             outputStream.putFrame(frameBuffer);
