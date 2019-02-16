@@ -7,7 +7,9 @@ import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
+@Deprecated
 /**
+ * Note: This class is kind of a mess. You may want to use {@link frc.robot.DTI DTI} instead.
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
