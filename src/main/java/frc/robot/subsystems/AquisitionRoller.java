@@ -3,6 +3,8 @@ package frc.robot.subsystems;
 import frc.robot.RobotMap;
 import frc.robot.Sensors;
 
+import frc.robot.commands.RunRoller;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -15,14 +17,13 @@ public class AquisitionRoller extends Subsystem {
     private static Solenoid pistonSolenoid = new Solenoid(RobotMap.PISTON_SOLENOID_CHANNEL);
 
     public enum PistonState {
-        EXTEND, RETRACT
+        EXTEND, RETRACT;
     }
 
     private static PistonState currentState = PistonState.RETRACT;
 
     protected void initDefaultCommand() {
-        // Nothing to see here
-        // :D
+        setDefaultCommand(new RunRoller());
     }
 
     public synchronized void set(boolean on) {
@@ -57,5 +58,9 @@ public class AquisitionRoller extends Subsystem {
                 pistonSolenoid.set(false);
                 break;
         }
+    }
+
+    public PistonState togglePistons() {
+        return currentState = (currentState == PistonState.EXTEND) ? PistonState.EXTEND : PistonState.RETRACT;
     }
 }

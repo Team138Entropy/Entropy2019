@@ -1,6 +1,8 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
+import frc.robot.OI;
+import frc.robot.Constants;
 
 import frc.robot.subsystems.AquisitionRoller.PistonState;
 
@@ -13,8 +15,11 @@ public class RunRoller extends Command {
     }
     
     protected void execute() {
-        Robot.roller.set(true);
-        Robot.roller.setPistons(PistonState.EXTEND);
+        // We take the opposite of the value because up = negative y on the joysticks
+        if (-OI.operatorStick.getRawAxis(OI.NykoController.leftYAxis) > Constants.CloseLoopJoystickDeadband) {
+            Robot.roller.set(true);
+            Robot.roller.setPistons(PistonState.EXTEND);
+        }
     }
 
     protected boolean isFinished() {

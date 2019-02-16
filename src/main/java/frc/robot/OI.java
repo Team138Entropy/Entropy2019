@@ -11,6 +11,8 @@ import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
+import frc.robot.commands.TestRoller;
+import frc.robot.commands.TestRollerPistons;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -84,12 +86,15 @@ public final class OI {
     static double LastY=0;
 	
 	static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
-	static Button elevateToFloor = new JoystickButton(operatorStick, NykoController.button4);
-	static Button elevateToLevel1 = new JoystickButton(operatorStick, NykoController.button1);
-	static Button elevateToLevel2 = new JoystickButton(operatorStick, NykoController.button2);
-	static Button elevateToLevel3 = new JoystickButton(operatorStick, NykoController.button3);
-	static Button rotateTurretLeft = new JoystickButton(operatorStick,NykoController.leftBumper);
-	static Button rotateTurretRight = new JoystickButton(operatorStick,NykoController.rightBumper);
+	static Button elevateToFloor     = new JoystickButton(operatorStick, NykoController.button4);
+	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
+	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
+	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button3);
+	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
+	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
+	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
+	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -99,6 +104,8 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
+		rollerTestButton.whileHeld(new TestRoller());
+		pistonTestButton.whileHeld(new TestRollerPistons());
 	}
     
 	public static double getMoveSpeed()
