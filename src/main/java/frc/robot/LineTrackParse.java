@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 
 public class LineTrackParse{
+    // # of sensors pre row
     private static final int sensorsPerRow = 4;
+
+    // measured on 2/16/19 on practice robot
+    // unit: inches
+
+    // physical, relative distance between sensors
     private static final int sensorDistance = 1;
-    private static final int rowDistance = 2;
+    // physical, relative distance between sensor rows
+    private static final int rowDistance = 6;
 
     private boolean[] topSensorRow = new boolean[sensorsPerRow];
     private boolean[] bottomSensorRow = new boolean[sensorsPerRow];
@@ -59,5 +66,24 @@ public class LineTrackParse{
         );
         return degs;
     }
-    // rumble when it runs over a line
+
+    // if the row is all "true"
+    // isTopRow: if true, the top row, if false, the bottom row
+    public int countTriggeredInRow(boolean isTopRow){
+        boolean[] row = null;
+        if(isTopRow){
+            row = topSensorRow;
+        }else{
+            row = bottomSensorRow;
+        }
+
+        return countTrue(row);
+    }
+
+    private static int countTrue(boolean... array)
+    {
+        int num = 0;
+        for(boolean b : array) if(b) num++;
+        return num;
+    }
 }
