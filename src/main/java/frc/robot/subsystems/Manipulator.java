@@ -14,6 +14,9 @@ public class Manipulator extends Subsystem {
     private boolean stayStateControl = false;
     private boolean changeStateControl = false;
 
+    private boolean isTranslated = false;
+    private boolean isRotated = false;
+
     public void initDefaultCommand() {
         setDefaultCommand(new ManipulatorStateMachine());
     }
@@ -39,16 +42,28 @@ public class Manipulator extends Subsystem {
     }
 
     public void actuate(boolean translation, boolean rotation) {
+        isTranslated = translation;
         translationSolenoid.set(translation);
+        isRotated = rotation;
         rotationSolenoid.set(rotation);
     }
 
     public void actuate(boolean translation, String str) {
+        isTranslated = translation;
         translationSolenoid.set(translation);
     }
 
     public void actuate(String str, boolean rotation) {
+        isRotated = rotation;
         rotationSolenoid.set(rotation);
+    }
+
+    public boolean getTranslated() {
+        return isTranslated;
+    }
+
+    public boolean getRotated() {
+        return isRotated;
     }
 
 }
