@@ -20,7 +20,7 @@ public class Sensors {
 	public static double gyroBias=0;
 
 	public static DigitalInput practiceRobotJumperPin;
-	public static DigitalInput cargosensor;
+	// public static DigitalInput cargosensor;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -31,7 +31,8 @@ public class Sensors {
         gyro.reset();
 	   
 	   practiceRobotJumperPin = new DigitalInput(5);
-	   cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
+
+	//    cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
 	}
 	
 	public static double getLeftDistance() {
@@ -63,7 +64,8 @@ public class Sensors {
 	 }
 
 	public static boolean isCargoPresent(){
-		return !cargosensor.get();
+		return false;
+		// return !cargosensor.get();
 	}
 
 }

@@ -61,8 +61,8 @@ public final class OI {
 	static final int nykoRightYAxis = 2;	// Z Axis on Driver Station
 	static final int nykoRightXAxis = 3;	// Rotate Axis on Driver Station
 	
-    static Joystick driverStick = new Joystick(xboxController);
-    static Joystick operatorStick = new Joystick(nykoController);
+    static public Joystick driverStick = new Joystick(xboxController);
+    static public Joystick operatorStick = new Joystick(nykoController);
     
     static double lastX=0;
     static double LastY=0;
@@ -135,7 +135,4 @@ public final class OI {
 			return 0;
 		}
 	}
-	
-	
 } // :D)))
-

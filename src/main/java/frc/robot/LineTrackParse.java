@@ -1,3 +1,4 @@
+package frc.robot;
 import java.util.ArrayList;
 
 public class LineTrackParse{
@@ -9,15 +10,16 @@ public class LineTrackParse{
 
     // physical, relative distance between sensors
     private static final int sensorDistance = 1;
-    // physical, relative distance between sensor rows
+    // physical, relative distance between senors or rows
     private static final int rowDistance = 6;
 
     private boolean[] topSensorRow = new boolean[sensorsPerRow];
     private boolean[] bottomSensorRow = new boolean[sensorsPerRow];
     ArrayList<Integer> trueIndexesInTopRow = new ArrayList<Integer>();
     ArrayList<Integer> trueIndexesInBottomRow = new ArrayList<Integer>();
+
+    public boolean isValidData = true;
     public void setSensorValues(String[] values){
-        System.out.println();
         boolean isFillingBottomRow = false;
         int sensorToFill = 0;
         for(String str : values){
@@ -27,6 +29,10 @@ public class LineTrackParse{
                 isFillingBottomRow = true;
                 sensorToFill = 0;
             }else{
+                if(sensorToFill >= sensorsPerRow){
+                    isValidData = false;
+                    return;
+                }
                 if(!isFillingBottomRow){
                     topSensorRow[sensorToFill] = isTrue;
                     if(isTrue){
