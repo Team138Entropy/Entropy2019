@@ -18,6 +18,7 @@ public class Robot extends TimedRobot {
     // Subsystems
     public static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator ();
     public static final Manipulator manipulator = new Manipulator();
 
@@ -39,6 +40,7 @@ public class Robot extends TimedRobot {
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
         elevator.ElevatorInit();
+        turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
@@ -77,10 +79,10 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
     	mode = "teleop";
-    //	Sensors.resetEncoders();
+    	//Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-		Robot.drivetrain.Relax();
+	    Robot.drivetrain.Relax();
 
 		Constants.AutoEnable=true;
 		Constants.IntegralError=0;
@@ -97,6 +99,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
+        turret.updateSmartDashboard();
 //		LiveWindow.run();
     }
     
