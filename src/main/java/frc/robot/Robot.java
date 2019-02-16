@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 
-import frc.robot.subsystems.*;
-
 /**
  * This is the development branch.
  * The VM is configured to automatically run this class, and to call the
