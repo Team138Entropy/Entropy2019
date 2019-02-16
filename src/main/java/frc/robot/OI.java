@@ -7,6 +7,10 @@ import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
+import frc.robot.commands.ToggleAcquisitionPiston;
+import frc.robot.commands.ToggleAcquisitionRoller;
+import frc.robot.commands.ToggleManipulatorRotate;
+import frc.robot.commands.ToggleManipulatorTranslate;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -76,6 +80,10 @@ public final class OI {
 	static Button elevateToLevel3 = new JoystickButton(operatorStick, nykoButton3);
 	static Button rotateTurretLeft = new JoystickButton(operatorStick,nykoLeftBumper);
 	static Button rotateTurretRight = new JoystickButton(operatorStick,nykoRightBumper);
+	static Button toggleAcquisitionPiston = new JoystickButton(operatorStick, nykoLeftStick);
+	static Button toggleAcquisitionRoller = new JoystickButton(operatorStick, nykoMiddle9);
+	static Button toggleManipulatorTranslate = new JoystickButton(operatorStick, nykoRightStick);
+	static Button toggleManipulatorRotate = new JoystickButton(operatorStick, nykoMiddle10);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -85,6 +93,10 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
+		toggleAcquisitionPiston.whenPressed(new ToggleAcquisitionPiston());
+		toggleAcquisitionRoller.whenPressed(new ToggleAcquisitionRoller());
+		toggleManipulatorTranslate.whenPressed(new ToggleManipulatorTranslate());
+		toggleManipulatorRotate.whenPressed(new ToggleManipulatorRotate());
 	}
     
 	public static double getMoveSpeed()
