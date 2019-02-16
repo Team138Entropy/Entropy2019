@@ -13,32 +13,7 @@ public class Constants {
 		
 	public static boolean practiceBot = false;
 	
-	public static boolean isSimulated = false;
-	
-	// Deadband applied to Joystick, when
-	// magnitude is less than deadBand, then set Magnitude to 0
-	public final static double joystickDeadband = 0.09;
-	// joystick must be "zero" for zeroDelay iterations before
-	// Talon is commanded to 0 volts.  Priot to that, drivetrain Talons
-	// remain in closed loop speed control.
-	public final static int zeroDelay= 60; // Approx 40/sec;
-	
-	// Threshold beyond which high speed mode is enabled for trigger
-	public final static double highSpeedModeTriggerThreshold = 0.3;
-	
-	// Low pass filter on joystick heading - 
-	// Filter eqn:  heading(i+1) =joystickDir(i)*Alpha + (1-Alpha)*(heading(i)
-	// where Alpha = Ts*2*pi*Freq
-	//   Ts is sample period (20 mSec for FRC)
-	//   Freq is location of filter pole in Hz
-	public static double rotateAlpha = .02 * 6.28 * 1;
-
-	//
-	// These are autonomous constants useful for the autonomous commands
-	//
-	
-
-	
+		
 	public final static double releaseDelay = 0.5;				 // Seconds
 	public final static double softReleaseDelay = 0.25;			 // Seconds
 	public final static double acquireDelay = 0.25;				 // Seconds
@@ -84,21 +59,12 @@ public class Constants {
 	public final static double elevatorHoldSpeed = 0.1;
 	public final static double elevatorExchangeSpeed = 0.5;
 	
-	//Cube Grasper
-	public final static boolean grasperSolenoidActiveOpen = true;
-	public final static boolean wristSolenoidActiveRaised = false;
-	public final static double acquisitionWheelsPercent = 50.0;
-	public final static double aquireSpeed = 0.75; 
-	public final static double releaseSpeed = -0.85;
-	public final static double holdSpeed = 0.3;
-	public final static double releaseSpeedReduced = -0.7;
-
-	// Auto Cube Acquisition
-	public final static double autoDetectionSettlingTime = 0.5;	// Time to delay after turning acquisition wheels on to start detection
-	public final static int cubeDetectThresholdCount = 3;		// Consecutive readings above threshold to trigger acquire
-	public final static double cubeDetectThreshold = 3.0;		// Roller current threshold to start acquire
-	public final static int cubeAcquireThresholdCount = 10;		// Consecutive readings above threshold to trigger complete acquire
-	public final static double cubeAcquireThreshold = 7.0;		// Roller current threshold to complete acquire
+	// Turret
+	public final static double TurretSpeed = 0.5; //TBD
+	public final static double TurretJogSpeed = 0.25; //TBD
+	public final static int TurretDirectionLeft = -1;
+	public final static int TurretDirectionRight = 1;
+	
 
 	// ***** Autonomous drive parameters *******
 	public final static double AutoStraighLineSpeedFactor = 1.0; 				 // Fraction of full autonomous speed
@@ -106,7 +72,7 @@ public class Constants {
 	public static double AutoDriveAccel = 1.0; // M/sec2 (1 ~.1G)
 	public static double AutoDriveRotateRate = 0.5; // Meters/second
 	public static double IntegralError=0;
-	
+
 	// PID gains to control rotation (measured by Gyro)
 	public static double kPRotate = .2;
 	public static double kIRotate = .2;
@@ -119,11 +85,7 @@ public class Constants {
 	// mechanism to settle (before sensors are reset at start of next move)
 	public static double AutoDrivePause = 2; // 50=1second
 	public static double AutoDriveStopTolerance = 2; // CM
-	public static double AutoDriveAngleCompensation = .01; // 
-
-	// Dashboard input constants
-	public final static String practiceRobot = "practice robot";
-	public final static String competitionRobot = "comp robot";
+	public static double AutoDriveAngleCompensation = .01;
 
 	// Controller stuff
 	public static final int nykoControllerPort = 0;
@@ -133,5 +95,12 @@ public class Constants {
     public static final String frontCameraHostname = "10.1.38.90";
     public static final String rearCameraHostname = "10.1.38.91";
     public static final String frontCameraLabel = "Front Camera";
-    public static final String rearCameraLabel = "Rear Camera";
+	public static final String rearCameraLabel = "Rear Camera";
+	
+	// Stuff that was deleted that I had to paste back in from the 2018 code
+	public final static int zeroDelay= 60; // Approx 40/sec;
+	public final static double highSpeedModeTriggerThreshold = 0.3;
+
+	// Temporary values I had to put in before compiling
+	public static final boolean isSimulated = false;
 }

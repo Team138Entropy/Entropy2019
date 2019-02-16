@@ -13,8 +13,17 @@ public class RobotMap {
 	public final static int RIGHT_MOTOR_CHANNEL_TOP       = 3;
 	public final static int RIGHT_MOTOR_CHANNEL_BOTTOM    = 4;
 	
-	public final static int ROLLER_TALON_ID = 5;
+	public final static int ROLLER_TALON_ID = 6;
 
 	// Other mappings
 	public static final int PISTON_SOLENOID_CHANNEL = 0;
+
+	public final static int ELEVATOR_PORT 				= 5; //TBD
+	public final static int TURRET_PORT					= 0; //TBD
+									   
+	public final static int CARGO_SENSOR                = 0; //TBD
+	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 7; //TBD
+	public final static int CENTER_TURRET_LIMIT_SWITCH  = 8; //TBD
+	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 9; //TBD
+
 }

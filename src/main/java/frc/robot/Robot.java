@@ -3,7 +3,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.DriverVision;
+import frc.robot.subsystems.AquisitionRoller;
+import frc.robot.subsystems.Turret;
+import frc.robot.subsystems.Elevator;
 
 /**
  * This is the development branch.
@@ -21,8 +25,10 @@ public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain     = new Drivetrain();
     public static final DriverVision driverVision = new DriverVision();
     public static final AquisitionRoller roller   = new AquisitionRoller();
+    public static final Turret turret = new Turret();
+    public static final Elevator elevator = new Elevator ();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-	
+	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
     
     // Global constants
@@ -38,7 +44,8 @@ public class Robot extends TimedRobot {
     	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
-
+        elevator.ElevatorInit();
+        turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
@@ -77,10 +84,10 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
     	mode = "teleop";
-    //	Sensors.resetEncoders();
+    	//Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-		Robot.drivetrain.Relax();
+	    Robot.drivetrain.Relax();
 
 		Constants.AutoEnable=true;
 		Constants.IntegralError=0;
@@ -95,6 +102,9 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        elevator.updateSmartDashboard();
+        Sensors.updateSmartDashboard();
+        turret.updateSmartDashboard();
 //		LiveWindow.run();
     }
     
