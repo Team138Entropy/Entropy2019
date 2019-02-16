@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.RobotMap;
+import frc.robot.Sensors;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,8 +26,13 @@ public class AquisitionRoller extends Subsystem {
     }
 
     public synchronized void set(boolean on) {
+        if (Sensors.isCargoPresent()) {
+            rollerTalon.set(ControlMode.PercentOutput, 0.0d);
+            return;
+        }
+        
         // Because this is experimental, I'm not sure if we want to be running the talon at full speed.
-        rollerTalon.set(ControlMode.PercentOutput, on ? 0.5 : 0);
+        rollerTalon.set(ControlMode.PercentOutput, on ? 0.5d : 0.0d);
     }
 
     /**
@@ -37,6 +43,11 @@ public class AquisitionRoller extends Subsystem {
     public synchronized void setPistons(PistonState ps) {
         if (currentState == ps)
             return;
+
+        if (Sensors.isCargoPresent()) {
+            pistonSolenoid.set(false);
+            return;
+        }
         
         switch (ps) {
             case EXTEND:

@@ -23,11 +23,6 @@ public class RunRoller extends Command {
 
 	protected void end() {
         Robot.roller.setPistons(PistonState.RETRACT);
-        
-        // Don't stop the roller right away; we need to make sure we've acquired the cargo.
-        try {
-            wait(500);
-        } catch (InterruptedException e) {}
         Robot.roller.set(false);
 	}
 }
