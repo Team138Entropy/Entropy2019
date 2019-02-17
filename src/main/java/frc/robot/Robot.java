@@ -3,11 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.DriverVision;
-import frc.robot.subsystems.AquisitionRoller;
-import frc.robot.subsystems.Turret;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.*;
 
 /**
  * This is the development branch.
@@ -26,7 +22,7 @@ public class Robot extends TimedRobot {
     public static final DriverVision driverVision = new DriverVision();
     public static final AquisitionRoller roller   = new AquisitionRoller();
     public static final Turret turret = new Turret();
-    public static final Elevator elevator = new Elevator ();
+    public static final Elevator elevator = new Elevator();
     public static final Manipulator manipulator = new Manipulator();
 
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)

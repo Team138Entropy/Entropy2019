@@ -100,11 +100,11 @@ public final class OI {
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 
 
-	static Button stayState = new JoystickButton(operatorStick, nykoLeftTrigger);
-	static Button changeState = new JoystickButton(operatorStick, nykoRightTrigger);
+	static Button stayState = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	static Button changeState = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
-	static Button extendManipulator = new JoystickButton(operatorStick, nykoRightStick); 
-	static Button rotateManipulator = new JoystickButton(operatorStick, nykoMiddle10);
+	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick); 
+	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
