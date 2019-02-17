@@ -118,4 +118,7 @@ public class Constants {
 		public final static String practiceRobot = "practice robot";
 		public final static String competitionRobot = "comp robot";
 
+		// Controllers
+		public static final int nykoControllerPort = 0;
+		public static final int xboxControllerPort = 1;
 }
