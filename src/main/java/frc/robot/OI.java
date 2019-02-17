@@ -1,99 +1,158 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.*;
 
+import frc.robot.Constants;
+
+import frc.robot.subsystems.Elevator.ElevatorTarget;
+
+import frc.robot.commands.ChangeState;
+import frc.robot.commands.ElevateToTarget;
+import frc.robot.commands.HomeElevator;
+import frc.robot.commands.StayState;
+import frc.robot.commands.ToggleManipRotation;
+import frc.robot.commands.ToggleManipTranslation;
+import frc.robot.commands.RotateTurretLeft;
+import frc.robot.commands.RotateTurretRight;
+import frc.robot.commands.TestRoller;
+import frc.robot.commands.TestRollerPistons;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public final class OI {
 	
-	// Xbox Controller Map
-	static final int xboxController = 0;
-	// Xbox Buttons
-	static final int xboxA = 1;
-	static final int xboxB = 2;
-	static final int xboxX = 3;
-	static final int xboxY = 4;
-	static final int xboxLeftBumper = 5;
-	static final int xboxRightBumper = 6;
-	static final int xboxLeftStick = 7;
-	static final int xboxRightStick = 8;
-	static final int xboxMenu = 9;
-	static final int xboxView = 10;
-	static final int xboxHome = 11;
-	static final int xboxDpadUp = 12;
-	static final int xboxDpadDown = 13;
-	static final int xboxDpadLeft = 14;
-	static final int xboxDpadRigt = 15;
+	public static class NykoController extends Joystick {
+
+        // Buttons
+        public static final int button1 = 1;
+        public static final int button2 = 2;
+        public static final int button3 = 3;
+        public static final int button4 = 4;
+        public static final int leftBumper = 5;
+        public static final int rightBumper = 6;
+        public static final int leftTrigger = 7;
+        public static final int rightTrigger = 8;
+        public static final int middle9 = 9;
+        public static final int middle10 = 10;
+        public static final int middle11 = 11;
+        public static final int leftStick = 12;
+        public static final int rightStick = 13;
+        
+        // Axes
+        public static final int leftXAxis = 0;		// X Axis on Driver Station
+        public static final int leftYAxis = 1;		// Y Axis on Driver Station
+        public static final int rightYAxis = 2;	// Z Axis on Driver Station
+        public static final int rightXAxis = 3;	// Rotate Axis on Driver Station
+
+        public NykoController(int port) {
+            super(port);
+        }
+
+	}
 	
-	//Xbox axes
-	static final int xboxLeftXAxis = 0;
-	static final int xboxLeftYAxis = 1;
-	static final int xboxLeftTriggerAxis = 2;
-	static final int xboxRightTriggerAxis = 3;
-	static final int xboxRightXAxis = 4;
-	static final int xboxRightYAxis = 5;
+	public static class XboxController extends Joystick {
+		// Buttons
+		static final int a = 1;
+		static final int b = 2;
+		static final int x = 3;
+		static final int y = 4;
+		static final int leftBumper = 5;
+		static final int rightBumper = 6;
+		static final int leftStick = 7;
+		static final int rightStick = 8;
+		static final int menu = 9;
+		static final int view = 10;
+		static final int home = 11;
+		static final int dPadUp = 12;
+		static final int dPadDown = 13;
+		static final int dPadLeft = 14;
+		static final int dPadRigt = 15;
+		
+		// Axes
+		static final int leftXAxis = 0;
+		static final int leftYAxis = 1;
+		static final int leftTriggerAxis = 2;
+		static final int rightTriggerAxis = 3;
+		static final int rightXAxis = 4;
+		static final int rightYAxis = 5;
+
+		public XboxController(int port) {
+			super(port);
+		}
+	}
 	
-	// Nyko Air Flow Controller Map
-	static final int nykoController = 1;
-	// Nyko buttons
-	static final int nykoButton1 = 1;
-	static final int nykoButton2 = 2;
-	static final int nykoButton3 = 3;
-	static final int nykoButton4 = 4;
-	static final int nykoLeftBumper = 5;
-	static final int nykoRightBumper = 6;
-	static final int nykoLeftTrigger = 7;
-	static final int nykoRightTrigger = 8;
-	static final int nykoMiddle9 = 9;
-	static final int nykoMiddle10 = 10;
-	static final int nykoMiddle11 = 11;
-	static final int nykoLeftStick = 12;
-	static final int nykoRightStick = 13;
-	
-	// Nyko axes
-	static final int nykoLeftXAxis = 0;		// X Axis on Driver Station
-	static final int nykoLeftYAxis = 1;		// Y Axis on Driver Station
-	static final int nykoRightYAxis = 2;	// Z Axis on Driver Station
-	static final int nykoRightXAxis = 3;	// Rotate Axis on Driver Station
-	
-    static Joystick driverStick = new Joystick(xboxController);
-    static Joystick operatorStick = new Joystick(nykoController);
+	public static Joystick driverStick = new Joystick(Constants.xboxControllerPort);
+	public static Joystick operatorStick = new Joystick(Constants.nykoControllerPort);
     
     static double lastX=0;
     static double LastY=0;
 	
-	static Button headlessButton = new JoystickButton(driverStick, xboxLeftBumper);
+	static Button headlessButton = new JoystickButton(driverStick, XboxController.leftBumper);
+
+	static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
+	static Button elevateToFloor     = new JoystickButton(operatorStick, NykoController.button1);
+	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button2);
+	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button3);
+	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
+	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
+	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
+	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
+	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+
+
+	static Button stayState = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	static Button changeState = new JoystickButton(operatorStick, NykoController.rightTrigger);
+
+	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick); 
+	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
 
     public OI(){
-    	
+		homeElevatorButton.whileHeld(new HomeElevator());
+		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
+    	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
+		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
+		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
+
+		stayState.whenPressed(new StayState());
+		changeState.whenPressed(new ChangeState());
+		rotateTurretLeft.whenPressed(new RotateTurretLeft());
+		rotateTurretRight.whenPressed(new RotateTurretRight());
+
+		rollerTestButton.whileHeld(new TestRoller());
+		pistonTestButton.whileHeld(new TestRollerPistons());
+
+		// It's a toggle for sure
+		rotateManipulator.whenPressed(new ToggleManipTranslation());
+		extendManipulator.whenPressed(new ToggleManipRotation());
+
+		rotateManipulator.whenReleased(new ToggleManipTranslation());
+		extendManipulator.whenReleased(new ToggleManipRotation());
 	}
     
 	public static double getMoveSpeed()
 	{
 		// joystick values are opposite to robot directions
-		double moveSpeed=driverStick.getRawAxis(xboxLeftYAxis);
+		double moveSpeed=-driverStick.getRawAxis(XboxController.leftYAxis);
 		// Apply thresholds to joystick positions to eliminate
 		// creep motion due to non-zero joystick value when joysticks are 
 		// "centered"
-		if (Math.abs(moveSpeed) < Constants.JoystickDeadband)
+		if (Math.abs(moveSpeed) < Constants.joystickDeadband)
 			moveSpeed=0;
 		return moveSpeed;
 	}
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed=driverStick.getRawAxis(xboxRightXAxis);
-		if (Math.abs(rotateSpeed) < Constants.JoystickDeadband)
+		double rotateSpeed=driverStick.getRawAxis(XboxController.rightXAxis);
+		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;
 	}
 
 	public static double getStickX() {
-		double x = driverStick.getRawAxis(xboxLeftXAxis);
+		double x = driverStick.getRawAxis(XboxController.rightXAxis);
 
 		if (Math.abs(x) < Constants.joystickDeadband) {
 			x = 0;
@@ -103,7 +162,7 @@ public final class OI {
 	}
 
 	public static double getStickY() {
-		double y = driverStick.getRawAxis(xboxLeftYAxis);
+		double y = driverStick.getRawAxis(XboxController.rightYAxis);
 
 		if (Math.abs(y) < Constants.joystickDeadband) {
 			y = 0;
@@ -117,7 +176,7 @@ public final class OI {
 	}
 	
 	public static boolean isReverse() {
-		return driverStick.getRawButton(xboxB);
+		return driverStick.getRawButton(XboxController.b);
 	}
 	
 	public static boolean isFullSpeed() {
@@ -129,8 +188,47 @@ public final class OI {
 	}
 	
 	public static boolean isQuickturn() {
-		return driverStick.getRawAxis(xboxLeftTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
+		return driverStick.getRawAxis(XboxController.leftTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
 	}
-	    
+	
+	// Return the jog direction: 1 for up, -1 for down
+	public static int getElevatorJogDirection()
+	{
+		// POV hat returns 0 for up
+		if (operatorStick.getPOV() == 0)
+		{
+			return Constants.elevatorUp;
+		}
+		// POV hat returns 180 for down
+		else if (operatorStick.getPOV() == 180)
+		{
+			return Constants.elevatorDown;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	// Return the jog direction: 1 for up, -1 for down
+	public static int getTurretJogDirection()
+	{
+		// POV hat returns 90 for right
+		if (operatorStick.getPOV() == 90)
+		{
+			return Constants.TurretDirectionRight;
+		}
+		// POV hat returns 270 for left
+		else if (operatorStick.getPOV() == 270)
+		{
+			return Constants.TurretDirectionLeft;
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
+	
 } // :D)))
 

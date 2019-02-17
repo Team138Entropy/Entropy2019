@@ -17,9 +17,16 @@ public class Robot extends TimedRobot {
 	// Interface with players
         
     // Subsystems
-    public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Compressor compressor     = new Compressor();
+    public static final Drivetrain drivetrain     = new Drivetrain();
+    public static final DriverVision driverVision = new DriverVision();
+    public static final AquisitionRoller roller   = new AquisitionRoller();
+    public static final Turret turret = new Turret();
+    public static final Elevator elevator = new Elevator();
+    public static final Manipulator manipulator = new Manipulator();
+
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-	
+	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
     
     // Global constants
@@ -32,10 +39,11 @@ public class Robot extends TimedRobot {
      */
     public void robotInit() {
     	drivetrain.DriveTrainInit();
-    	Sensors.initialize();		
+    	compressor.start();	
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
-
+        elevator.ElevatorInit();
+        turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
@@ -74,10 +82,10 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
     	mode = "teleop";
-    //	Sensors.resetEncoders();
+    	//Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-		Robot.drivetrain.Relax();
+	    Robot.drivetrain.Relax();
 
 		Constants.AutoEnable=true;
     }
@@ -91,6 +99,9 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        elevator.updateSmartDashboard();
+        Sensors.updateSmartDashboard();
+        turret.updateSmartDashboard();
 //		LiveWindow.run();
     }
     

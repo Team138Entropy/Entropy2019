@@ -46,10 +46,6 @@ public class Drivetrain extends Subsystem {
 		bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 		bottomLeftTalon.setSensorPhase(true);
 
-		// Reverse the right talons because they're facing opposite directions
-		topRightTalon.setInverted(true);
-		bottomRightTalon.setInverted(true);
-
 		/* set the peak and nominal outputs, 12V means full */
 		bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
 		bottomLeftTalon.configNominalOutputForward(0.,0);
