@@ -7,6 +7,8 @@ import frc.robot.commands.ChangeState;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.StayState;
+import frc.robot.commands.ToggleManipRotation;
+import frc.robot.commands.ToggleManipTranslation;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
 /**
@@ -82,6 +84,9 @@ public final class OI {
 	static Button stayState = new JoystickButton(operatorStick, nykoLeftTrigger);
 	static Button changeState = new JoystickButton(operatorStick, nykoRightTrigger);
 
+	static Button extendManipulator = new JoystickButton(operatorStick, nykoRightStick); 
+	static Button rotateManipulator = new JoystickButton(operatorStick, nykoMiddle10);
+
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
 		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
@@ -93,6 +98,13 @@ public final class OI {
 		changeState.whenPressed(new ChangeState());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
+
+		// It's a toggle for sure
+		rotateManipulator.whenPressed(new ToggleManipTranslation());
+		extendManipulator.whenPressed(new ToggleManipRotation());
+
+		rotateManipulator.whenReleased(new ToggleManipTranslation());
+		extendManipulator.whenReleased(new ToggleManipRotation());
 	}
     
 	public static double getMoveSpeed()
