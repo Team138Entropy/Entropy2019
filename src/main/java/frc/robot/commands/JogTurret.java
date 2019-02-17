@@ -6,19 +6,19 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class JogElevator extends Command {
+public class JogTurret extends Command {
 	
 	private int _jogDirection = 0;
 	
-	public JogElevator(int direction)
+	public JogTurret(int direction)
 	{
-		requires(Robot.elevator);
+		requires(Robot.turret);
 		_jogDirection = direction;
 	}
 	
-	public JogElevator()
+	public JogTurret()
 	{
-		requires(Robot.elevator);
+		requires(Robot.turret);
 	}
 	
 
@@ -26,12 +26,12 @@ public class JogElevator extends Command {
 		// Command was invoked with specific direction
 		if (_jogDirection != 0)
 		{
-			Robot.elevator.JogElevator(_jogDirection, Constants.elevatorJogSpeed);
+			Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
 		}
 		// Command was not invoked with specific direction - use D Pad
 		else
 		{
-			Robot.elevator.JogElevator(OI.getElevatorJogDirection(), Constants.elevatorJogSpeed);
+			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
 		}
 	}
 
@@ -39,20 +39,12 @@ public class JogElevator extends Command {
 		// Command was invoked with specific direction
 		if (_jogDirection != 0)
 		{
-			Robot.elevator.JogElevator(_jogDirection, Constants.elevatorJogSpeed);
+			Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
 		}
 		// Command was not invoked with specific direction - use D Pad
-		else
-		{
-			if (OI.getElevatorJogDirection() == 0) // && !Robot.elevator.IsAtFloor())
-			{
-				Robot.elevator.JogElevator(1, Constants.elevatorHoldSpeed);
-			}
-			else
-			{
-				Robot.elevator.JogElevator(OI.getElevatorJogDirection(), Constants.elevatorJogSpeed);
-			}
-		}
+		else{
+			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
+		}			
 	}
 
 	protected boolean isFinished() {
@@ -60,13 +52,13 @@ public class JogElevator extends Command {
 	}
 
 	protected void end() {
-		Robot.elevator.StopMoving();
+		Robot.turret.StopMoving();
 		
 	}
 
 	protected void interrupted() {
 		
-		Robot.elevator.StopMoving();
+		Robot.turret.StopMoving();
 	}
 
 }

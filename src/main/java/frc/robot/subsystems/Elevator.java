@@ -11,15 +11,12 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Elevator extends Subsystem{
 
 	public WPI_TalonSRX _elevatorMotor = new WPI_TalonSRX(RobotMap.ELEVATOR_PORT);
-	public DigitalInput _lowerLimitSwitch = new DigitalInput(0);
-	public DigitalInput _upperLimitSwitch = new DigitalInput(1);
 	
 	// Servo Loop Gains
 	double _liftKf = 0.2;
@@ -50,6 +47,7 @@ public class Elevator extends Subsystem{
 	private double _targetPosition = 0.0;
 	private double _currentPosition = 0.0;
 	private boolean _isAtFloor = true;
+	private ElevatorTarget _targetNamedPosition = ElevatorTarget.NONE;
 	
 	private int _currentJogDirection = 0;
 	
@@ -143,6 +141,7 @@ public class Elevator extends Subsystem{
 	
 	// Elevate to a specific target position
 	public void Elevate (ElevatorTarget target) {
+		_targetNamedPosition = target;
 		_isAtFloor = false; 
 		if (target == ElevatorTarget.NONE)
 		{
@@ -240,12 +239,12 @@ public class Elevator extends Subsystem{
 			_currentPosition = GetElevatorPosition();
 			
 			if (_targetPosition > _currentPosition) {
-				_direction = 1;
+				_direction = Constants.elevatorUp;
 				elevatorSpeed = Constants.elevatorMoveSpeed;
 				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
 			}
 			else {
-				_direction = -1;
+				_direction = Constants.elevatorDown;
 				elevatorSpeed =  Constants.elevatorDownMoveSpeed;
 				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
 			}
@@ -287,13 +286,57 @@ public class Elevator extends Subsystem{
 	public void updateSmartDashboard()
 	{                  
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
+		SmartDashboard.putString("Target Named Position", convertTargetPositionToString(_targetNamedPosition));
 		SmartDashboard.putNumber("Target Position", _targetPosition);
-		SmartDashboard.putNumber("Direction", _direction);
+		SmartDashboard.putString("Direction", convertDirectionToString(_direction));
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
 		SmartDashboard.putNumber("Elevate Output:",_elevatorMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Count", _count);
 	}
 	
+	private String convertDirectionToString (int direction) {
+		if (_direction == -1) {
+			return "Down";
+		}	
+		else if (_direction == 1) {
+			return "Up";
+		}
+		else {
+			return "";
+		}
+	}
+
+	private String convertTargetPositionToString (ElevatorTarget targetNamedPosition) {
+		String targetString = "Error!";
+
+		switch (targetNamedPosition){
+			case FLOOR:
+				targetString = "Floor";
+				break;
+			case LEVEL_1:
+				targetString = "Level 1";
+				break;
+			case LEVEL_2:
+				targetString = "Level 2";
+				break;
+			case LEVEL_3:
+				targetString = "Level 3";
+				break;
+			case NONE:
+				targetString = "None";
+				break;
+			case LOADING_STATION:
+				targetString = "Loading Station";
+				break;
+			default:
+				targetString = "Error!";
+				break;
+		}
+
+		return targetString; 
+	}
+
+
 	// Stop the homing move, reset the encoder position 
 	public void StopHoming()
 	{

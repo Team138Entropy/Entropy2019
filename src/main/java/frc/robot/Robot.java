@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 
-import frc.robot.subsystems.*;
-
 /**
  * This is the development branch.
  * The VM is configured to automatically run this class, and to call the
@@ -21,6 +19,7 @@ public class Robot extends TimedRobot {
     public static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final LineDetectorSerial lineDetectorSerial = new LineDetectorSerial();
+    public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator ();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
 	public static final OI oi = new OI();
@@ -40,6 +39,7 @@ public class Robot extends TimedRobot {
         Robot.accumulatedHeading = 0;
         Constants.AutoEnable=true;
         elevator.ElevatorInit();
+        turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
@@ -78,10 +78,10 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
     	mode = "teleop";
-    //	Sensors.resetEncoders();
+    	//Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-		Robot.drivetrain.Relax();
+	    Robot.drivetrain.Relax();
 
 		Constants.AutoEnable=true;
 		Constants.IntegralError=0;
@@ -98,6 +98,7 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
+        turret.updateSmartDashboard();
 //		LiveWindow.run();
     }
     

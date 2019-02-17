@@ -82,22 +82,16 @@ public class Constants {
 		public final static double elevatorDownMoveSpeed = 0.7;
 		public final static double elevatorHoldSpeed = 0.1;
 		public final static double elevatorExchangeSpeed = 0.5;
-		
-		//Cube Grasper
-		public final static boolean grasperSolenoidActiveOpen = true;
-		public final static boolean wristSolenoidActiveRaised = false;
-		public final static double acquisitionWheelsPercent = 50.0;
-		public final static double aquireSpeed = 0.75; 
-		public final static double releaseSpeed = -0.85;
-		public final static double holdSpeed = 0.3;
-		public final static double releaseSpeedReduced = -0.7;
+		public final static int elevatorUp = 1; 
+		public final static int elevatorDown = -1;
 
-		// Auto Cube Acquisition
-		public final static double autoDetectionSettlingTime = 0.5;	// Time to delay after turning acquisition wheels on to start detection
-		public final static int cubeDetectThresholdCount = 3;		// Consecutive readings above threshold to trigger acquire
-		public final static double cubeDetectThreshold = 3.0;		// Roller current threshold to start acquire
-		public final static int cubeAcquireThresholdCount = 10;		// Consecutive readings above threshold to trigger complete acquire
-		public final static double cubeAcquireThreshold = 7.0;		// Roller current threshold to complete acquire
+		
+		// Turret
+		public final static double TurretSpeed = 0.5; //TBD
+		public final static double TurretJogSpeed = 0.25; //TBD
+		public final static int TurretDirectionLeft = -1;
+		public final static int TurretDirectionRight = 1;
+		
 
 		// ***** Autonomous drive parameters *******
 		public final static double AutoStraighLineSpeedFactor = 1.0; 				 // Fraction of full autonomous speed
@@ -105,7 +99,7 @@ public class Constants {
 		public static double AutoDriveAccel = 1.0; // M/sec2 (1 ~.1G)
 		public static double AutoDriveRotateRate = 0.5; // Meters/second
 		public static double IntegralError=0;
-		
+
 		// PID gains to control rotation (measured by Gyro)
 		public static double kPRotate = .2;
 		public static double kIRotate = .2;
