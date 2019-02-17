@@ -238,12 +238,12 @@ public class Elevator extends Subsystem{
 			_currentPosition = GetElevatorPosition();
 			
 			if (_targetPosition > _currentPosition) {
-				_direction = 1;
+				_direction = Constants.elevatorUp;
 				elevatorSpeed = Constants.elevatorMoveSpeed;
 				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
 			}
 			else {
-				_direction = -1;
+				_direction = Constants.elevatorDown;
 				elevatorSpeed =  Constants.elevatorDownMoveSpeed;
 				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
 			}
