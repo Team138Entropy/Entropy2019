@@ -2,7 +2,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-import frc.robot.OI;
+import frc.robot.DTI;
 import frc.robot.Robot;
 import frc.robot.CheesyDrive;
 
@@ -23,14 +23,14 @@ public class TeleopDrive extends Command{
 
 	protected void execute() {
 		double moveSpeed,rotateSpeed;
-		moveSpeed=OI.getMoveSpeed();
-		rotateSpeed=OI.getRotateSpeed();
+		moveSpeed=DTI.getMoveSpeed();
+		rotateSpeed=DTI.getRotateSpeed();
 
 		System.out.println(moveSpeed);
 		System.out.println(rotateSpeed);
 
 		// // Full speed or slow speed?
-		// if (OI.isFullSpeed()) {
+		// if (DTI.isFullSpeed()) {
 		// 	// Full speed
 		// 	moveSpeed=moveSpeed*Constants.ClosedLoopCruiseVelocity;
 		// 	rotateSpeed=rotateSpeed*Constants.ClosedLoopTurnSpeed;
@@ -45,7 +45,7 @@ public class TeleopDrive extends Command{
 		// rotateSpeed=Robot.drivetrain.limitRotateAccel(rotateSpeed);
 		// Robot.drivetrain.drive(moveSpeed,rotateSpeed);
 
-		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
+		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, DTI.isQuickturn(), DTI.isFullSpeed()));
 	}
 
 	protected boolean isFinished() {

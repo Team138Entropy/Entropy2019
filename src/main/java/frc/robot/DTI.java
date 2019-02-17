@@ -14,10 +14,11 @@ import frc.robot.commands.RotateTurretRight;
 import frc.robot.commands.TestRoller;
 import frc.robot.commands.TestRollerPistons;
 /**
+ * This is a nicer version of {@link frc.robot.DTI DTI}.
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public final class OI {
+public final class DTI {
 	
 	public static class NykoController extends Joystick {
 
@@ -96,7 +97,7 @@ public final class OI {
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 
 
-    public OI(){
+    public DTI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
 		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
     	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));

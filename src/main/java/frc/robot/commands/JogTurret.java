@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.OI;
+import frc.robot.DTI;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -31,7 +31,7 @@ public class JogTurret extends Command {
 		// Command was not invoked with specific direction - use D Pad
 		else
 		{
-			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
+			Robot.turret.JogTurret(DTI.getTurretJogDirection(), Constants.TurretJogSpeed);
 		}
 	}
 
@@ -43,7 +43,7 @@ public class JogTurret extends Command {
 		}
 		// Command was not invoked with specific direction - use D Pad
 		else{
-			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
+			Robot.turret.JogTurret(DTI.getTurretJogDirection(), Constants.TurretJogSpeed);
 		}			
 	}
 

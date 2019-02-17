@@ -12,6 +12,11 @@ public class RobotMap {
 	public final static int LEFT_MOTOR_CHANNEL_TOP        = 2;
 	public final static int RIGHT_MOTOR_CHANNEL_TOP       = 3;
 	public final static int RIGHT_MOTOR_CHANNEL_BOTTOM    = 4;
+	
+	public final static int ROLLER_TALON_ID = 6;
+
+	// Other mappings
+	public static final int PISTON_SOLENDTID_CHANNEL = 0;
 
 	public final static int ELEVATOR_PORT 				= 5; //TBD
 	public final static int TURRET_PORT					= 0; //TBD
