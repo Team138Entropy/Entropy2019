@@ -49,11 +49,11 @@ public class Robot extends TimedRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-
+        System.out.println("Your bot is disabled!\n");
     }
 	
 	public void disabledPeriodic() {
-
+        // System.out.println("Periodic disabled!");
 	}
 
 	/**
@@ -66,14 +66,14 @@ public class Robot extends TimedRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    	
+    	System.err.println("WE DON'T HAVE AUTONOMOUS YOU FOOL!");
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
+        System.err.println("WE DON'T HAVE AUTONOMOUS YOU FOOL!");
     }
 
     public void teleopInit() {
@@ -106,6 +106,6 @@ public class Robot extends TimedRobot {
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-  //      LiveWindow.run();
+        System.out.println("nothing to see here...");
     }
 }

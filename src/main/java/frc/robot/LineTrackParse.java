@@ -13,8 +13,8 @@ public class LineTrackParse{
     // physical, relative distance between senors or rows
     private static final int rowDistance = 6;
 
-    private boolean[] topSensorRow = new boolean[sensorsPerRow];
-    private boolean[] bottomSensorRow = new boolean[sensorsPerRow];
+    public boolean[] topSensorRow = new boolean[sensorsPerRow];
+    public boolean[] bottomSensorRow = new boolean[sensorsPerRow];
     ArrayList<Integer> trueIndexesInTopRow = new ArrayList<Integer>();
     ArrayList<Integer> trueIndexesInBottomRow = new ArrayList<Integer>();
 
