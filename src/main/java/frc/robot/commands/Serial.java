@@ -46,8 +46,8 @@ public class Serial extends Command {
         // buffers to "\n"
         str = buffer + str;
 
-        if(str.contains("\n"))
-            SmartDashboard.putString("serialData", str){
+        if(str.contains("\n")){
+            SmartDashboard.putString("serialData", str);
             System.out.println("n" + str);
             String[] split = str.split("\n");
             str = split[0];
@@ -81,7 +81,7 @@ public class Serial extends Command {
             for(boolean row: rows){
                 double count = t.countTriggeredInRow(row) - 1;
                 if(count > 0){
-                vibrateVal = Math.max(count / 3, vibrateVal);
+                    vibrateVal = Math.max(count / 3, vibrateVal);
                 }
             }
             OI.driverStick.setRumble(rumble, vibrateVal);
