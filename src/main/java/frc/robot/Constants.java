@@ -51,12 +51,15 @@ public class Constants {
 	public final static int LeftDriveEncoderPolarity = -1;
 	public final static int RightDriveEncoderPolarity = 1;
 	
+	// 2019 Drive Train constants
+	public final static double VelocityScale = 0.75;
+
 	// Elevator
 	public final static double elevatorHomingSpeed = -0.2;
 	public final static double elevatorJogSpeed = 0.5;
 	public final static double elevatorMoveSpeed = 1.0;
 	public final static double elevatorDownMoveSpeed = 0.7;
-	public final static double elevatorHoldSpeed = 0.1;
+	public final static double elevatorHoldSpeed = 0.0;
 	public final static double elevatorExchangeSpeed = 0.5;
 	public final static int elevatorUp = 1; 
 	public final static int elevatorDown = -1;
