@@ -11,7 +11,7 @@ public class TestRoller extends Command {
     }
 
     protected void execute() {
-        Robot.roller.set(true);
+        Robot.roller.setRoller(true);
     }
 
     protected boolean isFinished() {
@@ -19,6 +19,6 @@ public class TestRoller extends Command {
     }
 
     protected void end() {
-        Robot.roller.set(false);
+        Robot.roller.setRoller(false);
 	}
 }

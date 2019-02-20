@@ -57,6 +57,7 @@ public class Sensors {
 	}	
   
 	 public static void updateSmartDashboard(){
+		SmartDashboard.putBoolean("Practice Bot", isPracticeBot());
 		SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
@@ -88,4 +89,7 @@ public class Sensors {
 		return !rightLimitSwitch.get();
 	}
 
+	public static boolean isPracticeBot() {
+		return !practiceRobotJumperPin.get();
+	}
 }

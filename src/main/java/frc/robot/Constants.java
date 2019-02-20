@@ -59,7 +59,7 @@ public class Constants {
 	public final static double elevatorJogSpeed = 0.5;
 	public final static double elevatorMoveSpeed = 1.0;
 	public final static double elevatorDownMoveSpeed = 0.7;
-	public final static double elevatorHoldSpeed = 0.0;
+	public final static double elevatorHoldSpeed = 0.1;
 	public final static double elevatorExchangeSpeed = 0.5;
 	public final static int elevatorUp = 1; 
 	public final static int elevatorDown = -1;
@@ -109,4 +109,10 @@ public class Constants {
 
 	// Temporary values I had to put in before compiling
 	public static final boolean isSimulated = false;
+
+	// Pneumatics
+	public static final boolean EXTEND = true;
+	public static final boolean RETRACT = false;
+
+	public static final double ROLLER_SPEED = 0.3;
 }
