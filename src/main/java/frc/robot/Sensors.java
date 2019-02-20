@@ -34,7 +34,7 @@ public class Sensors {
         gyro.calibrate();
         gyro.reset();
 	   
-		practiceRobotJumperPin = new DigitalInput(5);
+		practiceRobotJumperPin = new DigitalInput(RobotMap.IS_PRACTICE_GIO);
 		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);

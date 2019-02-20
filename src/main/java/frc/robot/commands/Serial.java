@@ -20,19 +20,19 @@ public class Serial extends Command {
 
     public Serial() {
         try {
-            port = new SerialPort(9600, SerialPort.Port.kUSB);
+            port = new SerialPort(9600, SerialPort.Port.kUSB1);
             port.enableTermination();    
         } catch (Exception e) {
             try{
-                port = new SerialPort(9600, SerialPort.Port.kUSB1);
+                port = new SerialPort(9600, SerialPort.Port.kUSB2);
                 port.enableTermination();
             } catch (Exception e1) {
                 try{
-                    port = new SerialPort(9600, SerialPort.Port.kUSB2);
+                    port = new SerialPort(9600, SerialPort.Port.kUSB);
                     port.enableTermination();
                 } catch (Exception e2) {
-                    System.err.println("Connect an arduino to a usb port");
-                    throw e;
+                    throw new Error("Connect an arduino to a usb port");
+                    // throw e;
                 }
             }
         }
@@ -42,7 +42,6 @@ public class Serial extends Command {
 
     protected void execute() {
         String str = port.readString();
-        System.out.println("str " + str);
         // buffers to "\n"
         str = buffer + str;
 
@@ -51,27 +50,27 @@ public class Serial extends Command {
             System.out.println("n" + str);
             String[] split = str.split("\n");
             str = split[0];
-            buffer = split[1];
+            buffer = split.length == 2 ? split[1] : "";
 
             if(str.length() == 0) return;
             if(str.charAt(0) == '#'){
                 System.out.println("serial: " + str);
             }else{
                 System.out.println("got data " + str);
-                procArgs(str.split(" "));
+                procArgs(str.trim().split(" "), str);
             }
         }else{
-            System.out.println("no n" + str);
             buffer = str;
         }
     }
 
-    private void procArgs(String[] args){
-        t.setSensorValues(args);
+    private void procArgs(String[] args, String str){
+        t.setSensorValues(args, str);
+        SmartDashboard.putBoolean("is calibrating", !t.isValidData);
         if(t.isValidData){
-            SmartDashboard.putBoolean("isInCalibration", false);
             double degs = t.calcAngle();
             System.out.println("calculated angle " + degs);
+            SmartDashboard.putNumber("calculated angle (degrees)", degs);
 
             boolean rows[] = { true, false };
             double vibrateVal = 0;
@@ -86,7 +85,6 @@ public class Serial extends Command {
             }
             OI.driverStick.setRumble(rumble, vibrateVal);
         }else{
-            SmartDashboard.putBoolean("isInCalibration", true);
             System.out.println("Calibration mode!");
         }
     }

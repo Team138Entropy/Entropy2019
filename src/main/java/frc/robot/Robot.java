@@ -2,6 +2,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.*;
 
 /**
@@ -29,6 +30,13 @@ public class Robot extends TimedRobot {
     public static String mode; // "auto" or "teleop"
     public static String gameData;
 
+    private static void nothing(String a){
+
+    }
+
+    private DigitalInput pin = null;
+    private DigitalInput pin2 = null;
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -49,11 +57,11 @@ public class Robot extends TimedRobot {
 	 * the robot is disabled.
      */
     public void disabledInit(){
-        System.out.println("Your bot is disabled!\n");
+        nothing("Your bot is disabled!\n");
     }
 	
 	public void disabledPeriodic() {
-        // System.out.println("Periodic disabled!");
+        nothing("Periodic disabled!");
 	}
 
 	/**
@@ -100,6 +108,7 @@ public class Robot extends TimedRobot {
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
 //		LiveWindow.run();
+
     }
     
     /**

@@ -19,16 +19,19 @@ public class LineTrackParse{
     ArrayList<Integer> trueIndexesInBottomRow = new ArrayList<Integer>();
 
     public boolean isValidData = true;
-    public void setSensorValues(String[] values){
+    public void setSensorValues(String[] values, String str2){
         boolean isFillingBottomRow = false;
         int sensorToFill = 0;
         for(String str : values){
-            boolean isTrue = str.equals("true") || str.equals("1");
-            boolean isValid = isTrue || str.equals("false") || str.equals("0");
+            if(str.trim().length() == 0 || str == "\n" || str == "\r\n"){
+                continue;
+            }
+            boolean isValid = str.matches("^\\d+$");
             if(!isValid){
                 isFillingBottomRow = true;
                 sensorToFill = 0;
             }else{
+                boolean isTrue = Integer.parseInt(str) > 50;
                 if(sensorToFill >= sensorsPerRow){
                     isValidData = false;
                     return;
@@ -47,8 +50,17 @@ public class LineTrackParse{
                 sensorToFill ++;
             }
         }
+
+        if(!isFillingBottomRow){
+            // if we never got a seperator...
+            // we're still on calibration
+            isValidData = false;
+            return;
+        }
+        isValidData = true;
+        
     }
-    
+
     private double calculateAverage(ArrayList<Integer> marks) {
         Integer sum = 0;
         if(!marks.isEmpty()) {
