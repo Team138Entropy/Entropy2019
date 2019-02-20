@@ -13,12 +13,17 @@ public class RobotMap {
 	public final static int RIGHT_MOTOR_CHANNEL_TOP       = 3;
 	public final static int RIGHT_MOTOR_CHANNEL_BOTTOM    = 4;
 
-	public final static int ELEVATOR_PORT 				= 5; //TBD
-	public final static int TURRET_PORT					= 0; //TBD
+	public final static int TURRET_PORT					= 5; 
+	public final static int ROLLER_TALON_ID             = 6;
+	public final static int ELEVATOR_PORT 				= 7; 
 									   
-	public final static int CARGO_SENSOR                = 0; //TBD
-	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 7; //TBD
-	public final static int CENTER_TURRET_LIMIT_SWITCH  = 8; //TBD
-	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 9; //TBD
+	// Sensors
+	public final static int CARGO_SENSOR                = 5; 
+	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 4; 
+	public final static int CENTER_TURRET_LIMIT_SWITCH  = 3; 
+	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 2; 
+	public final static int PRACTICE_ROBOT_JUMPER		= 6;
 
+	// Pneumatics
+	public final static int PISTON_SOLENOID_CHANNEL = 0;
 }

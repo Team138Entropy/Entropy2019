@@ -34,7 +34,7 @@ public class Sensors {
         gyro.calibrate();
         gyro.reset();
 	   
-		practiceRobotJumperPin = new DigitalInput(5);
+		practiceRobotJumperPin = new DigitalInput(RobotMap.PRACTICE_ROBOT_JUMPER);
 		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
@@ -57,6 +57,7 @@ public class Sensors {
 	}	
   
 	 public static void updateSmartDashboard(){
+		SmartDashboard.putBoolean("Practice Bot", isPracticeBot());
 		SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
@@ -88,4 +89,7 @@ public class Sensors {
 		return !rightLimitSwitch.get();
 	}
 
+	public static boolean isPracticeBot() {
+		return !practiceRobotJumperPin.get();
+	}
 }
