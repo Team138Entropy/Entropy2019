@@ -30,11 +30,6 @@ public class AquisitionRoller extends Subsystem {
         rollerTalon.set(ControlMode.PercentOutput, on ? Constants.ROLLER_SPEED : 0.0d);
     }
 
-    /**
-     * This is intentionally set up as if it were for a DoubleSolenoid,
-     * because at the time of writing it wasn't clear how we were going to
-     * retract the roller. This is just a handy abstraction.
-     */
     public synchronized void setPistons(boolean ps) {
         if (pistonSolenoid.get() == ps)
             return;
