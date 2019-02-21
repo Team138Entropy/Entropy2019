@@ -51,6 +51,9 @@ public class Constants {
 	public final static int LeftDriveEncoderPolarity = -1;
 	public final static int RightDriveEncoderPolarity = 1;
 	
+	// 2019 Drive Train constants
+	public final static double VelocityScale = 0.75;
+
 	// Elevator
 	public final static double elevatorHomingSpeed = -0.2;
 	public final static double elevatorJogSpeed = 0.5;
@@ -106,4 +109,10 @@ public class Constants {
 
 	// Temporary values I had to put in before compiling
 	public static final boolean isSimulated = false;
+
+	// Pneumatics
+	public static final boolean EXTEND = true;
+	public static final boolean RETRACT = false;
+
+	public static final double ROLLER_SPEED = 0.3;
 }

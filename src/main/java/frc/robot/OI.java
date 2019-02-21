@@ -134,7 +134,7 @@ public final class OI {
 	public static double getMoveSpeed()
 	{
 		// joystick values are opposite to robot directions
-		double moveSpeed=-driverStick.getRawAxis(XboxController.leftYAxis);
+		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis) * Constants.VelocityScale;
 		// Apply thresholds to joystick positions to eliminate
 		// creep motion due to non-zero joystick value when joysticks are 
 		// "centered"
@@ -145,7 +145,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed=driverStick.getRawAxis(XboxController.rightXAxis);
+		double rotateSpeed= -1 * driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;

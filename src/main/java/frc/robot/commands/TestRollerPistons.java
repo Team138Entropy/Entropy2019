@@ -1,8 +1,7 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.Robot;
-
-import frc.robot.subsystems.AquisitionRoller.PistonState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,7 +12,7 @@ public class TestRollerPistons extends Command {
     }
 
     protected void execute() {
-        Robot.roller.setPistons(PistonState.EXTEND);
+        Robot.roller.setPistons(Constants.EXTEND);
     }
 
     protected boolean isFinished() {
@@ -21,6 +20,6 @@ public class TestRollerPistons extends Command {
     }
 
     protected void end() {
-        Robot.roller.setPistons(PistonState.RETRACT);
+        Robot.roller.setPistons(Constants.RETRACT);
 	}
 }

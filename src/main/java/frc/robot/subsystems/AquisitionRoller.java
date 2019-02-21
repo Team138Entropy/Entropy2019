@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.Sensors;
 
@@ -16,51 +17,27 @@ public class AquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
     private static Solenoid pistonSolenoid = new Solenoid(RobotMap.PISTON_SOLENOID_CHANNEL);
 
-    public enum PistonState {
-        EXTEND, RETRACT;
-    }
-
-    private static PistonState currentState = PistonState.RETRACT;
-
     protected void initDefaultCommand() {
         setDefaultCommand(new RunRoller());
     }
 
-    public synchronized void set(boolean on) {
-        if (Sensors.isCargoPresent()) {
-            rollerTalon.set(ControlMode.PercentOutput, 0.0d);
-            return;
-        }
-        
-        // Because this is experimental, I'm not sure if we want to be running the talon at full speed.
-        rollerTalon.set(ControlMode.PercentOutput, on ? 0.5d : 0.0d);
+    protected void init() {
+        pistonSolenoid.set(false);
+        rollerTalon.set(ControlMode.PercentOutput, 0.0d);
     }
 
-    /**
-     * This is intentionally set up as if it were for a DoubleSolenoid,
-     * because at the time of writing it wasn't clear how we were going to
-     * retract the roller. This is just a handy abstraction.
-     */
-    public synchronized void setPistons(PistonState ps) {
-        if (currentState == ps)
-            return;
-
-        if (Sensors.isCargoPresent()) {
-            pistonSolenoid.set(false);
-            return;
-        }
-        
-        switch (ps) {
-            case EXTEND:
-                pistonSolenoid.set(true);
-                break;
-            case RETRACT:
-                pistonSolenoid.set(false);
-                break;
-        }
+    public synchronized void setRoller(boolean on) {
+        rollerTalon.set(ControlMode.PercentOutput, on ? Constants.ROLLER_SPEED : 0.0d);
     }
 
-    public PistonState togglePistons() {
-        return currentState = (currentState == PistonState.EXTEND) ? PistonState.EXTEND : PistonState.RETRACT;
+    public synchronized void setPistons(boolean ps) {
+        if (pistonSolenoid.get() == ps)
+            return;
+        else
+            pistonSolenoid.set(ps);
+    }
+
+    public void togglePistons() {
+        setPistons(!pistonSolenoid.get());
     }
 }
