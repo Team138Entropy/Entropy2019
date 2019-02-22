@@ -7,7 +7,7 @@ public class ToggleManipRotation extends Command {
 
     public ToggleManipRotation() {
         requires(Robot.manipulator);
-        Robot.manipulator.actuate("", !Robot.manipulator.getRotated());
+        Robot.manipulator.rotate(!Robot.manipulator.getRotated());
     }
 
     public boolean isFinished() {

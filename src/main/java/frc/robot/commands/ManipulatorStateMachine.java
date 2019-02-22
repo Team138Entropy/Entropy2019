@@ -5,6 +5,7 @@ import frc.robot.Robot;
 import frc.robot.Sensors;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.subsystems.Elevator;
+import frc.robot.Constants;
 
 public class ManipulatorStateMachine extends Command {
 
@@ -53,7 +54,7 @@ public class ManipulatorStateMachine extends Command {
 
     private void idle() {
         if (!isEntryActionComplete) {
-            Robot.manipulator.actuate(false, false);
+            Robot.manipulator.actuate(Constants.RETRACT, Constants.HORIZONTAL);
             Robot.elevator.Elevate(Elevator.ElevatorTarget.FLOOR); // TODO: Get this correct
             isEntryActionComplete = true;
         }
@@ -71,7 +72,7 @@ public class ManipulatorStateMachine extends Command {
 
     private void prepareAcquire() {
         if (!isEntryActionComplete) {
-            Robot.manipulator.actuate(true, true);
+            Robot.manipulator.actuate(Constants.EXTEND, Constants.VERTICAL);
             Robot.elevator.Elevate(Elevator.ElevatorTarget.LEVEL_1); // TODO: Get this correct
             isEntryActionComplete = true;
         }
@@ -94,7 +95,7 @@ public class ManipulatorStateMachine extends Command {
         }
 
         if (Robot.elevator.IsMoveComplete()) {
-            Robot.manipulator.actuate(false, true);
+            Robot.manipulator.actuate(Constants.RETRACT, Constants.VERTICAL);
             Robot.elevator.Elevate(ElevatorTarget.LEVEL_1);
             
             if (Robot.elevator.IsMoveComplete()) {
@@ -105,7 +106,7 @@ public class ManipulatorStateMachine extends Command {
 
     private void acquiredHP() {
         if (!isEntryActionComplete) {
-            Robot.manipulator.actuate(false, true);
+            Robot.manipulator.actuate(Constants.RETRACT, Constants.VERTICAL);
             isEntryActionComplete = true;
         }
 
@@ -120,7 +121,7 @@ public class ManipulatorStateMachine extends Command {
 
     private void deployHP() {
         if (!isEntryActionComplete) {
-            Robot.manipulator.actuate(true, true);
+            Robot.manipulator.actuate(Constants.EXTEND, Constants.VERTICAL);
             isEntryActionComplete = true;
         }
 
@@ -141,7 +142,7 @@ public class ManipulatorStateMachine extends Command {
 
     private void deployCargo() {
         if (!isEntryActionComplete) {
-            Robot.manipulator.actuate(false, true);
+            Robot.manipulator.actuate(Constants.RETRACT, Constants.VERTICAL);
             isEntryActionComplete = true;
         }
 

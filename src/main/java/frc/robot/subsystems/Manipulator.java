@@ -48,12 +48,12 @@ public class Manipulator extends Subsystem {
         rotationSolenoid.set(rotation);
     }
 
-    public void actuate(boolean translation, String str) {
+    public void translate(boolean translation) {
         isTranslated = translation;
         translationSolenoid.set(translation);
     }
 
-    public void actuate(String str, boolean rotation) {
+    public void rotate(boolean rotation) {
         isRotated = rotation;
         rotationSolenoid.set(rotation);
     }

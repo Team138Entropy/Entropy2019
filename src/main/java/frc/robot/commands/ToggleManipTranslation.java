@@ -7,7 +7,7 @@ public class ToggleManipTranslation extends Command {
 
     public ToggleManipTranslation() {
         requires(Robot.manipulator);
-        Robot.manipulator.actuate(!Robot.manipulator.getTranslated(), "");
+        Robot.manipulator.translate(!Robot.manipulator.getTranslated());
     }
 
     public boolean isFinished() {
