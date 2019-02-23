@@ -123,12 +123,8 @@ public final class OI {
 		rollerTestButton.whileHeld(new TestRoller());
 		pistonTestButton.whileHeld(new TestRollerPistons());
 
-		// It's a toggle for sure
 		rotateManipulator.whenPressed(new ToggleManipTranslation());
 		extendManipulator.whenPressed(new ToggleManipRotation());
-
-		rotateManipulator.whenReleased(new ToggleManipTranslation());
-		extendManipulator.whenReleased(new ToggleManipRotation());
 	}
     
 	public static double getMoveSpeed()
