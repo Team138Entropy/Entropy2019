@@ -8,6 +8,7 @@ import frc.robot.subsystems.DriverVision;
 import frc.robot.subsystems.AquisitionRoller;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Climber;
 
 /**
  * This is the development branch.

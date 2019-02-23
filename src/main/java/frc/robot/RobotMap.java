@@ -17,13 +17,17 @@ public class RobotMap {
 	public final static int ROLLER_TALON_ID             = 6;
 	public final static int ELEVATOR_PORT 				= 7; 
 									   
-	// Sensors
+	// Digital I/O Sensors
 	public final static int CARGO_SENSOR                = 5; 
 	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 4; 
 	public final static int CENTER_TURRET_LIMIT_SWITCH  = 3; 
 	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 2; 
 	public final static int PRACTICE_ROBOT_JUMPER		= 6;
 
+	// Analog I/O Sebsors
+	public final static int CLIMB_PROXIMiTY_SENOR 		= 0;
+
 	// Pneumatics
-	public final static int PISTON_SOLENOID_CHANNEL = 0;
+	public final static int ACQUISITION_PISTON_SOLENOID_CHANNEL = 0;
+	public final static int CLIMB_PISTON_SOLENOID_CHANNEL = 3;
 }

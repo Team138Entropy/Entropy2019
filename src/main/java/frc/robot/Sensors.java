@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,7 +24,9 @@ public class Sensors {
 
 	public static DigitalInput leftLimitSwitch;
     public static DigitalInput centerLimitSwitch;
-    public static DigitalInput rightLimitSwitch;
+	public static DigitalInput rightLimitSwitch;
+	
+	public static AnalogInput climbProximitySensor;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -91,5 +93,9 @@ public class Sensors {
 
 	public static boolean isPracticeBot() {
 		return !practiceRobotJumperPin.get();
+	}
+
+	public static boolean isClimbProximityThresholdReached () {
+		return (climbProximitySensor.getValue() > Constants.CLIMB_PROXIMITY_THRESHOLD);
 	}
 }
