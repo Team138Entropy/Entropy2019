@@ -88,6 +88,8 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
+
+		xboxHome.whileHeld(() -> Robot.lineDetectorSerial.serial.moveDrivetrainViaAngle());
 	}
     
 	public static double getMoveSpeed()

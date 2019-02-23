@@ -18,7 +18,8 @@ public class Serial extends Command {
     private XboxController controller = null;
     private LineTrackParse t = new LineTrackParse();
     private String buffer = "";
-	private static double moveSpeed = 0.1;
+    private static double moveSpeed = 0.1;
+    public double lastDegs = 0;
 
     public Serial() {
         try {
@@ -66,9 +67,9 @@ public class Serial extends Command {
         }
     }
 
-    private void moveDrivetrainViaAngle(double degs){
-        System.out.println("moveSpeed: " + moveSpeed + " degs / 90: " + (degs / 90));
-        Robot.drivetrain.drive(TeleopDrive.ourDrive.cheesyDrive(moveSpeed, degs / 90, false, false));
+    public void moveDrivetrainViaAngle(){
+        System.out.println("moveSpeed: " + moveSpeed + " lastDegs / 90: " + (lastDegs / 90));
+        Robot.drivetrain.drive(TeleopDrive.ourDrive.cheesyDrive(moveSpeed, lastDegs / 90, false, false));
     }
 
     private void procArgs(String[] args, String str){
@@ -76,9 +77,9 @@ public class Serial extends Command {
         SmartDashboard.putBoolean("is calibrating", !t.isValidData);
         if(t.isValidData){
             double degs = t.calcAngle();
+            lastDegs = degs;
             System.out.println("calculated angle " + degs);
             SmartDashboard.putNumber("calculated angle (degrees)", degs);
-            moveDrivetrainViaAngle(degs);
 
             boolean rows[] = { true, false };
             double vibrateVal = 0;

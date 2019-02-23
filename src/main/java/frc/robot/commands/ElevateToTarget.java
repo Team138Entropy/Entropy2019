@@ -17,7 +17,7 @@ public class ElevateToTarget extends Command {
 		requires(Robot.elevator);
 //		requires(Robot.grasper);
 		elevatorTarget = Robot.elevator.ConvertToTarget(target);
-		}
+	}
 	
 	public ElevateToTarget(ElevatorTarget target)
 	{
