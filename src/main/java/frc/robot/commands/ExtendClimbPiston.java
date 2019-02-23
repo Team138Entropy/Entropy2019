@@ -5,25 +5,28 @@ import frc.robot.Robot;
 import frc.robot.Sensors;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ClimbPiston extends Command {
+public class ExtendClimbPiston extends Command {
 	
-
-	public ClimbPiston()
+	private boolean isFinished = false;
+	public ExtendClimbPiston()
 	{
 		requires(Robot.climber);
 	}
 
 	protected void initialize() {
+		isFinished = false;
 		Robot.drivetrain.setDriveSpeed(Constants.ClimbSpeed);
 		Robot.climber.extendClimbPiston();
 	}
 
 	protected void execute() {
-
+		if (Sensors.isClimbProximityThresholdReached()) {
+			isFinished = true;
+		}
 	}
 
 	protected boolean isFinished() {
-		return Sensors.isClimbProximityThresholdReached();
+		return isFinished;
 	}
 
 	protected void end() {

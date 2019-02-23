@@ -40,7 +40,8 @@ public class Sensors {
 		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
-    	rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
+		rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
+		climbProximitySensor = new AnalogInput(RobotMap.CLIMB_PROXIMiTY_SENOR);
 	}
 	
 	public static double getLeftDistance() {
@@ -64,6 +65,8 @@ public class Sensors {
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
+		SmartDashboard.putNumber("Proximity Value", climbProximitySensor.getValue());
+		SmartDashboard.putBoolean("Proximity", isClimbProximityThresholdReached());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
 	// 	SmartDashboard.putNumber("Right Pos(M)", getRightDistance());
 	// 	SmartDashboard.putNumber("Elev Position", Robot.elevator._elevatorMotor.getSelectedSensorPosition(0));     

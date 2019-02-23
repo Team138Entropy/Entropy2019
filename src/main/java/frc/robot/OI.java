@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.Elevator.ElevatorTarget;
-import frc.robot.commands.ClimbPiston;
+import frc.robot.commands.ExtendClimbPiston;
+import frc.robot.commands.RetractClimbPiston;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.RotateTurretLeft;
@@ -107,7 +108,8 @@ public final class OI {
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		rollerTestButton.whileHeld(new TestRoller());
 		pistonTestButton.whileHeld(new TestRollerPistons());
-		climbPistonButton.whileHeld(new ClimbPiston());
+		climbPistonButton.whenPressed(new ExtendClimbPiston());
+		climbPistonButton.whenReleased(new RetractClimbPiston());
 	}
     
 	public static double getMoveSpeed()

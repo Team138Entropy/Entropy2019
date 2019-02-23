@@ -118,6 +118,6 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.3;
 
 	// Climber 
-	public static final int CLIMB_PROXIMITY_THRESHOLD = 2048;
-	
+	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;
+
 }
