@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ChangeState extends Command {
+public class Acquire extends Command {
 
-    public ChangeState() {
+    public Acquire() {
         requires(Robot.manipulator);
-        Robot.manipulator.changeState();
+        Robot.manipulator.acquire();
     }
 
     public boolean isFinished() {

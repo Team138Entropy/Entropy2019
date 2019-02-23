@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class StayState extends Command {
+public class Deploy extends Command {
 
-    public StayState() {
+    public Deploy() {
         requires(Robot.manipulator);
-        Robot.manipulator.stayState();
+        Robot.manipulator.deploy();
     }
 
     public boolean isFinished() {

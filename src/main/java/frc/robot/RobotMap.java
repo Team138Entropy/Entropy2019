@@ -26,8 +26,7 @@ public class RobotMap {
 
 	// Pneumatics
 	public final static int PISTON_SOLENOID_CHANNEL = 0;
-
-	// PCM
-	public final static int MANIPULATOR_TRANSLATION_PORT = 0;
 	public final static int MANIPULATOR_ROTATION_PORT = 1;
+	public final static int MANIPULATOR_TRANSLATION_PORT = 2;
+	
 }

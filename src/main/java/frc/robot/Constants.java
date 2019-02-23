@@ -4,7 +4,6 @@ package frc.robot;
  * In "C" this would be a header file, but alas, this is Java
  */
 public class Constants {
-	// TODO Clean this up for the 2019 robot.
 
 	// System Constants
 	public static boolean AutoEnable=true;
@@ -12,7 +11,8 @@ public class Constants {
 	public static double commandLoopIterationSeconds = 0.020;
 		
 	public static boolean practiceBot = false;
-	
+
+		
 		
 	public final static double releaseDelay = 0.5;				 // Seconds
 	public final static double softReleaseDelay = 0.25;			 // Seconds
@@ -118,4 +118,7 @@ public class Constants {
 	public static final boolean HORIZONTAL = false;
 
 	public static final double ROLLER_SPEED = 0.3;
+
+	// Manipulator
+	public static final int HP_ELEVATE_OFFSET = 10; // TODO: Verify this value
 }

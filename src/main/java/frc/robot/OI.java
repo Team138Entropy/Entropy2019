@@ -7,10 +7,10 @@ import frc.robot.Constants;
 
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 
-import frc.robot.commands.ChangeState;
+import frc.robot.commands.Acquire;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
-import frc.robot.commands.StayState;
+import frc.robot.commands.Deploy;
 import frc.robot.commands.ToggleManipRotation;
 import frc.robot.commands.ToggleManipTranslation;
 import frc.robot.commands.RotateTurretLeft;
@@ -100,8 +100,8 @@ public final class OI {
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 
 
-	static Button stayState = new JoystickButton(operatorStick, NykoController.leftTrigger);
-	static Button changeState = new JoystickButton(operatorStick, NykoController.rightTrigger);
+	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
 	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick); 
 	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
@@ -113,8 +113,8 @@ public final class OI {
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
-		stayState.whenPressed(new StayState());
-		changeState.whenPressed(new ChangeState());
+		acquireButton.whenPressed(new Acquire());
+		deployButton.whenPressed(new Deploy());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 
