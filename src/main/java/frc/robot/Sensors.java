@@ -3,7 +3,7 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj.DigitalInput;
-
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -24,7 +24,10 @@ public class Sensors {
 
 	public static DigitalInput leftLimitSwitch;
     public static DigitalInput centerLimitSwitch;
-    public static DigitalInput rightLimitSwitch;
+	public static DigitalInput rightLimitSwitch;
+	
+	public static DigitalOutput arduinoReset;
+	public static DigitalOutput arduinoCalibrate;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -38,7 +41,18 @@ public class Sensors {
 		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
-    	rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
+		rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
+		
+		arduinoCalibrate = new DigitalOutput(RobotMap.ARDUINO_CALIBRATE);
+		arduinoReset = new DigitalOutput(RobotMap.ARDUINO_RESET);
+	}
+
+	public static void setCalibrate(Boolean val){
+		arduinoCalibrate.set(val);
+	}
+
+	public static void setResetArduino(Boolean val){
+		arduinoReset.set(val);
 	}
 	
 	public static double getLeftDistance() {

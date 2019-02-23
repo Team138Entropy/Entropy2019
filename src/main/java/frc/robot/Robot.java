@@ -109,6 +109,8 @@ public class Robot extends TimedRobot {
         turret.updateSmartDashboard();
 //		LiveWindow.run();
 
+        Sensors.setResetArduino(OI.resetButton.get());
+        Sensors.setCalibrate(OI.calibrateButton.get());
     }
     
     /**

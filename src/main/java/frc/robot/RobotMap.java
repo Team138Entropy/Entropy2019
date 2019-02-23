@@ -16,10 +16,12 @@ public class RobotMap {
 	public final static int ELEVATOR_PORT 				= 7; //TBD
 	public final static int TURRET_PORT					= 5; //TBD
 									   
-	public final static int CARGO_SENSOR                = 0; //TBD
+	public final static int CARGO_SENSOR                = 5; //TBD
 	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 7; //TBD
 	public final static int CENTER_TURRET_LIMIT_SWITCH  = 8; //TBD
 	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 9; //TBD
 
-	public final static int IS_PRACTICE_GIO = 1;
+	public final static int IS_PRACTICE_GIO = 6;
+	public final static int ARDUINO_RESET = 1;
+	public final static int ARDUINO_CALIBRATE = 0;
 }

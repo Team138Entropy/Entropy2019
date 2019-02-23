@@ -77,6 +77,9 @@ public final class OI {
 	static Button rotateTurretLeft = new JoystickButton(operatorStick,nykoLeftBumper);
 	static Button rotateTurretRight = new JoystickButton(operatorStick,nykoRightBumper);
 
+	public static Button resetButton = new JoystickButton(operatorStick, xboxMenu);
+	public static Button calibrateButton = new JoystickButton(operatorStick, xboxView);
+
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
 		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
