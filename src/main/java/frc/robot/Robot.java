@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
 
-import frc.robot.subsystems.*;
-
 /**
  * This is the development branch.
  * The VM is configured to automatically run this class, and to call the
@@ -22,6 +20,8 @@ public class Robot extends TimedRobot {
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator ();
+    public static final Climber climber = new Climber();
+
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
 	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
         Constants.AutoEnable=true;
         elevator.ElevatorInit();
         turret.TurretInit();
+        climber.ClimberInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	
