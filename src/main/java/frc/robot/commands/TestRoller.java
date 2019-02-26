@@ -4,6 +4,7 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
+@Deprecated
 public class TestRoller extends Command {
 
     public TestRoller() {
