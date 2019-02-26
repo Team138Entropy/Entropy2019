@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,7 +20,7 @@ public class Sensors {
 	public static double gyroBias=0;
 
 	public static DigitalInput practiceRobotJumperPin;
-	public static DigitalInput cargosensor;
+	public static AnalogInput cargoSensor;
 
 	public static DigitalInput leftLimitSwitch;
     public static DigitalInput centerLimitSwitch;
@@ -35,7 +35,7 @@ public class Sensors {
         gyro.reset();
 	   
 		practiceRobotJumperPin = new DigitalInput(RobotMap.PRACTICE_ROBOT_JUMPER);
-		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
+		cargoSensor = new AnalogInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
     	rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
@@ -74,7 +74,7 @@ public class Sensors {
 	 }
 
 	public static boolean isCargoPresent(){
-		return !cargosensor.get();
+		return (cargoSensor.getValue() < Constants.CARGO_SENSOR_THRESHOLD);
 	}
 
 	public static boolean isTurretLeft (){

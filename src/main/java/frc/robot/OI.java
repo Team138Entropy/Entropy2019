@@ -118,8 +118,6 @@ public final class OI {
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 
-
-
 		rollerTestButton.whileHeld(new TestRoller());
 		pistonTestButton.whileHeld(new TestRollerPistons());
 

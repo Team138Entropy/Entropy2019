@@ -93,7 +93,7 @@ public class Manipulator extends Subsystem {
     private void prepareAcquire() {
         if (!isEntryActionComplete) {
             Robot.manipulator.actuate(Constants.EXTEND, Constants.VERTICAL);
-            Robot.elevator.Elevate(Elevator.ElevatorTarget.LEVEL_1);
+            //Robot.elevator.Elevate(Elevator.ElevatorTarget.LEVEL_1);
             isEntryActionComplete = true;
         }
 
@@ -116,7 +116,8 @@ public class Manipulator extends Subsystem {
 
         if (Robot.elevator.IsMoveComplete()) {
             Robot.manipulator.actuate(Constants.RETRACT, Constants.VERTICAL);
-            Robot.elevator.Elevate(ElevatorTarget.LEVEL_1);
+            //Robot.elevator.Elevate(ElevatorTarget.LEVEL_1);
+            Robot.elevator.ElevateRelative(Constants.HP_ELEVATE_OFFSET * -1);
             
             if (Robot.elevator.IsMoveComplete()) {
                 changeState(ManipulatorState.ACQUIRED_HP);
