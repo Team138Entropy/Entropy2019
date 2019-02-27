@@ -45,6 +45,8 @@ public class Manipulator extends Subsystem {
     }
 
     public void executeStateMachine() {
+        //System.out.println(currentState.toString());
+
         switch(currentState) {
             case IDLE:
                 idle();
@@ -208,11 +210,13 @@ public class Manipulator extends Subsystem {
     }
 
     public void translate(boolean translation) {
+        System.out.println("Translate function called");
         isTranslated = translation;
         translationSolenoid.set(translation);
     }
 
     public void rotate(boolean rotation) {
+        System.out.println("Rotate function called");
         isRotated = rotation;
         rotationSolenoid.set(rotation);
     }

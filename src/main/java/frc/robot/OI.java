@@ -103,8 +103,8 @@ public final class OI {
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
 	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
-	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick); 
 	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -139,7 +139,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed= -1 * driverStick.getRawAxis(XboxController.rightXAxis);
+		double rotateSpeed= driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;

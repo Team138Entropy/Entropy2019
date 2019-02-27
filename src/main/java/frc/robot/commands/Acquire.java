@@ -1,16 +1,15 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class Acquire extends Command {
+public class Acquire extends InstantCommand {
 
     public Acquire() {
         requires(Robot.manipulator);
-        Robot.manipulator.acquire();
     }
 
-    public boolean isFinished() {
-        return false;
+    public void execute() {
+        Robot.manipulator.acquire();
     }
 }

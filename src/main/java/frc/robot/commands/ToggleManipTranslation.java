@@ -1,16 +1,16 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ToggleManipTranslation extends Command {
+public class ToggleManipTranslation extends InstantCommand {
 
     public ToggleManipTranslation() {
         requires(Robot.manipulator);
-        Robot.manipulator.translate(!Robot.manipulator.getTranslated());
     }
 
-    public boolean isFinished() {
-        return false;
+    public void execute () {
+        System.out.println("Translate command called");
+        Robot.manipulator.translate(!Robot.manipulator.getTranslated());
     }
 }

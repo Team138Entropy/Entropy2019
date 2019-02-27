@@ -1,16 +1,15 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class Deploy extends Command {
+public class Deploy extends InstantCommand {
 
     public Deploy() {
         requires(Robot.manipulator);
-        Robot.manipulator.deploy();
     }
 
-    public boolean isFinished() {
-        return false;
+    public void execute() {
+        Robot.manipulator.deploy();
     }
 }
