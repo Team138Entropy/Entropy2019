@@ -355,7 +355,8 @@ public class Elevator extends Subsystem{
 	
 	// Interface to let command know it's done
 	public boolean IsMoveComplete() {
-		return (_direction == 0);
+		return true;
+		//return (_direction == 0);
 	}
 	
 	// Cancel the current elevator move, but don't stop the motion immediately

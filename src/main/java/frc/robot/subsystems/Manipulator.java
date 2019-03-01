@@ -2,11 +2,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.Sensors;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 
 public class Manipulator extends Subsystem {
@@ -45,7 +43,7 @@ public class Manipulator extends Subsystem {
     }
 
     public void executeStateMachine() {
-        //System.out.println(currentState.toString());
+        System.out.println(currentState.toString());
 
         switch(currentState) {
             case IDLE:
@@ -86,7 +84,7 @@ public class Manipulator extends Subsystem {
         if (Robot.elevator.IsMoveComplete()) {
             if (operatorCommand == OperatorCommand.ACQUIRE) {
                 changeState(ManipulatorState.PREPARE_ACQUIRE_HP);
-            } else if (Sensors.isCargoPresent()) {
+            } else if (operatorCommand == OperatorCommand.DEPLOY) {
                 changeState(ManipulatorState.IDLE_CARGO);
             }
         }
@@ -167,7 +165,7 @@ public class Manipulator extends Subsystem {
             isEntryActionComplete = true;
         }
 
-        if (operatorCommand == OperatorCommand.ACQUIRE) {
+        if (operatorCommand == OperatorCommand.DEPLOY) {
             changeState(ManipulatorState.IDLE);
         }
     }
@@ -183,7 +181,6 @@ public class Manipulator extends Subsystem {
 
     // State machine controls
     private void changeState(ManipulatorState newState) {
-        SmartDashboard.putString("Current Manipulator State", newState.toString());
         oldState = currentState;
         currentState = newState;
 

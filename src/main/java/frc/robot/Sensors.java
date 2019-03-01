@@ -73,8 +73,8 @@ public class Sensors {
 	// 	SmartDashboard.putNumber("Right Velocity",-Robot.drivetrain.frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 	 }
 
-	public static boolean isCargoPresent(){
-		return (cargoSensor.getValue() < Constants.CARGO_SENSOR_THRESHOLD);
+	public static boolean isCargoPresent (){
+		return (cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD);
 	}
 
 	public static boolean isTurretLeft (){

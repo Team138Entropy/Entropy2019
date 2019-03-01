@@ -121,5 +121,5 @@ public class Constants {
 
 	// Manipulator
 	public static final int HP_ELEVATE_OFFSET = 10; // TODO: Verify this value
-	public static final int CARGO_SENSOR_THRESHOLD = 1000;
+	public static final float CARGO_SENSOR_THRESHOLD = 230;
 }
