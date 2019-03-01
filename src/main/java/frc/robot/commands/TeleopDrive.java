@@ -1,15 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.CheesyDrive;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.CheesyDrive;
 
-//import org.usfirst.frc.team138.robot.subsystems.Claw;
+public class TeleopDrive extends Command {
 
-public class TeleopDrive extends Command{
-	
 //           *happy stalin*
 	CheesyDrive ourDrive = new CheesyDrive();
 	
@@ -29,21 +26,23 @@ public class TeleopDrive extends Command{
 		System.out.println(moveSpeed);
 		System.out.println(rotateSpeed);
 
-		// // Full speed or slow speed?
-		// if (OI.isFullSpeed()) {
-		// 	// Full speed
-		// 	moveSpeed=moveSpeed*Constants.ClosedLoopCruiseVelocity;
-		// 	rotateSpeed=rotateSpeed*Constants.ClosedLoopTurnSpeed;
-		// }
-		// else { 
-		// 	// Slow speed
-		// 	moveSpeed=moveSpeed*Constants.ClosedLoopSlowVelocity;
-		// 	rotateSpeed=rotateSpeed*Constants.ClosedLoopSlowRotateSpeed;
-		// }
-		// // Limit rate of change of moveSpeed
-		// moveSpeed=Robot.drivetrain.limitDriveAccel(moveSpeed);
-		// rotateSpeed=Robot.drivetrain.limitRotateAccel(rotateSpeed);
-		// Robot.drivetrain.drive(moveSpeed,rotateSpeed);
+		/*
+		// Full speed or slow speed?
+		if (OI.isFullSpeed()) {
+		// Full speed
+		moveSpeed=moveSpeed*Constants.ClosedLoopCruiseVelocity;
+		rotateSpeed=rotateSpeed*Constants.ClosedLoopTurnSpeed;
+		}
+		else {
+		// Slow speed
+		moveSpeed=moveSpeed*Constants.ClosedLoopSlowVelocity;
+		rotateSpeed=rotateSpeed*Constants.ClosedLoopSlowRotateSpeed;
+		}
+		// Limit rate of change of moveSpeed
+		moveSpeed=Robot.drivetrain.limitDriveAccel(moveSpeed);
+		rotateSpeed=Robot.drivetrain.limitRotateAccel(rotateSpeed);
+		Robot.drivetrain.drive(moveSpeed,rotateSpeed);
+		*/
 
 		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
 	}

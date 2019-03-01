@@ -8,8 +8,10 @@ package frc.robot;
  */
 public class CheesyDrive {
 
-    // Note: These two aren't used right now
+    // These constants help prevent accidental triggering
+    /** @see #handleDeadband(double, double)*/
     private static final double kThrottleDeadband = 0.02;
+    /** @see #handleDeadband(double, double)*/
     private static final double kWheelDeadband = 0.02;
 
     // These factors determine how fast the wheel traverses the "non linear" sine curve.
@@ -34,6 +36,15 @@ public class CheesyDrive {
     private double mQuickStopAccumlator = 0.0;
     private double mNegInertiaAccumlator = 0.0;
 
+    /**
+     * Here's the function that does all the work. There's a lot of math here.
+     * @param throttle
+     * @param wheel
+     * @param isQuickTurn
+     * @param isHighGear
+     * @return
+     * @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>
+     */
     public DriveSignal cheesyDrive(double throttle, double wheel, boolean isQuickTurn,
                                    boolean isHighGear) {
 
@@ -98,6 +109,7 @@ public class CheesyDrive {
         linearPower = throttle;
 
         // Quickturn!
+        // Thank you, 254, for the incredibly helpful comment. -Will
         if (isQuickTurn) {
             if (Math.abs(linearPower) < kQuickStopDeadband) {
                 double alpha = kQuickStopWeight;
@@ -138,6 +150,12 @@ public class CheesyDrive {
         return new DriveSignal(leftPwm, rightPwm);
     }
 
+    /**
+     * Handles a deadband, obviously.
+     * @param val The value we want to regulate with the deadband.
+     * @param deadband The minimum the <i>absolute value</i> of {@code val} should be before we use it.
+     * @return {@code val} if its absolute value is greater than {@code deadband}, otherwise 0.
+     */
     public double handleDeadband(double val, double deadband) {
         return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
     }
