@@ -186,8 +186,7 @@ public class Elevator extends Subsystem{
 				}
 					break;	
 				default:
-					// Error 
-					break;
+					throw new RuntimeException("Error: Unknown target " + target.toString());
 				}
 			}
 			else	// Competition Robot
@@ -228,8 +227,7 @@ public class Elevator extends Subsystem{
 					}
 					break;	
 				default:
-					// Error 
-					break;
+					throw new RuntimeException("Error: Unknown target " + target.toString());
 				}
 			} 
 			

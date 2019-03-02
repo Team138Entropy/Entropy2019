@@ -42,10 +42,7 @@ public class Constants {
 	// This is our encoder constant for distance (in METERS) per  encoder pulse
 	// 6" Wheels, 15:45 chain drive; 256 encoder counts per drive sprocket rotation
 	public final static double MetersPerPulse = Math.PI*6*.0254*15/45/256;
-	public final static double SecondsTo100Milliseconds = 0.1;
-	
-	// public static double Meters2CM = 100.0; // convert distance in Meters to Centimeters
-	public static double Meters2CM = 100.0; // convert distance in Meters to Centimeters
+
 	// TEST ONLY
 	
 	public final static int LeftDriveEncoderPolarity = -1;
