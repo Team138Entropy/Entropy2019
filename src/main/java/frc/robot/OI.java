@@ -127,6 +127,8 @@ public final class OI {
 		pistonTestButton.whenPressed(new ExtendRollerTest());
 		pistonTestButton.whenReleased(new RetractRollerTest());
 
+		rotateManipulator.whenPressed(new ToggleManipTranslation());
+		extendManipulator.whenPressed(new ToggleManipRotation());
 	}
     
 	public static double getMoveSpeed()
