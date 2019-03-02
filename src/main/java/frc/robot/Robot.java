@@ -41,7 +41,6 @@ public class Robot extends TimedRobot {
     	drivetrain.DriveTrainInit();
     	compressor.start();	
         Robot.accumulatedHeading = 0;
-        Constants.AutoEnable=true;
         elevator.ElevatorInit();
         turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
@@ -87,9 +86,6 @@ public class Robot extends TimedRobot {
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
 	    Robot.drivetrain.Relax();
-
-		Constants.AutoEnable=true;
-		Constants.IntegralError=0;
     }
     
     public static boolean isPracticeRobot() {
