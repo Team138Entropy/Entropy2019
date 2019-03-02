@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class AquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
-    private static Solenoid pistonSolenoid = new Solenoid(RobotMap.PISTON_SOLENOID_CHANNEL);
+    private static Solenoid pistonSolenoid = new Solenoid(RobotMap.ACQUISITION_PISTON_SOLENOID_CHANNEL);
 
     protected void initDefaultCommand() {
         setDefaultCommand(new RunRoller());

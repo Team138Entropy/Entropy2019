@@ -17,8 +17,9 @@ import frc.robot.Util;
 
 public class Drivetrain extends Subsystem {
 	public double lastSpeed = 0;
-	double _speedFactor = 1;
+	double _speedFactor = Constants.FullSpeed;
 	double _rotateFactor = 1;
+	
 
 	// Servo Loop Gains
 	double Drive_Kf = 1.7;
@@ -99,7 +100,7 @@ public class Drivetrain extends Subsystem {
 
 	public void drive(double moveSpeed, double rotateSpeed)
 	{
-        Robot.drivetrain.driveCloseLoopControl(moveSpeed, rotateSpeed);
+        Robot.drivetrain.driveCloseLoopControl(moveSpeed * _speedFactor, rotateSpeed * _rotateFactor);
     }
     
 	public void drive(DriveSignal signal)
@@ -108,8 +109,8 @@ public class Drivetrain extends Subsystem {
     }
 
     public void driveCheezy(DriveSignal signal) {
-        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * Constants.tempWheelSpeed);
-		bottomRightTalon.set(ControlMode.PercentOutput, signal.getRight() * Constants.tempWheelSpeed);
+        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * _speedFactor);
+		bottomRightTalon.set(ControlMode.PercentOutput, signal.getRight() * _speedFactor);
     }
 
 	public void driveCloseLoopControl(double moveSpeed, double rotateSpeed)
@@ -159,6 +160,10 @@ public class Drivetrain extends Subsystem {
 		bottomRightTalon.set(ControlMode.PercentOutput, 0);
 		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
 		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
+	}
+
+	public void setDriveSpeed(double newDriveSpeed){
+		_speedFactor = newDriveSpeed;
 	}
 
 

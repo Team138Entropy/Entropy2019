@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,7 +24,9 @@ public class Sensors {
 
 	public static DigitalInput leftLimitSwitch;
     public static DigitalInput centerLimitSwitch;
-    public static DigitalInput rightLimitSwitch;
+	public static DigitalInput rightLimitSwitch;
+	
+	public static AnalogInput climbProximitySensor;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -38,7 +40,8 @@ public class Sensors {
 		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
-    	rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
+		rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
+		climbProximitySensor = new AnalogInput(RobotMap.CLIMB_PROXIMiTY_SENOR);
 	}
 	
 	public static double getLeftDistance() {
@@ -62,6 +65,8 @@ public class Sensors {
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
+		SmartDashboard.putNumber("Proximity Value", climbProximitySensor.getValue());
+		SmartDashboard.putBoolean("Proximity", isClimbProximityThresholdReached());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
 	// 	SmartDashboard.putNumber("Right Pos(M)", getRightDistance());
 	// 	SmartDashboard.putNumber("Elev Position", Robot.elevator._elevatorMotor.getSelectedSensorPosition(0));     
@@ -91,5 +96,9 @@ public class Sensors {
 
 	public static boolean isPracticeBot() {
 		return !practiceRobotJumperPin.get();
+	}
+
+	public static boolean isClimbProximityThresholdReached () {
+		return (climbProximitySensor.getValue() > Constants.CLIMB_PROXIMITY_THRESHOLD);
 	}
 }

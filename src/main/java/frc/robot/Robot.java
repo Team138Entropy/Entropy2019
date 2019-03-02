@@ -8,6 +8,7 @@ import frc.robot.subsystems.DriverVision;
 import frc.robot.subsystems.AquisitionRoller;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Climber;
 
 /**
  * This is the development branch.
@@ -27,6 +28,8 @@ public class Robot extends TimedRobot {
     public static final AquisitionRoller roller   = new AquisitionRoller();
     public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator ();
+    public static final Climber climber = new Climber();
+
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
 	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
@@ -46,6 +49,7 @@ public class Robot extends TimedRobot {
         Constants.AutoEnable=true;
         elevator.ElevatorInit();
         turret.TurretInit();
+        climber.ClimberInit();
         Constants.practiceBot = isPracticeRobot();
     }
 	

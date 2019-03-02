@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.Elevator.ElevatorTarget;
-
+import frc.robot.commands.ExtendClimbPiston;
+import frc.robot.commands.RetractClimbPiston;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.RotateTurretLeft;
@@ -94,6 +95,7 @@ public final class OI {
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
 	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 
 
     public OI(){
@@ -106,12 +108,14 @@ public final class OI {
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		rollerTestButton.whileHeld(new TestRoller());
 		pistonTestButton.whileHeld(new TestRollerPistons());
+		climbPistonButton.whenPressed(new ExtendClimbPiston());
+		climbPistonButton.whenReleased(new RetractClimbPiston());
 	}
     
 	public static double getMoveSpeed()
 	{
 		// joystick values are opposite to robot directions
-		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis) * Constants.VelocityScale;
+		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis);
 		// Apply thresholds to joystick positions to eliminate
 		// creep motion due to non-zero joystick value when joysticks are 
 		// "centered"
