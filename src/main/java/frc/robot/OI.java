@@ -12,8 +12,11 @@ import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
-import frc.robot.commands.TestRoller;
-import frc.robot.commands.TestRollerPistons;
+import frc.robot.commands.ExtendRollerTest;
+import frc.robot.commands.RetractRollerTest;
+import frc.robot.commands.StartRollerTest;
+import frc.robot.commands.StopRollerTest;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -106,8 +109,13 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
-		rollerTestButton.whileHeld(new TestRoller());
-		pistonTestButton.whileHeld(new TestRollerPistons());
+		
+		// Testing / individual component operation
+		rollerTestButton.whenPressed(new StartRollerTest());
+		rollerTestButton.whenReleased(new StopRollerTest());
+		pistonTestButton.whenPressed(new ExtendRollerTest());
+		pistonTestButton.whenReleased(new RetractRollerTest());
+
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
 		climbPistonButton.whenReleased(new RetractClimbPiston());
 	}
@@ -126,7 +134,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed= -1 * driverStick.getRawAxis(XboxController.rightXAxis);
+		double rotateSpeed= -driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;
