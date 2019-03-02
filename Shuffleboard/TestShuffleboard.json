@@ -5,15 +5,15 @@
       "autoPopulate": true,
       "autoPopulatePrefix": "SmartDashboard/",
       "widgetPane": {
-        "gridSize": 90.0,
+        "gridSize": 128.0,
         "showGrid": true,
-        "hgap": 12.0,
+        "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
           "6,0": {
             "size": [
               2,
-              6
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -56,7 +56,7 @@
           "4,0": {
             "size": [
               2,
-              6
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -137,7 +137,7 @@
           "0,0": {
             "size": [
               2,
-              5
+              6
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -171,13 +171,6 @@
                   "_title": "Cargo Present",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///SmartDashboard/Practice Bot",
-                  "_title": "Practice Bot",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
             }
@@ -185,19 +178,26 @@
           "8,0": {
             "size": [
               2,
-              6
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
               "_title": "Acquire and Deploy",
               "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/Current Manipulator State",
-                  "_title": "Current Manipulator State"
-                }
-              ]
+              "_children": []
+            }
+          },
+          "10,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Practice Bot",
+              "_title": "Practice Bot",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
             }
           }
         }
@@ -325,66 +325,49 @@
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
-                  "_type": "Voltage View",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/AnalogInput[5]",
-                  "_title": "/LiveWindow/Ungrouped/AnalogInput[5]",
-                  "Range/Min": 0.0,
-                  "Range/Max": 5.0,
-                  "Range/Center": 0.0,
-                  "Visuals/Orientation": "HORIZONTAL",
-                  "Visuals/Number of tick marks": 5
-                },
-                {
-                  "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,2]/Value",
-                  "_title": "/LiveWindow/Ungrouped/Solenoid[0,2]/Value",
-                  "Colors/Color when true": "#7CFC00FF",
-                  "Colors/Color when false": "#8B0000FF"
-                },
-                {
                   "_type": "Speed Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [7]",
-                  "_title": "/LiveWindow/Ungrouped/Talon SRX [7]",
+                  "_title": "Talon SRX [7]",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,1]/Value",
-                  "_title": "/LiveWindow/Ungrouped/Solenoid[0,1]/Value",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[6]/Value",
+                  "_title": "DigitalInput[6]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[6]/Value",
-                  "_title": "/LiveWindow/Ungrouped/DigitalInput[6]/Value",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalOutput[1]/Value",
+                  "_title": "DigitalOutput[1]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Speed Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [6]",
-                  "_title": "/LiveWindow/Ungrouped/Talon SRX [6]",
+                  "_title": "Talon SRX [6]",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[4]/Value",
-                  "_title": "/LiveWindow/Ungrouped/DigitalInput[4]/Value",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
+                  "_title": "DigitalInput[2]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Boolean Box",
                   "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[3]/Value",
-                  "_title": "/LiveWindow/Ungrouped/DigitalInput[3]/Value",
+                  "_title": "DigitalInput[3]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 },
                 {
                   "_type": "Boolean Box",
-                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[2]/Value",
-                  "_title": "/LiveWindow/Ungrouped/DigitalInput[2]/Value",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/DigitalInput[4]/Value",
+                  "_title": "DigitalInput[4]/Value",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
                 }
@@ -450,8 +433,8 @@
             ],
             "content": {
               "_type": "Subsystem Layout",
-              "_source0": "network_table:///LiveWindow/Manipulator",
-              "_title": "Manipulator",
+              "_source0": "network_table:///LiveWindow/LineDetectorSerial",
+              "_title": "LineDetectorSerial",
               "Layout/Label position": "BOTTOM",
               "_children": []
             }
@@ -461,9 +444,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -7.333333492279053,
-    "y": -7.333333492279053,
-    "width": 1294.6666259765625,
-    "height": 694.6666870117188
+    "x": -8.0,
+    "y": -8.0,
+    "width": 1936.0,
+    "height": 1056.0
   }
 }

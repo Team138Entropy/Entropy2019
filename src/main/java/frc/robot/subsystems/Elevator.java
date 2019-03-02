@@ -168,29 +168,29 @@ public class Elevator extends Subsystem{
 					break;
 				case LEVEL_1:
 					if (Sensors.isCargoPresent()){
-						_targetPosition = 200;
+						_targetPosition = 80;
 					}
 					else
 					{
-						_targetPosition = 300; 
+						_targetPosition = 0; 
 					}
 					break;	
 				case LEVEL_2:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 400;
+					_targetPosition = 1080;
 				}
 				else
 				{
-					_targetPosition = 500;	
+					_targetPosition = 830;	
 				}
 					break;
 				case LEVEL_3:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 600;
+					_targetPosition = 1870;
 				}
 				else
 				{
-					_targetPosition = 700;	
+					_targetPosition = 1870;	
 				}
 					break;	
 				default:
