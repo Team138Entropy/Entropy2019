@@ -70,6 +70,10 @@ public class Constants {
 	public final static double TurretJogSpeed = 0.25; //TBD
 	public final static int TurretDirectionLeft = -1;
 	public final static int TurretDirectionRight = 1;
+	public final static int TurretCenterPosition = 0;
+	public final static int TurretLeftPosition = -1;
+	public final static int TurretRightPosition = 1;
+
 		
 
 	// ***** Autonomous drive parameters *******
