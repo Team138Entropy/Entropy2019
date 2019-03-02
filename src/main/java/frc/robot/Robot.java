@@ -4,10 +4,11 @@ import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.DriverVision;
-import frc.robot.subsystems.AquisitionRoller;
+import frc.robot.subsystems.AcquisitionRoller;
 import frc.robot.subsystems.Turret;
 import frc.robot.subsystems.Elevator;
+
+import frc.robot.events.EventWatcherThread;
 
 /**
  * This is the development branch.
@@ -18,19 +19,19 @@ import frc.robot.subsystems.Elevator;
  * directory .
  */
 public class Robot extends TimedRobot {
-	// Interface with players
-        
+    // Interface with players
+
     // Subsystems
-    public static final Compressor compressor     = new Compressor();
-    public static final Drivetrain drivetrain     = new Drivetrain();
+    public static final Compressor compressor = new Compressor();
+    public static final Drivetrain drivetrain = new Drivetrain();
     //public static final DriverVision driverVision = new DriverVision();
-    public static final AquisitionRoller roller   = new AquisitionRoller();
+    public static final AcquisitionRoller roller = new AcquisitionRoller();
     public static final Turret turret = new Turret();
-    public static final Elevator elevator = new Elevator ();
+    public static final Elevator elevator = new Elevator();
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-	public static final OI oi = new OI();
+    public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
-    
+
     // Global constants
     public static String mode; // "auto" or "teleop"
     public static String gameData;
@@ -40,61 +41,63 @@ public class Robot extends TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-    	drivetrain.DriveTrainInit();
-    	compressor.start();	
+        drivetrain.DriveTrainInit();
+        compressor.start();
         Robot.accumulatedHeading = 0;
-        Constants.AutoEnable=true;
+        Constants.AutoEnable = true;
         elevator.ElevatorInit();
         turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
+
+        EventWatcherThread.getInstance().start();
     }
-	
-	/**
+
+    /**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
+     * the robot is disabled.
      */
-    public void disabledInit(){
+    public void disabledInit() {
 
     }
-	
-	public void disabledPeriodic() {
 
-	}
+    public void disabledPeriodic() {
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
-	 * below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
-	 * or additional comparisons to the switch structure below with additional strings & commands.
-	 */
+    }
+
+    /**
+     * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
+     * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
+     * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
+     * below the Gyro
+     * <p>
+     * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
+     * or additional comparisons to the switch structure below with additional strings & commands.
+     */
     public void autonomousInit() {
-    	
+
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
+
     }
 
     public void teleopInit() {
-    	mode = "teleop";
-    	//Sensors.resetEncoders();
+        mode = "teleop";
+        //Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-	    Robot.drivetrain.Relax();
+        Robot.drivetrain.Relax();
 
-		Constants.AutoEnable=true;
-		Constants.IntegralError=0;
+        Constants.AutoEnable = true;
+        Constants.IntegralError = 0;
     }
-    
+
     public static boolean isPracticeRobot() {
-    	return (! Sensors.practiceRobotJumperPin.get());
+        return (!Sensors.practiceRobotJumperPin.get());
     }
 
     /**
@@ -107,11 +110,11 @@ public class Robot extends TimedRobot {
         turret.updateSmartDashboard();
 //		LiveWindow.run();
     }
-    
+
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-  //      LiveWindow.run();
+        //      LiveWindow.run();
     }
 }

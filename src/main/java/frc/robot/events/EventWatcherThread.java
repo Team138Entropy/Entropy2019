@@ -4,18 +4,16 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 
 import java.util.ArrayList;
 
-
-
 /**
  * Singleton thread for monitoring joysticks.
  */
-public class EventWatcher extends Thread {
+public class EventWatcherThread extends Thread {
 
     private ArrayList<Event> queue = new ArrayList<>();
 
-    private static EventWatcher thread = new EventWatcher();
+    private static EventWatcherThread thread = new EventWatcherThread();
 
-    public static EventWatcher getInstance() {
+    public static EventWatcherThread getInstance() {
         return thread;
     }
 
@@ -28,5 +26,9 @@ public class EventWatcher extends Thread {
                 }
             }
         }
+    }
+
+    public void addEvent(Event e) {
+        queue.add(e);
     }
 }

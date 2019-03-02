@@ -4,13 +4,13 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class StopRollerTest extends  InstantCommand {
+public class RetractRoller extends InstantCommand {
 
-    public StopRollerTest() {
+    public RetractRoller() {
         requires(Robot.roller);
     }
 
-    public void execute() {
-        Robot.roller.setRoller(false);
+    protected void execute() {
+        Robot.roller.setPistons(false);
     }
 }

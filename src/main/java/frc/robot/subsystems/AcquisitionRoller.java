@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.RobotMap;
- 
-import frc.robot.commands.RunRoller;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -12,12 +10,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 
-public class AquisitionRoller extends Subsystem {
+public class AcquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
     private static Solenoid pistonSolenoid = new Solenoid(RobotMap.PISTON_SOLENOID_CHANNEL);
 
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunRoller());
     }
 
     protected void init() {
