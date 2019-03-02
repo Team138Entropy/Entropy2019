@@ -10,6 +10,6 @@ public class Deploy extends InstantCommand {
     }
 
     public void execute() {
-        Robot.manipulator.deploy();
+        Robot.sequenceCoordinator.deploy();
     }
 }

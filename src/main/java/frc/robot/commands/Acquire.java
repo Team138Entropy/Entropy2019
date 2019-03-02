@@ -10,6 +10,6 @@ public class Acquire extends InstantCommand {
     }
 
     public void execute() {
-        Robot.manipulator.acquire();
+        Robot.sequenceCoordinator.acquire();
     }
 }

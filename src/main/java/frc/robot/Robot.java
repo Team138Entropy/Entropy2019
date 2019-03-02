@@ -23,6 +23,7 @@ public class Robot extends TimedRobot {
     public static final AquisitionRoller roller   = new AquisitionRoller();
     public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator();
+    public static final SequenceCoordinator sequenceCoordinator = new SequenceCoordinator();
     public static final Manipulator manipulator = new Manipulator();
 
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
@@ -100,7 +101,7 @@ public class Robot extends TimedRobot {
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
-        manipulator.executeStateMachine();
+        sequenceCoordinator.execute();
 //		LiveWindow.run();
     }
     
