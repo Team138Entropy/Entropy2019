@@ -1,15 +1,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import frc.robot.CheesyDrive;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.CheesyDrive;
 
-//import org.usfirst.frc.team138.robot.subsystems.Claw;
+public class TeleopDrive extends Command {
 
-public class TeleopDrive extends Command{
-	
 //           *happy stalin*
 	CheesyDrive ourDrive = new CheesyDrive();
 	

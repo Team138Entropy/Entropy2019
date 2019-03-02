@@ -1,19 +1,13 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.*;
-
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.*;
 import frc.robot.commands.TeleopDrive;
-import frc.robot.RobotMap;
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.DriveSignal;
-import frc.robot.Util;
 
 public class Drivetrain extends Subsystem {
 	public double lastSpeed = 0;

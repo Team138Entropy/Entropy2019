@@ -8,12 +8,16 @@ package frc.robot;
  */
 public class CheesyDrive {
 
-    // Note: These two aren't used right now
+    // These constants help prevent accidental triggering
+    /** @see #handleDeadband(double, double)*/
     private static final double kThrottleDeadband = 0.02;
+    /** @see #handleDeadband(double, double)*/
     private static final double kWheelDeadband = 0.02;
 
     // These factors determine how fast the wheel traverses the "non linear" sine curve.
+    /** @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>*/
     private static final double kHighWheelNonLinearity = 0.65;
+    /** @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>*/
     private static final double kLowWheelNonLinearity = 0.5;
 
     private static final double kHighNegInertiaScalar = 4.0;
@@ -31,32 +35,31 @@ public class CheesyDrive {
     private static final double kQuickStopScalar = 5.0;
 
     private double mOldWheel = 0.0;
-    private double mQuickStopAccumlator = 0.0;
+    private double mQuickStopAccumulator = 0.0;
     private double mNegInertiaAccumlator = 0.0;
 
-    public DriveSignal cheesyDrive(double throttle, double wheel, boolean isQuickTurn,
-                                   boolean isHighGear) {
+    /**
+     * Here's the function that does all the work. There's a lot of math here.
+     * @param throttle
+     * @param wheel The raw Y-value from the joystick
+     * @param isQuickTurn {@code true} if we want to turn in place
+     * @param isHighGear
+     * @return
+     * @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>
+     */
+    public DriveSignal cheesyDrive(double throttle, double wheel, boolean isQuickTurn, boolean isHighGear) {
 
         wheel = handleDeadband(wheel, kWheelDeadband);
         throttle = handleDeadband(throttle, kThrottleDeadband);
 
+        // "negative inertia" means we're slowing down.
         double negInertia = wheel - mOldWheel;
         mOldWheel = wheel;
 
-        double wheelNonLinearity;
         if (isHighGear) {
-            wheelNonLinearity = kHighWheelNonLinearity;
-            final double denominator = Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            // Apply a sine function that's scaled to make it feel better.
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
+            wheel = applyMagicFunc(wheel, kHighWheelNonLinearity, 2);
         } else {
-            wheelNonLinearity = kLowWheelNonLinearity;
-            final double denominator = Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-            // Apply a sine function that's scaled to make it feel better.
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
-            wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) / denominator;
+            wheel = applyMagicFunc(wheel, kLowWheelNonLinearity, 3);
         }
 
         double leftPwm, rightPwm, overPower;
@@ -98,23 +101,24 @@ public class CheesyDrive {
         linearPower = throttle;
 
         // Quickturn!
+        // Thank you, 254, for the incredibly helpful comment. -Will
         if (isQuickTurn) {
             if (Math.abs(linearPower) < kQuickStopDeadband) {
                 double alpha = kQuickStopWeight;
-                mQuickStopAccumlator = (1 - alpha) * mQuickStopAccumlator
+                mQuickStopAccumulator = (1 - alpha) * mQuickStopAccumulator
                         + alpha * Util.limit(wheel, 1.0) * kQuickStopScalar;
             }
             overPower = 1.0;
             angularPower = wheel;
         } else {
             overPower = 0.0;
-            angularPower = Math.abs(throttle) * wheel * sensitivity - mQuickStopAccumlator;
-            if (mQuickStopAccumlator > 1) {
-                mQuickStopAccumlator -= 1;
-            } else if (mQuickStopAccumlator < -1) {
-                mQuickStopAccumlator += 1;
+            angularPower = Math.abs(throttle) * wheel * sensitivity - mQuickStopAccumulator;
+            if (mQuickStopAccumulator > 1) {
+                mQuickStopAccumulator -= 1;
+            } else if (mQuickStopAccumulator < -1) {
+                mQuickStopAccumulator += 1;
             } else {
-                mQuickStopAccumlator = 0.0;
+                mQuickStopAccumulator = 0.0;
             }
         }
 
@@ -138,7 +142,32 @@ public class CheesyDrive {
         return new DriveSignal(leftPwm, rightPwm);
     }
 
-    public double handleDeadband(double val, double deadband) {
+    /**
+     * Handles a deadband, obviously.
+     * @param val The value we want to regulate with the deadband.
+     * @param deadband The minimum the <i>absolute value</i> of {@code val} should be before we use it.
+     * @return {@code val} if its absolute value is greater than {@code deadband}, otherwise 0.
+     */
+    private double handleDeadband(double val, double deadband) {
         return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
+    }
+
+    /**
+     * Apply 254's "magic function" an arbitrary number of times.
+     * @param rawValue The raw value from the joystick.
+     * @param nonLinearity The "intensity" of the adjustment from applying the function. Don't let this go above 1.
+     * @param iterations The number of times we want to apply the function.
+     * @return The result of the last iteration.
+     * @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>
+     */
+    private double applyMagicFunc(final double rawValue, final double nonLinearity, final int iterations) {
+        final double denominator = Math.sin(Math.PI / 2.0 * nonLinearity);
+        double retVal = rawValue;
+
+        for (int i = 0; i < iterations; i++) {
+            retVal = Math.sin(Math.PI / 2.0 * nonLinearity * retVal) / denominator;
+        }
+
+        return retVal;
     }
 }

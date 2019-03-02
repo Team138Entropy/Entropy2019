@@ -15,8 +15,11 @@ import frc.robot.commands.ToggleManipRotation;
 import frc.robot.commands.ToggleManipTranslation;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
-import frc.robot.commands.TestRoller;
-import frc.robot.commands.TestRollerPistons;
+import frc.robot.commands.ExtendRollerTest;
+import frc.robot.commands.RetractRollerTest;
+import frc.robot.commands.StartRollerTest;
+import frc.robot.commands.StopRollerTest;
+
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -117,12 +120,13 @@ public final class OI {
 		deployButton.whenPressed(new Deploy());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
+		
+		// Testing / individual component operation
+		rollerTestButton.whenPressed(new StartRollerTest());
+		rollerTestButton.whenReleased(new StopRollerTest());
+		pistonTestButton.whenPressed(new ExtendRollerTest());
+		pistonTestButton.whenReleased(new RetractRollerTest());
 
-		rollerTestButton.whileHeld(new TestRoller());
-		pistonTestButton.whileHeld(new TestRollerPistons());
-
-		rotateManipulator.whenPressed(new ToggleManipTranslation());
-		extendManipulator.whenPressed(new ToggleManipRotation());
 	}
     
 	public static double getMoveSpeed()
