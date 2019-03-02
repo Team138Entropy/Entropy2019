@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Constants;
 
@@ -43,7 +43,7 @@ public class SequenceCoordinator extends Subsystem {
     }
 
     public void executeStateMachine() {
-        System.out.println(currentState.toString());
+        SmartDashboard.putString("Manipulator State", currentState.toString());
 
         switch(currentState) {
             case IDLE:
