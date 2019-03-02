@@ -247,18 +247,18 @@ public class Elevator extends Subsystem{
 	private void initiateMove() {
 		double elevatorSpeed;
 			
-			_currentPosition = GetElevatorPosition();
-			
-			if (_targetPosition > _currentPosition) {
-				_direction = Constants.elevatorUp;
-				elevatorSpeed = Constants.elevatorMoveSpeed;
-				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-			}
-			else {
-				_direction = Constants.elevatorDown;
-				elevatorSpeed =  Constants.elevatorDownMoveSpeed;
-				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-			}
+		_currentPosition = GetElevatorPosition();
+		
+		if (_targetPosition > _currentPosition) {
+			_direction = Constants.elevatorUp;
+			elevatorSpeed = Constants.elevatorMoveSpeed;
+			_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
+		}
+		else {
+			_direction = Constants.elevatorDown;
+			elevatorSpeed =  Constants.elevatorDownMoveSpeed;
+			_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
+		}
 	}
 	
 	// Return the elevator position in encoder counts
@@ -297,7 +297,7 @@ public class Elevator extends Subsystem{
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
 		SmartDashboard.putString("Target Named Position", convertTargetPositionToString(_targetNamedPosition));
 		SmartDashboard.putNumber("Target Position", _targetPosition);
-		SmartDashboard.putString("Direction", convertDirectionToString(_direction));
+		SmartDashboard.putNumber("Direction", _direction);
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
 		SmartDashboard.putNumber("Elevate Output:",_elevatorMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Count", _count);
@@ -355,8 +355,7 @@ public class Elevator extends Subsystem{
 	
 	// Interface to let command know it's done
 	public boolean IsMoveComplete() {
-		return true;
-		//return (_direction == 0);
+		return (_direction == 0);
 	}
 	
 	// Cancel the current elevator move, but don't stop the motion immediately

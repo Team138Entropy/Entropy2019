@@ -53,8 +53,8 @@ public class Drivetrain extends Subsystem {
 		bottomLeftTalon.configNominalOutputReverse(0.,0);
 		bottomLeftTalon.configPeakOutputForward(1,0);
 		bottomLeftTalon.configPeakOutputReverse(-1,0);
-		bottomLeftTalon.setNeutralMode(NeutralMode.Coast);
-		topLeftTalon.setNeutralMode(NeutralMode.Coast);
+		bottomLeftTalon.setNeutralMode(NeutralMode.Brake);
+		topLeftTalon.setNeutralMode(NeutralMode.Brake);
 
 		/* choose thebttomnsor and sensor direction */
 		bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0,0);
@@ -63,8 +63,8 @@ public class Drivetrain extends Subsystem {
 		bottomRightTalon.configNominalOutputReverse(-0.,0);
 		bottomRightTalon.configPeakOutputForward(1,0);
 		bottomRightTalon.configPeakOutputReverse(-1,0);
-		bottomRightTalon.setNeutralMode(NeutralMode.Coast);
-		topRightTalon.setNeutralMode(NeutralMode.Coast);
+		bottomRightTalon.setNeutralMode(NeutralMode.Brake);
+		topRightTalon.setNeutralMode(NeutralMode.Brake);
 
 		// Configure Talon gains
 		bottomLeftTalon.config_kF(0, Drive_Kf,0);

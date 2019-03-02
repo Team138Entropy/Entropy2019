@@ -77,7 +77,7 @@ public class Manipulator extends Subsystem {
     private void idle() {
         if (!isEntryActionComplete) {
             actuate(Constants.RETRACT, Constants.HORIZONTAL);
-            Robot.elevator.Elevate(Elevator.ElevatorTarget.FLOOR);
+            //Robot.elevator.Elevate(Elevator.ElevatorTarget.FLOOR);
             isEntryActionComplete = true;
         }
 
@@ -97,7 +97,8 @@ public class Manipulator extends Subsystem {
             isEntryActionComplete = true;
         }
 
-        if (Robot.elevator.IsMoveComplete()) {
+        //if (Robot.elevator.IsMoveComplete()) {
+        if (true) {
             changeState(ManipulatorState.READY_ACQUIRE_HP);
         }
     }
@@ -110,16 +111,18 @@ public class Manipulator extends Subsystem {
 
     private void completeAcquire() {
         if (!isEntryActionComplete) {
-            Robot.elevator.ElevateRelative(Constants.HP_ELEVATE_OFFSET);
+            //Robot.elevator.ElevateRelative(Constants.HP_ELEVATE_OFFSET);
             isEntryActionComplete = true;
         }
 
-        if (Robot.elevator.IsMoveComplete()) {
+        //if (Robot.elevator.IsMoveComplete()) {
+        if (true) {
             Robot.manipulator.actuate(Constants.RETRACT, Constants.VERTICAL);
             //Robot.elevator.Elevate(ElevatorTarget.LEVEL_1);
-            Robot.elevator.ElevateRelative(Constants.HP_ELEVATE_OFFSET * -1);
+            //Robot.elevator.ElevateRelative(Constants.HP_ELEVATE_OFFSET * -1);
             
-            if (Robot.elevator.IsMoveComplete()) {
+            //if (Robot.elevator.IsMoveComplete()) {
+            if (true) {
                 changeState(ManipulatorState.ACQUIRED_HP);
             }
         }
@@ -127,15 +130,15 @@ public class Manipulator extends Subsystem {
 
     private void acquiredHP() {
         if (!isEntryActionComplete) {
-            Robot.manipulator.actuate(Constants.RETRACT, Constants.VERTICAL);
+            Robot.manipulator.actuate(Constants.RETRACT, Constants.HORIZONTAL);
             isEntryActionComplete = true;
         }
 
         if (operatorCommand == OperatorCommand.DEPLOY) {
             changeState(ManipulatorState.DEPLOY_HP);
-        } else if (operatorCommand == OperatorCommand.ACQUIRE &&
-                   Robot.elevator.getTargetPosition() == ElevatorTarget.LEVEL_1) {
-            
+        //} else if (operatorCommand == OperatorCommand.ACQUIRE &&
+        //           Robot.elevator.getTargetPosition() == ElevatorTarget.LEVEL_1) {
+        } else if (operatorCommand == OperatorCommand.ACQUIRE) {
             changeState(ManipulatorState.PREPARE_ACQUIRE_HP);
         }
     }
