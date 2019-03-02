@@ -19,7 +19,7 @@ public class DriverVision extends Subsystem {
 
     public DriverVision() {
         CameraServer.getInstance().addAxisCamera(Constants.frontCameraLabel, Constants.frontCameraHostname);
-        CameraServer.getInstance().addAxisCamera(Constants.rearCameraLabel, Constants.rearCameraHostname);
+        //CameraServer.getInstance().addAxisCamera(Constants.rearCameraLabel, Constants.rearCameraHostname);
         
         VisionThread.getInstance().start();
     }

@@ -20,7 +20,7 @@ public class Sensors {
 	public static double gyroBias=0;
 
 	public static DigitalInput practiceRobotJumperPin;
-	public static DigitalInput cargosensor;
+	public static AnalogInput cargoSensor;
 
 	public static DigitalInput leftLimitSwitch;
     public static DigitalInput centerLimitSwitch;
@@ -37,7 +37,7 @@ public class Sensors {
         gyro.reset();
 	   
 		practiceRobotJumperPin = new DigitalInput(RobotMap.PRACTICE_ROBOT_JUMPER);
-		cargosensor = new DigitalInput(RobotMap.CARGO_SENSOR);
+		cargoSensor = new AnalogInput(RobotMap.CARGO_SENSOR);
 		leftLimitSwitch = new DigitalInput(RobotMap.LEFT_TURRET_LIMIT_SWITCH);
     	centerLimitSwitch = new DigitalInput(RobotMap.CENTER_TURRET_LIMIT_SWITCH);
 		rightLimitSwitch = new DigitalInput(RobotMap.RIGHT_TURRET_LIMIT_SWITCH);
@@ -78,8 +78,8 @@ public class Sensors {
 	// 	SmartDashboard.putNumber("Right Velocity",-Robot.drivetrain.frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 	 }
 
-	public static boolean isCargoPresent(){
-		return !cargosensor.get();
+	public static boolean isCargoPresent (){
+		return (cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD);
 	}
 
 	public static boolean isTurretLeft (){

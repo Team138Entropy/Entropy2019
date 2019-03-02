@@ -3,12 +3,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.DriverVision;
-import frc.robot.subsystems.AquisitionRoller;
-import frc.robot.subsystems.Turret;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.*;
+
 
 /**
  * This is the development branch.
@@ -27,7 +23,10 @@ public class Robot extends TimedRobot {
     //public static final DriverVision driverVision = new DriverVision();
     public static final AquisitionRoller roller   = new AquisitionRoller();
     public static final Turret turret = new Turret();
-    public static final Elevator elevator = new Elevator ();
+    public static final Elevator elevator = new Elevator();
+    public static final SequenceCoordinator sequenceCoordinator = new SequenceCoordinator();
+    public static final Manipulator manipulator = new Manipulator();
+
     public static final Climber climber = new Climber();
 
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
@@ -46,7 +45,6 @@ public class Robot extends TimedRobot {
     	drivetrain.DriveTrainInit();
     	compressor.start();	
         Robot.accumulatedHeading = 0;
-        Constants.AutoEnable=true;
         elevator.ElevatorInit();
         turret.TurretInit();
         climber.ClimberInit();
@@ -83,7 +81,8 @@ public class Robot extends TimedRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        
+        // TODO: Figure out how autonomousPeriodic functions in relation to teleopPeriodic
+        //teleopPeriodic();
     }
 
     public void teleopInit() {
@@ -92,9 +91,6 @@ public class Robot extends TimedRobot {
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
 	    Robot.drivetrain.Relax();
-
-		Constants.AutoEnable=true;
-		Constants.IntegralError=0;
     }
     
     public static boolean isPracticeRobot() {
@@ -109,6 +105,7 @@ public class Robot extends TimedRobot {
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
+        sequenceCoordinator.execute();
 //		LiveWindow.run();
     }
     

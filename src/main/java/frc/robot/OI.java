@@ -8,8 +8,12 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.ExtendClimbPiston;
 import frc.robot.commands.RetractClimbPiston;
+import frc.robot.commands.Acquire;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
+import frc.robot.commands.Deploy;
+import frc.robot.commands.ToggleManipRotation;
+import frc.robot.commands.ToggleManipTranslation;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
 import frc.robot.commands.ExtendRoller;
@@ -102,12 +106,21 @@ public final class OI {
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
 
+	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
+
+	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick);
+
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
 		defaultPositions.whenPressed(new DefaultPosition());
 		elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
+
+		acquireButton.whenPressed(new Acquire());
+		deployButton.whenPressed(new Deploy());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		
@@ -117,6 +130,8 @@ public final class OI {
 		pistonTestButton.whenPressed(new ExtendRoller());
 		pistonTestButton.whenReleased(new RetractRoller());
 
+		rotateManipulator.whenPressed(new ToggleManipTranslation());
+		extendManipulator.whenPressed(new ToggleManipRotation());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
 		climbPistonButton.whenReleased(new RetractClimbPiston());
 	}
@@ -135,7 +150,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed= -driverStick.getRawAxis(XboxController.rightXAxis);
+		double rotateSpeed= driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;
