@@ -7,8 +7,7 @@ import frc.robot.Constants;
 	public class DefaultPosition extends CommandGroup {
         public  DefaultPosition() {
             addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_2));
-            //addSequential(new CarriageRetracted());
-            //addSequential(new CradleWristHorizontal());
+            addSequential(new Actuate(Constants.RETRACT, Constants.HORIZONTAL));
             addSequential(new RotateTurretToTarget(Constants.TurretCenterPosition));
             addSequential(new RetractRoller());
             addSequential(new StopRoller());
