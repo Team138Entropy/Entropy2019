@@ -4,9 +4,9 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class ExtendRollerTest extends InstantCommand {
+public class ExtendRoller extends InstantCommand {
     
-    public ExtendRollerTest() {
+    public ExtendRoller() {
         requires(Robot.roller);
     }
 

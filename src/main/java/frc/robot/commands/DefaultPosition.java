@@ -10,8 +10,8 @@ import frc.robot.Constants;
             //addSequential(new CarriageRetracted());
             //addSequential(new CradleWristHorizontal());
             addSequential(new RotateTurretToTarget(Constants.TurretCenterPosition));
-            //addSequential(new RollerRetracted());
-            //addSequential(new RollerRotationOff());
+            addSequential(new RetractRoller());
+            addSequential(new StopRoller());
             addSequential(new RetractClimbPiston());
         }
 
