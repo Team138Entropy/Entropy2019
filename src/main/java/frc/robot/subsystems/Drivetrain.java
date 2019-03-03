@@ -91,6 +91,4 @@ public class Drivetrain extends Subsystem {
 		SmartDashboard.putNumber("L PWM", -bottomLeftTalon.getMotorOutputPercent());
 		SmartDashboard.putNumber("R PWM", -bottomRightTalon.getMotorOutputPercent());
 	}
-
-
 }

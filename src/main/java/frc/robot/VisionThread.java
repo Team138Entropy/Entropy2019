@@ -1,7 +1,5 @@
 package frc.robot;
 
-import frc.robot.subsystems.DriverVision;
-
 import org.opencv.core.Mat;
 
 /*
@@ -21,11 +19,8 @@ import edu.wpi.cscore.CvSource;
  */
 public class VisionThread extends Thread {
         
-    // Input stream references go here
-    private CvSink frontCameraInputStream, rearCameraInputStream;
-
+    // Input stream reference goes here
     private CvSink inputStream;
-    private DriverVision.Camera currentCamera;
 
     // Output stream goes here
     private static CvSource outputStream;
@@ -35,12 +30,10 @@ public class VisionThread extends Thread {
 
     // Initialization code goes here
     public VisionThread() {
-        frontCameraInputStream = CameraServer.getInstance().getVideo(Constants.frontCameraLabel);
-        rearCameraInputStream  = CameraServer.getInstance().getVideo(Constants.rearCameraLabel);
-        
-        currentCamera = DriverVision.Camera.FRONT;
-        inputStream   = frontCameraInputStream;
-        outputStream  = CameraServer.getInstance().putVideo("Unified Camera", 320, 240);
+        CameraServer.getInstance().addAxisCamera(Constants.rearCameraLabel, Constants.rearCameraHostname);
+
+        inputStream  = CameraServer.getInstance().getVideo(Constants.rearCameraLabel);
+        outputStream  = CameraServer.getInstance().putVideo("Rear Camera", 320, 240);
     }
 
     // The singleton mechanism
@@ -50,23 +43,6 @@ public class VisionThread extends Thread {
             thread = new VisionThread();
         }
         return thread;
-    }
-
-    // Reassign the input stream, but only if it's actually been changed
-    public synchronized void switchToCamera(DriverVision.Camera camera) {
-        if (currentCamera == camera)
-            return;
-        
-        switch (camera) {
-            case FRONT:
-                currentCamera = DriverVision.Camera.FRONT;
-                inputStream = frontCameraInputStream;
-                break;
-            case REAR:
-                currentCamera = DriverVision.Camera.REAR;
-                inputStream = rearCameraInputStream;
-                break;
-        }
     }
 
     @Override
@@ -80,19 +56,6 @@ public class VisionThread extends Thread {
             // Make sure the frame isn't empty because everyone will die if it is.
             if (frameBuffer.empty())
                 continue;
-
-            // Annotate the frame
-            /*
-            Imgproc.putText(
-                frameBuffer,
-                (currentCamera == DriverVision.Camera.FRONT) ? "Front" : "Rear",
-                new Point(5, 5),
-                Core.FONT_HERSHEY_COMPLEX_SMALL,
-                1,
-                new Scalar(255, 255, 255),
-                3
-            );
-            */
 
             // Yeet it back at the driver station
             outputStream.putFrame(frameBuffer);

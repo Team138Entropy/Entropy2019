@@ -49,9 +49,7 @@ public class Constants {
     public static final int xboxControllerPort = 1;
 
 	// Camera stuff
-    public static final String frontCameraHostname = "10.1.38.90";
-    public static final String rearCameraHostname = "10.1.38.91";
-    public static final String frontCameraLabel = "Front Camera";
+    public static final String rearCameraHostname = "10.1.38.90";
 	public static final String rearCameraLabel = "Rear Camera";
 	
 	// Stuff that was deleted that I had to paste back in from the 2018 code

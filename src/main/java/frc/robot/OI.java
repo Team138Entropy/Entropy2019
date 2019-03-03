@@ -102,7 +102,6 @@ public final class OI {
 	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 
-
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
 	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 

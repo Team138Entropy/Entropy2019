@@ -18,7 +18,7 @@ public class DriverVision extends Subsystem {
     }
 
     public DriverVision() {
-        CameraServer.getInstance().addAxisCamera(Constants.frontCameraLabel, Constants.frontCameraHostname);
+        //CameraServer.getInstance().addAxisCamera(Constants.frontCameraLabel, Constants.frontCameraHostname);
         //CameraServer.getInstance().addAxisCamera(Constants.rearCameraLabel, Constants.rearCameraHostname);
         
         VisionThread.getInstance().start();
@@ -29,6 +29,6 @@ public class DriverVision extends Subsystem {
     }
 
     public synchronized void switchToCamera(Camera camera) {
-        VisionThread.getInstance().switchToCamera(camera);
+        //VisionThread.getInstance().switchToCamera(camera);
     }
 }
