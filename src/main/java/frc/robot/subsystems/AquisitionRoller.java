@@ -5,6 +5,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.RunRoller;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -37,5 +38,10 @@ public class AquisitionRoller extends Subsystem {
 
     public void togglePistons() {
         setPistons(!pistonSolenoid.get());
+    }
+
+    public void toggleRoller() {
+        boolean isOn = (rollerTalon.getMotorOutputPercent() > 0);
+        setRoller (!isOn);
     }
 }

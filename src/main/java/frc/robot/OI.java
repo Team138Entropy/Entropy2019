@@ -21,6 +21,8 @@ import frc.robot.commands.RetractRoller;
 import frc.robot.commands.StartRoller;
 import frc.robot.commands.StopRoller;
 import frc.robot.commands.DefaultPosition;
+import frc.robot.commands.ToggleRoller;
+import frc.robot.commands.ToggleRollerPistons;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -125,10 +127,8 @@ public final class OI {
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		
 		// Testing / individual component operation
-		rollerTestButton.whenPressed(new StartRoller());
-		rollerTestButton.whenReleased(new StopRoller());
-		pistonTestButton.whenPressed(new ExtendRoller());
-		pistonTestButton.whenReleased(new RetractRoller());
+		rollerTestButton.whenPressed(new ToggleRoller());
+		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
 		rotateManipulator.whenPressed(new ToggleManipTranslation());
 		extendManipulator.whenPressed(new ToggleManipRotation());
