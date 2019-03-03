@@ -10,7 +10,7 @@ public class SequenceCoordinator extends Subsystem {
     private enum OperatorCommand {
         NONE,
         ACQUIRE,
-        DEPLOY,
+        DEPLOY
     }
 
     private enum ManipulatorState {
@@ -190,5 +190,9 @@ public class SequenceCoordinator extends Subsystem {
 
     public void deploy() {
         operatorCommand = OperatorCommand.DEPLOY;
+    }
+
+    public void reset() {
+        changeState(ManipulatorState.IDLE);
     }
 }

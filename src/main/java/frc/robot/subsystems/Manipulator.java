@@ -42,4 +42,5 @@ public class Manipulator extends Subsystem {
         isRotated = rotation;
         rotationSolenoid.set(rotation);
     }
+
 }

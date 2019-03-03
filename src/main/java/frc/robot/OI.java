@@ -10,6 +10,7 @@ import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.Acquire;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
+import frc.robot.commands.ResetManipulator;
 import frc.robot.commands.Deploy;
 import frc.robot.commands.ToggleManipRotation;
 import frc.robot.commands.ToggleManipTranslation;
@@ -107,6 +108,7 @@ public final class OI {
 
 	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
 	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick);
+	static Button resetManipulator = new JoystickButton(driverStick, XboxController.x);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -128,6 +130,7 @@ public final class OI {
 
 		rotateManipulator.whenPressed(new ToggleManipTranslation());
 		extendManipulator.whenPressed(new ToggleManipRotation());
+		resetManipulator.whenPressed(new ResetManipulator());
 	}
     
 	public static double getMoveSpeed()
