@@ -4,6 +4,7 @@ import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class AcquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
-    private static Solenoid pistonSolenoid = new Solenoid(RobotMap.PISTON_SOLENOID_CHANNEL);
+    private static Solenoid pistonSolenoid = new Solenoid(RobotMap.ACQUISITION_PISTON_SOLENOID_CHANNEL);
 
     protected void initDefaultCommand() {
     }
@@ -35,5 +36,10 @@ public class AcquisitionRoller extends Subsystem {
 
     public void togglePistons() {
         setPistons(!pistonSolenoid.get());
+    }
+
+    public void toggleRoller() {
+        boolean isOn = (rollerTalon.getMotorOutputPercent() > 0);
+        setRoller (!isOn);
     }
 }

@@ -47,7 +47,6 @@ public class Elevator extends Subsystem{
 	private double _currentPosition = 0.0;
 	private boolean _isAtFloor = true;
 	private ElevatorTarget _targetNamedPosition = ElevatorTarget.NONE;
-	
 	private int _currentJogDirection = 0;
 	
 	public void ElevatorInit() {
@@ -95,6 +94,10 @@ public class Elevator extends Subsystem{
 	protected void initDefaultCommand() {
 		setDefaultCommand(new JogElevator());
 	}
+
+	public ElevatorTarget getTargetPosition() {
+		return _targetNamedPosition;
+	}
 	
 	// Convert the target string to an ElevatorTarget
 	public ElevatorTarget ConvertToTarget(String target) {
@@ -119,7 +122,7 @@ public class Elevator extends Subsystem{
 				elevatorTarget = ElevatorTarget.LEVEL_3;
 			break;
 		default:
-			elevatorTarget = ElevatorTarget.FLOOR;
+			elevatorTarget = ElevatorTarget.LEVEL_2;
 			break;
 		}
 		return elevatorTarget;
@@ -136,6 +139,11 @@ public class Elevator extends Subsystem{
 	public void HomeElevator()
 	{
 		_elevatorMotor.set(ControlMode.PercentOutput, Constants.elevatorHomingSpeed);
+	}
+
+	public void ElevateRelative (int distance) {
+		_targetPosition = GetElevatorPosition() + distance;
+		initiateMove();
 	}
 	
 	// Elevate to a specific target position
@@ -229,23 +237,25 @@ public class Elevator extends Subsystem{
 				default:
 					throw new RuntimeException("Error: Unknown target " + target.toString());
 				}
-			} 
-			
-			double elevatorSpeed;
-			
-			_currentPosition = GetElevatorPosition();
-			
-			if (_targetPosition > _currentPosition) {
-				_direction = Constants.elevatorUp;
-				elevatorSpeed = Constants.elevatorMoveSpeed;
-				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
 			}
-			else {
-				_direction = Constants.elevatorDown;
-				elevatorSpeed =  Constants.elevatorDownMoveSpeed;
-				_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-			}
+			initiateMove();
+		}
+	}
+
+	private void initiateMove() {
+		double elevatorSpeed;
 			
+		_currentPosition = GetElevatorPosition();
+		
+		if (_targetPosition > _currentPosition) {
+			_direction = Constants.elevatorUp;
+			elevatorSpeed = Constants.elevatorMoveSpeed;
+			_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
+		}
+		else {
+			_direction = Constants.elevatorDown;
+			elevatorSpeed =  Constants.elevatorDownMoveSpeed;
+			_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
 		}
 	}
 	
@@ -285,7 +295,7 @@ public class Elevator extends Subsystem{
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
 		SmartDashboard.putString("Target Named Position", convertTargetPositionToString(_targetNamedPosition));
 		SmartDashboard.putNumber("Target Position", _targetPosition);
-		SmartDashboard.putString("Direction", convertDirectionToString(_direction));
+		SmartDashboard.putNumber("Direction", _direction);
 		SmartDashboard.putNumber("Jog Direction", _currentJogDirection);
 		SmartDashboard.putNumber("Elevate Output:",_elevatorMotor.getMotorOutputPercent());
 		SmartDashboard.putNumber("Count", _count);

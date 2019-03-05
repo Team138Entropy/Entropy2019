@@ -3,19 +3,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
+import frc.robot.Constants;
 import frc.robot.events.EventWatcherThread;
 import frc.robot.events.LeftOperatorStickForward;
 import frc.robot.events.LeftOperatorStickReturned;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
-
-import frc.robot.commands.ElevateToTarget;
-import frc.robot.commands.HomeElevator;
-import frc.robot.commands.RotateTurretLeft;
-import frc.robot.commands.RotateTurretRight;
-import frc.robot.commands.ExtendRoller;
-import frc.robot.commands.RetractRoller;
-import frc.robot.commands.StartRoller;
-import frc.robot.commands.StopRoller;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -89,61 +82,76 @@ public final class OI {
     static double lastX = 0;
     static double LastY = 0;
 
-    static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
-    static Button elevateToFloor = new JoystickButton(operatorStick, NykoController.button1);
-    static Button elevateToLevel1 = new JoystickButton(operatorStick, NykoController.button2);
-    static Button elevateToLevel2 = new JoystickButton(operatorStick, NykoController.button3);
-    static Button elevateToLevel3 = new JoystickButton(operatorStick, NykoController.button4);
-    static Button rotateTurretLeft = new JoystickButton(operatorStick, NykoController.leftBumper);
-    static Button rotateTurretRight = new JoystickButton(operatorStick, NykoController.rightBumper);
-    static Button rollerTestButton = new JoystickButton(operatorStick, NykoController.leftStick);
-    static Button pistonTestButton = new JoystickButton(operatorStick, NykoController.middle9);
+	static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
+	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
+	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
+	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
+	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
+	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
+	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
+	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
+	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
 
-    public OI() {
-        homeElevatorButton.whileHeld(new HomeElevator());
-        elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
-        elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
-        elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
-        elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
-        rotateTurretLeft.whenPressed(new RotateTurretLeft());
-        rotateTurretRight.whenPressed(new RotateTurretRight());
+	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
-        // Testing / individual component operation
-        rollerTestButton.whenPressed(new StartRoller());
-        rollerTestButton.whenReleased(new StopRoller());
-        pistonTestButton.whenPressed(new ExtendRoller());
-        pistonTestButton.whenReleased(new RetractRoller());
+	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick);
+
+    public OI(){
+		homeElevatorButton.whileHeld(new HomeElevator());
+		defaultPositions.whenPressed(new DefaultPosition());
+		elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
+		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
+		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
+
+		acquireButton.whenPressed(new Acquire());
+		deployButton.whenPressed(new Deploy());
+		rotateTurretLeft.whenPressed(new RotateTurretLeft());
+		rotateTurretRight.whenPressed(new RotateTurretRight());
+
+		// Testing / individual component operation
+		rollerTestButton.whenPressed(new ToggleRoller());
+		pistonTestButton.whenPressed(new ToggleRollerPistons());
+
+        rotateManipulator.whenPressed(new ToggleManipTranslation());
+        extendManipulator.whenPressed(new ToggleManipRotation());
+        climbPistonButton.whenPressed(new ExtendClimbPiston());
+        climbPistonButton.whenReleased(new RetractClimbPiston());
 
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickReturned());
     }
-
-    public static double getMoveSpeed() {
-        // joystick values are opposite to robot directions
-        double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis) * Constants.VelocityScale;
-        // Apply thresholds to joystick positions to eliminate
-        // creep motion due to non-zero joystick value when joysticks are
-        // "centered"
-        if (Math.abs(moveSpeed) < Constants.CloseLoopJoystickDeadband)
-            moveSpeed = 0;
-        return moveSpeed;
-    }
-
-    public static double getRotateSpeed() {
-        double rotateSpeed = -driverStick.getRawAxis(XboxController.rightXAxis);
-        if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
-            rotateSpeed = 0;
-        return rotateSpeed;
-    }
-
-    public static boolean isReverse() {
-        return driverStick.getRawButton(XboxController.b);
-    }
-
-    public static boolean isFullSpeed() {
-        // We don't use a freaking transmission, so just return false
-        return false;
+    
+	public static double getMoveSpeed()
+	{
+		// joystick values are opposite to robot directions
+		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis);
+		// Apply thresholds to joystick positions to eliminate
+		// creep motion due to non-zero joystick value when joysticks are 
+		// "centered"
+		if (Math.abs(moveSpeed) < Constants.CloseLoopJoystickDeadband)
+			moveSpeed=0;
+		return moveSpeed;
+	}
+	
+	public static double getRotateSpeed()
+	{
+		double rotateSpeed= -driverStick.getRawAxis(XboxController.rightXAxis);
+		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
+			rotateSpeed=0;
+		return rotateSpeed;
+	}
+	
+	public static boolean isReverse() {
+		return driverStick.getRawButton(XboxController.b);
+	}
+	
+	public static boolean isFullSpeed() {
+		// We don't use a freaking transmission, so just return false
+		return false;
 
         // But if we did...
         // return driverStick.getRawAxis(xboxRightTriggerAxis) > Constants.highSpeedModeTriggerThreshold;

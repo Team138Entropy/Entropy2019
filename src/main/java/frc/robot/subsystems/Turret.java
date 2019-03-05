@@ -98,10 +98,10 @@ public class Turret extends Subsystem {
 
     public void RotateTurret(int target)
     {
-        int difference = _targetPosition - _currentPosition;
-        
         _targetPosition = target;
 
+        int difference = _targetPosition - _currentPosition;
+       
         if (difference == 0) {
             _direction = 0;
         }
