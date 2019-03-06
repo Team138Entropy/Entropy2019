@@ -1,12 +1,11 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
-import frc.robot.subsystems.*;
-
-
 import frc.robot.events.EventWatcherThread;
+import frc.robot.subsystems.*;
 
 /**
  * This is the development branch.
@@ -20,7 +19,7 @@ public class Robot extends TimedRobot {
     // Interface with players
 
     // Subsystems
-    public static final Compressor compressor = new Compressor();
+    private static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
     //public static final DriverVision driverVision = new DriverVision();
     public static final AcquisitionRoller roller = new AcquisitionRoller();
@@ -31,12 +30,12 @@ public class Robot extends TimedRobot {
 
     public static final Climber climber = new Climber();
 
-    public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
+    private static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
     public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
 
     // Global constants
-    public static String mode; // "auto" or "teleop"
+    private static String mode; // "auto" or "teleop"
     public static String gameData;
 
     /**
@@ -50,6 +49,7 @@ public class Robot extends TimedRobot {
         elevator.ElevatorInit();
         turret.TurretInit();
         climber.ClimberInit();
+        roller.init();
         Constants.practiceBot = isPracticeRobot();
 
         EventWatcherThread.getInstance().start();
@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
         //Constants.IntegralError = 0;
     }
 
-    public static boolean isPracticeRobot() {
+    private static boolean isPracticeRobot() {
         return (!Sensors.practiceRobotJumperPin.get());
     }
 

@@ -1,15 +1,11 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
-import frc.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
+import frc.robot.RobotMap;
 
 public class AcquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
@@ -18,7 +14,7 @@ public class AcquisitionRoller extends Subsystem {
     protected void initDefaultCommand() {
     }
 
-    protected void init() {
+    public void init() {
         pistonSolenoid.set(false);
         rollerTalon.set(ControlMode.PercentOutput, 0.0d);
     }
@@ -28,9 +24,7 @@ public class AcquisitionRoller extends Subsystem {
     }
 
     public synchronized void setPistons(boolean ps) {
-        if (pistonSolenoid.get() == ps)
-            return;
-        else
+        if (pistonSolenoid.get() != ps)
             pistonSolenoid.set(ps);
     }
 
