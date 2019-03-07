@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.RunRoller;
 
@@ -25,7 +26,7 @@ public class AquisitionRoller extends Subsystem {
     }
 
     public synchronized void setRoller(boolean on) {
-        rollerTalon.set(ControlMode.PercentOutput, on ? Constants.ROLLER_SPEED : 0.0d);
+        rollerTalon.set(ControlMode.PercentOutput, on ? Robot.shuffHandler.getRollerSpeed() : 0.0d);
     }
 
     public synchronized void setPistons(boolean ps) {

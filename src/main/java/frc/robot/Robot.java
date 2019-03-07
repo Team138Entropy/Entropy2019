@@ -2,7 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.*;
 
 /**
@@ -15,7 +16,9 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 	// Interface with players
-        
+    public static final ShuffleboardTab main = Shuffleboard.getTab("SmartDashboard");
+    public static final ShuffleboardHandler shuffHandler = new ShuffleboardHandler();
+
     // Subsystems
     public static final Compressor compressor     = new Compressor();
     public static final Drivetrain drivetrain     = new Drivetrain();
@@ -46,6 +49,7 @@ public class Robot extends TimedRobot {
         elevator.ElevatorInit();
         turret.TurretInit();
         Constants.practiceBot = isPracticeRobot();
+        shuffHandler.init();
     }
 	
 	/**
