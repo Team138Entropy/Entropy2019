@@ -9,6 +9,6 @@ public class ResetManipulator extends InstantCommand {
     }
 
     public void execute () {
-        Robot.sequenceCoordinator.reset();
+        Robot.manipulator.reset();
     }
 }

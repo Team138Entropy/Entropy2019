@@ -210,7 +210,7 @@ public class Elevator extends Subsystem{
 						break;
 				case LEVEL_1:
 				if (Sensors.isCargoPresent()){
-						_targetPosition =200;
+						_targetPosition = 200;
 					}
 				else
 				{
@@ -287,6 +287,7 @@ public class Elevator extends Subsystem{
 			     (_direction < 0 && (_currentPosition < _targetPosition) )))
 			{
 				_elevatorMotor.set(ControlMode.MotionMagic, _targetPosition);
+				System.out.println("Setting jog direction to 0...");
 				_direction = 0;
 			}
 		}

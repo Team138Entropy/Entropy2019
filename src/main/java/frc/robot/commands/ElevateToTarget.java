@@ -50,6 +50,9 @@ public class ElevateToTarget extends Command {
 		}
 		else
 		{
+			if (Robot.elevator.IsMoveComplete()) {
+				System.out.println("ElevateTo <" + elevatorTarget.toString() + "> finished successfully");
+			}
 			return Robot.elevator.IsMoveComplete();
 		}
 	}
