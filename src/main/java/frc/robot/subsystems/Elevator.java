@@ -122,7 +122,7 @@ public class Elevator extends Subsystem{
 				elevatorTarget = ElevatorTarget.LEVEL_3;
 			break;
 		default:
-			elevatorTarget = ElevatorTarget.FLOOR;
+			elevatorTarget = ElevatorTarget.LEVEL_2;
 			break;
 		}
 		return elevatorTarget;

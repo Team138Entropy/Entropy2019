@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.Elevator.ElevatorTarget;
-
+import frc.robot.commands.ExtendClimbPiston;
+import frc.robot.commands.RetractClimbPiston;
 import frc.robot.commands.Acquire;
 import frc.robot.commands.ElevateToTarget;
 import frc.robot.commands.HomeElevator;
@@ -16,10 +17,13 @@ import frc.robot.commands.ToggleManipRotation;
 import frc.robot.commands.ToggleManipTranslation;
 import frc.robot.commands.RotateTurretLeft;
 import frc.robot.commands.RotateTurretRight;
-import frc.robot.commands.ExtendRollerTest;
-import frc.robot.commands.RetractRollerTest;
-import frc.robot.commands.StartRollerTest;
-import frc.robot.commands.StopRollerTest;
+import frc.robot.commands.ExtendRoller;
+import frc.robot.commands.RetractRoller;
+import frc.robot.commands.StartRoller;
+import frc.robot.commands.StopRoller;
+import frc.robot.commands.DefaultPosition;
+import frc.robot.commands.ToggleRoller;
+import frc.robot.commands.ToggleRollerPistons;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -94,14 +98,15 @@ public final class OI {
     static double LastY=0;
 
 	static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
-	static Button elevateToFloor     = new JoystickButton(operatorStick, NykoController.button1);
-	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button2);
-	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button3);
+	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
+	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
 	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
 	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
 	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
+	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
 	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
@@ -112,8 +117,8 @@ public final class OI {
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
-		elevateToFloor.whenPressed(new ElevateToTarget(ElevatorTarget.FLOOR));
-    	elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
+		defaultPositions.whenPressed(new DefaultPosition());
+		elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
@@ -123,20 +128,20 @@ public final class OI {
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		
 		// Testing / individual component operation
-		rollerTestButton.whenPressed(new StartRollerTest());
-		rollerTestButton.whenReleased(new StopRollerTest());
-		pistonTestButton.whenPressed(new ExtendRollerTest());
-		pistonTestButton.whenReleased(new RetractRollerTest());
+		rollerTestButton.whenPressed(new ToggleRoller());
+		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
 		rotateManipulator.whenPressed(new ToggleManipTranslation());
 		extendManipulator.whenPressed(new ToggleManipRotation());
+		climbPistonButton.whenPressed(new ExtendClimbPiston());
+		climbPistonButton.whenReleased(new RetractClimbPiston());
 		resetManipulator.whenPressed(new ResetManipulator());
 	}
     
 	public static double getMoveSpeed()
 	{
 		// joystick values are opposite to robot directions
-		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis) * Constants.VelocityScale;
+		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis);
 		// Apply thresholds to joystick positions to eliminate
 		// creep motion due to non-zero joystick value when joysticks are 
 		// "centered"

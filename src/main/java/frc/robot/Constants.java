@@ -25,7 +25,8 @@ public class Constants {
 	public final static int RightDriveEncoderPolarity = 1;
 	
 	// 2019 Drive Train constants
-	public final static double VelocityScale = 0.75;
+	public final static double FullSpeed = 0.75;
+	public final static double ClimbSpeed = 0.25;
 
 	// Elevator
 	public final static double elevatorHomingSpeed = -0.2;
@@ -43,6 +44,11 @@ public class Constants {
 	public final static double TurretJogSpeed = 0.25; //TBD
 	public final static int TurretDirectionLeft = -1;
 	public final static int TurretDirectionRight = 1;
+	public final static int TurretCenterPosition = 0;
+	public final static int TurretLeftPosition = -1;
+	public final static int TurretRightPosition = 1;
+
+		
 
 	// Controller stuff
 	public static final int nykoControllerPort = 0;
@@ -71,4 +77,8 @@ public class Constants {
 	// Manipulator
 	public static final int HP_ELEVATE_OFFSET = 10; // TODO: Verify this value
 	public static final float CARGO_SENSOR_THRESHOLD = 230;
+
+	// Climber 
+	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;
+
 }

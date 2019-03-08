@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.*;
 
+
 /**
  * This is the development branch.
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +29,8 @@ public class Robot extends TimedRobot {
     public static final Elevator elevator = new Elevator();
     public static final Manipulator manipulator = new Manipulator();
 
+    public static final Climber climber = new Climber();
+
     public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
 	public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
@@ -47,6 +50,7 @@ public class Robot extends TimedRobot {
         Robot.accumulatedHeading = 0;
         elevator.ElevatorInit();
         turret.TurretInit();
+        climber.ClimberInit();
         Constants.practiceBot = isPracticeRobot();
         shuffHandler.init();
     }
