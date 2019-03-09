@@ -6,23 +6,7 @@ import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.Elevator.ElevatorTarget;
-import frc.robot.commands.ExtendClimbPiston;
-import frc.robot.commands.RetractClimbPiston;
-import frc.robot.commands.Acquire;
-import frc.robot.commands.ElevateToTarget;
-import frc.robot.commands.HomeElevator;
-import frc.robot.commands.Deploy;
-import frc.robot.commands.ToggleManipRotation;
-import frc.robot.commands.ToggleManipTranslation;
-import frc.robot.commands.RotateTurretLeft;
-import frc.robot.commands.RotateTurretRight;
-import frc.robot.commands.ExtendRoller;
-import frc.robot.commands.RetractRoller;
-import frc.robot.commands.StartRoller;
-import frc.robot.commands.StopRoller;
-import frc.robot.commands.DefaultPosition;
-import frc.robot.commands.ToggleRoller;
-import frc.robot.commands.ToggleRollerPistons;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -121,6 +105,7 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
 		acquireButton.whenPressed(new Acquire());
+		acquireButton.whenReleased(new AcquireComplete());
 		deployButton.whenPressed(new Deploy());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());

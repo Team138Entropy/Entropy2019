@@ -75,7 +75,6 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.75;
 
 	// Manipulator
-	public static final int HP_ELEVATE_OFFSET = 10; // TODO: Verify this value
 	public static final float CARGO_SENSOR_THRESHOLD = 230;
 
 	// Climber 
