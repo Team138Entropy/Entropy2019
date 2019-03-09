@@ -114,8 +114,8 @@ public final class OI {
 		rollerTestButton.whenPressed(new ToggleRoller());
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
-		rotateManipulator.whenPressed(new ToggleManipTranslation());
-		extendManipulator.whenPressed(new ToggleManipRotation());
+		rotateManipulator.whenPressed(new ToggleManipRotation());
+		extendManipulator.whenPressed(new ToggleManipTranslation());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
 		climbPistonButton.whenReleased(new RetractClimbPiston());
 	}
