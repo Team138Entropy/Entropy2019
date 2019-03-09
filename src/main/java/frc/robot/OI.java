@@ -93,7 +93,6 @@ public final class OI {
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
-
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
 	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
@@ -107,8 +106,9 @@ public final class OI {
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
-		acquireButton.whenPressed(new Acquire());
-		deployButton.whenPressed(new Deploy());
+		acquireButton.whenPressed(new AcquireHP());
+		acquireButton.whenReleased(new AcquireCompleteHP());
+		deployButton.whenPressed(new DeployHP());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 
@@ -116,14 +116,14 @@ public final class OI {
 		rollerTestButton.whenPressed(new ToggleRoller());
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
-        rotateManipulator.whenPressed(new ToggleManipTranslation());
-        extendManipulator.whenPressed(new ToggleManipRotation());
-        climbPistonButton.whenPressed(new ExtendClimbPiston());
+		rotateManipulator.whenPressed(new ToggleManipRotation());
+		extendManipulator.whenPressed(new ToggleManipTranslation());
+		climbPistonButton.whenPressed(new ExtendClimbPiston());
         climbPistonButton.whenReleased(new RetractClimbPiston());
-
+        
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
-    }
+	}
     
 	public static double getMoveSpeed()
 	{

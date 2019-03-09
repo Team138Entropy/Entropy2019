@@ -7,26 +7,35 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ExtendClimbPiston extends Command {
 	
-	private boolean isFinished = false;
+	private boolean isLifted = false;
+	private boolean isOnStep = false;
 	public ExtendClimbPiston()
 	{
 		requires(Robot.climber);
 	}
 
 	protected void initialize() {
-		isFinished = false;
+		isLifted = false;
+		isOnStep = false;
 		Robot.drivetrain.setDriveSpeed(Constants.ClimbSpeed);
 		Robot.climber.extendClimbPiston();
 	}
 
 	protected void execute() {
-		if (Sensors.isClimbProximityThresholdReached()) {
-			isFinished = true;
+		
+		// Wait for the pistons to lift the robot off the floor
+		if (!isLifted && !Sensors.isClimbProximityThresholdReached()) {
+			isLifted = true;
+		}
+
+		// Now that the robot is lifted off the floor, wait for the step to be reached
+		if (isLifted && Sensors.isClimbProximityThresholdReached()) {
+			isOnStep = true;
 		}
 	}
 
 	protected boolean isFinished() {
-		return isFinished;
+		return isOnStep;
 	}
 
 	protected void end() {

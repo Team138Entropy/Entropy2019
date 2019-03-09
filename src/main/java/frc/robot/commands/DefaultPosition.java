@@ -13,6 +13,4 @@ import frc.robot.Constants;
             addSequential(new StopRoller());
             addSequential(new RetractClimbPiston());
         }
-
-
 }

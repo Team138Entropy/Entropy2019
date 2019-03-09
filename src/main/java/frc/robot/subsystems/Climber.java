@@ -18,11 +18,13 @@ public class Climber extends Subsystem {
     }
     
     public void extendClimbPiston() {
+        System.out.println("Climb Piston EXTEND");
         pistonSolenoid.set(Constants.EXTEND);
         
     }
     
     public void retractClimbPiston() {
+        System.out.println("Climb Piston RETRACT");
         pistonSolenoid.set(Constants.RETRACT);
 
     }

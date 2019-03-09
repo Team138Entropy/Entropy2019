@@ -23,6 +23,10 @@ public class TeleopDrive extends Command {
 		moveSpeed=OI.getMoveSpeed();
 		rotateSpeed=OI.getRotateSpeed();
 
+		if (moveSpeed < 0) {
+			rotateSpeed = rotateSpeed * -1;
+		}
+
 		/*
 		System.out.println(moveSpeed);
 		System.out.println(rotateSpeed);
