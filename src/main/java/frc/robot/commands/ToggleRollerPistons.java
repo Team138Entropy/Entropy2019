@@ -11,6 +11,7 @@ public class ToggleRollerPistons extends InstantCommand {
     }
 
     protected void execute() {
+        System.out.println("trying to use piston");
         Robot.roller.togglePistons();
     }
 }
