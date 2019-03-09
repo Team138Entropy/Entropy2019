@@ -18,7 +18,7 @@ public class AquisitionRoller extends Subsystem {
     private static Solenoid pistonSolenoid = new Solenoid(RobotMap.ACQUISITION_PISTON_SOLENOID_CHANNEL);
 
     protected void initDefaultCommand() {
-        setDefaultCommand(new RunRoller());
+        //xsetDefaultCommand(new RunRoller());
     }
 
     protected void init() {

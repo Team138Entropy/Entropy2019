@@ -13,6 +13,10 @@ public class Manipulator extends Subsystem {
     private boolean isTranslated = false;
     private boolean isRotated = false;
 
+    // Control states
+    public boolean readyToAcquire = false;
+    public boolean deployed = false;
+
     public void initDefaultCommand() {
         // Obligatory initDefaultCommand() declaration so we don't get yelled at by WPILib
     }
