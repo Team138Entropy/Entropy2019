@@ -104,9 +104,9 @@ public final class OI {
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
-		acquireButton.whenPressed(new Acquire());
-		acquireButton.whenReleased(new AcquireComplete());
-		deployButton.whenPressed(new Deploy());
+		acquireButton.whenPressed(new AcquireHP());
+		acquireButton.whenReleased(new AcquireCompleteHP());
+		deployButton.whenPressed(new DeployHP());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		
