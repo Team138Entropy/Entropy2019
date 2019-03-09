@@ -6,23 +6,7 @@ import edu.wpi.first.wpilibj.buttons.*;
 import frc.robot.Constants;
 
 import frc.robot.subsystems.Elevator.ElevatorTarget;
-import frc.robot.commands.ExtendClimbPiston;
-import frc.robot.commands.RetractClimbPiston;
-import frc.robot.commands.Acquire;
-import frc.robot.commands.ElevateToTarget;
-import frc.robot.commands.HomeElevator;
-import frc.robot.commands.Deploy;
-import frc.robot.commands.ToggleManipRotation;
-import frc.robot.commands.ToggleManipTranslation;
-import frc.robot.commands.RotateTurretLeft;
-import frc.robot.commands.RotateTurretRight;
-import frc.robot.commands.ExtendRoller;
-import frc.robot.commands.RetractRoller;
-import frc.robot.commands.StartRoller;
-import frc.robot.commands.StopRoller;
-import frc.robot.commands.DefaultPosition;
-import frc.robot.commands.ToggleRoller;
-import frc.robot.commands.ToggleRollerPistons;
+import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -107,7 +91,6 @@ public final class OI {
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
-
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
 	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
@@ -121,8 +104,9 @@ public final class OI {
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
-		acquireButton.whenPressed(new Acquire());
-		deployButton.whenPressed(new Deploy());
+		acquireButton.whenPressed(new AcquireHP());
+		acquireButton.whenReleased(new AcquireCompleteHP());
+		deployButton.whenPressed(new DeployHP());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 		
@@ -130,8 +114,8 @@ public final class OI {
 		rollerTestButton.whenPressed(new ToggleRoller());
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
-		rotateManipulator.whenPressed(new ToggleManipTranslation());
-		extendManipulator.whenPressed(new ToggleManipRotation());
+		rotateManipulator.whenPressed(new ToggleManipRotation());
+		extendManipulator.whenPressed(new ToggleManipTranslation());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
 		climbPistonButton.whenReleased(new RetractClimbPiston());
 	}

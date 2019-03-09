@@ -55,9 +55,7 @@ public class Constants {
     public static final int xboxControllerPort = 1;
 
 	// Camera stuff
-    public static final String frontCameraHostname = "10.1.38.90";
-    public static final String rearCameraHostname = "10.1.38.91";
-    public static final String frontCameraLabel = "Front Camera";
+    public static final String rearCameraHostname = "10.1.38.90";
 	public static final String rearCameraLabel = "Rear Camera";
 	
 	// Stuff that was deleted that I had to paste back in from the 2018 code
@@ -77,7 +75,6 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.75;
 
 	// Manipulator
-	public static final int HP_ELEVATE_OFFSET = 10; // TODO: Verify this value
 	public static final float CARGO_SENSOR_THRESHOLD = 230;
 
 	// Climber 

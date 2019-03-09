@@ -2,7 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.*;
 
 
@@ -16,7 +17,9 @@ import frc.robot.subsystems.*;
  */
 public class Robot extends TimedRobot {
 	// Interface with players
-        
+    public static final ShuffleboardTab main = Shuffleboard.getTab("SmartDashboard");
+    public static final ShuffleboardHandler shuffHandler = new ShuffleboardHandler();
+
     // Subsystems
     public static final Compressor compressor     = new Compressor();
     public static final Drivetrain drivetrain     = new Drivetrain();
@@ -24,7 +27,6 @@ public class Robot extends TimedRobot {
     public static final AquisitionRoller roller   = new AquisitionRoller();
     public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator();
-    public static final SequenceCoordinator sequenceCoordinator = new SequenceCoordinator();
     public static final Manipulator manipulator = new Manipulator();
 
     public static final Climber climber = new Climber();
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+        VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
     	compressor.start();	
         Robot.accumulatedHeading = 0;
@@ -49,6 +52,7 @@ public class Robot extends TimedRobot {
         turret.TurretInit();
         climber.ClimberInit();
         Constants.practiceBot = isPracticeRobot();
+        shuffHandler.init();
     }
 	
 	/**
@@ -105,7 +109,6 @@ public class Robot extends TimedRobot {
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
-        sequenceCoordinator.execute();
 //		LiveWindow.run();
     }
     

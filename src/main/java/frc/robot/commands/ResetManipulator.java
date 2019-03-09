@@ -3,13 +3,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class Deploy extends InstantCommand {
-
-    public Deploy() {
+public class ResetManipulator extends InstantCommand {
+    public ResetManipulator () {
         requires(Robot.manipulator);
     }
 
-    public void execute() {
-        Robot.sequenceCoordinator.deploy();
+    public void execute () {
+        Robot.manipulator.reset();
     }
 }

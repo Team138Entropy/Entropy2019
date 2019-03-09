@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.RobotMap;
 
 public class Manipulator extends Subsystem {
@@ -11,6 +12,10 @@ public class Manipulator extends Subsystem {
 
     private boolean isTranslated = false;
     private boolean isRotated = false;
+
+    // Control states
+    public boolean readyToAcquire = false;
+    public boolean deployed = false;
 
     public void initDefaultCommand() {
         // Obligatory initDefaultCommand() declaration so we don't get yelled at by WPILib
@@ -42,4 +47,12 @@ public class Manipulator extends Subsystem {
         isRotated = rotation;
         rotationSolenoid.set(rotation);
     }
+
+    public void reset() {
+        isTranslated = Constants.RETRACT;
+        translationSolenoid.set(Constants.RETRACT);
+        isRotated = Constants.HORIZONTAL;
+        rotationSolenoid.set(Constants.HORIZONTAL);
+    }
+
 }

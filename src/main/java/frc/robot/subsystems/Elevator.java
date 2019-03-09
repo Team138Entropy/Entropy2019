@@ -34,7 +34,8 @@ public class Elevator extends Subsystem{
 		NONE,
 		FLOOR,							// Acquire Cargo and dropped Hatch Panels Level 0 (Floor)
 		LOADING_STATION,				// Aquire Cargo from loading station Level 0.5
-		LEVEL_1,						// Deposit at Rocket Level 1 / Deposit at Cargo Ship Level 1 
+		LEVEL_1,						// Deposit at Rocket Level 1 / Deposit at Cargo Ship Level 1
+		LEVEL_1_ACQUIRE,				// Offset Level 1 to clear the brushes on the loading station
 		LEVEL_2,						// Deposit at Rocket Level 2
 		LEVEL_3,						// Deposit at Rocket Level 3
 	}
@@ -115,6 +116,9 @@ public class Elevator extends Subsystem{
 		case "Level 1":
 				elevatorTarget = ElevatorTarget.LEVEL_1;		
 			break;
+		case "Level 1 Acquire":
+				elevatorTarget = ElevatorTarget.LEVEL_1_ACQUIRE;
+				break;
 		case "Level 2":
 				elevatorTarget = ElevatorTarget.LEVEL_2;
 			break;
@@ -168,13 +172,16 @@ public class Elevator extends Subsystem{
 					break;
 				case LEVEL_1:
 					if (Sensors.isCargoPresent()){
-						_targetPosition = 80;
+						_targetPosition = 280;
 					}
 					else
 					{
-						_targetPosition = 0; 
+						_targetPosition = 200; 
 					}
-					break;	
+					break;
+				case LEVEL_1_ACQUIRE:
+					_targetPosition = 350;
+					break;
 				case LEVEL_2:
 				if (Sensors.isCargoPresent()) {
 					_targetPosition = 1080;
@@ -210,13 +217,16 @@ public class Elevator extends Subsystem{
 						break;
 				case LEVEL_1:
 				if (Sensors.isCargoPresent()){
-						_targetPosition =200;
+						_targetPosition = 200;
 					}
 				else
 				{
 					_targetPosition = 300; 
 					}
-				break;	
+				break;
+				case LEVEL_1_ACQUIRE:
+					_targetPosition = 100;
+					break;
 				case LEVEL_2:
 				if (Sensors.isCargoPresent()) {
 					_targetPosition = 400;
@@ -287,6 +297,7 @@ public class Elevator extends Subsystem{
 			     (_direction < 0 && (_currentPosition < _targetPosition) )))
 			{
 				_elevatorMotor.set(ControlMode.MotionMagic, _targetPosition);
+				System.out.println("Setting jog direction to 0...");
 				_direction = 0;
 			}
 		}
@@ -324,6 +335,9 @@ public class Elevator extends Subsystem{
 				break;
 			case LEVEL_1:
 				targetString = "Level 1";
+				break;
+			case LEVEL_1_ACQUIRE:
+				targetString = "Level 1 Acquire";
 				break;
 			case LEVEL_2:
 				targetString = "Level 2";

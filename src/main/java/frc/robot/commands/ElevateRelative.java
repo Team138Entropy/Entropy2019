@@ -2,24 +2,17 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.subsystems.Elevator.ElevatorTarget;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class ElevateToTarget extends Command {
+public class ElevateRelative extends Command {
 	
-	private ElevatorTarget elevatorTarget;
+	private int elevatorTarget;
 	private final double commandTimeoutSeconds = 7;
 	private double _currentCommandTime = 0;
 	
-	public ElevateToTarget(String target){
-		requires(Robot.elevator);
-//		requires(Robot.grasper);
-		elevatorTarget = Robot.elevator.ConvertToTarget(target);
-		}
-	
-	public ElevateToTarget(ElevatorTarget target)
+	public ElevateRelative(int target)
 	{
 		requires(Robot.elevator);
 		elevatorTarget = target;
@@ -27,15 +20,9 @@ public class ElevateToTarget extends Command {
 	
 
 	protected void initialize() {
-		
-		// Supports elevate to scale with hook interference
-		//if (elevatorTarget == ElevatorTarget.LOWER_SCALE || elevatorTarget == ElevatorTarget.UPPER_SCALE) {
-//			Robot.grasper.lowerWrist();
-	//	}
-		
-		Robot.elevator.Elevate(elevatorTarget);
+		Robot.elevator.ElevateRelative(elevatorTarget);
 		_currentCommandTime = 0;
-		}
+	}
 
 	protected void execute() {
 		Robot.elevator.Execute();
@@ -51,7 +38,7 @@ public class ElevateToTarget extends Command {
 		else
 		{
 			if (Robot.elevator.IsMoveComplete()) {
-				System.out.println("ElevateTo <" + elevatorTarget.toString() + "> finished successfully");
+				System.out.println("ElevateTo <" + elevatorTarget + "> finished successfully");
 			}
 			return Robot.elevator.IsMoveComplete();
 		}
@@ -59,11 +46,6 @@ public class ElevateToTarget extends Command {
 
 	protected void end() {
 		Robot.elevator.StopMoving();
-		
-		// Supports release from scale
-	//	if (elevatorTarget == ElevatorTarget.LOWER_SCALE || elevatorTarget == ElevatorTarget.UPPER_SCALE) {
-		//	Robot.grasper.raiseWrist();
-	//	}		
 	}
 
 	protected void interrupted() {

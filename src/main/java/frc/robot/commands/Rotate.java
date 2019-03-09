@@ -3,13 +3,16 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class Acquire extends InstantCommand {
+public class Rotate extends InstantCommand {
 
-    public Acquire() {
+    boolean rotation = false;
+
+    public Rotate (boolean rotate) {
         requires(Robot.manipulator);
+        rotation = rotate;
     }
 
     public void execute() {
-        Robot.sequenceCoordinator.acquire();
+        Robot.manipulator.rotate(rotation);
     }
 }
