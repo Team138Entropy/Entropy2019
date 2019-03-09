@@ -5,10 +5,10 @@ import frc.robot.Constants;
 import frc.robot.OI;
 import frc.robot.commands.StopRollerSequence;
 
-public class LeftOperatorStickReturned implements Event {
+public class LeftOperatorStickBackward implements Event {
 
     public boolean check() {
-        return !(-OI.operatorStick.getRawAxis(OI.NykoController.leftYAxis) > Constants.CloseLoopJoystickDeadband);
+        return (OI.operatorStick.getRawAxis(OI.NykoController.leftYAxis) > Constants.CloseLoopJoystickDeadband);
     }
 
     public Command getCommand() {
