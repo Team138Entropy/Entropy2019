@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.commands.DefaultPosition;
-
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
