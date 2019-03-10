@@ -37,6 +37,7 @@ public class AcquisitionRoller extends Subsystem {
     }
 
     public void togglePistons() {
+        System.out.println("togglePistons called");
         setPistons(!pistonSolenoid.get());
     }
 
