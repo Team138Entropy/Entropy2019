@@ -7,6 +7,7 @@ import frc.robot.Constants;
 import frc.robot.events.EventWatcherThread;
 import frc.robot.events.LeftOperatorStickForward;
 import frc.robot.events.LeftOperatorStickBackward;
+import frc.robot.events.CargoDetected;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.*;
 
@@ -129,7 +130,8 @@ public final class OI {
         climbPistonButton.whenReleased(new RetractClimbPiston());
         
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
-        EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
+		EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
+		EventWatcherThread.getInstance().addEvent(new CargoDetected());
 	}
     
 	public static double getMoveSpeed()
