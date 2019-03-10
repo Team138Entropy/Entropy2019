@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-
+import frc.robot.subsystems.AcquisitionRoller.RollerState;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 public class StopRoller extends InstantCommand {
@@ -11,6 +11,6 @@ public class StopRoller extends InstantCommand {
     }
 
     public void execute() {
-        Robot.roller.setRoller(false);
+        Robot.roller.setRoller(RollerState.STOP);
     }
 }

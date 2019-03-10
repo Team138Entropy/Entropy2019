@@ -18,6 +18,12 @@ public class AcquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
     private static Solenoid pistonSolenoid = new Solenoid(RobotMap.ACQUISITION_PISTON_SOLENOID_CHANNEL);
 
+    public enum RollerState {
+        INTAKE,
+        STOP,
+        EJECT
+    }
+
     protected void initDefaultCommand() {
 
     }
@@ -27,8 +33,27 @@ public class AcquisitionRoller extends Subsystem {
         rollerTalon.set(ControlMode.PercentOutput, 0.0d);
     }
 
-    public synchronized void setRoller(boolean on) {
+    public synchronized void setRoller(final RollerState targetState) {
+        boolean on = false;
+        
+        switch (targetState) {
+            case INTAKE:
+                on = true;
+                rollerTalon.setInverted(false);
+                break;
+            case EJECT:
+                on = true;
+                rollerTalon.setInverted(true);
+                break;
+            case STOP:
+                break;
+        }
+
         rollerTalon.set(ControlMode.PercentOutput, on ? Robot.shuffHandler.getRollerSpeed() : 0.0d);
+    }
+
+    public synchronized void setPistons() {
+
     }
 
     public synchronized void setPistons(boolean ps) {
@@ -43,6 +68,6 @@ public class AcquisitionRoller extends Subsystem {
 
     public void toggleRoller() {
         boolean isOn = (rollerTalon.getMotorOutputPercent() > 0);
-        setRoller (!isOn);
+        setRoller (!isOn ? RollerState.INTAKE : RollerState.STOP);
     }
 }

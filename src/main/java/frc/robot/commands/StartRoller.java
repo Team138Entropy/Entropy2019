@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-
+import frc.robot.subsystems.AcquisitionRoller.RollerState;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
 public class StartRoller extends InstantCommand {
@@ -11,6 +11,6 @@ public class StartRoller extends InstantCommand {
     }
 
     protected void execute() {
-        Robot.roller.setRoller(true);
+        Robot.roller.setRoller(RollerState.INTAKE);
     }
 }
