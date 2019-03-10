@@ -3,7 +3,8 @@ package frc.robot.events;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.OI;
-import frc.robot.commands.StopRollerSequence;
+import frc.robot.commands.SetRoller;
+import frc.robot.subsystems.AcquisitionRoller.RollerState;
 
 public class LeftOperatorStickBackward implements Event {
 
@@ -12,6 +13,6 @@ public class LeftOperatorStickBackward implements Event {
     }
 
     public Command getCommand() {
-        return new StopRollerSequence();
+        return new SetRoller(RollerState.EJECT);
     }
 }

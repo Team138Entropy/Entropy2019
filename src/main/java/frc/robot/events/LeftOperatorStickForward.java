@@ -3,7 +3,8 @@ package frc.robot.events;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Constants;
 import frc.robot.OI;
-import frc.robot.commands.StartRollerSequence;
+import frc.robot.commands.SetRoller;
+import frc.robot.subsystems.AcquisitionRoller.RollerState;
 
 public class LeftOperatorStickForward implements Event {
 
@@ -12,6 +13,6 @@ public class LeftOperatorStickForward implements Event {
     }
 
     public Command getCommand() {
-        return new StartRollerSequence();
+        return new SetRoller(RollerState.INTAKE);
     }
 }
