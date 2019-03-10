@@ -5,14 +5,15 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 
-public class AcquireCompleteHP extends CommandGroup {
 
-    public AcquireCompleteHP() {
+public class AcquireCargo extends CommandGroup {
+
+    public AcquireCargo() {
         requires(Robot.manipulator);
 
         addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
-        addSequential(new Rotate(Constants.VERTICAL));
-        addSequential(new ToggleManipTranslation());
-        addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1));
+        addSequential(new ExtendRoller());
+        addSequential(new ElevateToTarget(ElevatorTarget.FLOOR));
+        addSequential(new StartRoller());
     }
 }

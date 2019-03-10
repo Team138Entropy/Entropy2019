@@ -86,7 +86,6 @@ public final class OI {
 	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
 	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
-	static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
@@ -94,8 +93,11 @@ public final class OI {
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
 	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
-	static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
-	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.rightStick);
+	static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftStick);
+	static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightStick);
+
+	//static Button rotateManipulator = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.middle9);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -109,12 +111,14 @@ public final class OI {
 		deployButton.whenPressed(new DeployHP());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
+
+		acquireCargoButton.whenPressed(new AcquireCargo());
+		deployCargoButton.whenPressed(new DeployCargo());
 		
 		// Testing / individual component operation
-		rollerTestButton.whenPressed(new ToggleRoller());
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
-		rotateManipulator.whenPressed(new ToggleManipRotation());
+		//rotateManipulator.whenPressed(new ToggleManipRotation());
 		extendManipulator.whenPressed(new ToggleManipTranslation());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
 		climbPistonButton.whenReleased(new RetractClimbPiston());
