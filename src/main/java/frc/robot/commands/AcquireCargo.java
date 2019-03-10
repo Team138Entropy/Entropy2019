@@ -1,16 +1,18 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 
-import frc.robot.commands.ElevateToTarget;
-import frc.robot.commands.StartRollerSequence;
-
-import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AcquireCargo extends CommandGroup {
+
     public AcquireCargo() {
-        addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1_ACQUIRE));
-        addParallel(new StartRollerSequence());
+        requires(Robot.manipulator);
+
+        addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
+        addSequential(new ExtendRoller());
         addSequential(new ElevateToTarget(ElevatorTarget.FLOOR));
+        addSequential(new StartRoller());
     }
 }

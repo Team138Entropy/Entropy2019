@@ -62,6 +62,7 @@ public class Sensors {
 	 public static void updateSmartDashboard(){
 		SmartDashboard.putBoolean("Practice Bot", isPracticeBot());
 		SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
+		SmartDashboard.putNumber("Cargo Proximity Value", cargoSensor.getValue());
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());

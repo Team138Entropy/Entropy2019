@@ -73,7 +73,7 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.75;
 
 	// Manipulator
-	public static final float CARGO_SENSOR_THRESHOLD = 230;
+	public static final float CARGO_SENSOR_THRESHOLD = 500;
 
 	// Climber 
 	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;
