@@ -46,7 +46,7 @@ public class Robot extends TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        VisionThread.getInstance().start();
+        //VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
     	compressor.start();	
         Robot.accumulatedHeading = 0;

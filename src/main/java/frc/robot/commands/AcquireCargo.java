@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class AcquireCargo extends CommandGroup {
     public AcquireCargo() {
-        addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_2));
+        addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1_ACQUIRE));
         addParallel(new StartRollerSequence());
         addSequential(new ElevateToTarget(ElevatorTarget.FLOOR));
     }
