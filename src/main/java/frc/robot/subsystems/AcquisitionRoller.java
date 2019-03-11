@@ -17,7 +17,6 @@ import frc.robot.RobotMap;
 public class AcquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
     private static Solenoid pistonSolenoid = new Solenoid(RobotMap.ACQUISITION_PISTON_SOLENOID_CHANNEL);
-    public AcquisitionState acquisitionState = AcquisitionState.IDLE;
 
     public enum AcquisitionState {
         IDLE,

@@ -27,6 +27,11 @@ public class Sensors {
 	public static DigitalInput rightLimitSwitch;
 	
 	public static AnalogInput climbProximitySensor;
+
+	private static final int requiredDebounceCount = 10;
+	private static int currentDebounceCount = 0;
+	public static boolean isCargoDetectionEnabled = false;
+	private static boolean isCargoDetected = false;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -44,6 +49,32 @@ public class Sensors {
 		climbProximitySensor = new AnalogInput(RobotMap.CLIMB_PROXIMiTY_SENOR);
 	}
 	
+	public static void debounce()
+	{
+		if (isCargoDetectionEnabled)
+		{
+			if (cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD)
+			{
+				currentDebounceCount++;
+				System.out.println("debounce " + currentDebounceCount);
+			}
+			else{
+				currentDebounceCount = 0;
+			}
+
+			if (currentDebounceCount > requiredDebounceCount)
+			{
+				System.out.println("Cargo!");
+				isCargoDetectionEnabled = false;	
+				isCargoDetected = true;
+			}
+		}
+		else
+		{
+			currentDebounceCount = 0;
+		}
+	}
+
 	public static double getLeftDistance() {
 		// In METERS
 		return -Robot.drivetrain.bottomLeftTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
@@ -79,8 +110,18 @@ public class Sensors {
 	// 	SmartDashboard.putNumber("Right Velocity",-Robot.drivetrain.frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 	 }
 
+	 public static void detectAndLatchCargo()
+	 {
+		isCargoDetectionEnabled = true;
+	 }
+
+	 public static void unlatchCargo()
+	 {
+		isCargoDetected = false;
+	 }
+
 	public static boolean isCargoPresent (){
-		return (cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD);
+		return (isCargoDetected);
 	}
 
 	public static boolean isTurretLeft (){

@@ -90,8 +90,7 @@ public class Robot extends TimedRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        // TODO: Figure out how autonomousPeriodic functions in relation to teleopPeriodic
-        //teleopPeriodic();
+        teleopPeriodic();
     }
 
     public void teleopInit() {
@@ -117,6 +116,7 @@ public class Robot extends TimedRobot {
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
+        Sensors.debounce();
 //		LiveWindow.run();
     }
 
