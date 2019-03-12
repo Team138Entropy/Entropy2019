@@ -184,7 +184,7 @@ public class Elevator extends Subsystem{
 					break;
 				case LEVEL_2:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 1080;
+					_targetPosition = 1350;
 				}
 				else
 				{
@@ -193,7 +193,7 @@ public class Elevator extends Subsystem{
 					break;
 				case LEVEL_3:
 				if (Sensors.isCargoPresent()) {
-					_targetPosition = 1870;
+					_targetPosition = 2300;
 				}
 				else
 				{
