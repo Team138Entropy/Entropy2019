@@ -28,7 +28,7 @@ public class Sensors {
 	
 	public static AnalogInput climbProximitySensor;
 
-	private static final int requiredDebounceCount = 10;
+	private static final int requiredDebounceCount = 50;
 	private static int currentDebounceCount = 0;
 	public static boolean isCargoDetectionEnabled = false;
 	private static boolean isCargoDetected = false;
