@@ -35,7 +35,7 @@ public class Elevator extends Subsystem{
 		FLOOR,							// Acquire Cargo and dropped Hatch Panels Level 0 (Floor)
 		LOADING_STATION,				// Aquire Cargo from loading station Level 0.5
 		LEVEL_1,						// Deposit at Rocket Level 1 / Deposit at Cargo Ship Level 1
-		LEVEL_1_ACQUIRE,				// Offset Level 1 to clear the brushes on the loading station
+		SAFE,							// Offset Level 1 to clear the brushes on the loading station
 		LEVEL_2,						// Deposit at Rocket Level 2
 		LEVEL_3,						// Deposit at Rocket Level 3
 	}
@@ -117,7 +117,7 @@ public class Elevator extends Subsystem{
 				elevatorTarget = ElevatorTarget.LEVEL_1;		
 			break;
 		case "Level 1 Acquire":
-				elevatorTarget = ElevatorTarget.LEVEL_1_ACQUIRE;
+				elevatorTarget = ElevatorTarget.SAFE;
 				break;
 		case "Level 2":
 				elevatorTarget = ElevatorTarget.LEVEL_2;
@@ -179,7 +179,7 @@ public class Elevator extends Subsystem{
 						_targetPosition = 200; 
 					}
 					break;
-				case LEVEL_1_ACQUIRE:
+				case SAFE:
 					_targetPosition = 350;
 					break;
 				case LEVEL_2:
@@ -201,8 +201,7 @@ public class Elevator extends Subsystem{
 				}
 					break;	
 				default:
-					// Error 
-					break;
+					throw new RuntimeException("Error: Unknown target " + target.toString());
 				}
 			}
 			else	// Competition Robot
@@ -224,7 +223,7 @@ public class Elevator extends Subsystem{
 					_targetPosition = 300; 
 					}
 				break;
-				case LEVEL_1_ACQUIRE:
+				case SAFE:
 					_targetPosition = 100;
 					break;
 				case LEVEL_2:
@@ -246,8 +245,7 @@ public class Elevator extends Subsystem{
 					}
 					break;	
 				default:
-					// Error 
-					break;
+					throw new RuntimeException("Error: Unknown target " + target.toString());
 				}
 			}
 			initiateMove();
@@ -336,7 +334,7 @@ public class Elevator extends Subsystem{
 			case LEVEL_1:
 				targetString = "Level 1";
 				break;
-			case LEVEL_1_ACQUIRE:
+			case SAFE:
 				targetString = "Level 1 Acquire";
 				break;
 			case LEVEL_2:

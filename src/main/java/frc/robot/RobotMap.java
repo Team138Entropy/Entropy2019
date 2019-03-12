@@ -18,7 +18,6 @@ public class RobotMap {
 	public final static int ELEVATOR_PORT 				= 7; 
 									   
 	// Digital I/O Sensors
-	public final static int CARGO_SENSOR                = 5; 
 	public final static int LEFT_TURRET_LIMIT_SWITCH  	= 4; 
 	public final static int CENTER_TURRET_LIMIT_SWITCH  = 3; 
 	public final static int RIGHT_TURRET_LIMIT_SWITCH   = 2; 
@@ -26,6 +25,7 @@ public class RobotMap {
 
 	// Analog I/O Sebsors
 	public final static int CLIMB_PROXIMiTY_SENOR 		= 0;
+	public final static int CARGO_SENSOR                = 1; 
 
 	// Pneumatics
 	public final static int ACQUISITION_PISTON_SOLENOID_CHANNEL = 0;

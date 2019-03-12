@@ -1,11 +1,13 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.events.EventWatcherThread;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.subsystems.*;
-
 
 /**
  * This is the development branch.
@@ -21,22 +23,22 @@ public class Robot extends TimedRobot {
     public static final ShuffleboardHandler shuffHandler = new ShuffleboardHandler();
 
     // Subsystems
-    public static final Compressor compressor     = new Compressor();
-    public static final Drivetrain drivetrain     = new Drivetrain();
+    private static final Compressor compressor = new Compressor();
+    public static final Drivetrain drivetrain = new Drivetrain();
     //public static final DriverVision driverVision = new DriverVision();
-    public static final AquisitionRoller roller   = new AquisitionRoller();
+    public static final AcquisitionRoller roller = new AcquisitionRoller();
     public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator();
     public static final Manipulator manipulator = new Manipulator();
 
     public static final Climber climber = new Climber();
 
-    public static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
-	public static final OI oi = new OI();
+    private static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
+    public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
-    
+
     // Global constants
-    public static String mode; // "auto" or "teleop"
+    private static String mode; // "auto" or "teleop"
     public static String gameData;
 
     /**
@@ -44,61 +46,66 @@ public class Robot extends TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        VisionThread.getInstance().start();
+        //VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
     	compressor.start();	
         Robot.accumulatedHeading = 0;
         elevator.ElevatorInit();
         turret.TurretInit();
         climber.ClimberInit();
+        roller.init();
         Constants.practiceBot = isPracticeRobot();
+
+        EventWatcherThread.getInstance().start();
         shuffHandler.init();
     }
-	
-	/**
+
+    /**
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
+     * the robot is disabled.
      */
-    public void disabledInit(){
+    public void disabledInit() {
 
     }
-	
-	public void disabledPeriodic() {
 
-	}
+    public void disabledPeriodic() {
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
-	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
-	 * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
-	 * below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
-	 * or additional comparisons to the switch structure below with additional strings & commands.
-	 */
+    }
+
+    /**
+     * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
+     * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
+     * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
+     * below the Gyro
+     * <p>
+     * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
+     * or additional comparisons to the switch structure below with additional strings & commands.
+     */
     public void autonomousInit() {
-    	
+
     }
 
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        // TODO: Figure out how autonomousPeriodic functions in relation to teleopPeriodic
-        //teleopPeriodic();
+        teleopPeriodic();
     }
 
     public void teleopInit() {
-    	mode = "teleop";
-    	//Sensors.resetEncoders();
+        mode = "teleop";
+        //Sensors.resetEncoders();
         Sensors.gyro.reset();
         Robot.accumulatedHeading = 0;
-	    Robot.drivetrain.Relax();
+        Robot.drivetrain.Relax();
+
+        //Constants.AutoEnable = true;
+        //Constants.IntegralError = 0;
     }
-    
-    public static boolean isPracticeRobot() {
-    	return (! Sensors.practiceRobotJumperPin.get());
+
+    private static boolean isPracticeRobot() {
+        return (!Sensors.practiceRobotJumperPin.get());
     }
 
     /**
@@ -109,13 +116,14 @@ public class Robot extends TimedRobot {
         elevator.updateSmartDashboard();
         Sensors.updateSmartDashboard();
         turret.updateSmartDashboard();
+        Sensors.debounce();
 //		LiveWindow.run();
     }
-    
+
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-  //      LiveWindow.run();
+        //      LiveWindow.run();
     }
 }

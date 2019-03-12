@@ -14,7 +14,7 @@ public class ShuffleboardHandler extends Subsystem {
     }
 
     public void init() {
-        rollerSpeedDouble = Robot.main.add("Roller Speed", 0.0d).getEntry();
+        rollerSpeedDouble = Robot.main.add("Roller Speed", Constants.ROLLER_SPEED).getEntry();
     }
 
     public void execute() {

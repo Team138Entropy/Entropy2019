@@ -16,9 +16,7 @@ public class Constants {
 	// 6" Wheels, 15:45 chain drive; 256 encoder counts per drive sprocket rotation
 	public final static double MetersPerPulse = Math.PI*6*.0254*15/45/256;
 	public final static double SecondsTo100Milliseconds = 0.1;
-	
-	// public static double Meters2CM = 100.0; // convert distance in Meters to Centimeters
-	public static double Meters2CM = 100.0; // convert distance in Meters to Centimeters
+
 	// TEST ONLY
 	
 	public final static int LeftDriveEncoderPolarity = -1;
@@ -75,7 +73,10 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.75;
 
 	// Manipulator
-	public static final float CARGO_SENSOR_THRESHOLD = 230;
+	public static final float CARGO_SENSOR_THRESHOLD = 500;
+	public static final double DEPLOY_DELAY = 0.25;
+	public static final double PNEUMATIC_DELAY = 0.5;
+
 
 	// Climber 
 	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;

@@ -10,7 +10,7 @@ public class AcquireCompleteHP extends CommandGroup {
     public AcquireCompleteHP() {
         requires(Robot.manipulator);
 
-        addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1_ACQUIRE));
+        addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
         addSequential(new Rotate(Constants.VERTICAL));
         addSequential(new ToggleManipTranslation());
         addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1));

@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
-import frc.robot.RobotMap;
-
 
 public class Climber extends Subsystem {
 
