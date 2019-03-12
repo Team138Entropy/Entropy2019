@@ -7,6 +7,7 @@ import frc.robot.Constants;
 import frc.robot.events.EventWatcherThread;
 import frc.robot.events.LeftOperatorStickForward;
 import frc.robot.events.LeftOperatorStickBackward;
+import frc.robot.events.RightOperatorStickBackward;
 import frc.robot.events.CargoDetected;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.*;
@@ -89,8 +90,6 @@ public final class OI {
 	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
 	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
-    static Button rollerTestButton   = new JoystickButton(operatorStick, NykoController.leftStick);
-    static Button cargoDeploy        = new JoystickButton(operatorStick, NykoController.rightStick);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
@@ -116,9 +115,6 @@ public final class OI {
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 
-		// Testing / individual component operation
-        rollerTestButton.whenPressed(new AcquireCargo());
-        // cargoDeploy.whenPressed(new )
 		acquireCargoButton.whenPressed(new AcquireCargo());
 		deployCargoButton.whenPressed(new DeployCargo());
 		
@@ -130,7 +126,8 @@ public final class OI {
         climbPistonButton.whenReleased(new RetractClimbPiston());
         
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
-		EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
+        EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
+        EventWatcherThread.getInstance().addEvent(new RightOperatorStickBackward());
 		EventWatcherThread.getInstance().addEvent(new CargoDetected());
 	}
     

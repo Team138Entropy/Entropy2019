@@ -74,6 +74,9 @@ public class Constants {
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 500;
+	public static final double DEPLOY_DELAY = 0.25;
+	public static final double PNEUMATIC_DELAY = 0.5;
+
 
 	// Climber 
 	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;

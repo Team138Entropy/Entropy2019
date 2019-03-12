@@ -51,6 +51,8 @@ public class AcquisitionRoller extends Subsystem {
                 rollerTalon.setInverted(true);
                 break;
             case STOP:
+                rollerTalon.setInverted(false);
+                on = false;
                 break;
         }
 
@@ -74,5 +76,10 @@ public class AcquisitionRoller extends Subsystem {
     public void toggleRoller() {
         boolean isOn = (rollerTalon.getMotorOutputPercent() > 0);
         setRoller (!isOn ? RollerState.INTAKE : RollerState.STOP);
+    }
+
+    public void reverseRoller() {
+        boolean isEject = (rollerTalon.getInverted());
+        setRoller (isEject ? RollerState.INTAKE : RollerState.EJECT);
     }
 }

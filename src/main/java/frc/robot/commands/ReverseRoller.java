@@ -4,13 +4,13 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
 
-public class ToggleRollerPistons extends InstantCommand {
+public class ReverseRoller extends InstantCommand {
 
-    public ToggleRollerPistons() {
+    public ReverseRoller() {
         requires(Robot.roller);
     }
 
     protected void execute() {
-        Robot.roller.togglePistons();
+        Robot.roller.reverseRoller();
     }
 }

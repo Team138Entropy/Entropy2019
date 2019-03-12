@@ -13,6 +13,6 @@ public class LeftOperatorStickForward implements Event {
     }
 
     public Command getCommand() {
-        return new SetRoller(RollerState.INTAKE);
+        return new SetRoller(RollerState.EJECT);
     }
 }

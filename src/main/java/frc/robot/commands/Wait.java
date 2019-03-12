@@ -1,15 +1,13 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.subsystems.Elevator.ElevatorTarget;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Wait extends Command {
 	
-	private double commandTimeoutSeconds = 7;
+	private double commandTimeoutSeconds = 0;
 	private double _currentCommandTime = 0;
 	
 	public Wait(double seconds)
