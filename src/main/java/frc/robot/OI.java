@@ -100,7 +100,7 @@ public final class OI {
 	static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightStick);
 
-	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button toggleManipulator = new JoystickButton(operatorStick, NykoController.middle10);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -121,7 +121,7 @@ public final class OI {
 		// Testing / individual component operation
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
-		extendManipulator.whenPressed(new ToggleManipTranslation());
+		toggleManipulator.whenPressed(new ToggleManipulator());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
         climbPistonButton.whenReleased(new RetractClimbPiston());
         
