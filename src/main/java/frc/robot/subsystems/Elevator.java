@@ -176,7 +176,7 @@ public class Elevator extends Subsystem{
 					}
 					else
 					{
-						_targetPosition = 200; 
+						_targetPosition = 250; 
 					}
 					break;
 				case SAFE:
