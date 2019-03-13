@@ -145,7 +145,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed = -1 * driverStick.getRawAxis(XboxController.rightXAxis);
+		double rotateSpeed = driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;
