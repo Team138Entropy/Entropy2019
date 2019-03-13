@@ -1,17 +1,15 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
-import frc.robot.RobotMap;
-import frc.robot.Sensors;
-import frc.robot.commands.JogElevator;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
+import frc.robot.RobotMap;
+import frc.robot.Sensors;
+import frc.robot.commands.JogElevator;
 
 public class Elevator extends Subsystem{
 
@@ -29,25 +27,65 @@ public class Elevator extends Subsystem{
 	
 	// Elevator motion command timeout
 	public static final int kElevatorTimeoutMs = 10;
-	
+
+
+
 	public enum ElevatorTarget{
-		NONE,
-		FLOOR,							// Acquire Cargo and dropped Hatch Panels Level 0 (Floor)
-		LOADING_STATION,				// Aquire Cargo from loading station Level 0.5
-		LEVEL_1,						// Deposit at Rocket Level 1 / Deposit at Cargo Ship Level 1
-		SAFE,							// Offset Level 1 to clear the brushes on the loading station
-		LEVEL_2,						// Deposit at Rocket Level 2
-		LEVEL_3,						// Deposit at Rocket Level 3
+		FLOOR(            // Panels↓  ↓Cargo
+				new TargetEnumData(0, 0), // <- Practice
+				new TargetEnumData(0, 0)  // <- Competition
+		),
+		LOADING_STATION(
+				new TargetEnumData(100, 100),
+				new TargetEnumData(100, 100)
+		),
+		LEVEL_1(
+				new TargetEnumData(200, 280),
+				new TargetEnumData(300, 200)
+		),
+		SAFE(
+				new TargetEnumData(350, 350),
+				new TargetEnumData(100, 100)
+		),
+		LEVEL_2(
+				new TargetEnumData(830, 1350),
+				new TargetEnumData(500, 400)
+		),
+		LEVEL_3(
+				new TargetEnumData(1870, 2300),
+				new TargetEnumData(700, 600)
+		);
+
+		private static class TargetEnumData {
+
+			private double panelHeight, cargoHeight;
+
+			public TargetEnumData(final double panelHeight, final double cargoHeight) {
+				this.panelHeight = panelHeight;
+				this.cargoHeight = cargoHeight;
+			}
+
+			public double get() {
+				return Sensors.isCargoPresent() ? this.cargoHeight : this.panelHeight;
+			}
+		}
+
+		public TargetEnumData practice, competition;
+
+		ElevatorTarget(TargetEnumData practice, TargetEnumData competition) {
+			this.practice = practice;
+			this.competition = competition;
+		}
 	}
-	
+
 	private static int _count = 0;
 
 	private int _direction = 0;		// 0: not moving to target, -1 or 1 moving to target in that direction
-	
+
 	private double _targetPosition = 0.0;
 	private double _currentPosition = 0.0;
 	private boolean _isAtFloor = true;
-	private ElevatorTarget _targetNamedPosition = ElevatorTarget.NONE;
+	private ElevatorTarget _targetNamedPosition = null;
 	private int _currentJogDirection = 0;
 	
 	public void ElevatorInit() {
@@ -153,101 +191,19 @@ public class Elevator extends Subsystem{
 	// Elevate to a specific target position
 	public void Elevate (ElevatorTarget target) {
 		_targetNamedPosition = target;
-		_isAtFloor = false; 
-		if (target == ElevatorTarget.NONE)
-		{
+		_isAtFloor = false;
+		if (target == null) {
 			StopMoving();
 		}
 		else
 		{
-			// TODO: Find actual heights
-			if (Constants.practiceBot) {
-				switch (target) {
-				case FLOOR:
-					_targetPosition = 0;	
-					_isAtFloor = true;
-					break;
-				case LOADING_STATION:
-					_targetPosition = 100;	
-					break;
-				case LEVEL_1:
-					if (Sensors.isCargoPresent()){
-						_targetPosition = 280;
-					}
-					else
-					{
-						_targetPosition = 200; 
-					}
-					break;
-				case SAFE:
-					_targetPosition = 350;
-					break;
-				case LEVEL_2:
-				if (Sensors.isCargoPresent()) {
-					_targetPosition = 1350;
-				}
-				else
-				{
-					_targetPosition = 830;	
-				}
-					break;
-				case LEVEL_3:
-				if (Sensors.isCargoPresent()) {
-					_targetPosition = 2300;
-				}
-				else
-				{
-					_targetPosition = 1870;	
-				}
-					break;	
-				default:
-					throw new RuntimeException("Error: Unknown target " + target.toString());
-				}
-			}
-			else	// Competition Robot
-			{
-				switch (target) {
-				case FLOOR:
-						_targetPosition = 0;	
-						_isAtFloor = true;
-						break;
-				case LOADING_STATION:
-						_targetPosition = 100;	
-						break;
-				case LEVEL_1:
-				if (Sensors.isCargoPresent()){
-						_targetPosition = 200;
-					}
-				else
-				{
-					_targetPosition = 300; 
-					}
-				break;
-				case SAFE:
-					_targetPosition = 100;
-					break;
-				case LEVEL_2:
-				if (Sensors.isCargoPresent()) {
-					_targetPosition = 400;
-				}
-				else
-				{
-					_targetPosition = 500;	
-				}
-					break;
-				case LEVEL_3:
-					if (Sensors.isCargoPresent()) {
-						_targetPosition = 600;
-					}
-					else
-					{
-						_targetPosition = 700;	
-					}
-					break;	
-				default:
-					throw new RuntimeException("Error: Unknown target " + target.toString());
-				}
-			}
+			if (target == ElevatorTarget.FLOOR) _isAtFloor = true;
+
+			_targetPosition = Sensors.isPracticeBot() ?
+					target.practice.get()
+					:
+					target.competition.get();
+
 			initiateMove();
 		}
 	}
@@ -342,9 +298,6 @@ public class Elevator extends Subsystem{
 				break;
 			case LEVEL_3:
 				targetString = "Level 3";
-				break;
-			case NONE:
-				targetString = "None";
 				break;
 			case LOADING_STATION:
 				targetString = "Loading Station";
