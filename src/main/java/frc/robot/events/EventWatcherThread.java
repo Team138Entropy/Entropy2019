@@ -22,6 +22,7 @@ public class EventWatcherThread extends Thread {
     @Override
     public void run() {
 
+        //noinspection InfiniteLoopStatement
         while (true) {
             for (Event e : queue) {
 
