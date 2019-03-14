@@ -13,6 +13,6 @@ public class AcquireCompleteHP extends CommandGroup {
         addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
         //addSequential(new Rotate(Constants.VERTICAL));
         //addSequential(new ToggleManipTranslation());
-        addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1));
+        //addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1));
     }
 }
