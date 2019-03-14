@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="556ec1ab-2ecf-42e2-b01b-92ffb56b3a2e" name="Default Changelist" comment="Suppress warning we don't care about (the thread is supposed to run forever)">
+    <list default="true" id="556ec1ab-2ecf-42e2-b01b-92ffb56b3a2e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Elevator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Elevator.java" afterDir="false" />
     </list>
@@ -24,17 +24,22 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Elevator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="29" selection-start-column="29" selection-end-column="29" />
+            <state relative-caret-position="631">
+              <caret line="215" column="74" selection-start-line="215" selection-start-column="74" selection-end-line="215" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7056#7057#0" expanded="true" />
-                <element signature="e#7080#7081#0" expanded="true" />
-                <element signature="e#9145#9146#0" expanded="true" />
-                <element signature="e#9176#9177#0" expanded="true" />
-                <element signature="e#9369#9370#0" expanded="true" />
-                <element signature="e#9410#9411#0" expanded="true" />
+                <element signature="e#1852#1853#0" expanded="true" />
+                <element signature="e#1918#1919#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="34" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -80,8 +85,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Course" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,7 +169,8 @@
       <workItem from="1551745965669" duration="1977000" />
       <workItem from="1551848555216" duration="1674000" />
       <workItem from="1552434937901" duration="3843000" />
-      <workItem from="1552518128855" duration="42000" />
+      <workItem from="1552518128855" duration="820000" />
+      <workItem from="1552603989866" duration="566000" />
     </task>
     <task id="LOCAL-00001" summary="Make it compile by putting one of Brad's annoying constants back in">
       <created>1551746310647</created>
@@ -201,17 +207,24 @@
       <option name="project" value="LOCAL" />
       <updated>1552435380871</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Refactor some stuff to get rid of two giant switches (also needs to be refactored to a lesser extent)">
+      <created>1552518288783</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1552518288783</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7536000" />
+    <option name="totallyTimeSpent" value="8880000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1933" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18506667" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1872" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -257,7 +270,8 @@
     <MESSAGE value="Add TODO to add a timeout to event-checks" />
     <MESSAGE value="Fix tpyo" />
     <MESSAGE value="Suppress warning we don't care about (the thread is supposed to run forever)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Suppress warning we don't care about (the thread is supposed to run forever)" />
+    <MESSAGE value="Refactor some stuff to get rid of two giant switches (also needs to be refactored to a lesser extent)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor some stuff to get rid of two giant switches (also needs to be refactored to a lesser extent)" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="editorHistoryManager">
@@ -345,26 +359,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Elevator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="215" column="74" selection-start-line="215" selection-start-column="74" selection-end-line="215" selection-end-column="74" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1852#1853#0" expanded="true" />
+            <element signature="e#1918#1919#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="34" selection-start-line="10" selection-start-column="26" selection-end-line="10" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Elevator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="29" selection-start-column="29" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7056#7057#0" expanded="true" />
-            <element signature="e#7080#7081#0" expanded="true" />
-            <element signature="e#9145#9146#0" expanded="true" />
-            <element signature="e#9176#9177#0" expanded="true" />
-            <element signature="e#9369#9370#0" expanded="true" />
-            <element signature="e#9410#9411#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

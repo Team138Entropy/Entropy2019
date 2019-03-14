@@ -60,13 +60,17 @@ public class Elevator extends Subsystem{
 
 			private double panelHeight, cargoHeight;
 
+
 			public TargetEnumData(final double panelHeight, final double cargoHeight) {
 				this.panelHeight = panelHeight;
 				this.cargoHeight = cargoHeight;
 			}
+			public double getPanelHeight() {
+				return panelHeight;
+			}
 
-			public double get() {
-				return Sensors.isCargoPresent() ? this.cargoHeight : this.panelHeight;
+			public double getCargoHeight() {
+				return cargoHeight;
 			}
 		}
 
@@ -199,13 +203,23 @@ public class Elevator extends Subsystem{
 		{
 			if (target == ElevatorTarget.FLOOR) _isAtFloor = true;
 
-			_targetPosition = Sensors.isPracticeBot() ?
-					target.practice.get()
-					:
-					target.competition.get();
+			if (Sensors.isPracticeBot()) {
+				if (Sensors.isCargoPresent()) {
+					_targetPosition = target.practice.getCargoHeight();
+				} else {
+					_targetPosition = target.practice.getPanelHeight();
+				}
+			} else {
+				if (Sensors.isCargoPresent()) {
+					_targetPosition = target.competition.getCargoHeight();
+				} else {
+					_targetPosition = target.competition.getPanelHeight();
+				}
+			}
 
-			initiateMove();
 		}
+
+		initiateMove();
 	}
 
 	private void initiateMove() {
