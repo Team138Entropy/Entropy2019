@@ -9,6 +9,7 @@ public interface Event {
     /**
      * Check whether or not some command should be added to the scheduler.
      * Try to keep this as short-running as possible.
+     * TODO timeout?
      *
      * @return Whether or not it should be added to the scheduler.
      */
