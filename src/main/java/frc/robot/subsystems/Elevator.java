@@ -297,30 +297,35 @@ public class Elevator extends Subsystem{
 	private String convertTargetPositionToString (ElevatorTarget targetNamedPosition) {
 		String targetString = "Error!";
 
-		switch (targetNamedPosition){
-			case FLOOR:
-				targetString = "Floor";
-				break;
-			case LEVEL_1:
-				targetString = "Level 1";
-				break;
-			case SAFE:
-				targetString = "Level 1 Acquire";
-				break;
-			case LEVEL_2:
-				targetString = "Level 2";
-				break;
-			case LEVEL_3:
-				targetString = "Level 3";
-				break;
-			case LOADING_STATION:
-				targetString = "Loading Station";
-				break;
-			default:
-				targetString = "Error!";
-				break;
+		if (targetNamedPosition == null) {
+			targetString =  "None";
 		}
+		else {
 
+			switch (targetNamedPosition){
+				case FLOOR:
+					targetString = "Floor";
+					break;
+				case LEVEL_1:
+					targetString = "Level 1";
+					break;
+				case SAFE:
+					targetString = "Level 1 Acquire";
+					break;
+				case LEVEL_2:
+					targetString = "Level 2";
+					break;
+				case LEVEL_3:
+					targetString = "Level 3";
+					break;
+				case LOADING_STATION:
+					targetString = "Loading Station";
+					break;
+				default:
+					targetString = "Error!";
+					break;
+			}
+		}
 		return targetString; 
 	}
 
