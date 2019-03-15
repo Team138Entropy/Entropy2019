@@ -40,19 +40,19 @@ public class Elevator extends Subsystem{
 				new TargetEnumData(100, 100)
 		),
 		LEVEL_1(
-				new TargetEnumData(250, 280),
+				new TargetEnumData(250, 280),	//Cargo 18 inches
 				new TargetEnumData(300, 200)
 		),
 		SAFE(
-				new TargetEnumData(350, 350),
+				new TargetEnumData(350, 350),	// Cargo 19.5 inches
 				new TargetEnumData(100, 100)
 		),
 		LEVEL_2(
-				new TargetEnumData(830, 1350),
+				new TargetEnumData(830, 1350),	// Cargo 50 inches
 				new TargetEnumData(500, 400)
 		),
 		LEVEL_3(
-				new TargetEnumData(1870, 2300),
+				new TargetEnumData(1870, 2300),	// Cargo 74 inches
 				new TargetEnumData(700, 600)
 		);
 
