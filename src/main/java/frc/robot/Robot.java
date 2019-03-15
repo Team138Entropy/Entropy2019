@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
     // Subsystems
     private static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
-    //public static final DriverVision driverVision = new DriverVision();
+    public static final DriverVision driverVision = new DriverVision();
     public static final AcquisitionRoller roller = new AcquisitionRoller();
     public static final Turret turret = new Turret();
     public static final Elevator elevator = new Elevator();

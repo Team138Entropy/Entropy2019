@@ -3,7 +3,9 @@ package frc.robot;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.SensorCollection;
 import edu.wpi.first.wpilibj.DigitalInput;
-
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoMode.PixelFormat;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -18,6 +20,8 @@ public class Sensors {
 	public static SensorCollection rightSensorCollection;
 	
 	public static double gyroBias=0;
+
+	private static UsbCamera frontCamera;
 
 	public static DigitalInput practiceRobotJumperPin;
 	public static AnalogInput cargoSensor;
@@ -36,6 +40,9 @@ public class Sensors {
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+
+		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
+		frontCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
 
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
