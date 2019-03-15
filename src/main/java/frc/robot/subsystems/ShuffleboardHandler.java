@@ -8,6 +8,7 @@ import frc.robot.Robot;
 public class ShuffleboardHandler extends Subsystem {
 
     private NetworkTableEntry rollerSpeedDouble;
+    private NetworkTableEntry pistonRotateEnabled;
 
     public void initDefaultCommand() {
 
@@ -15,6 +16,7 @@ public class ShuffleboardHandler extends Subsystem {
 
     public void init() {
         rollerSpeedDouble = Robot.main.add("Roller Speed", Constants.ROLLER_SPEED).getEntry();
+        pistonRotateEnabled = Robot.main.add("Piston Rotate Enabled", false).getEntry();
     }
 
     public void execute() {
@@ -23,5 +25,9 @@ public class ShuffleboardHandler extends Subsystem {
 
     public double getRollerSpeed() {
         return rollerSpeedDouble.getDouble(Constants.ROLLER_SPEED);
+    }
+
+    public boolean isPistonRotateEnabled() {
+        return pistonRotateEnabled.getBoolean(false);
     }
 }

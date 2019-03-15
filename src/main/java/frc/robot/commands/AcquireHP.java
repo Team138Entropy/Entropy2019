@@ -10,8 +10,8 @@ public class AcquireHP extends CommandGroup {
     public AcquireHP() {
         requires(Robot.manipulator);
 
-        addSequential(new Rotate(Constants.VERTICAL));
-        addSequential(new ToggleManipTranslation());
+        //addSequential(new Rotate(Constants.VERTICAL));
+        //addSequential(new ToggleManipTranslation());
         addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_1));
     }
 }

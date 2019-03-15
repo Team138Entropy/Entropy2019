@@ -100,7 +100,7 @@ public final class OI {
 	static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightStick);
 
-	static Button extendManipulator = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button toggleManipulator = new JoystickButton(operatorStick, NykoController.middle10);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -121,7 +121,7 @@ public final class OI {
 		// Testing / individual component operation
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
 
-		extendManipulator.whenPressed(new ToggleManipTranslation());
+		toggleManipulator.whenPressed(new ToggleManipulator());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
         climbPistonButton.whenReleased(new RetractClimbPiston());
         
@@ -134,7 +134,7 @@ public final class OI {
 	public static double getMoveSpeed()
 	{
 		// joystick values are opposite to robot directions
-		double moveSpeed = -1 * driverStick.getRawAxis(XboxController.leftYAxis);
+		double moveSpeed = driverStick.getRawAxis(XboxController.leftYAxis);
 		// Apply thresholds to joystick positions to eliminate
 		// creep motion due to non-zero joystick value when joysticks are 
 		// "centered"
@@ -145,7 +145,7 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed= -driverStick.getRawAxis(XboxController.rightXAxis);
+		double rotateSpeed = driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
 		return rotateSpeed;

@@ -22,6 +22,7 @@ public class EventWatcherThread extends Thread {
     @Override
     public void run() {
 
+        //noinspection InfiniteLoopStatement
         while (true) {
             for (Event e : queue) {
 
@@ -33,7 +34,7 @@ public class EventWatcherThread extends Thread {
                   lastStateCache.put(e, savedState);
                 }
 
-                // Add the command to the scheduler onli if the state of the event changed
+                // Add the command to the scheduler only if the state of the event changed
                 if (savedState && !lastStateCache.get(e)) {
                   Scheduler.getInstance().add(e.getCommand());
                 }

@@ -7,6 +7,6 @@ public class DeployHP extends CommandGroup {
 
     public DeployHP() {
         requires(Robot.manipulator);
-        addSequential(new ToggleManipTranslation());
+        //addSequential(new ToggleManipTranslation());
     }
 }
