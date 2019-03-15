@@ -59,7 +59,7 @@ public class CheesyDrive {
         if (isHighGear) {
             wheel = applyMagicFunc(wheel, kHighWheelNonLinearity, 2);
         } else {
-            wheel = applyMagicFunc(wheel, kLowWheelNonLinearity, 3);
+            wheel = applyMagicFunc(wheel, kLowWheelNonLinearity, 2);
         }
 
         double leftPwm, rightPwm, overPower;
@@ -162,10 +162,15 @@ public class CheesyDrive {
      */
     private double applyMagicFunc(final double rawValue, final double nonLinearity, final int iterations) {
         final double denominator = Math.sin(Math.PI / 2.0 * nonLinearity);
+        boolean newMath = true;
         double retVal = rawValue;
 
         for (int i = 0; i < iterations; i++) {
-            retVal = Math.sin(Math.PI / 2.0 * nonLinearity * retVal) / denominator;
+            if (newMath) {
+                retVal = retVal * retVal * retVal; //y = x^3
+            } else {
+                retVal = Math.sin(Math.PI / 2.0 * nonLinearity * retVal) / denominator;
+            }
         }
 
         return retVal;
