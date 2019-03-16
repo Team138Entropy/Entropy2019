@@ -114,7 +114,7 @@
           "2,0": {
             "size": [
               2,
-              4
+              3
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -175,10 +175,10 @@
               ]
             }
           },
-          "8,0": {
+          "2,3": {
             "size": [
               2,
-              5
+              2
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -187,7 +187,7 @@
               "_children": []
             }
           },
-          "10,0": {
+          "12,0": {
             "size": [
               1,
               1
@@ -200,7 +200,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "11,0": {
+          "9,0": {
             "size": [
               1,
               1
@@ -211,7 +211,7 @@
               "_title": "Proximity Value"
             }
           },
-          "12,0": {
+          "8,0": {
             "size": [
               1,
               1
@@ -224,7 +224,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "10,1": {
+          "10,0": {
             "size": [
               1,
               1
@@ -237,7 +237,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "11,1": {
+          "11,0": {
             "size": [
               1,
               1
@@ -246,6 +246,25 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Cargo Proximity Value",
               "_title": "Cargo Proximity Value"
+            }
+          },
+          "8,1": {
+            "size": [
+              5,
+              5
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://frontCamera",
+              "_title": "frontCamera",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
             }
           }
         }
