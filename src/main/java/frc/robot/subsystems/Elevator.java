@@ -40,20 +40,20 @@ public class Elevator extends Subsystem{
 				new TargetEnumData(100, 100)
 		),
 		LEVEL_1(
-				new TargetEnumData(250, 280),	//Cargo 18 inches
-				new TargetEnumData(300, 200)
+				new TargetEnumData(250, 280),	//Hatch Panel 9 inches, Cargo 18 inches
+				new TargetEnumData(250, 280)
 		),
 		SAFE(
-				new TargetEnumData(350, 350),	// Cargo 19.5 inches
-				new TargetEnumData(100, 100)
+				new TargetEnumData(350, 350),	// Hatch Panel & Cargo 19.5 inches
+				new TargetEnumData(350, 350)
 		),
 		LEVEL_2(
-				new TargetEnumData(830, 1350),	// Cargo 50 inches
-				new TargetEnumData(500, 400)
+				new TargetEnumData(830, 1350),	// Hatch Panel 49.5 inches, Cargo 50 inches
+				new TargetEnumData(830, 1350)
 		),
 		LEVEL_3(
-				new TargetEnumData(1870, 2300),	// Cargo 74 inches
-				new TargetEnumData(700, 600)
+				new TargetEnumData(1870, 2300),	// Hatch Panel 78.5 inches, Cargo 74 inches
+				new TargetEnumData(1870, 2300)
 		);
 
 		private static class TargetEnumData {
@@ -271,7 +271,7 @@ public class Elevator extends Subsystem{
 		}
 	}
 	
-	public void updateSmartDashboard()
+ 	public void updateSmartDashboard()
 	{                  
 		SmartDashboard.putNumber("Current Position", GetElevatorPosition());
 		SmartDashboard.putString("Target Named Position", convertTargetPositionToString(_targetNamedPosition));
