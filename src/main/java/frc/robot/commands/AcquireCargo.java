@@ -13,6 +13,7 @@ public class AcquireCargo extends CommandGroup {
 
         addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
         addSequential(new ExtendRoller());
+        addSequential(new Wait(0.5));
         addSequential(new ElevateToTarget(ElevatorTarget.FLOOR));
         addSequential(new SetRoller(RollerState.INTAKE));
         addSequential(new DetectAndLatchCargo());

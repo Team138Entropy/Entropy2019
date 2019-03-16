@@ -36,24 +36,24 @@ public class Elevator extends Subsystem{
 				new TargetEnumData(0, 0)  // <- Competition
 		),
 		LOADING_STATION(
-				new TargetEnumData(100, 100),
-				new TargetEnumData(100, 100)
+				new TargetEnumData(250, 280),
+				new TargetEnumData(250, 190)
 		),
 		LEVEL_1(
-				new TargetEnumData(250, 280),	//Hatch Panel 9 inches, Cargo 18 inches
-				new TargetEnumData(250, 280)
+				new TargetEnumData(250, 280),	//Hatch Panel 9? inches, Cargo 18 inches
+				new TargetEnumData(250, 190)
 		),
 		SAFE(
 				new TargetEnumData(350, 350),	// Hatch Panel & Cargo 19.5 inches
-				new TargetEnumData(350, 350)
+				new TargetEnumData(230, 230)
 		),
 		LEVEL_2(
 				new TargetEnumData(830, 1350),	// Hatch Panel 49.5 inches, Cargo 50 inches
-				new TargetEnumData(830, 1350)
+				new TargetEnumData(1080, 1050)
 		),
 		LEVEL_3(
-				new TargetEnumData(1870, 2300),	// Hatch Panel 78.5 inches, Cargo 74 inches
-				new TargetEnumData(1870, 2300)
+				new TargetEnumData(1870, 2300),	// Hatch Panel 78.5? inches, Cargo 74 inches
+				new TargetEnumData(1700, 1700)
 		);
 
 		private static class TargetEnumData {

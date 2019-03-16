@@ -41,6 +41,12 @@ public class Sensors {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
+		try {
+			CameraServer.getInstance().addAxisCamera(Constants.rearCameraLabel, Constants.rearCameraHostname);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
 		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
 		frontCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
 

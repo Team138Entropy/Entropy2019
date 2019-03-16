@@ -260,11 +260,22 @@
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": true,
-              "Controls/Rotation": "NONE",
+              "Controls/Rotation": "QUARTER_CW",
               "compression": -1.0,
               "fps": -1,
               "imageWidth": -1,
               "imageHeight": -1
+            }
+          },
+          "2,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Wait Timer",
+              "_title": "Wait Timer"
             }
           }
         }
