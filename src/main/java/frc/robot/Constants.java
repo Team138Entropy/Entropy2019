@@ -73,7 +73,7 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.75;
 
 	// Manipulator
-	public static final float CARGO_SENSOR_THRESHOLD = 459;
+	public static final float CARGO_SENSOR_THRESHOLD = 375;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
 
