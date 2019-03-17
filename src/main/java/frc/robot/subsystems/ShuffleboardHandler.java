@@ -16,7 +16,7 @@ public class ShuffleboardHandler extends Subsystem {
 
     public void init() {
         rollerSpeedDouble = Robot.main.add("Roller Speed", Constants.ROLLER_SPEED).getEntry();
-        pistonRotateEnabled = Robot.main.add("Piston Rotate Enabled", false).getEntry();
+        pistonRotateEnabled = Robot.main.add("Piston Rotate Enabled", true).getEntry();
     }
 
     public void execute() {
@@ -28,6 +28,6 @@ public class ShuffleboardHandler extends Subsystem {
     }
 
     public boolean isPistonRotateEnabled() {
-        return pistonRotateEnabled.getBoolean(false);
+        return pistonRotateEnabled.getBoolean(true);
     }
 }

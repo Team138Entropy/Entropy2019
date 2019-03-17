@@ -10,10 +10,10 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "6,0": {
+          "2,4": {
             "size": [
               2,
-              5
+              2
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -53,10 +53,10 @@
               ]
             }
           },
-          "4,0": {
+          "6,4": {
             "size": [
               2,
-              5
+              2
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -111,10 +111,10 @@
               ]
             }
           },
-          "2,0": {
+          "4,4": {
             "size": [
               2,
-              3
+              2
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -137,7 +137,7 @@
           "0,0": {
             "size": [
               2,
-              6
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -175,18 +175,6 @@
               ]
             }
           },
-          "2,3": {
-            "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_title": "Acquire and Deploy",
-              "Layout/Label position": "BOTTOM",
-              "_children": []
-            }
-          },
           "12,0": {
             "size": [
               1,
@@ -200,7 +188,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,0": {
+          "12,3": {
             "size": [
               1,
               1
@@ -211,7 +199,7 @@
               "_title": "Proximity Value"
             }
           },
-          "8,0": {
+          "12,4": {
             "size": [
               1,
               1
@@ -224,7 +212,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "10,0": {
+          "12,2": {
             "size": [
               1,
               1
@@ -237,7 +225,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "11,0": {
+          "12,1": {
             "size": [
               1,
               1
@@ -248,9 +236,9 @@
               "_title": "Cargo Proximity Value"
             }
           },
-          "8,1": {
+          "8,0": {
             "size": [
-              5,
+              4,
               5
             ],
             "content": {
@@ -261,13 +249,13 @@
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": true,
               "Controls/Rotation": "QUARTER_CW",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "compression": 28.80327868852459,
+              "fps": 20,
+              "imageWidth": 360,
+              "imageHeight": 240
             }
           },
-          "2,5": {
+          "12,5": {
             "size": [
               1,
               1
@@ -276,6 +264,25 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Wait Timer",
               "_title": "Wait Timer"
+            }
+          },
+          "2,0": {
+            "size": [
+              6,
+              4
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://Rear Camera",
+              "_title": "axis-camera138",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
             }
           }
         }
