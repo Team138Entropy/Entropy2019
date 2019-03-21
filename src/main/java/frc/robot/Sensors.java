@@ -113,6 +113,7 @@ public class Sensors {
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
 		SmartDashboard.putNumber("Proximity Value", climbProximitySensor.getValue());
 		SmartDashboard.putBoolean("Proximity", isClimbProximityThresholdReached());
+		SmartDashboard.putNumber("Roller Current", Robot.roller.getRollerCurrent());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
 	// 	SmartDashboard.putNumber("Right Pos(M)", getRightDistance());
 	// 	SmartDashboard.putNumber("Elev Position", Robot.elevator._elevatorMotor.getSelectedSensorPosition(0));     
