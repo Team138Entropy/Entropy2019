@@ -97,5 +97,32 @@ public class Drivetrain extends Subsystem {
 		_speedFactor = newDriveSpeed;
 	}
 
+	public double limitRateOfChange(double currentValue, double targetValue, double maxDelta) {
+		double adjustedValue = currentValue;
+
+		if (currentValue < targetValue) {
+			// currentValue needs to move up to targetValue
+			if (currentValue + maxDelta < targetValue) {
+				// We're safe to move up by our max value
+				adjustedValue += maxDelta;
+			} else {
+				// We're so close to our target that adding maxDelta will overshoot, so do it manually
+				adjustedValue = targetValue;
+			}
+		}
+
+		if (currentValue > targetValue) {
+			// currentValue needs to move down to targetValue
+			if (currentValue - maxDelta > targetValue) {
+				// We're safe to move down by our max value
+				adjustedValue -= maxDelta;
+			} else {
+				// We're so close to our target that removing maxDelta will overshoot, so do it manually
+				adjustedValue = targetValue;
+			}
+		}
+
+		return adjustedValue;
+	}
 
 }

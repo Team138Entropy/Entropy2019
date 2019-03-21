@@ -4,11 +4,15 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.CheesyDrive;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.Drivetrain;
+import frc.robot.Constants;
 
 public class TeleopDrive extends Command {
 
 //           *happy stalin*
 	CheesyDrive ourDrive = new CheesyDrive();
+
+	double currentSpeed = 0;
 	
 	public TeleopDrive(){
 		requires(Robot.drivetrain);
@@ -19,11 +23,13 @@ public class TeleopDrive extends Command {
 	}
 
 	protected void execute() {
-		double moveSpeed,rotateSpeed;
-		moveSpeed=OI.getMoveSpeed();
+		double targetMoveSpeed,rotateSpeed;
+		targetMoveSpeed=OI.getMoveSpeed();
 		rotateSpeed=OI.getRotateSpeed();
 
-		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
+		currentSpeed = Robot.drivetrain.limitRateOfChange(currentSpeed, targetMoveSpeed, Constants.maxAccelerationDelta);
+
+		Robot.drivetrain.drive(ourDrive.cheesyDrive(currentSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
 	}
 
 	protected boolean isFinished() {
