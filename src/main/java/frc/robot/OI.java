@@ -148,7 +148,7 @@ public final class OI {
 		double rotateSpeed = driverStick.getRawAxis(XboxController.rightXAxis);
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
-		return rotateSpeed;
+		return -1 * rotateSpeed;
 	}
 	
 	public static boolean isReverse() {

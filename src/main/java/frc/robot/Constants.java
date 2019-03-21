@@ -24,14 +24,14 @@ public class Constants {
 	
 	// 2019 Drive Train constants
 	public final static double FullSpeed = 0.75;
-	public final static double ClimbSpeed = 0.25;
+	public final static double ClimbSpeed = 0.75;
 
 	// Elevator
 	public final static double elevatorHomingSpeed = -0.2;
-	public final static double elevatorJogSpeed = 0.5;
+	public final static double elevatorJogSpeed = 0.25;
 	public final static double elevatorMoveSpeed = 1.0;
 	public final static double elevatorDownMoveSpeed = 0.7;
-	public final static double elevatorHoldSpeed = 0.1;
+	public final static double elevatorHoldSpeed = 0.05;
 	public final static double elevatorExchangeSpeed = 0.5;
 	public final static int elevatorUp = 1; 
 	public final static int elevatorDown = -1;
@@ -53,7 +53,7 @@ public class Constants {
     public static final int xboxControllerPort = 1;
 
 	// Camera stuff
-    public static final String rearCameraHostname = "10.1.38.90";
+    public static final String rearCameraHostname = "axis-camera138.local";
 	public static final String rearCameraLabel = "Rear Camera";
 	
 	// Stuff that was deleted that I had to paste back in from the 2018 code
@@ -73,7 +73,7 @@ public class Constants {
 	public static final double ROLLER_SPEED = 0.75;
 
 	// Manipulator
-	public static final float CARGO_SENSOR_THRESHOLD = 500;
+	public static final float CARGO_SENSOR_THRESHOLD = 375;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
 

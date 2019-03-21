@@ -149,17 +149,26 @@ public class Turret extends Subsystem {
     {
         _turretMotor.set(ControlMode.PercentOutput, Constants.TurretSpeed * _direction);
 
+        int counter = 0;
+
         if (Sensors.isTurretLeft()) {
             _currentPosition = LEFT_POSITION;
+            counter++;
         }
-        else if (Sensors.isTurretCenter()) {
-            _currentPosition = CENTER_POSITION;
-        }
-        else if (Sensors.isTurretRight()){
+        
+        if (Sensors.isTurretRight()){
             _currentPosition = RIGHT_POSITION;
+            counter++;
+        }
+        
+        if (Sensors.isTurretCenter()) {
+            _currentPosition = CENTER_POSITION;
+            counter++;
         }
 
-        if (IsMoveComplete()) {
+        // If something went wrong stop moving
+        // If move is complete, also stop moving
+        if (counter > 1 || IsMoveComplete()) {
             StopMoving();
         }
     
