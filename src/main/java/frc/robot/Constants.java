@@ -21,7 +21,6 @@ public class Constants {
 	public final static double maxAccelerationDelta = 0.1;
 
 	// TEST ONLY
-	
 	public final static int LeftDriveEncoderPolarity = -1;
 	public final static int RightDriveEncoderPolarity = 1;
 	

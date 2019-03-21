@@ -154,18 +154,6 @@ public final class OI {
 	public static boolean isReverse() {
 		return driverStick.getRawButton(XboxController.b);
 	}
-	
-	public static boolean isFullSpeed() {
-		// We don't use a freaking transmission, so just return false
-		return false;
-
-        // But if we did...
-        // return driverStick.getRawAxis(xboxRightTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
-    }
-
-    public static boolean isQuickturn() {
-        return driverStick.getRawAxis(XboxController.leftTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
-    }
 
     // Return the jog direction: 1 for up, -1 for down
     public static int getElevatorJogDirection() {
