@@ -74,6 +74,7 @@ public class Constants {
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 375;
+	public static final float OVERCURRENT_THRESHOLD = 20;  // TODO: need value!
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
 
