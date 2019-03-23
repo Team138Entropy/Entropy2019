@@ -44,8 +44,8 @@ public class Sensors {
 
 		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
         backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 1);
-		frontCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
-		backCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
+		frontCamera.setVideoMode(PixelFormat.kMJPEG, 160, 120, 30);
+		backCamera.setVideoMode(PixelFormat.kMJPEG, 160, 120, 30);
 
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
