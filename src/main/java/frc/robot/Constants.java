@@ -72,6 +72,8 @@ public class Constants {
 	public static final float CARGO_SENSOR_THRESHOLD = 375;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
+	public static final int HATCH_PANEL_UP = 100; // TODO: Fine Tune
+	public static final int HATCH_PANEL_DOWN = -100; // TODO: Fine Tune
 
 
 	// Climber 

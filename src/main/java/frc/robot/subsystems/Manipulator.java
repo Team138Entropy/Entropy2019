@@ -9,9 +9,11 @@ public class Manipulator extends Subsystem {
 
     public Solenoid translationSolenoid = new Solenoid(RobotMap.MANIPULATOR_TRANSLATION_PORT);
     public Solenoid rotationSolenoid = new Solenoid(RobotMap.MANIPULATOR_ROTATION_PORT);
+    public Solenoid hatchPanelSolenoid = new Solenoid(RobotMap.HATCH_PANEL_PISTON_SOLENOID_CHANNEL);
 
     private boolean isTranslated = false;
     private boolean isRotated = false;
+    private boolean isHatchPanelTranslated = false;
 
     // Control states
     public boolean readyToAcquire = false;
@@ -48,11 +50,20 @@ public class Manipulator extends Subsystem {
         rotationSolenoid.set(rotation);
     }
 
-    public void reset() {
-        isTranslated = Constants.RETRACT;
-        translationSolenoid.set(Constants.RETRACT);
-        isRotated = Constants.HORIZONTAL;
-        rotationSolenoid.set(Constants.HORIZONTAL);
+    public void translateHatchPanel (boolean translation) {
+        isHatchPanelTranslated = translation;
+        translationSolenoid.set(translation);
     }
 
+
+    public void reset() {
+        isTranslated = Constants.RETRACT;
+        translationSolenoid.set(isTranslated);
+
+        isRotated = Constants.HORIZONTAL;
+        rotationSolenoid.set(isRotated);
+
+        isHatchPanelTranslated = Constants.RETRACT;
+        hatchPanelSolenoid.set(isHatchPanelTranslated);
+    }
 }
