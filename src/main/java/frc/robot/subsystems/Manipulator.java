@@ -52,7 +52,7 @@ public class Manipulator extends Subsystem {
 
     public void translateHatchPanel (boolean translation) {
         isHatchPanelTranslated = translation;
-        translationSolenoid.set(translation);
+        hatchPanelSolenoid.set(translation);
     }
 
 

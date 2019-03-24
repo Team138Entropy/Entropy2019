@@ -28,7 +28,7 @@ public class Constants {
 
 	// Elevator
 	public final static double elevatorHomingSpeed = -0.2;
-	public final static double elevatorJogSpeed = 0.25;
+	public final static double elevatorJogSpeed = 0.5;
 	public final static double elevatorMoveSpeed = 1.0;
 	public final static double elevatorDownMoveSpeed = 0.7;
 	public final static double elevatorHoldSpeed = 0.05;
@@ -72,7 +72,7 @@ public class Constants {
 	public static final float CARGO_SENSOR_THRESHOLD = 375;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
-	public static final int HATCH_PANEL_UP = 100; // TODO: Fine Tune
+	public static final int HATCH_PANEL_UP = 250; // TODO: Fine Tune
 	public static final int HATCH_PANEL_DOWN = -100; // TODO: Fine Tune
 
 
