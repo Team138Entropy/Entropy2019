@@ -188,54 +188,6 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Proximity Value",
-              "_title": "Proximity Value"
-            }
-          },
-          "6,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Proximity",
-              "_title": "Proximity",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "6,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Raw Cargo Present",
-              "_title": "Raw Cargo Present",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "8,3": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Cargo Proximity Value",
-              "_title": "Cargo Proximity Value"
-            }
-          },
           "3,3": {
             "size": [
               1,
@@ -271,9 +223,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,0": {
+          "8,4": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -282,9 +234,9 @@
               "_title": "Climb Proximity Value"
             }
           },
-          "9,0": {
+          "6,4": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -293,6 +245,30 @@
               "_title": "Climb Proximity",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "6,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Raw Cargo Present",
+              "_title": "Raw Cargo Present",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,3": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Cargo Proximity Value",
+              "_title": "Cargo Proximity Value"
             }
           }
         }
