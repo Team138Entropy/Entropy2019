@@ -188,9 +188,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "7,4": {
+          "8,4": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -201,7 +201,7 @@
           },
           "6,4": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -214,7 +214,7 @@
           },
           "6,3": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -225,9 +225,9 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "7,3": {
+          "8,3": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -247,9 +247,9 @@
               "_title": "Wait Timer"
             }
           },
-          "7,2": {
+          "8,2": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
@@ -260,13 +260,37 @@
           },
           "6,2": {
             "size": [
-              1,
+              2,
               1
             ],
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Roller Overcurrent",
               "_title": "Roller Overcurrent",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "8,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Climb Proximity Value",
+              "_title": "Climb Proximity Value"
+            }
+          },
+          "9,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Climb Proximity",
+              "_title": "Climb Proximity",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }

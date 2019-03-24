@@ -140,8 +140,8 @@ public class Sensors {
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
-		SmartDashboard.putNumber("Proximity Value", climbProximitySensor.getValue());
-		SmartDashboard.putBoolean("Proximity", isClimbProximityThresholdReached());
+		SmartDashboard.putNumber("Climb Proximity Value", climbProximitySensor.getValue());
+		SmartDashboard.putBoolean("Climb Proximity", isClimbProximityThresholdReached());
 		SmartDashboard.putNumber("Roller Current", Robot.roller.getRollerCurrent()); 
 		SmartDashboard.putBoolean("Roller Overcurrent", isOverCurrent());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
