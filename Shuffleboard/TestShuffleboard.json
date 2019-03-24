@@ -10,10 +10,10 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "2,4": {
+          "2,0": {
             "size": [
               2,
-              2
+              3
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -53,10 +53,10 @@
               ]
             }
           },
-          "6,4": {
+          "4,0": {
             "size": [
               2,
-              2
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -111,10 +111,10 @@
               ]
             }
           },
-          "4,4": {
+          "2,3": {
             "size": [
               2,
-              2
+              1
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -175,7 +175,7 @@
               ]
             }
           },
-          "12,0": {
+          "2,4": {
             "size": [
               1,
               1
@@ -188,7 +188,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "12,3": {
+          "12,4": {
             "size": [
               1,
               1
@@ -199,7 +199,7 @@
               "_title": "Proximity Value"
             }
           },
-          "12,4": {
+          "11,4": {
             "size": [
               1,
               1
@@ -212,7 +212,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "12,2": {
+          "9,4": {
             "size": [
               1,
               1
@@ -225,7 +225,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "12,1": {
+          "10,4": {
             "size": [
               1,
               1
@@ -236,10 +236,29 @@
               "_title": "Cargo Proximity Value"
             }
           },
-          "8,0": {
+          "6,0": {
+            "size": [
+              3,
+              5
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://backCamera",
+              "_title": "backCamera",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "QUARTER_CCW",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
+            }
+          },
+          "9,0": {
             "size": [
               4,
-              5
+              4
             ],
             "content": {
               "_type": "Camera Stream",
@@ -248,14 +267,14 @@
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": true,
-              "Controls/Rotation": "QUARTER_CW",
-              "compression": 28.80327868852459,
-              "fps": 20,
-              "imageWidth": 360,
-              "imageHeight": 240
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": -1,
+              "imageHeight": -1
             }
           },
-          "12,5": {
+          "3,4": {
             "size": [
               1,
               1
@@ -264,25 +283,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Wait Timer",
               "_title": "Wait Timer"
-            }
-          },
-          "2,0": {
-            "size": [
-              6,
-              4
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://Rear Camera",
-              "_title": "axis-camera138",
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
             }
           }
         }
@@ -506,6 +506,13 @@
                   "Range/Center": 0.0,
                   "Visuals/Orientation": "HORIZONTAL",
                   "Visuals/Number of tick marks": 5
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Solenoid[0,4]/Value",
+                  "_title": "LiveWindow/Ungrouped/Solenoid[0,4]/Value",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
             }
@@ -580,9 +587,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -4.0,
+    "x": -2.0,
     "y": 0.0,
-    "width": 1936.0,
+    "width": 1934.0,
     "height": 1056.0
   }
 }
