@@ -82,4 +82,9 @@ public class AcquisitionRoller extends Subsystem {
         boolean isEject = (rollerTalon.getInverted());
         setRoller (isEject ? RollerState.INTAKE : RollerState.EJECT);
     }
+
+    
+	public double getRollerCurrent () {
+		return rollerTalon.getOutputCurrent();
+	}
 }

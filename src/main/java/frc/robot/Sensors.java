@@ -35,8 +35,11 @@ public class Sensors {
 
 	private static final int requiredDebounceCount = 50;
 	private static int currentDebounceCount = 0;
+	private static final int requiredOverCurrentDebounceCount = 25;
+	private static int currentOverCurrentDebounceCount = 0;
 	public static boolean isCargoDetectionEnabled = false;
 	private static boolean isCargoDetected = false;
+	private static boolean isOverCurrentDetected = false;
 	
 	static {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -61,6 +64,11 @@ public class Sensors {
 	
 	public static void debounce()
 	{
+		debounceCargoSensor();
+		debounceOverCurrent();
+	}
+
+	private static void debounceCargoSensor() {
 		if (isCargoDetectionEnabled)
 		{
 			if (cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD)
@@ -85,22 +93,46 @@ public class Sensors {
 		}
 	}
 
+	private static void debounceOverCurrent() {
+		if (isCargoDetectionEnabled)
+		{
+			if (Robot.roller.getRollerCurrent() > Constants.OVERCURRENT_THRESHOLD)
+			{
+				currentOverCurrentDebounceCount++;
+				System.out.println("debounce overcurrent " + currentOverCurrentDebounceCount);
+			}
+			else{
+				currentOverCurrentDebounceCount = 0;
+			}
+
+			if (currentOverCurrentDebounceCount > requiredOverCurrentDebounceCount)
+			{
+				System.out.println("Overcurrent!");
+				currentOverCurrentDebounceCount = 0;
+				isOverCurrentDetected = true;
+			}
+		}
+		else {
+			currentOverCurrentDebounceCount = 0;
+		}
+	}
+
 	public static double getLeftDistance() {
 		// In METERS
-		return -Robot.drivetrain.bottomLeftTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
+		return -Robot.drivetrain.bottomLeftTalon.getSelectedSensorPosition(0) * Constants.MetersPerPulse;
 	}
-	
+
 	public static double getRightDistance() {
 		// In METERS
-		return -Robot.drivetrain.bottomRightTalon.getSelectedSensorPosition(0)*Constants.MetersPerPulse;
+		return -Robot.drivetrain.bottomRightTalon.getSelectedSensorPosition(0) * Constants.MetersPerPulse;
 	}
-	
+
 	public static void resetEncoders() {
 		Robot.drivetrain.bottomLeftTalon.setSelectedSensorPosition(0, 0, 0);
 		Robot.drivetrain.bottomRightTalon.setSelectedSensorPosition(0, 0, 0);
-	}	
-  
-	 public static void updateSmartDashboard(){
+	}
+
+	public static void updateSmartDashboard() {
 		SmartDashboard.putBoolean("Practice Bot", isPracticeBot());
 		SmartDashboard.putBoolean("Raw Cargo Present", cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD);
 		SmartDashboard.putBoolean("Cargo Present", isCargoPresent());
@@ -110,6 +142,8 @@ public class Sensors {
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
 		SmartDashboard.putNumber("Proximity Value", climbProximitySensor.getValue());
 		SmartDashboard.putBoolean("Proximity", isClimbProximityThresholdReached());
+		SmartDashboard.putNumber("Roller Current", Robot.roller.getRollerCurrent()); 
+		SmartDashboard.putBoolean("Roller Overcurrent", isOverCurrent());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());
 	// 	SmartDashboard.putNumber("Right Pos(M)", getRightDistance());
 	// 	SmartDashboard.putNumber("Elev Position", Robot.elevator._elevatorMotor.getSelectedSensorPosition(0));     
@@ -131,8 +165,17 @@ public class Sensors {
 		isCargoDetected = false;
 	 }
 
+	 public static void resetOvercurrentDetected()
+	 {
+		 isOverCurrentDetected = false;
+	 }
+
 	public static boolean isCargoPresent (){
 		return (isCargoDetected);
+	}
+
+	public static boolean isOverCurrent (){
+		return (isOverCurrentDetected);
 	}
 
 	public static boolean isTurretLeft (){

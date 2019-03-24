@@ -66,10 +66,12 @@ public class Constants {
 	public static final boolean VERTICAL = true;
 	public static final boolean HORIZONTAL = false;
 
-	public static final double ROLLER_SPEED = 0.75;
+	public static final double ROLLER_SPEED = 0.65;
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 375;
+	public static final float OVERCURRENT_THRESHOLD = 12;
+	public static final double OVERCURRENT_REVERSE_ROLLER_DELAY = 0.25;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
 	public static final int HATCH_PANEL_UP = 250; // TODO: Fine Tune

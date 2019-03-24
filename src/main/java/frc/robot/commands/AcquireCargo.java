@@ -11,7 +11,8 @@ public class AcquireCargo extends CommandGroup {
 
     public AcquireCargo() {
         requires(Robot.manipulator);
-
+        
+        addSequential(new UnlatchCargo());
         addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
         addSequential(new ExtendRoller());
         addSequential(new Wait(Constants.PNEUMATIC_DELAY));
