@@ -9,6 +9,7 @@ import frc.robot.events.LeftOperatorStickForward;
 import frc.robot.events.LeftOperatorStickBackward;
 import frc.robot.events.RightOperatorStickBackward;
 import frc.robot.events.CargoDetected;
+import frc.robot.events.OverCurrentDetected;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.*;
 
@@ -128,6 +129,7 @@ public final class OI {
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
         EventWatcherThread.getInstance().addEvent(new RightOperatorStickBackward());
         EventWatcherThread.getInstance().addEvent(new CargoDetected());
+        EventWatcherThread.getInstance().addEvent(new OverCurrentDetected());
 	}
     
 	public static double getMoveSpeed()

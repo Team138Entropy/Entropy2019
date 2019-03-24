@@ -35,7 +35,7 @@ public class Sensors {
 
 	private static final int requiredDebounceCount = 50;
 	private static int currentDebounceCount = 0;
-	private static final int requiredOverCurrentDebounceCount = 50;
+	private static final int requiredOverCurrentDebounceCount = 25;
 	private static int currentOverCurrentDebounceCount = 0;
 	public static boolean isCargoDetectionEnabled = false;
 	private static boolean isCargoDetected = false;
@@ -108,6 +108,7 @@ public class Sensors {
 			if (currentOverCurrentDebounceCount > requiredOverCurrentDebounceCount)
 			{
 				System.out.println("Overcurrent!");
+				currentOverCurrentDebounceCount = 0;
 				isOverCurrentDetected = true;
 			}
 		}
@@ -162,6 +163,11 @@ public class Sensors {
 	 public static void unlatchCargo()
 	 {
 		isCargoDetected = false;
+	 }
+
+	 public static void resetOvercurrentDetected()
+	 {
+		 isOverCurrentDetected = false;
 	 }
 
 	public static boolean isCargoPresent (){

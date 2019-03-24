@@ -13,6 +13,7 @@ public class OverCurrentDetected implements Event {
     }
 
     public Command getCommand() {
+        System.out.println("Reacquiring");
         return new ReacquireCargo();
     }
 
