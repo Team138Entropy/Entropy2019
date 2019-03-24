@@ -51,10 +51,6 @@ public class Constants {
 	// Controller stuff
 	public static final int nykoControllerPort = 0;
     public static final int xboxControllerPort = 1;
-
-	// Camera stuff
-    public static final String rearCameraHostname = "axis-camera138.local";
-	public static final String rearCameraLabel = "Rear Camera";
 	
 	// Stuff that was deleted that I had to paste back in from the 2018 code
 	public final static int zeroDelay= 60; // Approx 40/sec;

@@ -22,6 +22,7 @@ public class Sensors {
 	public static double gyroBias=0;
 
 	private static UsbCamera frontCamera;
+	private static UsbCamera backCamera;
 
 	public static DigitalInput practiceRobotJumperPin;
 	public static AnalogInput cargoSensor;
@@ -44,14 +45,10 @@ public class Sensors {
 		Robot.drivetrain.bottomLeftTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-		try {
-			CameraServer.getInstance().addAxisCamera(Constants.rearCameraLabel, Constants.rearCameraHostname);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-
 		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
+        backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 1);
 		frontCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
+		backCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
 
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
