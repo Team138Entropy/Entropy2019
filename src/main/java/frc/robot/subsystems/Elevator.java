@@ -40,11 +40,11 @@ public class Elevator extends Subsystem{
 				new TargetEnumData(250, 190)
 		),
 		LEVEL_1(
-				new TargetEnumData(250, 280),	//Hatch Panel 9? inches, Cargo 19.5 - 2 = 17.5 inches
+				new TargetEnumData(350, 280),	//Hatch Panel 9? inches, Cargo 19.5 - 2 = 17.5 inches
 				new TargetEnumData(225, 225)
 		),
 		SAFE(
-				new TargetEnumData(350, 350),	
+				new TargetEnumData(355, 350),	
 				new TargetEnumData(275, 275)
 		),
 		LEVEL_2(

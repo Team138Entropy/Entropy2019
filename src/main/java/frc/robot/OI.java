@@ -110,7 +110,6 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
 		acquireButton.whenPressed(new AcquireHP());
-		acquireButton.whenReleased(new AcquireCompleteHP());
 		deployButton.whenPressed(new DeployHP());
 		rotateTurretLeft.whenPressed(new RotateTurretLeft());
 		rotateTurretRight.whenPressed(new RotateTurretRight());
@@ -128,7 +127,7 @@ public final class OI {
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
         EventWatcherThread.getInstance().addEvent(new RightOperatorStickBackward());
-		EventWatcherThread.getInstance().addEvent(new CargoDetected());
+        EventWatcherThread.getInstance().addEvent(new CargoDetected());
 	}
     
 	public static double getMoveSpeed()
