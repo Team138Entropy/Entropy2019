@@ -186,11 +186,11 @@ public final class OI {
     public static int getTurretJogDirection() {
         // POV hat returns 90 for right
         if (operatorStick.getPOV() == 90) {
-            return Constants.TurretDirectionRight;
+            return Constants.TurretDirectionLeft;
         }
         // POV hat returns 270 for left
         else if (operatorStick.getPOV() == 270) {
-            return Constants.TurretDirectionLeft;
+            return Constants.TurretDirectionRight;
         } else {
             return 0;
         }
