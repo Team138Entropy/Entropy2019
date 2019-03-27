@@ -40,7 +40,7 @@ public class Elevator extends Subsystem{
 				new TargetEnumData(250, 190)
 		),
 		LEVEL_1(
-				new TargetEnumData(350, 280),	//Hatch Panel 9? inches, Cargo 19.5 - 2 = 17.5 inches
+				new TargetEnumData(350, 310),	//Hatch Panel 9? inches, Cargo 19.5 - 2 = 17.5 inches
 				new TargetEnumData(225, 225)
 		),
 		SAFE(
@@ -48,11 +48,11 @@ public class Elevator extends Subsystem{
 				new TargetEnumData(275, 275)
 		),
 		LEVEL_2(
-				new TargetEnumData(830, 1350),	// Hatch Panel 49.5 inches, Cargo 47.5 - 2 = 45.5 inches
+				new TargetEnumData(1500, 1350),	// Hatch Panel 49.5 inches, Cargo 47.5 - 2 = 45.5 inches
 				new TargetEnumData(925, 925)
 		),
 		LEVEL_3(
-				new TargetEnumData(1870, 2300),	// Hatch Panel 78.5? inches, Cargo 75.5 - 2  = 73.5 inches
+				new TargetEnumData(2400, 2300),	// Hatch Panel 78.5? inches, Cargo 75.5 - 2  = 73.5 inches
 				new TargetEnumData(1700, 1700)
 		);
 
