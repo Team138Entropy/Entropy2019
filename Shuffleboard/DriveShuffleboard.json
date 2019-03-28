@@ -10,7 +10,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "2,0": {
+          "5,0": {
             "size": [
               2,
               3
@@ -53,7 +53,7 @@
               ]
             }
           },
-          "4,0": {
+          "7,0": {
             "size": [
               2,
               5
@@ -111,33 +111,10 @@
               ]
             }
           },
-          "6,0": {
+          "4,0": {
             "size": [
-              2,
-              2
-            ],
-            "content": {
-              "_type": "Subsystem Layout",
-              "_title": "DriveTrain",
-              "Layout/Label position": "BOTTOM",
-              "_children": [
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/L PWM",
-                  "_title": "L PWM"
-                },
-                {
-                  "_type": "Text View",
-                  "_source0": "network_table:///SmartDashboard/R PWM",
-                  "_title": "R PWM"
-                }
-              ]
-            }
-          },
-          "0,0": {
-            "size": [
-              2,
-              5
+              1,
+              6
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -171,46 +148,18 @@
                   "_title": "Cargo Present",
                   "Colors/Color when true": "#7CFC00FF",
                   "Colors/Color when false": "#8B0000FF"
+                },
+                {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///SmartDashboard/Raw Cargo Present",
+                  "_title": "Raw Cargo Present",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
                 }
               ]
             }
           },
-          "2,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Practice Bot",
-              "_title": "Practice Bot",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Wait Timer",
-              "_title": "Wait Timer"
-            }
-          },
-          "8,2": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Roller Current",
-              "_title": "Roller Current"
-            }
-          },
-          "6,2": {
+          "5,3": {
             "size": [
               2,
               1
@@ -223,18 +172,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,4": {
-            "size": [
-              2,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Climb Proximity Value",
-              "_title": "Climb Proximity Value"
-            }
-          },
-          "6,4": {
+          "5,4": {
             "size": [
               2,
               1
@@ -247,22 +185,82 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "6,3": {
+          "0,0": {
             "size": [
-              2,
+              4,
+              6
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://frontCamera",
+              "_title": "frontCamera",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          },
+          "9,0": {
+            "size": [
+              4,
+              6
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://backCamera",
+              "_title": "backCamera",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "NONE",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          },
+          "5,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/L PWM",
+              "_title": "L PWM"
+            }
+          },
+          "6,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/R PWM",
+              "_title": "R PWM"
+            }
+          },
+          "7,5": {
+            "size": [
+              1,
               1
             ],
             "content": {
               "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Raw Cargo Present",
-              "_title": "Raw Cargo Present",
+              "_source0": "network_table:///SmartDashboard/Practice Bot",
+              "_title": "Practice Bot",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,3": {
+          "8,5": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -621,12 +619,24 @@
           }
         }
       }
+    },
+    {
+      "title": "Storage",
+      "autoPopulate": false,
+      "autoPopulatePrefix": "",
+      "widgetPane": {
+        "gridSize": 128.0,
+        "showGrid": true,
+        "hgap": 16.0,
+        "vgap": 16.0,
+        "tiles": {}
+      }
     }
   ],
   "windowGeometry": {
-    "x": -2.0,
+    "x": -7.0,
     "y": 0.0,
     "width": 1934.0,
-    "height": 1056.0
+    "height": 1047.0
   }
 }

@@ -47,8 +47,8 @@ public class Sensors {
 
 		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
         backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 1);
-		frontCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
-		backCamera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
+		frontCamera.setVideoMode(PixelFormat.kMJPEG, 80, 60, 30);
+		backCamera.setVideoMode(PixelFormat.kMJPEG, 80, 60, 30);
 
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
@@ -140,8 +140,8 @@ public class Sensors {
 		SmartDashboard.putBoolean("Turret Left", isTurretLeft());
 		SmartDashboard.putBoolean("Turret Right", isTurretRight());
 		SmartDashboard.putBoolean("Turret Center", isTurretCenter());
-		SmartDashboard.putNumber("Proximity Value", climbProximitySensor.getValue());
-		SmartDashboard.putBoolean("Proximity", isClimbProximityThresholdReached());
+		SmartDashboard.putNumber("Climb Proximity Value", climbProximitySensor.getValue());
+		SmartDashboard.putBoolean("Climb Proximity", isClimbProximityThresholdReached());
 		SmartDashboard.putNumber("Roller Current", Robot.roller.getRollerCurrent()); 
 		SmartDashboard.putBoolean("Roller Overcurrent", isOverCurrent());
 	// 	SmartDashboard.putNumber("Left Pos(M)", getLeftDistance());

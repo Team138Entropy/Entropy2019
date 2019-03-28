@@ -146,10 +146,18 @@ public final class OI {
 	
 	public static double getRotateSpeed()
 	{
-		double rotateSpeed = driverStick.getRawAxis(XboxController.rightXAxis);
+        double rotateSpeed;
+        
+        if (Constants.practiceBot) {
+            rotateSpeed = driverStick.getRawAxis(XboxController.rightXAxis);
+        }
+        else {
+            rotateSpeed = -1 * driverStick.getRawAxis(XboxController.rightXAxis);
+        }
+        
 		if (Math.abs(rotateSpeed) < Constants.CloseLoopJoystickDeadband)
 			rotateSpeed=0;
-		return -1 * rotateSpeed;
+		return rotateSpeed;
 	}
 	
 	public static boolean isReverse() {
@@ -184,15 +192,28 @@ public final class OI {
 
     // Return the jog direction: 1 for up, -1 for down
     public static int getTurretJogDirection() {
-        // POV hat returns 90 for right
-        if (operatorStick.getPOV() == 90) {
-            return Constants.TurretDirectionRight;
-        }
-        // POV hat returns 270 for left
-        else if (operatorStick.getPOV() == 270) {
-            return Constants.TurretDirectionLeft;
+        if (Constants.practiceBot) {
+            // POV hat returns 90 for left on the practice bot
+            if (operatorStick.getPOV() == 90) {
+                return Constants.TurretDirectionLeft;
+            }
+            // POV hat returns 270 for right on the practice bot
+            else if (operatorStick.getPOV() == 270) {
+                return Constants.TurretDirectionRight;
+            } else {
+                return 0;
+            }
         } else {
-            return 0;
+            // POV hat returns 90 for right
+            if (operatorStick.getPOV() == 90) {
+                return Constants.TurretDirectionRight;
+            }
+            // POV hat returns 270 for left
+            else if (operatorStick.getPOV() == 270) {
+                return Constants.TurretDirectionLeft;
+            } else {
+                return 0;
+            }
         }
     }
 
