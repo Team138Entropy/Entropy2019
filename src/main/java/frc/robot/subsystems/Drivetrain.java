@@ -27,9 +27,9 @@ public class Drivetrain extends Subsystem {
 
 	int zeroCounter=0;
 
-	WPI_TalonSRX topLeftTalon            = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
+	public WPI_TalonSRX topLeftTalon            = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
 	public WPI_TalonSRX bottomLeftTalon  = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_BOTTOM);
-	WPI_TalonSRX topRightTalon           = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_TOP);
+	public WPI_TalonSRX topRightTalon           = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_TOP);
 	public WPI_TalonSRX bottomRightTalon = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_BOTTOM);
 
 	protected void initDefaultCommand() {
@@ -96,6 +96,5 @@ public class Drivetrain extends Subsystem {
 	public void setDriveSpeed(double newDriveSpeed){
 		_speedFactor = newDriveSpeed;
 	}
-
 
 }

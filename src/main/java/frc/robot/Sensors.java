@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.Turret;
 
 public class Sensors {
 	public static ADXRS450_Gyro gyro; 
@@ -46,8 +47,8 @@ public class Sensors {
 		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
-        backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 1);
 		frontCamera.setVideoMode(PixelFormat.kMJPEG, 80, 60, 30);
+        backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 1);
 		backCamera.setVideoMode(PixelFormat.kMJPEG, 80, 60, 30);
 
         gyro = new ADXRS450_Gyro();
@@ -153,6 +154,18 @@ public class Sensors {
 	// 	SmartDashboard.putNumber("Robot Heading", gyro.getAngle());
 	// 	SmartDashboard.putNumber("Left Velocity",-Robot.drivetrain.frontLeftTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
 	// 	SmartDashboard.putNumber("Right Velocity",-Robot.drivetrain.frontRightTalon.getSelectedSensorVelocity(0)*10*Constants.MetersPerPulse);
+
+		double totalCurrent = 0;
+
+		totalCurrent += Robot.drivetrain.bottomLeftTalon.getOutputCurrent();
+		totalCurrent += Robot.drivetrain.bottomRightTalon.getOutputCurrent();
+		totalCurrent += Robot.drivetrain.topLeftTalon.getOutputCurrent();
+		totalCurrent += Robot.drivetrain.topRightTalon.getOutputCurrent();
+		totalCurrent += Robot.roller.getRollerCurrent();
+		totalCurrent += Robot.elevator._elevatorMotor.getOutputCurrent();
+		totalCurrent += Robot.turret._turretMotor.getOutputCurrent();
+
+		SmartDashboard.putNumber("MOTOR Current", totalCurrent);
 	 }
 
 	 public static void detectAndLatchCargo()

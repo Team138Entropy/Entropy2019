@@ -12,6 +12,7 @@ public class DeployHP extends CommandGroup {
         addSequential(new TranslateHatchPanel(Constants.EXTEND));
         addSequential(new Wait(Constants.PNEUMATIC_DELAY));
         addSequential(new ElevateRelative(Constants.HATCH_PANEL_DOWN));
+        addSequential(new Wait(Constants.PNEUMATIC_DELAY));
         addSequential(new TranslateHatchPanel(Constants.RETRACT));
     }
 }
