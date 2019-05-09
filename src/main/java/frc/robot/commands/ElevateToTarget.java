@@ -13,12 +13,6 @@ public class ElevateToTarget extends Command {
 	private final double commandTimeoutSeconds = 7;
 	private double _currentCommandTime = 0;
 	
-	public ElevateToTarget(String target){
-		requires(Robot.elevator);
-//		requires(Robot.grasper);
-		elevatorTarget = Robot.elevator.ConvertToTarget(target);
-		}
-	
 	public ElevateToTarget(ElevatorTarget target)
 	{
 		requires(Robot.elevator);

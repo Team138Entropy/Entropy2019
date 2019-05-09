@@ -142,38 +142,6 @@ public class Elevator extends Subsystem{
 		return _targetNamedPosition;
 	}
 	
-	// Convert the target string to an ElevatorTarget
-	public ElevatorTarget ConvertToTarget(String target) {
-		ElevatorTarget elevatorTarget;
-		
-		switch (target) {
-		case "Loading Station":
-		elevatorTarget = ElevatorTarget.LOADING_STATION;
-		break;
-
-		case "Floor":
-			elevatorTarget = ElevatorTarget.FLOOR;
-			break;
-
-		case "Level 1":
-				elevatorTarget = ElevatorTarget.LEVEL_1;		
-			break;
-		case "Level 1 Acquire":
-				elevatorTarget = ElevatorTarget.SAFE;
-				break;
-		case "Level 2":
-				elevatorTarget = ElevatorTarget.LEVEL_2;
-			break;
-		case "Level 3":
-				elevatorTarget = ElevatorTarget.LEVEL_3;
-			break;
-		default:
-			elevatorTarget = ElevatorTarget.LEVEL_2;
-			break;
-		}
-		return elevatorTarget;
-	}
-	
 	// Start jogging the elevator
 	public void JogElevator(int jogDirection, double jogSpeed)
 	{
