@@ -10,7 +10,7 @@ public class ToggleManipTranslation extends InstantCommand {
     }
 
     public void execute () {
-        System.out.println("Translate command called");
-        Robot.manipulator.translate(!Robot.manipulator.getTranslated());
+        System.out.println("Toggle wrist command called");
+        Robot.manipulator.actuate(!Robot.manipulator.getWristDown());
     }
 }

@@ -11,8 +11,7 @@ public class Manipulator extends Subsystem {
     public Solenoid rotationSolenoid = new Solenoid(RobotMap.MANIPULATOR_ROTATION_PORT);
     public Solenoid hatchPanelSolenoid = new Solenoid(RobotMap.HATCH_PANEL_PISTON_SOLENOID_CHANNEL);
 
-    private boolean isTranslated = false;
-    private boolean isRotated = false;
+    private boolean isWristDown = false;
     private boolean isHatchPanelTranslated = false;
 
     // Control states
@@ -24,30 +23,14 @@ public class Manipulator extends Subsystem {
     }
 
     // Hardware state accessers
-    public boolean getTranslated() {
-        return isTranslated;
-    }
-
-    public boolean getRotated() {
-        return isRotated;
+    public boolean getWristDown() {
+        return isWristDown;
     }
 
     // Hardware interface
-    public void actuate(boolean translation, boolean rotation) {
-        isTranslated = translation;
-        translationSolenoid.set(translation);
-        isRotated = rotation;
-        rotationSolenoid.set(rotation);
-    }
-
-    public void translate(boolean translation) {
-        isTranslated = translation;
-        translationSolenoid.set(translation);
-    }
-
-    public void rotate(boolean rotation) {
-        isRotated = rotation;
-        rotationSolenoid.set(rotation);
+    public void actuate(boolean wrist) {
+        isWristDown = wrist;
+        translationSolenoid.set(wrist);
     }
 
     public void translateHatchPanel (boolean translation) {
@@ -57,11 +40,8 @@ public class Manipulator extends Subsystem {
 
 
     public void reset() {
-        isTranslated = Constants.RETRACT;
-        translationSolenoid.set(isTranslated);
-
-        isRotated = Constants.HORIZONTAL;
-        rotationSolenoid.set(isRotated);
+        isWristDown = Constants.RETRACT;
+        translationSolenoid.set(isWristDown);
 
         isHatchPanelTranslated = Constants.RETRACT;
         hatchPanelSolenoid.set(isHatchPanelTranslated);
