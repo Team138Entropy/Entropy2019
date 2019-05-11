@@ -22,7 +22,7 @@ public class Manipulator extends Subsystem {
         // Obligatory initDefaultCommand() declaration so we don't get yelled at by WPILib
     }
 
-    // Hardware state accessers
+    // Hardware state accessors
     public boolean getWristDown() {
         return isWristDown;
     }
