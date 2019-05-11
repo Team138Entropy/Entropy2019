@@ -115,7 +115,8 @@ public final class OI {
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 
 		acquireCargoButton.whenPressed(new AcquireCargo());
-		deployCargoButton.whenPressed(new DeployCargo());
+        deployCargoButton.whenPressed(new DeployCargo());
+        deployCargoButton.whenReleased(new StopRoller());
 		
 		// Testing / individual component operation
 		pistonTestButton.whenPressed(new ToggleRollerPistons());
