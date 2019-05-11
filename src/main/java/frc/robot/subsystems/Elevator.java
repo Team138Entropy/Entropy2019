@@ -31,9 +31,9 @@ public class Elevator extends Subsystem{
 
 
 	public enum ElevatorTarget{
-		FLOOR(            // Panels↓  ↓Cargo
-				new TargetEnumData(0, 0), // <- Practice
-				new TargetEnumData(0, 0)  // <- Competition
+		FLOOR(             // Panels  Cargo
+				new TargetEnumData(0, 0), // Practice
+				new TargetEnumData(0, 0)  // Competition
 		),
 		LOADING_STATION(
 				new TargetEnumData(250, 280),
