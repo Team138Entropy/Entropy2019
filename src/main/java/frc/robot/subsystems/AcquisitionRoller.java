@@ -1,17 +1,11 @@
 package frc.robot.subsystems;
 
-import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 public class AcquisitionRoller extends Subsystem {
@@ -36,6 +30,7 @@ public class AcquisitionRoller extends Subsystem {
     public void init() {
         pistonSolenoid.set(false);
         rollerTalon.set(ControlMode.PercentOutput, 0.0d);
+        rollerTalon.setNeutralMode(NeutralMode.Brake);
     }
 
     public synchronized void setRoller(final RollerState targetState) {

@@ -1,23 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.subsystems.AcquisitionRoller;
 
-public class DeployCargo extends Command {
+public class DeployCargo extends CommandGroup {
 
-    boolean done = false;
-
-    @Override
-    protected void execute() {
-        Robot.roller.setPistons(false);
-        Robot.roller.setRoller(AcquisitionRoller.RollerState.EJECT);
-
-        done = true;
-    }
-
-    @Override
-    protected boolean isFinished() {
-        return done;
+    public DeployCargo() {
+        addSequential(new UnlatchCargo());
+        addSequential(new RetractRoller());
+        addSequential(new SetRoller(AcquisitionRoller.RollerState.EJECT));
     }
 }
