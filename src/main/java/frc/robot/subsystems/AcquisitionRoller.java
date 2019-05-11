@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -20,6 +21,7 @@ public class AcquisitionRoller extends Subsystem {
     public enum RollerState {
         INTAKE,
         STOP,
+        HOLD,
         EJECT
     }
 
@@ -37,11 +39,11 @@ public class AcquisitionRoller extends Subsystem {
         boolean on = false;
         
         switch (targetState) {
-            case INTAKE:
+            case EJECT:
                 on = true;
                 rollerTalon.setInverted(false);
                 break;
-            case EJECT:
+            case INTAKE:
                 on = true;
                 rollerTalon.setInverted(true);
                 break;
@@ -49,6 +51,10 @@ public class AcquisitionRoller extends Subsystem {
                 rollerTalon.setInverted(false);
                 on = false;
                 break;
+            case HOLD:
+                rollerTalon.setInverted(true);
+                rollerTalon.set(ControlMode.PercentOutput, Constants.ROLLER_HOLD_SPEED);
+                return;
         }
 
         rollerTalon.set(ControlMode.PercentOutput, on ? Robot.shuffHandler.getRollerSpeed() : 0.0d);
@@ -59,6 +65,7 @@ public class AcquisitionRoller extends Subsystem {
     }
 
     public synchronized void setPistons(boolean ps) {
+        System.out.println("Setting pistons to: " + Boolean.toString(ps) + (ps ? "(EXTEND)" : "(RETRACT)"));
         if (pistonSolenoid.get() != ps)
             pistonSolenoid.set(ps);
     }
