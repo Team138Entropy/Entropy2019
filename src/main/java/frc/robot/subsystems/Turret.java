@@ -24,7 +24,7 @@ public class Turret extends Subsystem {
     private int _direction;
     private int _currentJogDirection = 0;
 
-    private WPI_TalonSRX _turretMotor = new WPI_TalonSRX(RobotMap.TURRET_PORT);
+    public WPI_TalonSRX _turretMotor = new WPI_TalonSRX(RobotMap.TURRET_PORT);
  
    
 
