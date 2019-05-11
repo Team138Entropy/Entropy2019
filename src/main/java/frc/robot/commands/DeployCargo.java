@@ -10,7 +10,7 @@ public class DeployCargo extends CommandGroup {
         addSequential(new TranslateManipulator(Constants.EXTEND));
         addSequential(new Wait(Constants.DEPLOY_DELAY));
         addSequential(new Rotate(Constants.VERTICAL));
-        addSequential(new Wait(Constants.PNEUMATIC_DELAY));
+        addSequential(new Wait(Constants.LONG_DELAY));
         addSequential(new TranslateManipulator(Constants.RETRACT));
         addSequential(new Rotate(Constants.HORIZONTAL));
     }
