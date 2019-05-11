@@ -65,33 +65,7 @@ public class Sensors {
 	
 	public static void debounce()
 	{
-		debounceCargoSensor();
 		debounceOverCurrent();
-	}
-
-	private static void debounceCargoSensor() {
-		if (isCargoDetectionEnabled)
-		{
-			if (cargoSensor.getValue() > Constants.CARGO_SENSOR_THRESHOLD)
-			{
-				currentDebounceCount++;
-				System.out.println("debounce " + currentDebounceCount);
-			}
-			else{
-				currentDebounceCount = 0;
-			}
-
-			if (currentDebounceCount > requiredDebounceCount)
-			{
-				System.out.println("Cargo!");
-				isCargoDetectionEnabled = false;	
-				isCargoDetected = true;
-			}
-		}
-		else
-		{
-			currentDebounceCount = 0;
-		}
 	}
 
 	private static void debounceOverCurrent() {
@@ -110,6 +84,7 @@ public class Sensors {
 			{
 				System.out.println("Overcurrent!");
 				currentOverCurrentDebounceCount = 0;
+				isCargoDetected = true;
 				isOverCurrentDetected = true;
 			}
 		}
