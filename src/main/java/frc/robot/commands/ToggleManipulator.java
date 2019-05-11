@@ -10,13 +10,6 @@ public class ToggleManipulator extends InstantCommand {
     }
 
     public void execute () {
-        if (Robot.shuffHandler.isPistonRotateEnabled())
-        {
-            Robot.manipulator.rotate(!Robot.manipulator.getRotated());
-        }
-        else
-        {
-            Robot.manipulator.translate(!Robot.manipulator.getTranslated());
-        }
+        Robot.manipulator.actuate(!Robot.manipulator.getWristDown());
     }
 }
