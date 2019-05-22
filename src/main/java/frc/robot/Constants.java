@@ -75,7 +75,7 @@ public class Constants {
 	public static final double OVERCURRENT_REVERSE_ROLLER_DELAY = 0.25;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
-	public static final double LONG_DELAY = 1.0;
+	public static final double CARGO_LOWER_DELAY = 1.0;
 	public static final int HATCH_PANEL_UP = 150; // TODO: Fine Tune
 	public static final int HATCH_PANEL_DOWN = -100; // TODO: Fine Tune
 

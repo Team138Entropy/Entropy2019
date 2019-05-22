@@ -8,7 +8,7 @@ import frc.robot.RobotMap;
 public class Manipulator extends Subsystem {
 
     // Rotation solenoid not currently present, but may come back
-    //public Solenoid rotationSolenoid = new Solenoid(RobotMap.MANIPULATOR_ROTATION_PORT);
+    public Solenoid rotationSolenoid = new Solenoid(RobotMap.MANIPULATOR_ROTATION_PORT);
     public Solenoid hatchPanelSolenoid = new Solenoid(RobotMap.HATCH_PANEL_PISTON_SOLENOID_CHANNEL);
 
     private boolean isHatchPanelTranslated = false;
@@ -21,6 +21,10 @@ public class Manipulator extends Subsystem {
         // Obligatory initDefaultCommand() declaration so we don't get yelled at by WPILib
     }
 
+    public void rotateCargoManipulator(boolean isRotated) {
+        rotationSolenoid.set(isRotated);
+    }
+
     public void translateHatchPanel (boolean translation) {
         isHatchPanelTranslated = translation;
         hatchPanelSolenoid.set(translation);
@@ -29,5 +33,18 @@ public class Manipulator extends Subsystem {
     public void reset() {
         isHatchPanelTranslated = Constants.RETRACT;
         hatchPanelSolenoid.set(isHatchPanelTranslated);
+    }
+
+
+    // stuff for testing the cargo manipulator
+    public synchronized void setCargoManipulator(boolean ps) {
+        System.out.println("Setting cargo manipulator to: " + Boolean.toString(ps) + (ps ? "(VERTICAL)" : "(HORIZONTAL)"));
+        if (rotationSolenoid.get() != ps)
+        rotationSolenoid.set(ps);
+    }
+
+    public void toggleCargoManipulator() {
+        System.out.println("toggleCargoManipulator called");
+        setCargoManipulator(!rotationSolenoid.get());
     }
 }

@@ -30,8 +30,8 @@ public class RobotMap {
 	// Pneumatics
 	public final static int ACQUISITION_PISTON_SOLENOID_CHANNEL = 2;
 	public final static int CLIMB_PISTON_SOLENOID_CHANNEL = 3;
-	// Rotation solenoid not currently present, but may come back
-	//public final static int MANIPULATOR_ROTATION_PORT = 1;
+	// Rotates the cargo manipulator
+	public final static int MANIPULATOR_ROTATION_PORT = 1;
 	public final static int HATCH_PANEL_PISTON_SOLENOID_CHANNEL = 4;
 	
 }

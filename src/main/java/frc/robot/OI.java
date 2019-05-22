@@ -91,6 +91,7 @@ public final class OI {
 	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
@@ -117,7 +118,10 @@ public final class OI {
         deployCargoButton.whenReleased(new StopRoller());
 		
 		// Testing / individual component operation
-		pistonTestButton.whenPressed(new ToggleRollerPistons());
+        pistonTestButton.whenPressed(new ToggleRollerPistons());
+        
+        cargoRotateTestButton.whenPressed(new ToggleCargoManipulator());
+        
 
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
         climbPistonButton.whenReleased(new RetractClimbPiston());
