@@ -67,7 +67,7 @@ public class Constants {
 	public static final boolean HORIZONTAL = false;
 
 	public static final double ROLLER_SPEED = 0.65;
-	public static final double ROLLER_HOLD_SPEED = 0.2;
+	public static final double ROLLER_HOLD_SPEED = 0.3;
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 375;

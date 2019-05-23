@@ -8,7 +8,7 @@ import frc.robot.Constants;
         public DefaultPosition() {
             addSequential(new RetractRoller());
             addSequential(new RotateCargoManipulator(Constants.VERTICAL));
-            addSequential(new ElevateToTarget(ElevatorTarget.LEVEL_2));
+            addSequential(new ElevateToTarget(ElevatorTarget.SAFE));
             addSequential(new TranslateHatchPanel(Constants.RETRACT));
             addSequential(new RotateTurretToTarget(Constants.TurretCenterPosition));
             addSequential(new RetractClimbPiston());

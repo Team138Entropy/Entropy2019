@@ -11,6 +11,8 @@ public class DeployCargo extends CommandGroup {
         addSequential(new RotateCargoManipulator(Constants.HORIZONTAL));
         addSequential(new Wait(Constants.CARGO_LOWER_DELAY));
         addSequential(new RetractRoller());
+        addSequential(new Wait(Constants.PNEUMATIC_DELAY));
         addSequential(new SetRoller(AcquisitionRoller.RollerState.EJECT));
+        addSequential(new Wait(Constants.CARGO_LOWER_DELAY));
     }
 }
