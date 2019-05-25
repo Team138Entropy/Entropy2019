@@ -63,11 +63,11 @@ public class Constants {
 	public static final boolean EXTEND = true;
 	public static final boolean RETRACT = false;
 
-	public static final boolean VERTICAL = true;
-	public static final boolean HORIZONTAL = false;
+	public static final boolean VERTICAL = false;
+	public static final boolean HORIZONTAL = true;
 
-	public static final double ROLLER_SPEED = 0.65;
-	public static final double ROLLER_HOLD_SPEED = 0.3;
+	public static final double ROLLER_SPEED = 0.75;
+	public static final double ROLLER_HOLD_SPEED = 0.4;
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 375;
