@@ -45,7 +45,9 @@ public class EventWatcherThread extends Thread {
     }
 
     public void addEvent(Event e) {
-        if (!queue.contains(e))
+        if (!queue.contains(e)) {
             queue.add(e);
+            System.out.println("Event added (" + queue.size() + " total)");
+        }
     }
 }

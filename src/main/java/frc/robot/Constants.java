@@ -83,4 +83,6 @@ public class Constants {
 	// Climber 
 	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;
 
+	// Dashboard
+	public static final long DASHBOARD_INTERVAL = 50; // In milliseconds
 }
