@@ -56,7 +56,7 @@
           "7,0": {
             "size": [
               2,
-              5
+              4
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -114,7 +114,7 @@
           "4,0": {
             "size": [
               1,
-              6
+              5
             ],
             "content": {
               "_type": "Subsystem Layout",
@@ -174,7 +174,7 @@
           },
           "5,4": {
             "size": [
-              2,
+              1,
               1
             ],
             "content": {
@@ -188,7 +188,7 @@
           "9,0": {
             "size": [
               4,
-              6
+              5
             ],
             "content": {
               "_type": "Camera Stream",
@@ -204,7 +204,7 @@
               "imageHeight": 0
             }
           },
-          "5,5": {
+          "7,4": {
             "size": [
               1,
               1
@@ -215,7 +215,7 @@
               "_title": "L PWM"
             }
           },
-          "6,5": {
+          "8,4": {
             "size": [
               1,
               1
@@ -226,7 +226,7 @@
               "_title": "R PWM"
             }
           },
-          "7,5": {
+          "1,1": {
             "size": [
               1,
               1
@@ -239,7 +239,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "8,5": {
+          "6,4": {
             "size": [
               1,
               1
@@ -272,7 +272,7 @@
               "_title": "Roller Current"
             }
           },
-          "2,0": {
+          "0,1": {
             "size": [
               1,
               1
@@ -283,9 +283,9 @@
               "_title": "Wait Timer"
             }
           },
-          "0,1": {
+          "2,0": {
             "size": [
-              3,
+              2,
               2
             ],
             "content": {
@@ -295,6 +295,25 @@
               "Range/Min": 0.0,
               "Range/Max": 200.0,
               "Visuals/Show value": true
+            }
+          },
+          "0,2": {
+            "size": [
+              4,
+              3
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://frontCamera",
+              "_title": "frontCamera",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "HALF",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": 0,
+              "imageHeight": 0
             }
           }
         }
@@ -353,9 +372,9 @@
     }
   ],
   "windowGeometry": {
-    "x": -8.0,
-    "y": -8.0,
+    "x": -7.0,
+    "y": 7.0,
     "width": 1936.0,
-    "height": 1056.0
+    "height": 855.0
   }
 }
