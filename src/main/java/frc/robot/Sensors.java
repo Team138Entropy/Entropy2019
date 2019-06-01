@@ -47,9 +47,9 @@ public class Sensors {
 		Robot.drivetrain.bottomRightTalon.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		frontCamera = CameraServer.getInstance().startAutomaticCapture("frontCamera", 0);
-		frontCamera.setVideoMode(PixelFormat.kMJPEG, 80, 60, 30);
+		frontCamera.setVideoMode(PixelFormat.kYUYV, 80, 60, 30);
         backCamera = CameraServer.getInstance().startAutomaticCapture("backCamera", 1);
-		backCamera.setVideoMode(PixelFormat.kMJPEG, 80, 60, 30);
+		backCamera.setVideoMode(PixelFormat.kYUYV, 80, 60, 30);
 
         gyro = new ADXRS450_Gyro();
         gyro.calibrate();
