@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.Sensors;
 
 public class AcquisitionRoller extends Subsystem {
     private static WPI_TalonSRX rollerTalon = new WPI_TalonSRX(RobotMap.ROLLER_TALON_ID);
@@ -42,6 +43,7 @@ public class AcquisitionRoller extends Subsystem {
             case EJECT:
                 on = true;
                 rollerTalon.setInverted(false);
+                Sensors.unlatchCargo();
                 break;
             case INTAKE:
                 on = true;
