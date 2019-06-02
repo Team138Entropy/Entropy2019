@@ -10,7 +10,7 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "6,0": {
+          "10,0": {
             "size": [
               1,
               3
@@ -49,11 +49,24 @@
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/Turret Direction",
                   "_title": "Turret Direction"
+                },
+                {
+                  "_type": "Camera Stream",
+                  "_source0": "camera_server://backCamera",
+                  "_title": "backCamera",
+                  "Crosshair/Show crosshair": true,
+                  "Crosshair/Crosshair color": "#FFFFFFFF",
+                  "Controls/Show controls": true,
+                  "Controls/Rotation": "QUARTER_CW",
+                  "compression": -1.0,
+                  "fps": -1,
+                  "imageWidth": 0,
+                  "imageHeight": 0
                 }
               ]
             }
           },
-          "7,0": {
+          "11,0": {
             "size": [
               2,
               4
@@ -111,7 +124,7 @@
               ]
             }
           },
-          "5,0": {
+          "9,0": {
             "size": [
               1,
               4
@@ -159,7 +172,7 @@
               ]
             }
           },
-          "6,3": {
+          "10,3": {
             "size": [
               1,
               1
@@ -172,7 +185,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "5,4": {
+          "9,4": {
             "size": [
               1,
               1
@@ -185,26 +198,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "9,0": {
-            "size": [
-              4,
-              5
-            ],
-            "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://backCamera",
-              "_title": "backCamera",
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#FFFFFFFF",
-              "Controls/Show controls": true,
-              "Controls/Rotation": "QUARTER_CCW",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": 0,
-              "imageHeight": 0
-            }
-          },
-          "7,4": {
+          "11,4": {
             "size": [
               1,
               1
@@ -215,7 +209,7 @@
               "_title": "L PWM"
             }
           },
-          "8,4": {
+          "12,4": {
             "size": [
               1,
               1
@@ -226,7 +220,7 @@
               "_title": "R PWM"
             }
           },
-          "2,0": {
+          "8,2": {
             "size": [
               1,
               1
@@ -239,7 +233,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "6,4": {
+          "10,4": {
             "size": [
               1,
               1
@@ -250,7 +244,7 @@
               "_title": "Cargo Proximity Value"
             }
           },
-          "0,0": {
+          "8,4": {
             "size": [
               1,
               1
@@ -261,7 +255,7 @@
               "_title": "Climb Proximity Value"
             }
           },
-          "1,0": {
+          "8,3": {
             "size": [
               1,
               1
@@ -272,7 +266,7 @@
               "_title": "Roller Current"
             }
           },
-          "4,0": {
+          "8,0": {
             "size": [
               1,
               1
@@ -283,7 +277,7 @@
               "_title": "Wait Timer"
             }
           },
-          "3,0": {
+          "8,1": {
             "size": [
               1,
               1
@@ -297,10 +291,10 @@
               "Visuals/Show value": true
             }
           },
-          "0,1": {
+          "0,0": {
             "size": [
-              5,
-              4
+              4,
+              5
             ],
             "content": {
               "_type": "Camera Stream",
@@ -309,7 +303,26 @@
               "Crosshair/Show crosshair": true,
               "Crosshair/Crosshair color": "#FFFFFFFF",
               "Controls/Show controls": true,
-              "Controls/Rotation": "HALF",
+              "Controls/Rotation": "QUARTER_CCW",
+              "compression": -1.0,
+              "fps": -1,
+              "imageWidth": 0,
+              "imageHeight": 0
+            }
+          },
+          "4,0": {
+            "size": [
+              4,
+              5
+            ],
+            "content": {
+              "_type": "Camera Stream",
+              "_source0": "camera_server://backCamera",
+              "_title": "backCamera",
+              "Crosshair/Show crosshair": true,
+              "Crosshair/Crosshair color": "#FFFFFFFF",
+              "Controls/Show controls": true,
+              "Controls/Rotation": "QUARTER_CW",
               "compression": -1.0,
               "fps": -1,
               "imageWidth": 0,
