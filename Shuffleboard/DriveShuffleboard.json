@@ -49,19 +49,6 @@
                   "_type": "Text View",
                   "_source0": "network_table:///SmartDashboard/Turret Direction",
                   "_title": "Turret Direction"
-                },
-                {
-                  "_type": "Camera Stream",
-                  "_source0": "camera_server://backCamera",
-                  "_title": "backCamera",
-                  "Crosshair/Show crosshair": true,
-                  "Crosshair/Crosshair color": "#FFFFFFFF",
-                  "Controls/Show controls": true,
-                  "Controls/Rotation": "QUARTER_CW",
-                  "compression": -1.0,
-                  "fps": -1,
-                  "imageWidth": 0,
-                  "imageHeight": 0
                 }
               ]
             }
@@ -198,28 +185,6 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "11,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/L PWM",
-              "_title": "L PWM"
-            }
-          },
-          "12,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/R PWM",
-              "_title": "R PWM"
-            }
-          },
           "8,2": {
             "size": [
               1,
@@ -327,6 +292,55 @@
               "fps": -1,
               "imageWidth": 0,
               "imageHeight": 0
+            }
+          },
+          "11,4": {
+            "size": [
+              2,
+              1
+            ],
+            "content": {
+              "_type": "Grid Layout",
+              "_title": "FMS",
+              "Layout/Number of columns": 3,
+              "Layout/Number of rows": 3,
+              "Layout/Label position": "BOTTOM",
+              "_children": {
+                "0,0": {
+                  "_type": "Boolean Box",
+                  "_source0": "network_table:///FMSInfo/IsRedAlliance",
+                  "_title": "/FMSInfo/IsRedAlliance",
+                  "Colors/Color when true": "#7CFC00FF",
+                  "Colors/Color when false": "#8B0000FF"
+                },
+                "1,0": {
+                  "_type": "Text View",
+                  "_source0": "network_table:///FMSInfo/MatchNumber",
+                  "_title": "/FMSInfo/MatchNumber"
+                }
+              }
+            }
+          },
+          "0,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/L PWM",
+              "_title": "L PWM"
+            }
+          },
+          "1,5": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/R PWM",
+              "_title": "R PWM"
             }
           }
         }
