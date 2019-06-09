@@ -9,7 +9,7 @@ import frc.robot.subsystems.AcquisitionRoller.RollerState;
 public class RightOperatorStickBackward implements Event {
 
     public boolean check() {
-        return (OI.operatorStick.getRawAxis(OI.NykoController.rightYAxis) > Constants.CloseLoopJoystickDeadband);
+        return (OI.operatorStick.getRawAxis(OI.NykoController.rightYAxis) > Constants.OperatorJoystickDeadband);
     }
 
     public Command getCommand() {

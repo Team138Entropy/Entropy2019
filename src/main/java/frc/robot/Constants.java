@@ -11,6 +11,7 @@ public class Constants {
 	public static boolean practiceBot = false;
 
 	public final static double CloseLoopJoystickDeadband = 0.2;
+	public final static double OperatorJoystickDeadband = 0.5;
 	
 	// This is our encoder constant for distance (in METERS) per  encoder pulse
 	// 6" Wheels, 15:45 chain drive; 256 encoder counts per drive sprocket rotation
@@ -67,7 +68,7 @@ public class Constants {
 	public static final boolean HORIZONTAL = true;
 
 	public static final double ROLLER_SPEED = 0.8;
-	public static final double ROLLER_HOLD_SPEED = 0.3;
+	public static final double ROLLER_HOLD_SPEED = 0.4;
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 375;

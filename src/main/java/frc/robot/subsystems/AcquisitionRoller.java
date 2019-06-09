@@ -47,6 +47,7 @@ public class AcquisitionRoller extends Subsystem {
                 break;
             case INTAKE:
                 on = true;
+                Sensors.detectAndLatchCargo();
                 rollerTalon.setInverted(true);
                 break;
             case STOP:
