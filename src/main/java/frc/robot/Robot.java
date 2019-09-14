@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.concurrent.CompletableFuture;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
@@ -59,6 +61,8 @@ public class Robot extends TimedRobot {
 
         EventWatcherThread.getInstance().start();
         shuffHandler.init();
+
+        DashboardThread.getInstance().start();
     }
 
     /**
@@ -114,9 +118,6 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        elevator.updateSmartDashboard();
-        Sensors.updateSmartDashboard();
-        turret.updateSmartDashboard();
         Sensors.debounce();
 //		LiveWindow.run();
     }

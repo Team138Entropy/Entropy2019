@@ -8,7 +8,6 @@ import frc.robot.events.EventWatcherThread;
 import frc.robot.events.LeftOperatorStickForward;
 import frc.robot.events.LeftOperatorStickBackward;
 import frc.robot.events.RightOperatorStickBackward;
-import frc.robot.events.CargoDetected;
 import frc.robot.events.OverCurrentDetected;
 import frc.robot.subsystems.Elevator.ElevatorTarget;
 import frc.robot.commands.*;
@@ -92,6 +91,7 @@ public final class OI {
 	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
@@ -100,8 +100,6 @@ public final class OI {
 
 	static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftStick);
 	static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightStick);
-
-	static Button toggleManipulator = new JoystickButton(operatorStick, NykoController.middle10);
 
     public OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
@@ -116,19 +114,20 @@ public final class OI {
 		rotateTurretRight.whenPressed(new RotateTurretRight());
 
 		acquireCargoButton.whenPressed(new AcquireCargo());
-		deployCargoButton.whenPressed(new DeployCargo());
+        deployCargoButton.whenPressed(new DeployCargo());
 		
 		// Testing / individual component operation
-		pistonTestButton.whenPressed(new ToggleRollerPistons());
+        pistonTestButton.whenPressed(new ToggleRollerPistons());
+        
+        cargoRotateTestButton.whenPressed(new ToggleCargoManipulator());
+        
 
-		toggleManipulator.whenPressed(new ToggleManipulator());
 		climbPistonButton.whenPressed(new ExtendClimbPiston());
         climbPistonButton.whenReleased(new RetractClimbPiston());
         
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
         EventWatcherThread.getInstance().addEvent(new RightOperatorStickBackward());
-        EventWatcherThread.getInstance().addEvent(new CargoDetected());
         EventWatcherThread.getInstance().addEvent(new OverCurrentDetected());
 	}
     

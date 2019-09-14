@@ -11,6 +11,7 @@ public class Constants {
 	public static boolean practiceBot = false;
 
 	public final static double CloseLoopJoystickDeadband = 0.2;
+	public final static double OperatorJoystickDeadband = 0.5;
 	
 	// This is our encoder constant for distance (in METERS) per  encoder pulse
 	// 6" Wheels, 15:45 chain drive; 256 encoder counts per drive sprocket rotation
@@ -63,10 +64,11 @@ public class Constants {
 	public static final boolean EXTEND = true;
 	public static final boolean RETRACT = false;
 
-	public static final boolean VERTICAL = true;
-	public static final boolean HORIZONTAL = false;
+	public static final boolean VERTICAL = false;
+	public static final boolean HORIZONTAL = true;
 
-	public static final double ROLLER_SPEED = 0.65;
+	public static final double ROLLER_SPEED = 0.8;
+	public static final double ROLLER_HOLD_SPEED = 0.4;
 
 	// Manipulator
 	public static final float CARGO_SENSOR_THRESHOLD = 375;
@@ -74,12 +76,14 @@ public class Constants {
 	public static final double OVERCURRENT_REVERSE_ROLLER_DELAY = 0.25;
 	public static final double DEPLOY_DELAY = 0.25;
 	public static final double PNEUMATIC_DELAY = 0.5;
-	public static final double LONG_DELAY = 1.0;
+	public static final double CARGO_LOWER_DELAY = 1.0;
 	public static final int HATCH_PANEL_UP = 150; // TODO: Fine Tune
-	public static final int HATCH_PANEL_DOWN = -100; // TODO: Fine Tune
+	public static final int HATCH_PANEL_DOWN = -80; // TODO: Fine Tune
 
 
 	// Climber 
 	public static final int CLIMB_PROXIMITY_THRESHOLD = 1000;
 
+	// Dashboard
+	public static final long DASHBOARD_INTERVAL = 50; // In milliseconds
 }

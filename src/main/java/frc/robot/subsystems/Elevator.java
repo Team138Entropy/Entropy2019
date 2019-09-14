@@ -31,17 +31,17 @@ public class Elevator extends Subsystem{
 
 
 	public enum ElevatorTarget{
-		FLOOR(             // Panels  Cargo
-				new TargetEnumData(0, 0), // Practice
-				new TargetEnumData(0, 0)  // Competition
+		FLOOR(            // Panels↓  ↓Cargo
+				new TargetEnumData(200, 200), // <- Practice
+				new TargetEnumData(200, 200)  // <- Competition
 		),
 		LOADING_STATION(
 				new TargetEnumData(250, 280),
 				new TargetEnumData(250, 190)
 		),
 		LEVEL_1(
-				new TargetEnumData(350, 310),	//Hatch Panel 9? inches, Cargo 19.5 - 2 = 17.5 inches
-				new TargetEnumData(260, 280)
+				new TargetEnumData(350, 475),	//Hatch Panel 9? inches, Cargo 19.5 - 2 = 17.5 inches
+				new TargetEnumData(260, 475)
 		),
 		SAFE(
 				new TargetEnumData(355, 350),	

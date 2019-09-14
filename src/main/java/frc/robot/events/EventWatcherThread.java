@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
- * Singleton thread for monitoring joysticks.
+ * Singleton thread for monitoring things.
  */
 public class EventWatcherThread extends Thread {
 
@@ -45,7 +45,9 @@ public class EventWatcherThread extends Thread {
     }
 
     public void addEvent(Event e) {
-        if (!queue.contains(e))
+        if (!queue.contains(e)) {
             queue.add(e);
+            System.out.println("Event added (" + queue.size() + " total)");
+        }
     }
 }

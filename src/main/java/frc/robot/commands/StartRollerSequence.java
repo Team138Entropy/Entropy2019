@@ -6,7 +6,7 @@ import frc.robot.subsystems.AcquisitionRoller.RollerState;
 public class StartRollerSequence extends CommandGroup {
 
     public StartRollerSequence() {
-        addParallel(new ExtendRoller());
-        addParallel(new SetRoller(RollerState.INTAKE));
+        addSequential(new ExtendRoller());
+        addSequential(new SetRoller(RollerState.INTAKE));
     }
 }

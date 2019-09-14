@@ -2,8 +2,7 @@ package frc.robot.events;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Sensors;
-import frc.robot.commands.DefaultPosition;
-import frc.robot.commands.ReacquireCargo;
+import frc.robot.commands.CompleteAcquireCargo;;
 
 public class OverCurrentDetected implements Event {
 
@@ -13,8 +12,8 @@ public class OverCurrentDetected implements Event {
     }
 
     public Command getCommand() {
-        System.out.println("Reacquiring");
-        return new ReacquireCargo();
+        System.out.println("Cargo Acquired");
+        return new CompleteAcquireCargo();
     }
 
 }
