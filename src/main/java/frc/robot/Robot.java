@@ -1,15 +1,13 @@
 package frc.robot;
 
-import java.util.concurrent.CompletableFuture;
-
-import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.robot.events.EventWatcherThread;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import frc.robot.events.EventWatcherThread;
 import frc.robot.subsystems.*;
 
 /**
@@ -21,6 +19,9 @@ import frc.robot.subsystems.*;
  * directory .
  */
 public class Robot extends TimedRobot {
+
+    public static NetworkTableInstance networkTableInstance = NetworkTableInstance.getDefault();
+    public static edu.wpi.first.networktables.NetworkTable visionInstruction;
 	// Interface with players
     public static final ShuffleboardTab main = Shuffleboard.getTab("SmartDashboard");
     public static final ShuffleboardHandler shuffHandler = new ShuffleboardHandler();
@@ -49,6 +50,9 @@ public class Robot extends TimedRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+        networkTableInstance.startServer();
+        networkTable = networkTableInstance.getTable("visionInstruction");
+
         //VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
     	compressor.start();	

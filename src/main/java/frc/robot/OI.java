@@ -1,16 +1,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.*;
-
-import frc.robot.Constants;
-import frc.robot.events.EventWatcherThread;
-import frc.robot.events.LeftOperatorStickForward;
-import frc.robot.events.LeftOperatorStickBackward;
-import frc.robot.events.RightOperatorStickBackward;
-import frc.robot.events.OverCurrentDetected;
-import frc.robot.subsystems.Elevator.ElevatorTarget;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.*;
+import frc.robot.events.*;
+import frc.robot.subsystems.Elevator.ElevatorTarget;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -91,8 +86,9 @@ public final class OI {
 	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
-	static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
+	static Button cargoRotateTestButton  = new JoystickButton(operatorStick, NykoController.middle10);
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
+    static Button VisionControl      = new JoystickButton(driverStick, XboxController.leftBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
 	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
