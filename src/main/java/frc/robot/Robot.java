@@ -49,9 +49,16 @@ public class Robot extends TimedRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
+	
+	NetworkTableEntry xEntry;
+	NetworkTableEntry yEntry;	
+	
     public void robotInit() {
         networkTableInstance.startServer();
-        networkTable = networkTableInstance.getTable("visionInstruction");
+        NetworkTableInstance inst = NetworkTableInstance.getDefault();
+        NetworkTable table = networkTableInstance.getTable("SmartDashboard");
+        xEntry = table.getEntry("X");
+        yEntry = table.getEntry("Y");
 
         //VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
@@ -68,6 +75,9 @@ public class Robot extends TimedRobot {
 
         DashboardThread.getInstance().start();
     }
+	
+	double x = 0;
+   	double y = 0;
 
     /**
      * This function is called once each time the robot enters Disabled mode.
@@ -123,6 +133,10 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         Sensors.debounce();
+	xEntry.setDouble(x);
+        yEntry.setDouble(y);
+        x += 0.05;
+        y += 1.0;
 //		LiveWindow.run();
     }
 
