@@ -52,7 +52,7 @@ public class ElevateToTarget extends Command {
 	}
 
 	protected void end() {
-		Robot.elevator.StopMoving();
+		// Robot.elevator.StopMoving();
 		
 		// Supports release from scale
 	//	if (elevatorTarget == ElevatorTarget.LOWER_SCALE || elevatorTarget == ElevatorTarget.UPPER_SCALE) {

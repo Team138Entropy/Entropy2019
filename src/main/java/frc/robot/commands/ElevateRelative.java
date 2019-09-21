@@ -45,7 +45,7 @@ public class ElevateRelative extends Command {
 	}
 
 	protected void end() {
-		Robot.elevator.StopMoving();
+		// Robot.elevator.StopMoving();
 	}
 
 	protected void interrupted() {
