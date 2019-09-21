@@ -138,7 +138,13 @@ public final class OI {
 			moveSpeed=0;
 		return moveSpeed;
 	}
-	
+
+	//Returns true if vision mode
+	public static  boolean isVision(){
+        boolean pressed = VisionControl.get();
+        return pressed;
+    }
+
 	public static double getRotateSpeed()
 	{
         double rotateSpeed;

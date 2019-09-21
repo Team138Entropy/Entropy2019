@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.CheesyDrive;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.Sensors;
 
 public class TeleopDrive extends Command {
 
@@ -24,7 +25,7 @@ public class TeleopDrive extends Command {
 
 		//Check if Vision Mode is held down
 		//if vision mode is held down attempt to use tracking
-		boolean VisionTracking = false;
+		boolean VisionTracking = OI.isVision();
 
 		if(VisionTracking == false){
 			//Not Vision Tracking.. Operator Control
@@ -37,6 +38,8 @@ public class TeleopDrive extends Command {
 			//Vision Tracking.. Auto Control
 			//call network table parameters
 			//use simple pid turn to lineup (proof of concept for now)
+			//Sensors.gyro
+
 		}
 
 	}
