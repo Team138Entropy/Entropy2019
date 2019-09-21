@@ -18,12 +18,27 @@ public class TeleopDrive extends Command {
 	//	Sensors.resetEncoders();
 	}
 
-	protected void execute() {
-		double moveSpeed,rotateSpeed;
-		moveSpeed=OI.getMoveSpeed();
-		rotateSpeed=OI.getRotateSpeed();
 
-		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
+	//Constantly called
+	protected void execute() {
+
+		//Check if Vision Mode is held down
+		//if vision mode is held down attempt to use tracking
+		boolean VisionTracking = false;
+
+		if(VisionTracking == false){
+			//Not Vision Tracking.. Operator Control
+			double moveSpeed,rotateSpeed;
+			moveSpeed=OI.getMoveSpeed();
+			rotateSpeed=OI.getRotateSpeed();
+
+			Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
+		}else{
+			//Vision Tracking.. Auto Control
+			//call network table parameters
+			//use simple pid turn to lineup (proof of concept for now)
+		}
+
 	}
 
 	protected boolean isFinished() {
