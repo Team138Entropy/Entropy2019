@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
@@ -51,12 +53,18 @@ public class Robot extends TimedRobot {
      */
 	
 	NetworkTableEntry xEntry;
-	NetworkTableEntry yEntry;	
+	NetworkTableEntry yEntry;
+    private boolean driverVision, tapeVision, cargoVision, cargoSeen, tapeSeen;
+    NetworkTable entropyVision;
+
+    private NetworkTableEntry tapeDetected, cargoDetected, tapeYaw, cargoYaw,
+            videoTimestamp;
 	
     public void robotInit() {
         networkTableInstance.startServer();
         NetworkTableInstance inst = NetworkTableInstance.getDefault();
         NetworkTable table = networkTableInstance.getTable("SmartDashboard");
+
         xEntry = table.getEntry("X");
         yEntry = table.getEntry("Y");
 
@@ -133,8 +141,8 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         Sensors.debounce();
-	xEntry.setDouble(x);
-        yEntry.setDouble(y);
+	    //xEntry.setDouble(x);
+        //yEntry.setDouble(y);
         x += 0.05;
         y += 1.0;
 //		LiveWindow.run();
