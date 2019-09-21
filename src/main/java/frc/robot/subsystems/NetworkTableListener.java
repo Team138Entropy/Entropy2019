@@ -18,9 +18,12 @@ public class NetworkTableListener {
         NetworkTableEntry yEntry = table.getEntry("Y");
         inst.startClientTeam(138);
 
-        table.addEntryListener("X", ( table, key, entry, value, flags) -> {
-           System.out.println("New X value: " + value.getValue());
+        /*
+        table.addEntryListener("X",(table,key,entry,value,flags)->{
+            System.out.println("X changed value" + value.getValue());
         }, EntryListenerFlags.kNew | EntryListenerFlags.kUpdate);
+        */
+
 
         yEntry.addListener(event -> {
             System.out.println("New Y value: " + event.value.getValue());
