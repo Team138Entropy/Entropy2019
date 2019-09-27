@@ -109,9 +109,6 @@ public final class OI {
 
 		acquireButton.whenPressed(new AcquireHP());
         deployButton.whenPressed(new DeployHP());
-        
-		// rotateTurretLeft.whenPressed(new RotateTurretLeft());
-		// rotateTurretRight.whenPressed(new RotateTurretRight());
 
 		acquireCargoButton.whenPressed(new AcquireCargo());
         deployCargoButton.whenPressed(new DeployCargo());
