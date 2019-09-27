@@ -87,9 +87,11 @@ public final class OI {
 	static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
 	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
 	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
-	static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
-	static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
-	static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
+    static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
+    
+	// static Button rotateTurretLeft   = new JoystickButton(operatorStick, NykoController.leftBumper);
+    // static Button rotateTurretRight  = new JoystickButton(operatorStick, NykoController.rightBumper);
+    
 	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 	static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
 	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
@@ -109,9 +111,10 @@ public final class OI {
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
 		acquireButton.whenPressed(new AcquireHP());
-		deployButton.whenPressed(new DeployHP());
-		rotateTurretLeft.whenPressed(new RotateTurretLeft());
-		rotateTurretRight.whenPressed(new RotateTurretRight());
+        deployButton.whenPressed(new DeployHP());
+        
+		// rotateTurretLeft.whenPressed(new RotateTurretLeft());
+		// rotateTurretRight.whenPressed(new RotateTurretRight());
 
 		acquireCargoButton.whenPressed(new AcquireCargo());
         deployCargoButton.whenPressed(new DeployCargo());
