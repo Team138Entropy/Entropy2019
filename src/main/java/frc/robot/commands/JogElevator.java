@@ -46,7 +46,8 @@ public class JogElevator extends Command {
 		{
 			if (OI.getElevatorJogDirection() == 0) // && !Robot.elevator.IsAtFloor())
 			{
-				Robot.elevator.JogElevator(1, Constants.elevatorHoldSpeed);
+				// Robot.elevator.JogElevator(1, Constants.elevatorHoldSpeed);
+				Robot.elevator.JogElevator(0, 0);
 			}
 			else
 			{

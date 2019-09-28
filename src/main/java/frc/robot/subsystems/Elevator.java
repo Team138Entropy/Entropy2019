@@ -17,9 +17,9 @@ public class Elevator extends Subsystem{
 	
 	// Servo Loop Gains
 	double _liftKf = 0.2;
-	double _liftKp = 1;
-	double _liftKi = 0;
-	double _liftKd = 5; 
+	double _liftKp = 5;
+	double _liftKi = 0.01;
+	double _liftKd = 10;
 	
 	// Talon SRX/ Victor SPX will support multiple (cascaded) PID loops
 	// For now we just want the primary one.
@@ -28,12 +28,12 @@ public class Elevator extends Subsystem{
 	// Elevator motion command timeout
 	public static final int kElevatorTimeoutMs = 10;
 
-
+	public static final float _isCompleteBand = 10;
 
 	public enum ElevatorTarget{
-		FLOOR(            // Panels↓  ↓Cargo
-				new TargetEnumData(200, 200), // <- Practice
-				new TargetEnumData(200, 200)  // <- Competition
+		FLOOR(               // Panels↓  ↓Cargo
+				new TargetEnumData(100, 100), // <- Practice
+				new TargetEnumData(80, 80)  // <- Competition
 		),
 		LOADING_STATION(
 				new TargetEnumData(250, 280),
@@ -53,7 +53,7 @@ public class Elevator extends Subsystem{
 		),
 		LEVEL_3(
 				new TargetEnumData(2400, 2300),	// Hatch Panel 78.5? inches, Cargo 75.5 - 2  = 73.5 inches
-				new TargetEnumData(1700, 1750)
+				new TargetEnumData(1690, 1690)
 		);
 
 		private static class TargetEnumData {
@@ -145,8 +145,16 @@ public class Elevator extends Subsystem{
 	// Start jogging the elevator
 	public void JogElevator(int jogDirection, double jogSpeed)
 	{
-		_currentJogDirection = jogDirection;
-		_elevatorMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
+		if (jogDirection == 0)
+		{
+			_elevatorMotor.set(ControlMode.Position, _targetPosition);
+		}
+		else
+		{
+			_currentJogDirection = jogDirection;
+			_elevatorMotor.set(ControlMode.PercentOutput, jogSpeed * jogDirection);
+			_targetPosition = GetElevatorPosition();
+		}
 	}
 	
 	// Start homing the elevator
@@ -195,16 +203,18 @@ public class Elevator extends Subsystem{
 			
 		_currentPosition = GetElevatorPosition();
 		
-		if (_targetPosition > _currentPosition) {
-			_direction = Constants.elevatorUp;
-			elevatorSpeed = Constants.elevatorMoveSpeed;
-			_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-		}
-		else {
-			_direction = Constants.elevatorDown;
-			elevatorSpeed =  Constants.elevatorDownMoveSpeed;
-			_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-		}
+		_elevatorMotor.set(ControlMode.Position, _targetPosition);
+
+		// if (_targetPosition > _currentPosition) {
+		// 	_direction = Constants.elevatorUp;
+		// 	elevatorSpeed = Constants.elevatorMoveSpeed;
+		// 	_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
+		// }
+		// else {
+		// 	_direction = Constants.elevatorDown;
+		// 	elevatorSpeed =  Constants.elevatorDownMoveSpeed;
+		// 	_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
+		// }
 	}
 	
 	// Return the elevator position in encoder counts
@@ -227,16 +237,16 @@ public class Elevator extends Subsystem{
 	public void Execute() {
 		_currentPosition = GetElevatorPosition();
 		
-		if (_direction != 0) {
-			// Monitor distance to Goal
-			if ( (_direction > 0 && (_currentPosition > _targetPosition) ||
-			     (_direction < 0 && (_currentPosition < _targetPosition) )))
-			{
-				_elevatorMotor.set(ControlMode.MotionMagic, _targetPosition);
-				System.out.println("Setting jog direction to 0...");
-				_direction = 0;
-			}
-		}
+		// if (_direction != 0) {
+		// 	// Monitor distance to Goal
+		// 	if ( (_direction > 0 && (_currentPosition > _targetPosition) ||
+		// 	     (_direction < 0 && (_currentPosition < _targetPosition) )))
+		// 	{
+		// 		_elevatorMotor.set(ControlMode.MotionMagic, _targetPosition);
+		// 		System.out.println("Setting jog direction to 0...");
+		// 		_direction = 0;
+		// 	}
+		// }
 	}
 	
  	public void updateSmartDashboard()
@@ -303,11 +313,14 @@ public class Elevator extends Subsystem{
 	{
 		_elevatorMotor.set(ControlMode.PercentOutput, 0);
 		_elevatorMotor.setSelectedSensorPosition(0, 0, 0);
+		_targetPosition = GetElevatorPosition();
 	}
 	
 	// Interface to let command know it's done
 	public boolean IsMoveComplete() {
-		return (_direction == 0);
+		return ((_currentPosition > (_targetPosition - _isCompleteBand)) && (_currentPosition < (_targetPosition + _isCompleteBand)));
+		// return false;
+		// return (_direction == 0);
 	}
 	
 	// Cancel the current elevator move, but don't stop the motion immediately
