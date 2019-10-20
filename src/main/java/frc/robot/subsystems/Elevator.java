@@ -145,7 +145,7 @@ public class Elevator extends Subsystem{
 	// Start jogging the elevator
 	public void JogElevator(int jogDirection, double jogSpeed)
 	{
-		if(_targetPosition <= 0){
+		if(_targetPosition < 0){
 			jogDirection = 0;
 			_targetPosition = 0;
 		}
