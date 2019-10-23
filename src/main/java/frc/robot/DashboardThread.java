@@ -15,9 +15,7 @@ public class DashboardThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            elevator.updateSmartDashboard();
             Sensors.updateSmartDashboard();
-            turret.updateSmartDashboard();
             
             try {
                 Thread.sleep(Constants.DASHBOARD_INTERVAL);

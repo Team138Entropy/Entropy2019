@@ -26,15 +26,8 @@ public class Robot extends TimedRobot {
     public static final ShuffleboardHandler shuffHandler = new ShuffleboardHandler();
 
     // Subsystems
-    private static final Compressor compressor = new Compressor();
     public static final Drivetrain drivetrain = new Drivetrain();
     //public static final DriverVision driverVision = new DriverVision();
-    public static final AcquisitionRoller roller = new AcquisitionRoller();
-    public static final Turret turret = new Turret();
-    public static final Elevator elevator = new Elevator();
-    public static final Manipulator manipulator = new Manipulator();
-
-    public static final Climber climber = new Climber();
 
     private static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
     public static final OI oi = new OI();
@@ -51,12 +44,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         //VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
-    	compressor.start();	
         Robot.accumulatedHeading = 0;
-        elevator.ElevatorInit();
-        turret.TurretInit();
-        climber.ClimberInit();
-        roller.init();
         Constants.practiceBot = isPracticeRobot();
 
         EventWatcherThread.getInstance().start();
@@ -118,7 +106,6 @@ public class Robot extends TimedRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        Sensors.debounce();
 //		LiveWindow.run();
     }
 
