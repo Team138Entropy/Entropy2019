@@ -1,11 +1,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.*;
 
 import frc.robot.Constants;
-import frc.robot.events.EventWatcherThread;
-import frc.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
