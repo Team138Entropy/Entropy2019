@@ -36,6 +36,8 @@ public class Constants {
 	public final static double elevatorExchangeSpeed = 0.5;
 	public final static int elevatorUp = 1; 
 	public final static int elevatorDown = -1;
+	public final static double elevatorMaxUpOutput = 1.0;
+	public final static double elevatorMaxDownOutput = 0.5;
 
 	
 	// Turret

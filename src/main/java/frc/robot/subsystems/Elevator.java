@@ -196,6 +196,19 @@ public class Elevator extends Subsystem{
 				} else {
 					_targetPosition = target.competition.getPanelHeight();
 				}
+
+				if (_targetPosition < _currentPosition)
+				{
+					_direction = Constants.elevatorDown;
+				}
+				else if (_targetPosition >  _currentPosition)
+				{
+					_direction = Constants.elevatorUp;
+				}
+				else
+				{
+					_direction = 0;
+				}
 			}
 
 		}
@@ -204,22 +217,19 @@ public class Elevator extends Subsystem{
 	}
 
 	private void initiateMove() {
-		double elevatorSpeed;
 			
+		if (_direction == Constants.elevatorUp)
+		{
+			_elevatorMotor.configClosedLoopPeakOutput(kElevatorPIDLoopIndex, Constants.elevatorMaxUpOutput);
+		}
+		else if (_direction == Constants.elevatorDown)
+		{
+			_elevatorMotor.configClosedLoopPeakOutput(kElevatorPIDLoopIndex, Constants.elevatorMaxDownOutput);
+		}
+
 		_currentPosition = GetElevatorPosition();
 		
 		_elevatorMotor.set(ControlMode.Position, _targetPosition);
-
-		// if (_targetPosition > _currentPosition) {
-		// 	_direction = Constants.elevatorUp;
-		// 	elevatorSpeed = Constants.elevatorMoveSpeed;
-		// 	_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-		// }
-		// else {
-		// 	_direction = Constants.elevatorDown;
-		// 	elevatorSpeed =  Constants.elevatorDownMoveSpeed;
-		// 	_elevatorMotor.set(ControlMode.PercentOutput , _direction * elevatorSpeed);
-		// }
 	}
 	
 	// Return the elevator position in encoder counts
@@ -241,17 +251,6 @@ public class Elevator extends Subsystem{
 	// Execute to move
 	public void Execute() {
 		_currentPosition = GetElevatorPosition();
-		
-		// if (_direction != 0) {
-		// 	// Monitor distance to Goal
-		// 	if ( (_direction > 0 && (_currentPosition > _targetPosition) ||
-		// 	     (_direction < 0 && (_currentPosition < _targetPosition) )))
-		// 	{
-		// 		_elevatorMotor.set(ControlMode.MotionMagic, _targetPosition);
-		// 		System.out.println("Setting jog direction to 0...");
-		// 		_direction = 0;
-		// 	}
-		// }
 	}
 	
  	public void updateSmartDashboard()
@@ -324,8 +323,6 @@ public class Elevator extends Subsystem{
 	// Interface to let command know it's done
 	public boolean IsMoveComplete() {
 		return ((_currentPosition > (_targetPosition - _isCompleteBand)) && (_currentPosition < (_targetPosition + _isCompleteBand)));
-		// return false;
-		// return (_direction == 0);
 	}
 	
 	// Cancel the current elevator move, but don't stop the motion immediately
