@@ -13,6 +13,7 @@ public class Util {
 
     /**
      * Prevent this class from being instantiated.
+     * That's not how that works! -Will
      */
     private Util() {
     }
