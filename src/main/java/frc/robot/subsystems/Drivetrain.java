@@ -15,12 +15,11 @@ public class Drivetrain extends Subsystem {
 	public double lastSpeed = 0;
 	double _speedFactor = Constants.FullSpeed;
 	double _rotateFactor = 1;
-	
 
 	// Servo Loop Gains
 	double Drive_Kf = 1.7;
 	double Drive_Kp = 5;
-	double Drive_Ki = 0.02; //
+	double Drive_Ki = 0.02;
 	double Drive_Kd = 30;
 
 	// Filter state for joystick movements
@@ -29,9 +28,9 @@ public class Drivetrain extends Subsystem {
 
 	int zeroCounter=0;
 
-	public WPI_TalonSRX topLeftTalon            = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
+	public WPI_TalonSRX topLeftTalon     = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_TOP);
 	public WPI_TalonSRX bottomLeftTalon  = new WPI_TalonSRX(RobotMap.LEFT_MOTOR_CHANNEL_BOTTOM);
-	public WPI_TalonSRX topRightTalon           = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_TOP);
+	public WPI_TalonSRX topRightTalon    = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_TOP);
 	public WPI_TalonSRX bottomRightTalon = new WPI_TalonSRX(RobotMap.RIGHT_MOTOR_CHANNEL_BOTTOM);
 
 	protected void initDefaultCommand() {
@@ -39,6 +38,7 @@ public class Drivetrain extends Subsystem {
 	}
 
 
+	// Why is this not just a constructor?
 	public void DriveTrainInit()
 	{
 		/* choose the sensor and sensor direction */
@@ -80,11 +80,7 @@ public class Drivetrain extends Subsystem {
     
 	public void drive(DriveSignal signal)
     {	
-		driveCheezy(signal);
-    }
-
-    public void driveCheezy(DriveSignal signal) {
-        bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * _speedFactor);
+		bottomLeftTalon.set(ControlMode.PercentOutput, signal.getLeft() * _speedFactor);
 		bottomRightTalon.set(ControlMode.PercentOutput, signal.getRight() * _speedFactor);
     }
 
