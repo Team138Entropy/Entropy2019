@@ -1,5 +1,6 @@
 package frc.robot.subsystems.drivetrain;
 
+import frc.robot.OI;
 import frc.robot.Util;
 import frc.robot.dto.DriveSignal;
 
@@ -9,7 +10,7 @@ import frc.robot.dto.DriveSignal;
  * speeds. Also handles the robot's quick turn functionality - "quick turn" overrides constant-curvature turning for
  * turn-in-place maneuvers.
  */
-public class CheesyDrive {
+public class CheesyDrive implements DriveEngine {
 
     // These constants help prevent accidental triggering
     /** @see #handleDeadband(double, double)*/
@@ -42,15 +43,15 @@ public class CheesyDrive {
     private double mNegInertiaAccumlator = 0.0;
 
     /**
-     * Here's the function that does all the work. There's a lot of math here.
-     * @param throttle
-     * @param wheel The raw Y-value from the joystick
-     * @param isQuickTurn {@code true} if we want to turn in place
-     * @param isHighGear
-     * @return
-     * @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>
+     * Here's the function that does most of the work. There's some math here.
+     * @return A {@link frc.robot.dto.DriveSignal DriveSignal} to send to the drivetrain
      */
-    public DriveSignal cheesyDrive(double throttle, double wheel, boolean isQuickTurn, boolean isHighGear) {
+    public DriveSignal drive() {
+        double throttle = OI.getMoveSpeed();
+        double wheel = OI.getRotateSpeed();
+        boolean isQuickTurn = OI.isQuickturn();
+        boolean isHighGear = OI.isFullSpeed();
+        
 
         wheel = handleDeadband(wheel, kWheelDeadband);
         throttle = handleDeadband(throttle, kThrottleDeadband);
@@ -90,6 +91,7 @@ public class CheesyDrive {
             }
             sensitivity = kLowSensitiity;
         }
+        
         double negInertiaPower = negInertia * negInertiaScalar;
         mNegInertiaAccumlator += negInertiaPower;
 
@@ -157,11 +159,12 @@ public class CheesyDrive {
 
     /**
      * Apply 254's "magic function" an arbitrary number of times.
+     * The purpose of this function is to make joystick input smoother doing a sine meme.
      * @param rawValue The raw value from the joystick.
      * @param nonLinearity The "intensity" of the adjustment from applying the function. Don't let this go above 1.
      * @param iterations The number of times we want to apply the function.
      * @return The result of the last iteration.
-     * @see <a href="https://www.desmos.com/calculator/hshfsz5we0">Math on Desmos</a>
+     * @see <a href="https://www.desmos.com/calculator/eirggpwcsk">Math on Desmos</a>
      */
     private double applyMagicFunc(final double rawValue, final double nonLinearity, final int iterations) {
         final double denominator = Math.sin(Math.PI / 2.0 * nonLinearity);
@@ -180,7 +183,7 @@ public class CheesyDrive {
     }
 }
 
-/*
+/* ASCII Shrek ASCII Shrek
           c,_.--.,y
             7 a.a(
            (   ,_Y)

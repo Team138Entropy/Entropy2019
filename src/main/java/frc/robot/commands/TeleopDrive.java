@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.subsystems.drivetrain.CheesyDrive;
-import frc.robot.OI;
 import frc.robot.Robot;
 
 public class TeleopDrive extends Command {
@@ -19,11 +18,7 @@ public class TeleopDrive extends Command {
 	}
 
 	protected void execute() {
-		double moveSpeed,rotateSpeed;
-		moveSpeed=OI.getMoveSpeed();
-		rotateSpeed=OI.getRotateSpeed();
-
-		Robot.drivetrain.drive(ourDrive.cheesyDrive(moveSpeed, rotateSpeed, OI.isQuickturn(), OI.isFullSpeed()));
+		Robot.drivetrain.drive(ourDrive.drive());
 	}
 
 	protected boolean isFinished() {
