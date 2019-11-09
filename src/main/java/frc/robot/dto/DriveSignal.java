@@ -4,9 +4,9 @@ package frc.robot.dto;
  * A drivetrain command consisting of the left, right motor settings and whether the brake mode is enabled.
  */
 public class DriveSignal {
-    protected double mLeftMotor;
-    protected double mRightMotor;
-    protected boolean mBrakeMode;
+    private double mLeftMotor;
+    private double mRightMotor;
+    private boolean mBrakeMode;
 
     public DriveSignal(double left, double right) {
         this(left, right, false);

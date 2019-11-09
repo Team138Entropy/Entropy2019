@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.util.Optional;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
@@ -82,7 +84,11 @@ public final class OI {
     }
 
     public static class FlightStick extends Joystick {
+        // Flight Stick-specific constants
+        static final double deadband = 0.1;
+
         // Buttons
+        // These are package-private because we should only use them in OI to map them to commands
         static final int trigger = 0;
         static final int lowerThumb = 1;
         static final int topMiddle = 2;
@@ -96,23 +102,28 @@ public final class OI {
         static final int farRight = 10;
 
         // Axes
-        static final int xAxis = 0;
-        static final int yAxis = 1;
-        static final int bottomWheel = 2;
+        // These are public because they need to be accessible to events
+        public static final int xAxis = 0;
+        public static final int yAxis = 1;
+        public static final int bottomWheel = 2;
 
         public FlightStick(int port) {
             super(port);
         }
     }
 
-
-    public static Joystick driverStick = new Joystick(Constants.xboxControllerPort);
-    public static Joystick operatorStick = new Joystick(Constants.nykoControllerPort);
+    public static FlightStick leftDriveStick = new FlightStick(Constants.leftFlightStickPort);
+    public static FlightStick rightDriveStick = new FlightStick(Constants.rightFlightStickPort);
+    public static NykoController operatorStick = new NykoController(Constants.nykoControllerPort);
 
     static double lastX = 0;
     static double LastY = 0;
-
+    
     // Buttons are private because we should only use them once to map them to commands.
+    // Driver
+    private static Button climbPistonButton  = new JoystickButton(rightDriveStick, FlightStick.topMiddle);
+    
+    // Operator
 	private static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
     private static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
     private static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
@@ -120,7 +131,6 @@ public final class OI {
     
 	private static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
 	private static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
-	private static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	private static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
 	private static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
@@ -157,16 +167,21 @@ public final class OI {
         EventWatcherThread.getInstance().addEvent(new OverCurrentDetected());
 	}
     
-	public static double getMoveSpeed()
+    /*
+	public static Double getMoveSpeed()
 	{
-		// joystick values are opposite to robot directions
-		double moveSpeed = driverStick.getRawAxis(XboxController.leftYAxis);
-		// Apply thresholds to joystick positions to eliminate
-		// creep motion due to non-zero joystick value when joysticks are 
-		// "centered"
-		if (Math.abs(moveSpeed) < Constants.CloseLoopJoystickDeadband)
-			moveSpeed=0;
-		return moveSpeed;
+        if (driverStick.isPresent()) {
+            // joystick values are opposite to robot directions
+            double moveSpeed = driverStick.get().getRawAxis(XboxController.leftYAxis);
+            // Apply thresholds to joystick positions to eliminate
+            // creep motion due to non-zero joystick value when joysticks are 
+            // "centered"
+            if (Math.abs(moveSpeed) < Constants.CloseLoopJoystickDeadband)
+                moveSpeed=0;
+            return moveSpeed;
+        } else {
+            return null;
+        }
 	}
 	
 	public static double getRotateSpeed()
@@ -200,6 +215,7 @@ public final class OI {
     public static boolean isQuickturn() {
         return driverStick.getRawAxis(XboxController.leftTriggerAxis) > Constants.highSpeedModeTriggerThreshold;
     }
+    */
 
     // Return the jog direction: 1 for up, -1 for down
     public static int getElevatorJogDirection() {

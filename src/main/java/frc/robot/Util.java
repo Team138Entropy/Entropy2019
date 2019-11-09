@@ -34,7 +34,7 @@ public class Util {
         return a + (b - a) * x;
     }
 
-    public static String joinStrings(final String delim, final List<?> strings) {
+    public static String joinStrings(final String delim, final List<? extends Object> strings) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < strings.size(); ++i) {
             sb.append(strings.get(i).toString());
