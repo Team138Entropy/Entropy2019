@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.dto;
 
 /**
  * A drivetrain command consisting of the left, right motor settings and whether the brake mode is enabled.
