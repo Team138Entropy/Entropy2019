@@ -19,23 +19,24 @@ import frc.robot.commands.*;
 public final class OI {
 
     public static class NykoController extends Joystick {
-
         // Buttons
-        public static final int button1 = 1;
-        public static final int button2 = 2;
-        public static final int button3 = 3;
-        public static final int button4 = 4;
-        public static final int leftBumper = 5;
-        public static final int rightBumper = 6;
-        public static final int leftTrigger = 7;
-        public static final int rightTrigger = 8;
-        public static final int middle9 = 9;
-        public static final int middle10 = 10;
-        public static final int middle11 = 11;
-        public static final int leftStick = 12;
-        public static final int rightStick = 13;
+        // These are package-private because we should only use them in OI to map them to commands
+        static final int button1 = 1;
+        static final int button2 = 2;
+        static final int button3 = 3;
+        static final int button4 = 4;
+        static final int leftBumper = 5;
+        static final int rightBumper = 6;
+        static final int leftTrigger = 7;
+        static final int rightTrigger = 8;
+        static final int middle9 = 9;
+        static final int middle10 = 10;
+        static final int middle11 = 11;
+        static final int leftStick = 12;
+        static final int rightStick = 13;
 
         // Axes
+        // These are public because they need to be accessible to events
         public static final int leftXAxis = 0;        // X Axis on Driver Station
         public static final int leftYAxis = 1;        // Y Axis on Driver Station
         public static final int rightYAxis = 2;    // Z Axis on Driver Station
@@ -49,6 +50,7 @@ public final class OI {
 
     public static class XboxController extends Joystick {
         // Buttons
+        // These are package-private because we should only use them in OI to map them to commands
         static final int a = 1;
         static final int b = 2;
         static final int x = 3;
@@ -66,17 +68,43 @@ public final class OI {
         static final int dPadRigt = 15;
 
         // Axes
-        static final int leftXAxis = 0;
-        static final int leftYAxis = 1;
-        static final int leftTriggerAxis = 2;
-        static final int rightTriggerAxis = 3;
-        static final int rightXAxis = 4;
-        static final int rightYAxis = 5;
+        // These are public because they need to be accessible to events
+        public static final int leftXAxis = 0;
+        public static final int leftYAxis = 1;
+        public static final int leftTriggerAxis = 2;
+        public static final int rightTriggerAxis = 3;
+        public static final int rightXAxis = 4;
+        public static final int rightYAxis = 5;
 
         public XboxController(int port) {
             super(port);
         }
     }
+
+    public static class FlightStick extends Joystick {
+        // Buttons
+        static final int trigger = 0;
+        static final int lowerThumb = 1;
+        static final int topMiddle = 2;
+        static final int topLeft = 3;
+        static final int topRight = 4;
+        static final int farLeft = 5;
+        static final int nearLeft = 6;
+        static final int middleLeft = 7;
+        static final int middleRight = 8;
+        static final int nearRight = 9;
+        static final int farRight = 10;
+
+        // Axes
+        static final int xAxis = 0;
+        static final int yAxis = 1;
+        static final int bottomWheel = 2;
+
+        public FlightStick(int port) {
+            super(port);
+        }
+    }
+
 
     public static Joystick driverStick = new Joystick(Constants.xboxControllerPort);
     public static Joystick operatorStick = new Joystick(Constants.nykoControllerPort);
@@ -84,23 +112,24 @@ public final class OI {
     static double lastX = 0;
     static double LastY = 0;
 
-	static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
-	static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
-	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
-    static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
+    // Buttons are private because we should only use them once to map them to commands.
+	private static Button homeElevatorButton = new JoystickButton(operatorStick, NykoController.middle11);
+    private static Button elevateToLevel1    = new JoystickButton(operatorStick, NykoController.button1);
+    private static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
+    private static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
     
-	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
-	static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
-	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
-	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
+	private static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	private static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
+	private static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
+	private static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
-	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
-	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
+	private static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	private static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
-	static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftBumper);
-	static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightBumper);
+	private static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftBumper);
+	private static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightBumper);
 
-    public OI(){
+    OI(){
 		homeElevatorButton.whileHeld(new HomeElevator());
 		defaultPositions.whenPressed(new DefaultPosition());
 		elevateToLevel1.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_1));
