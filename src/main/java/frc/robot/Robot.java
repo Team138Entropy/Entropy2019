@@ -1,8 +1,4 @@
 package frc.robot;
-
-import java.util.concurrent.CompletableFuture;
-
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -36,12 +32,15 @@ public class Robot extends TimedRobot {
 
     public static final Climber climber = new Climber();
 
-    private static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
+    // Never read
+    //private static double accumulatedHeading = 0.0; // Accumulate heading angle (target)
     public static final OI oi = new OI();
     Preferences prefs = Preferences.getInstance();
 
     // Global constants
-    private static String mode; // "auto" or "teleop"
+    
+    // Never used
+    //private static String mode; // "auto" or "teleop"
     public static String gameData;
 
     /**
@@ -52,7 +51,9 @@ public class Robot extends TimedRobot {
         //VisionThread.getInstance().start();
     	drivetrain.DriveTrainInit();
     	compressor.start();	
-        Robot.accumulatedHeading = 0;
+        
+        // Value is never read
+        //Robot.accumulatedHeading = 0;
         elevator.ElevatorInit();
         turret.TurretInit();
         climber.ClimberInit();
@@ -99,10 +100,13 @@ public class Robot extends TimedRobot {
     }
 
     public void teleopInit() {
-        mode = "teleop";
+        // Value is never read
+        //mode = "teleop";
         //Sensors.resetEncoders();
         Sensors.gyro.reset();
-        Robot.accumulatedHeading = 0;
+        
+        // Value is never read
+        //Robot.accumulatedHeading = 0;
         Robot.drivetrain.Relax();
 
         //Constants.AutoEnable = true;

@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.Turret;
 
 public class Sensors {
 	public static ADXRS450_Gyro gyro; 
@@ -34,8 +33,11 @@ public class Sensors {
 	
 	public static AnalogInput climbProximitySensor;
 
+	/* // Never used
 	private static final int requiredDebounceCount = 50;
 	private static int currentDebounceCount = 0;
+	*/
+
 	private static final int requiredOverCurrentDebounceCount = 25;
 	private static int currentOverCurrentDebounceCount = 0;
 	public static boolean isCargoDetectionEnabled = false;

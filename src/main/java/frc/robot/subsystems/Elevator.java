@@ -264,6 +264,7 @@ public class Elevator extends Subsystem{
 		SmartDashboard.putNumber("Count", _count);
 	}
 	
+	/* // Never used
 	private String convertDirectionToString (int direction) {
 		if (_direction == -1) {
 			return "Down";
@@ -275,6 +276,7 @@ public class Elevator extends Subsystem{
 			return "";
 		}
 	}
+	*/
 
 	private String convertTargetPositionToString (ElevatorTarget targetNamedPosition) {
 		String targetString = "Error!";

@@ -8,14 +8,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RotateTurretLeft extends Command {
 	
-	private int turretTarget;
+	// Never read
+	//private int turretTarget;
 	private final double commandTimeoutSeconds = 7;
 	private double _currentCommandTime = 0;
 	
 	public RotateTurretLeft(String target){
 		requires(Robot.turret);
 //		requires(Robot.grasper);
-		turretTarget = Robot.turret.ConvertToTarget(target);
+
+		// No need to update a value that's never read
+		//turretTarget = Robot.turret.ConvertToTarget(target);
 		}
 	
 	public RotateTurretLeft()
