@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.util.Optional;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.*;
 
