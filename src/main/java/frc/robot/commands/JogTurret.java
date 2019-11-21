@@ -26,12 +26,12 @@ public class JogTurret extends Command {
 		// Command was invoked with specific direction
 		if (_jogDirection != 0)
 		{
-			Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
+			//Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
 		}
 		// Command was not invoked with specific direction - use D Pad
 		else
 		{
-			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
+			//Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
 		}
 	}
 
@@ -39,11 +39,11 @@ public class JogTurret extends Command {
 		// Command was invoked with specific direction
 		if (_jogDirection != 0)
 		{
-			Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
+			//Robot.turret.JogTurret(_jogDirection, Constants.TurretJogSpeed);
 		}
 		// Command was not invoked with specific direction - use D Pad
 		else{
-			Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
+			//Robot.turret.JogTurret(OI.getTurretJogDirection(), Constants.TurretJogSpeed);
 		}			
 	}
 

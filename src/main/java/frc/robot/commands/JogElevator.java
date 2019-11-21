@@ -31,7 +31,7 @@ public class JogElevator extends Command {
 		// Command was not invoked with specific direction - use D Pad
 		else
 		{
-			Robot.elevator.JogElevator(OI.getElevatorJogDirection(), Constants.elevatorJogSpeed);
+			//Robot.elevator.JogElevator(OI.getElevatorJogDirection(), Constants.elevatorJogSpeed);
 		}
 	}
 
@@ -39,11 +39,12 @@ public class JogElevator extends Command {
 		// Command was invoked with specific direction
 		if (_jogDirection != 0)
 		{
-			Robot.elevator.JogElevator(_jogDirection, Constants.elevatorJogSpeed);
+			//Robot.elevator.JogElevator(_jogDirection, Constants.elevatorJogSpeed);
 		}
 		// Command was not invoked with specific direction - use D Pad
 		else
 		{
+			/*
 			if (OI.getElevatorJogDirection() == 0) // && !Robot.elevator.IsAtFloor())
 			{
 				// Robot.elevator.JogElevator(1, Constants.elevatorHoldSpeed);
@@ -53,6 +54,7 @@ public class JogElevator extends Command {
 			{
 				Robot.elevator.JogElevator(OI.getElevatorJogDirection(), Constants.elevatorJogSpeed);
 			}
+			*/
 		}
 	}
 
