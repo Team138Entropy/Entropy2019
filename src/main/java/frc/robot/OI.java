@@ -89,13 +89,13 @@ public final class OI {
 	static Button elevateToLevel2    = new JoystickButton(operatorStick, NykoController.button2);
     static Button elevateToLevel3    = new JoystickButton(operatorStick, NykoController.button4);
     
-	static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
-	static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
-	static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
+	//static Button pistonTestButton   = new JoystickButton(operatorStick, NykoController.middle9);
+	//static Button cargoRotateTestButton   = new JoystickButton(operatorStick, NykoController.middle10);
+	//static Button climbPistonButton  = new JoystickButton(driverStick, XboxController.rightBumper);
 	static Button defaultPositions   = new JoystickButton(operatorStick, NykoController.button3);
 
-	static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
-	static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
+	//static Button acquireButton = new JoystickButton(operatorStick, NykoController.leftTrigger);
+	//static Button deployButton = new JoystickButton(operatorStick, NykoController.rightTrigger);
 
 	static Button acquireCargoButton = new JoystickButton(operatorStick, NykoController.leftBumper);
 	static Button deployCargoButton = new JoystickButton(operatorStick, NykoController.rightBumper);
@@ -107,20 +107,20 @@ public final class OI {
 		elevateToLevel2.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_2));
 		elevateToLevel3.whenPressed(new ElevateToTarget(ElevatorTarget.LEVEL_3));
 
-		acquireButton.whenPressed(new AcquireHP());
-        deployButton.whenPressed(new DeployHP());
+		//acquireButton.whenPressed(new AcquireHP());
+        //deployButton.whenPressed(new DeployHP());
 
 		acquireCargoButton.whenPressed(new AcquireCargo());
         deployCargoButton.whenPressed(new DeployCargo());
 		
 		// Testing / individual component operation
-        pistonTestButton.whenPressed(new ToggleRollerPistons());
+        //pistonTestButton.whenPressed(new ToggleRollerPistons());
         
-        cargoRotateTestButton.whenPressed(new ToggleCargoManipulator());
+        //cargoRotateTestButton.whenPressed(new ToggleCargoManipulator());
         
 
-		climbPistonButton.whenPressed(new ExtendClimbPiston());
-        climbPistonButton.whenReleased(new RetractClimbPiston());
+		//climbPistonButton.whenPressed(new ExtendClimbPiston());
+        //climbPistonButton.whenReleased(new RetractClimbPiston());
         
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickForward());
         EventWatcherThread.getInstance().addEvent(new LeftOperatorStickBackward());
@@ -215,4 +215,3 @@ public final class OI {
 
 
 } // :D)))
-

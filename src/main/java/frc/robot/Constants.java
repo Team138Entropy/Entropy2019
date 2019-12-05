@@ -24,8 +24,8 @@ public class Constants {
 	public final static int RightDriveEncoderPolarity = 1;
 	
 	// 2019 Drive Train constants
-	public final static double FullSpeed = 0.75;
-	public final static double ClimbSpeed = 0.75;
+	public final static double FullSpeed = 0.5;
+	public final static double ClimbSpeed = 0.5;
 
 	// Elevator
 	public final static double elevatorHomingSpeed = -0.2;
